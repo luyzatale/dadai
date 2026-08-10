@@ -132,23 +132,25 @@ button,a,.aba,.tema{ touch-action:manipulation; -webkit-tap-highlight-color:tran
 .marca-txt i{ font-style:normal; display:block; font-family:var(--dado); font-size:.68rem; color:var(--tinta-3); letter-spacing:.03em; }
 
 .ferramentas{ display:flex; align-items:center; gap:8px; }
+/* controles do cabeçalho: discretos no computador; no celular voltam aos
+   44px de alvo de toque, dentro da consulta de tela estreita.            */
 .tecla{
-  display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:0 13px;
+  display:inline-flex; align-items:center; gap:7px; min-height:34px; padding:0 10px;
   background:var(--folha); border:1px solid var(--fio); border-radius:var(--r-2);
-  font:inherit; font-size:.82rem; font-weight:600; color:var(--tinta-2); cursor:pointer;
+  font:inherit; font-size:.75rem; font-weight:600; color:var(--tinta-2); cursor:pointer;
   transition:border-color .16s, color .16s;
 }
 .tecla:hover{ border-color:var(--tinta-3); color:var(--tinta); }
-.tecla svg{ width:17px; height:17px; flex:none; }
+.tecla svg{ width:14px; height:14px; flex:none; }
 .letras{ display:flex; background:var(--folha); border:1px solid var(--fio); border-radius:var(--r-2); overflow:hidden; }
 .letras button{
-  min-width:42px; min-height:44px; border:0; background:none; cursor:pointer; color:var(--tinta-2);
+  min-width:32px; min-height:34px; border:0; background:none; cursor:pointer; color:var(--tinta-2);
   font-family:var(--display); font-weight:600; transition:background .16s;
 }
 .letras button:hover{ background:var(--papel-2); }
 .letras button+button{ border-left:1px solid var(--fio); }
 .letras button[aria-pressed="true"]{ background:var(--tinta); color:var(--papel); }
-.l1{font-size:.78rem} .l2{font-size:.98rem} .l3{font-size:1.2rem}
+.l1{font-size:.7rem} .l2{font-size:.86rem} .l3{font-size:1.02rem}
 #abrirSumario{ display:none; }
 
 /* ── 4 · Estrutura: margem de protocolo + coluna ─────────── */
@@ -1106,8 +1108,9 @@ footer span:last-child{ flex-basis:100%; }
   .marca-txt b{ font-size:.9rem; line-height:1.16; }
   .marca-txt i{ font-size:.6rem; letter-spacing:.01em; line-height:1.25; }
   .tecla .rotulo{ display:none; }
-  .tecla{ padding:0 12px; }
-  .letras button{ min-width:38px; }
+  .tecla{ padding:0 12px; min-height:44px; }
+  .tecla svg{ width:16px; height:16px; }
+  .letras button{ min-width:38px; min-height:44px; }
 
   .capa h1{ max-width:none; }
   .dedicatoria{ padding:26px 22px 22px; }
