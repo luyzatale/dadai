@@ -55,6 +55,60 @@ com o **julgamento**, com a **autoridade**, com o **tempo**, com a **memória**,
 
 ---
 
+## O texto não pode parecer gerado por máquina
+
+> **Prosa de autor: argumento fluido, objetivo e profissional.**
+
+Um site sobre inteligência artificial escrito com a cadência de uma inteligência artificial
+perde a autoridade antes do primeiro argumento. O leitor percebe — e tem razão em desconfiar.
+
+### O que denuncia o texto de máquina, e está proibido aqui
+
+| Vício | Correção |
+|---|---|
+| Tríade decorativa: três adjetivos ou três orações onde bastava uma | Um argumento por frase |
+| "Não é apenas X, é Y" / "Mais do que X, trata-se de Y" | Dizer o que é, e seguir |
+| Abertura que anuncia o que o parágrafo vai fazer | Começar fazendo |
+| Fecho que resume o que acabou de ser dito | Terminar no último argumento |
+| Paralelismo mecânico entre itens de uma lista | Cada item com a extensão que o assunto pede |
+| Ênfase inflacionada — "crucial", "fundamental", "essencial", "poderoso" | Adjetivo só quando distingue |
+| Transição de encher — "vale destacar", "em suma", "por fim", "além disso" | Cortar; a ordem das frases já é a transição |
+| Simetria perfeita entre seções de tamanho igual | Assunto pequeno, bloco pequeno |
+
+**Teste de leitura em voz alta.** Se a frase soa como se estivesse cumprindo um gabarito, ela
+é do gabarito e não do assunto. Reescrever.
+
+### Valor percebido
+
+O leitor precisa terminar cada bloco com uma coisa que não sabia e pode usar na segunda-feira.
+Densidade de informação por linha é o critério: um parágrafo que só prepara o próximo é um
+parágrafo a menos. Leitura agradável não é leitura leve — é leitura sem atrito, com
+recompensa a cada trecho.
+
+---
+
+## Nada sem referência
+
+> **Este material será usado por um servidor público com responsabilidade legal.**
+
+Um número, uma data ou uma afirmação normativa errada neste site pode virar erro em despacho,
+em parecer ou em edital. A régua, portanto, não é a do texto de divulgação — é a do documento
+de trabalho.
+
+1. **Nenhuma afirmação factual sem fonte nomeada.** Órgão, documento, data. "Estudos apontam"
+   e "especialistas afirmam" não são fonte.
+2. **Verificar na web antes de escrever**, nunca de memória — em especial data de norma,
+   estágio de tramitação, número oficial e valor.
+3. **Preferir a fonte primária**: o texto da lei, o relatório do órgão, o comunicado da
+   instituição. Notícia serve para localizar o fato, não para prová-lo.
+4. **Quando o número vier do fornecedor da solução, dizer isso na própria linha.** Material de
+   quem vendeu lê-se com reserva declarada.
+5. **Sem verificação, a lacuna fica explícita** numa `.escopo`. Ausência honesta vale mais do
+   que preenchimento plausível — e é o próprio Fólio 05 que mostra o custo do contrário, com
+   a política nacional de IA sul-africana retirada por trazer referências inventadas.
+
+---
+
 ## Rótulos de interface
 
 Os controles do site obedecem à mesma regra.

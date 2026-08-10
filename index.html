@@ -468,6 +468,41 @@ body[data-nivel="mais"]    .verbete .so-simples{ display:block; }
 }
 .margem-nota strong{ color:var(--ocre); }
 
+/* link para o texto oficial de um instrumento normativo */
+.oficial{
+  display:flex; gap:10px; align-items:baseline; margin:18px 0 0; padding-top:14px;
+  border-top:1px solid var(--fio); font-size:.86em; color:var(--tinta-2); flex-wrap:wrap;
+}
+.oficial b{
+  font-family:var(--dado); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--tinta-3); flex:none;
+}
+
+/* verbete de norma: uma ficha por linha do quadro de regulamentação */
+.normas{ display:grid; gap:14px; margin:26px 0 0; }
+.norma{
+  padding:24px 26px; background:var(--folha); border:1px solid var(--fio);
+  border-left:3px solid var(--acento); border-radius:var(--r-2);
+}
+.norma .titulo-norma{ display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 12px; margin:0 0 12px; }
+.norma h4{ font-family:var(--display); font-size:1.22rem; font-weight:600; }
+.norma .titulo-norma .estagio{ font-size:.68rem; }
+.norma > p{ font-size:.92em; color:var(--tinta-2); max-width:64ch; }
+/* a cronologia interna do instrumento: data à esquerda, o que ocorreu à direita */
+.marcos{ margin:14px 0 0; padding:0; list-style:none; display:grid; gap:7px; }
+.marcos li{
+  display:grid; grid-template-columns:clamp(9.5em,20%,12em) 1fr; gap:14px;
+  font-size:.87em; color:var(--tinta-2); line-height:1.5;
+}
+.marcos li b{
+  font-family:var(--dado); font-size:.76em; letter-spacing:.03em; color:var(--carimbo);
+  font-variant-numeric:tabular-nums; font-weight:600; padding-top:.18em;
+}
+.marcos li.futuro b{ color:var(--tinta-3); }
+@media (max-width:560px){
+  .marcos li{ grid-template-columns:1fr; gap:2px; }
+}
+
 .fontes{ margin-top:24px; padding-top:20px; border-top:1px solid var(--fio); }
 .fontes h4{
   font-family:var(--dado); font-size:.69rem; letter-spacing:.12em; text-transform:uppercase;
@@ -495,6 +530,16 @@ body[data-nivel="mais"]    .verbete .so-simples{ display:block; }
 }
 .placar span{ font-size:.82rem; color:var(--tinta-3); line-height:1.45; display:block; }
 .rodape-nota{ margin-top:14px; font-size:.82rem; color:var(--tinta-3); }
+.rodape-nota b{
+  font-family:var(--dado); font-size:.66rem; letter-spacing:.11em; text-transform:uppercase;
+  color:var(--tinta-3); display:block; margin-bottom:3px;
+}
+.rodape-nota a{ color:var(--jade); word-break:break-word; }
+.casos{ display:grid; gap:16px; margin:26px 0 0; }
+/* caso que deu errado: o número não é conquista, e não leva o verde de
+   confirmação. Fica em tinta — sóbrio, sem alarme decorativo.            */
+.caso.contraprova .placar strong{ color:var(--tinta); }
+.caso.contraprova{ border-left:3px solid var(--carimbo); }
 
 /* notícias */
 
@@ -514,6 +559,40 @@ body[data-nivel="mais"]    .verbete .so-simples{ display:block; }
 .degrau .receita{
   margin-top:10px; font-family:var(--dado); font-size:.83em; color:var(--jade);
   background:var(--jade-f); border-radius:var(--r-1); padding:8px 11px; display:inline-block;
+}
+
+/* rótulo do caso concreto acima de cada par antes/depois */
+.caso-prompt{
+  margin:30px 0 0; padding-bottom:2px;
+  font-family:var(--dado); font-size:.72rem; letter-spacing:.11em; text-transform:uppercase;
+  color:var(--tinta-3); font-weight:600; display:flex; align-items:center; gap:11px;
+}
+.caso-prompt::after{ content:""; height:1px; flex:1; background:var(--fio); }
+
+/* folha de bolso: pensada para ser impressa e ficar na gaveta */
+.bolso{
+  margin:30px 0 0; padding:26px 28px; background:var(--papel-2);
+  border:1px solid var(--fio-2); border-radius:var(--r-2);
+}
+.bolso h4{ margin-bottom:4px; }
+.bolso > .intro{ margin:0 0 18px; font-size:.86em; color:var(--tinta-3); }
+.bolso ol{ margin:0; padding:0; list-style:none; display:grid; gap:11px; counter-reset:bolso; }
+.bolso li{
+  display:grid; grid-template-columns:22px 1fr; gap:12px; align-items:baseline;
+  font-size:.92em; color:var(--tinta-2); line-height:1.5;
+}
+.bolso li::before{
+  counter-increment:bolso; content:counter(bolso);
+  font-family:var(--dado); font-size:.72rem; color:var(--carimbo); font-weight:600;
+}
+.bolso li b{ color:var(--tinta); }
+.bolso .modelo{
+  margin:20px 0 0; padding:16px 18px; background:var(--folha); border:1px solid var(--fio);
+  border-radius:var(--r-1); font-family:var(--dado); font-size:.83em; line-height:1.65;
+  color:var(--tinta-2); white-space:pre-wrap; overflow-x:auto;
+}
+@media print{
+  .bolso{ break-inside:avoid; border:1px solid #000; background:transparent; }
 }
 
 .confronto{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:26px 0 0; }
@@ -714,7 +793,11 @@ body[data-nivel="mais"]    .verbete .so-simples{ display:block; }
   color:var(--carimbo); font-weight:600; font-variant-numeric:tabular-nums;
 }
 .aula h4{ font-family:var(--display); font-size:1.08rem; font-weight:600; line-height:1.3; transition:color .18s; }
-.aula .detalhe{ margin:0; font-size:.83em; color:var(--tinta-3); }
+.aula .detalhe{
+  margin:0; font-family:var(--dado); font-size:.72rem; color:var(--tinta-3);
+  font-variant-numeric:tabular-nums; letter-spacing:.02em;
+}
+.aula .resolve{ margin:2px 0 0; font-size:.86em; color:var(--tinta-2); line-height:1.5; }
 .aula .ir{
   margin-top:auto; padding-top:10px; font-family:var(--dado); font-size:.72rem;
   letter-spacing:.05em; color:var(--jade);
@@ -840,6 +923,77 @@ body[data-nivel="mais"]    .verbete .so-simples{ display:block; }
 .ed-en{ color:var(--tinta-3); background:var(--papel-2); }
 .ed-ver{ color:var(--ocre);   background:var(--ocre-f); }
 
+/* ficha de ferramenta: para que serve, quanto custa, dá para confiar */
+.caixa-ferramentas{ display:grid; gap:12px; margin:18px 0 0; }
+.ferramenta{
+  padding:20px 22px; background:var(--folha);
+  border:1px solid var(--fio); border-radius:var(--r-2);
+}
+.ferramenta .cabeca-f{ display:flex; align-items:center; gap:13px; margin-bottom:15px; }
+.ferramenta .corpo-f{ flex:1; min-width:0; }
+.ferramenta h4{ font-family:var(--display); font-size:1.14rem; font-weight:600; line-height:1.2; }
+.ferramenta .proc{ margin:2px 0 0; font-family:var(--dado); font-size:.7rem; color:var(--tinta-3); }
+.abrir-f{
+  display:inline-flex; align-items:center; gap:7px; min-height:38px; padding:0 14px; flex:none;
+  border:1px solid var(--fio-2); border-radius:var(--r-1); background:var(--papel-2);
+  font-family:var(--dado); font-size:.7rem; letter-spacing:.05em; font-weight:600;
+  color:var(--jade); text-decoration:none; transition:border-color .18s,color .18s;
+}
+.abrir-f svg{ width:12px; height:12px; }
+@media (hover:hover){ .abrir-f:hover{ border-color:var(--jade); color:var(--tinta); } }
+.campos{ margin:0; display:grid; gap:10px; }
+.campos > div{ display:grid; grid-template-columns:clamp(7.5em,23%,10em) 1fr; gap:14px; }
+.campos dt{
+  font-family:var(--dado); font-size:.66rem; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--tinta-3); padding-top:.28em;
+}
+.campos dd{ margin:0; font-size:.89em; color:var(--tinta-2); line-height:1.55; }
+.campos .confiar dt{ color:var(--ocre); }
+.campos .limite dt{ color:var(--carimbo); }
+@media (max-width:560px){
+  .campos > div{ grid-template-columns:1fr; gap:2px; }
+  .ferramenta .cabeca-f{ flex-wrap:wrap; }
+}
+
+/* autoteste: doze afirmações para marcar, sem nota no fim */
+.autoteste{
+  margin:26px 0 0; padding:26px 28px; background:var(--folha);
+  border:1px solid var(--fio); border-radius:var(--r-2);
+}
+.autoteste > h4{ margin-bottom:6px; }
+.autoteste > .intro{ margin:0 0 20px; font-size:.9em; color:var(--tinta-3); max-width:62ch; }
+.autoteste .bloco{ margin-bottom:20px; }
+.autoteste .bloco > p{
+  margin:0 0 9px; font-family:var(--dado); font-size:.7rem; letter-spacing:.11em;
+  text-transform:uppercase; color:var(--acento,var(--tinta-3)); font-weight:600;
+}
+.autoteste label{
+  display:grid; grid-template-columns:auto 1fr; gap:12px; align-items:start;
+  padding:9px 11px; border-radius:var(--r-1); font-size:.93em; color:var(--tinta-2);
+  line-height:1.5; cursor:pointer;
+}
+@media (hover:hover){ .autoteste label:hover{ background:var(--papel-2); } }
+.autoteste input[type="checkbox"]{
+  appearance:none; -webkit-appearance:none; width:17px; height:17px; margin:.24em 0 0;
+  border:1px solid var(--fio-2); border-radius:2px; background:var(--papel);
+  display:grid; place-items:center; cursor:pointer; flex:none;
+}
+.autoteste input[type="checkbox"]::after{
+  content:""; width:9px; height:5px; border-left:2px solid var(--folha);
+  border-bottom:2px solid var(--folha); transform:rotate(-45deg) translate(1px,-1px); opacity:0;
+}
+.autoteste input[type="checkbox"]:checked{ background:var(--jade); border-color:var(--jade); }
+.autoteste input[type="checkbox"]:checked::after{ opacity:1; }
+.autoteste input[type="checkbox"]:focus-visible{ outline:2px solid var(--carimbo); outline-offset:2px; }
+.autoteste .apuracao{
+  margin:4px 0 0; padding-top:16px; border-top:1px dashed var(--fio-2);
+  font-size:.9em; color:var(--tinta-2); max-width:64ch;
+}
+.autoteste .apuracao b{
+  font-family:var(--dado); font-size:.66rem; letter-spacing:.11em; text-transform:uppercase;
+  color:var(--tinta-3); display:block; margin-bottom:4px;
+}
+
 /* metodo 4D (AI Fluency, Anthropic) */
 .quatro-d{ display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); }
 .card-d{
@@ -941,8 +1095,12 @@ footer{
     padding-right:max(14px,env(safe-area-inset-right));
     gap:10px;
   }
-  .marca-txt i{ display:none; }
-  .marca-txt b{ font-size:.92rem; }
+  /* o subtítulo permanece visível no celular: é ele que nomeia o destinatário
+     do site. O que encolhe é o corpo da letra e o selo, não a linha.        */
+  .marca{ gap:9px; }
+  .marca-selo{ width:32px; height:32px; font-size:19px; }
+  .marca-txt b{ font-size:.9rem; line-height:1.16; }
+  .marca-txt i{ font-size:.6rem; letter-spacing:.01em; line-height:1.25; }
   .tecla .rotulo{ display:none; }
   .tecla{ padding:0 12px; }
   .letras button{ min-width:38px; }
@@ -968,7 +1126,18 @@ footer{
 
 /* — celular estreito (≤ 400px) — */
 @media (max-width:400px){
-  .marca-txt{ display:none; }
+  /* tela estreita: em vez de suprimir a marca, aperta-se o resto do cabeçalho.
+     O título pode cortar com reticências; o subtítulo quebra em duas linhas
+     antes de desaparecer.                                                    */
+  .topo{ gap:8px; }
+  .marca{ gap:8px; }
+  .marca-selo{ width:30px; height:30px; font-size:18px; }
+  .marca-txt b{
+    font-size:.8rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .marca-txt i{ font-size:.55rem; white-space:normal; }
+  .letras button{ min-width:31px; }
+  .tecla{ padding:0 9px; }
   .parte, .capa, .aprovacao{ padding-left:16px; padding-right:16px; }
   .malha{ grid-template-columns:1fr; }
   .temas{ grid-template-columns:1fr; }
@@ -1471,32 +1640,236 @@ footer{
           </p>
         </div>
 
+        <p class="criterio">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg>
+          <span><strong>Critério destas listas:</strong> não é ranking de faturamento nem de
+          número de usuários — os dois são declarados pelas próprias empresas e raramente
+          comparáveis entre países. Entram as organizações de cujo trabalho alguma coisa
+          <strong>depende</strong>: o modelo que se usa, o equipamento sem o qual ele não roda, ou
+          a norma que o rege. Cada ficha traz o que a organização faz e por que ela chega ao
+          Brasil.</span>
+        </p>
+
         <div class="abas" role="tablist" aria-label="Regiões">
-          <button class="aba" role="tab" aria-selected="true">🇨🇳 China</button>
-          <button class="aba" role="tab" aria-selected="false">🇺🇸 Estados Unidos</button>
-          <button class="aba" role="tab" aria-selected="false">🇧🇷 Brasil</button>
-          <button class="aba" role="tab" aria-selected="false">🇪🇺 Europa</button>
+          <button class="aba" role="tab" id="aba-cn" aria-controls="reg-cn" aria-selected="true">🇨🇳 China</button>
+          <button class="aba" role="tab" id="aba-us" aria-controls="reg-us" aria-selected="false">🇺🇸 Estados Unidos</button>
+          <button class="aba" role="tab" id="aba-br" aria-controls="reg-br" aria-selected="false">🇧🇷 Brasil</button>
+          <button class="aba" role="tab" id="aba-eu" aria-controls="reg-eu" aria-selected="false">🇪🇺 Europa</button>
         </div>
 
-        <div class="org">
-          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">D</span></span>
-          <span class="corpo"><h4>DeepSeek</h4><p>Hangzhou · modelos abertos que qualquer país pode baixar e rodar por conta própria</p></span>
-          <span class="selo-txt">aberto</span>
+        <!-- China ─────────────────────────────────────────── -->
+        <div class="regiao" id="reg-cn" role="tabpanel" aria-labelledby="aba-cn">
+          <p class="prosa" style="font-size:.93em;color:var(--tinta-2);margin-bottom:16px">
+            Quatro delas foram designadas pelo Estado, em 2017, para liderar um domínio cada —
+            o arranjo descrito no Fólio 11. As demais nasceram depois, e a mais nova mudou o preço
+            de todo o setor.
+          </p>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">D</span></span>
+            <span class="corpo"><h4>DeepSeek</h4><p>Hangzhou · modelos de raciocínio de pesos abertos, sob licença que permite baixar, executar e modificar. O lançamento de janeiro de 2025 derrubou a estimativa de quanto custa chegar ao estado da arte</p></span>
+            <span class="selo-txt">aberto</span>
+          </div>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">A</span></span>
+            <span class="corpo"><h4>Alibaba · Qwen</h4><p>Hangzhou · a família de modelos abertos mais adotada do mundo por número de derivados. Designada em 2017 para a plataforma nacional de cidades</p></span>
+            <span class="selo-txt">aberto</span>
+          </div>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">B</span></span>
+            <span class="corpo"><h4>Baidu · Ernie</h4><p>Pequim · busca e IA integradas a mapas e serviços urbanos. Designada em 2017 para a plataforma nacional de condução autônoma</p></span>
+            <span class="selo-txt">plataforma</span>
+          </div>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">T</span></span>
+            <span class="corpo"><h4>Tencent · Hunyuan</h4><p>Shenzhen · designada em 2017 para a plataforma nacional de diagnóstico por imagem médica; opera também a maior plataforma de mensagens e pagamentos do país</p></span>
+            <span class="selo-txt">plataforma</span>
+          </div>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">B</span></span>
+            <span class="corpo"><h4>ByteDance · Doubao</h4><p>Pequim · a empresa de recomendação algorítmica em maior escala do mundo; o assistente doméstico dela é o de uso mais disseminado na China</p></span>
+            <span class="selo-txt">consumo</span>
+          </div>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">M</span></span>
+            <span class="corpo"><h4>Moonshot AI · Kimi</h4><p>Pequim · especializada em leitura de documento longo — a capacidade que mais interessa a quem precisa resumir processo, edital ou parecer extenso</p></span>
+            <span class="selo-txt">documento</span>
+          </div>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">Z</span></span>
+            <span class="corpo"><h4>Zhipu AI · GLM</h4><p>Pequim · nascida na Universidade Tsinghua; publica modelos de pesos abertos e é uma das poucas com origem declaradamente acadêmica</p></span>
+            <span class="selo-txt">aberto</span>
+          </div>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">i</span></span>
+            <span class="corpo"><h4>iFlytek</h4><p>Hefei · reconhecimento e síntese de voz. Designada em 2017 para a plataforma nacional de inteligência de fala</p></span>
+            <span class="selo-txt">voz</span>
+          </div>
         </div>
-        <div class="org">
-          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">A</span></span>
-          <span class="corpo"><h4>Alibaba · Qwen</h4><p>Hangzhou · família de modelos adotada por empresas no mundo inteiro</p></span>
-          <span class="selo-txt">aberto</span>
+
+        <!-- Estados Unidos ────────────────────────────────── -->
+        <div class="regiao" id="reg-us" role="tabpanel" aria-labelledby="aba-us" hidden>
+          <p class="prosa" style="font-size:.93em;color:var(--tinta-2);margin-bottom:16px">
+            Repare que só três desta lista fazem modelos. As outras cinco fazem o chão em que os
+            modelos pisam — o equipamento, a nuvem, o lugar onde são distribuídos. É onde a
+            dependência de fato se instala.
+          </p>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">O</span></span>
+            <span class="corpo"><h4>OpenAI</h4><p>São Francisco · o assistente aberto ao público em 30 de novembro de 2022, que tirou a tecnologia do laboratório. Modelos fechados: não se pode baixar nem inspecionar</p></span>
+            <span class="selo-txt">fechado</span>
+          </div>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">A</span></span>
+            <span class="corpo"><h4>Anthropic</h4><p>São Francisco · autora da IA Constitucional e do enquadramento das quatro competências, ambos tratados no Fólio 07. Publica o texto dos princípios que governam a própria máquina — o que permite discuti-los</p></span>
+            <span class="selo-txt">fechado</span>
+          </div>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">G</span></span>
+            <span class="corpo"><h4>Google DeepMind</h4><p>Mountain View e Londres · o laboratório do AlphaGo, marco de 2016 no Fólio 11, hoje fundido à divisão de produto do Google</p></span>
+            <span class="selo-txt">fechado</span>
+          </div>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">M</span></span>
+            <span class="corpo"><h4>Meta · Llama</h4><p>Menlo Park · abriu os pesos dos próprios modelos quando ninguém no Ocidente fazia isso, e com essa decisão criou a via que os laboratórios chineses viriam a dominar</p></span>
+            <span class="selo-txt">aberto</span>
+          </div>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">N</span></span>
+            <span class="corpo"><h4>Nvidia</h4><p>Santa Clara · fabrica os processadores em que quase todo modelo do mundo é treinado. É o gargalo real da cadeia, e o assunto de <em>A Guerra dos Chips</em>, na estante do Fólio 12</p></span>
+            <span class="selo-txt">equipamento</span>
+          </div>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">M</span></span>
+            <span class="corpo"><h4>Microsoft</h4><p>Redmond · a nuvem Azure e os assistentes embutidos no pacote de escritório. Na prática, é por aqui que a IA entra numa repartição pública, muitas vezes sem contrato específico</p></span>
+            <span class="selo-txt">infraestrutura</span>
+          </div>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">A</span></span>
+            <span class="corpo"><h4>Amazon Web Services</h4><p>Seattle · a maior operadora de nuvem do mundo. Boa parte do dado público brasileiro repousa em infraestrutura contratada dela — o ponto que o Fólio 04 discute como soberania</p></span>
+            <span class="selo-txt">infraestrutura</span>
+          </div>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">H</span></span>
+            <span class="corpo"><h4>Hugging Face</h4><p>Nova York, fundada por franceses · o repositório onde os modelos de pesos abertos são publicados e baixados. Sem ele, "modelo aberto" seria um adjetivo sem endereço</p></span>
+            <span class="selo-txt">distribuição</span>
+          </div>
         </div>
-        <div class="org">
-          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">B</span></span>
-          <span class="corpo"><h4>Baidu · Ernie</h4><p>Pequim · busca e IA integradas a serviços urbanos e mapas</p></span>
-          <span class="selo-txt">plataforma</span>
+
+        <!-- Brasil ────────────────────────────────────────── -->
+        <div class="regiao" id="reg-br" role="tabpanel" aria-labelledby="aba-br" hidden>
+          <p class="prosa" style="font-size:.93em;color:var(--tinta-2);margin-bottom:16px">
+            A lista é curta e é honesto dizer por quê: o Brasil não treina modelos de fronteira, e
+            nenhuma das organizações abaixo alega treinar. O que existe aqui é outra coisa —
+            especialização em português, pesquisa aplicada, e o aparato público que decide onde
+            tudo isso vai ser usado.
+          </p>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">M</span></span>
+            <span class="corpo"><h4>Maritaca AI</h4><p>Campinas · nascida em 2022 no centro de pesquisa em IA da Unicamp. O modelo Sabiá foi o primeiro especializado em português do Brasil, com foco declarado em texto jurídico, educacional e institucional</p></span>
+            <span class="selo-txt">modelo</span>
+          </div>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">W</span></span>
+            <span class="corpo"><h4>WideLabs</h4><p>Porto Alegre · o modelo Amazônia IA, apresentado em julho de 2024 na 5ª Conferência Nacional de Ciência, Tecnologia e Inovação, treinado principalmente com texto em português brasileiro</p></span>
+            <span class="selo-txt">modelo</span>
+          </div>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">C</span></span>
+            <span class="corpo"><h4>CEIA · UFG</h4><p>Goiânia · centro de excelência criado em 2019 por política pública da fundação de amparo à pesquisa de Goiás, hoje unidade Embrapii. Trabalha por encomenda, com foco em saúde, logística, segurança e cidades</p></span>
+            <span class="selo-txt">pesquisa</span>
+          </div>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">L</span></span>
+            <span class="corpo"><h4>LNCC · Santos Dumont</h4><p>Petrópolis · o supercomputador nacional, cuja ampliação foi anunciada como primeiro passo do plano brasileiro de IA. Sem capacidade de cálculo própria, não há soberania possível — só aluguel</p></span>
+            <span class="selo-txt">infraestrutura</span>
+          </div>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">S</span></span>
+            <span class="corpo"><h4>Serpro</h4><p>Brasília · empresa pública que opera sistemas estruturantes do governo federal, da Receita ao portal de serviços. É onde a IA encosta no dado do cidadão antes de encostar em qualquer outro lugar</p></span>
+            <span class="selo-txt">estado</span>
+          </div>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">D</span></span>
+            <span class="corpo"><h4>Dataprev</h4><p>Brasília · empresa pública que processa os dados da previdência e dos benefícios sociais. Qualquer automação aqui decide, na prática, quem recebe e quando</p></span>
+            <span class="selo-txt">estado</span>
+          </div>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">P</span></span>
+            <span class="corpo"><h4>Plano Brasileiro de IA · MCTI</h4><p>Brasília · o plano 2024–2028, anunciado com R$ 23 bilhões, dos quais cerca de R$ 3 bilhões em infraestrutura. Prevê formação de servidores e uma plataforma de IA para o governo</p></span>
+            <span class="selo-txt">política</span>
+          </div>
+        </div>
+
+        <!-- Europa ────────────────────────────────────────── -->
+        <div class="regiao" id="reg-eu" role="tabpanel" aria-labelledby="aba-eu" hidden>
+          <p class="prosa" style="font-size:.93em;color:var(--tinta-2);margin-bottom:16px">
+            A Europa escreveu a lei antes de ter os modelos, e isso define a lista: quase todas
+            estas organizações vendem, junto com a tecnologia, a conformidade com a própria norma
+            europeia. A última da lista não vende modelo nenhum e é a mais insubstituível.
+          </p>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">M</span></span>
+            <span class="corpo"><h4>Mistral AI</h4><p>Paris · a principal aposta europeia em modelos próprios, boa parte deles de pesos abertos e hospedáveis dentro da União Europeia</p></span>
+            <span class="selo-txt">aberto</span>
+          </div>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">A</span></span>
+            <span class="corpo"><h4>Aleph Alpha</h4><p>Heidelberg, Alemanha · especializada em governo e empresa, com hospedagem sob jurisdição alemã. Vende exatamente aquilo que um órgão público europeu precisa provar a um fiscal</p></span>
+            <span class="selo-txt">soberania</span>
+          </div>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">B</span></span>
+            <span class="corpo"><h4>Black Forest Labs</h4><p>Alemanha · geração de imagem de alta qualidade. É o tipo de ferramenta que o Fólio 04 discute em mídia sintética: útil e, ao mesmo tempo, o berço da falsificação</p></span>
+            <span class="selo-txt">imagem</span>
+          </div>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">S</span></span>
+            <span class="corpo"><h4>Stability AI</h4><p>Londres · publicou modelos de imagem de pesos abertos, tornando a geração de imagem acessível fora das grandes empresas — com todas as consequências disso</p></span>
+            <span class="selo-txt">aberto</span>
+          </div>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">D</span></span>
+            <span class="corpo"><h4>DeepL</h4><p>Colônia, Alemanha · tradução automática. É a ferramenta europeia com uso mais disseminado em repartição pública, e a que menos se apresenta como inteligência artificial</p></span>
+            <span class="selo-txt">tradução</span>
+          </div>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">S</span></span>
+            <span class="corpo"><h4>Silo AI</h4><p>Helsinque, Finlândia · construiu modelos para línguas europeias pouco faladas, que nenhuma empresa grande atenderia por não haver mercado. Comprada pela americana AMD em 2024</p></span>
+            <span class="selo-txt">línguas</span>
+          </div>
+          <div class="org">
+            <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">A</span></span>
+            <span class="corpo"><h4>ASML</h4><p>Veldhoven, Países Baixos · fabrica as máquinas de litografia sem as quais nenhum chip avançado do mundo pode ser produzido — inclusive os americanos e os chineses. Não tem concorrente</p></span>
+            <span class="selo-txt">equipamento</span>
+          </div>
+        </div>
+
+        <p class="margem-nota" style="max-width:66ch;margin-top:28px">
+          <strong>A pergunta que atravessa as quatro listas:</strong> uma organização pode ser
+          substituída, duas ou três podem. Mas repare em quantas vezes, ao longo delas, um item é
+          descrito como sem concorrente ou sem alternativa — o equipamento de litografia, os
+          processadores, a nuvem onde o dado repousa. Depender de um fornecedor de <em>modelo</em>
+          é um risco administrável, porque há muitos. Depender de um fornecedor de
+          <em>infraestrutura</em> é outra coisa, e é a parte que costuma passar despercebida no
+          edital, porque não é ela que está sendo comprada.
+        </p>
+
+        <div class="fontes">
+          <h4>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+            Referências deste fólio
+          </h4>
+          <ol>
+            <li>China. Ministério da Ciência e Tecnologia. Designação das plataformas abertas de inovação, novembro de 2017 — Baidu, Alibaba, Tencent e iFlytek. Ver: <a href="https://digichina.stanford.edu/work/drafting-chinas-national-ai-team-for-governance" target="_blank" rel="noopener noreferrer">digichina.stanford.edu · national AI team</a></li>
+            <li>Stanford Institute for Human-Centered Artificial Intelligence. <em>The 2026 AI Index Report</em> — distribuição geográfica dos modelos de pesos abertos e diferença de desempenho entre modelos abertos e fechados. Disponível em: <a href="https://hai.stanford.edu/ai-index/2026-ai-index-report" target="_blank" rel="noopener noreferrer">hai.stanford.edu/ai-index/2026-ai-index-report</a></li>
+            <li>Maritaca AI. Documentação oficial do modelo Sabiá. Disponível em: <a href="https://docs.maritaca.ai/pt/introducao" target="_blank" rel="noopener noreferrer">docs.maritaca.ai</a></li>
+            <li>Brasil. Ministério da Ciência, Tecnologia e Inovação. <em>Plano Brasileiro de Inteligência Artificial 2024–2028</em>, apresentado na 5ª Conferência Nacional de Ciência, Tecnologia e Inovação, julho de 2024. Ver também o anúncio da ampliação do supercomputador Santos Dumont, do Laboratório Nacional de Computação Científica.</li>
+            <li>CEIA · Universidade Federal de Goiás. Página institucional e credenciamento como unidade Embrapii. Disponível em: <a href="https://ceia.ufg.br/" target="_blank" rel="noopener noreferrer">ceia.ufg.br</a></li>
+            <li>Miller, C. <em>A Guerra dos Chips</em>. Globo Livros, 2023, tradução de Roberto W. Nóbrega — para a posição da ASML e da Nvidia na cadeia. Na estante do Fólio 12.</li>
+          </ol>
         </div>
 
         <p class="escopo"><b>logotipos</b><span>O ladrilho branco aguarda o arquivo oficial de cada empresa — o ponto ocre no canto marca os que ainda estão pendentes. Até lá fica o monograma: marca desenhada de memória seria marca errada, e num site que exige fonte para tudo isso não passa.</span></p>
-
-        <p class="escopo"><b>a seguir</b><span>As abas trocam a lista. De 6 a 8 organizações por região, com porte, o que fazem e por que importam ao Brasil.</span></p>
       </div>
     </section>
     <!-- 06 ───────────────────────────────────────────────── -->
@@ -2541,21 +2914,21 @@ footer{
               </tr>
               <tr>
                 <th scope="row">🇨🇳 China</th>
-                <td>Medidas para IA generativa e normas de síntese profunda</td>
+                <td>Cinco normas setoriais, de 2022 a 2025</td>
                 <td><span class="estagio e-setor">normas setoriais</span></td>
-                <td>Registro prévio do serviço e rotulagem obrigatória de conteúdo sintético</td>
+                <td>Registro prévio do serviço e rotulagem obrigatória, visível e embutida no arquivo</td>
               </tr>
               <tr>
                 <th scope="row">🇺🇸 Estados Unidos</th>
-                <td>Sem lei federal geral; leis estaduais e padrões do NIST</td>
+                <td>Sem lei federal geral; leis estaduais, e a União tentando derrubá-las</td>
                 <td><span class="estagio e-voluntario">diretriz voluntária</span></td>
-                <td>Regulação fragmentada por estado e por setor</td>
+                <td>Califórnia obriga desde 2026; Colorado recuou e adiou para 2027</td>
               </tr>
               <tr>
                 <th scope="row">🇮🇳 Índia</th>
-                <td>Lei de proteção de dados de 2023 e orientações do ministério</td>
+                <td>Diretrizes de governança de IA, 5 de novembro de 2025</td>
                 <td><span class="estagio e-voluntario">diretriz voluntária</span></td>
-                <td>Prioriza adoção e inclusão digital antes de restringir</td>
+                <td>Recusa lei própria por decisão declarada; apoia-se no direito existente</td>
               </tr>
               <tr>
                 <th scope="row">🇷🇺 Rússia</th>
@@ -2565,9 +2938,9 @@ footer{
               </tr>
               <tr>
                 <th scope="row">🇿🇦 África do Sul</th>
-                <td>Política nacional de IA em construção</td>
-                <td><span class="estagio e-tramite">em tramitação</span></td>
-                <td>Ancorada na lei de proteção de dados já existente</td>
+                <td>Política retirada em 26 de abril de 2026</td>
+                <td><span class="estagio e-tramite">recomeçada do zero</span></td>
+                <td>Retirada por conter citações acadêmicas inventadas por IA</td>
               </tr>
             </tbody>
           </table>
@@ -2580,7 +2953,272 @@ footer{
           vezes sem que isso esteja escrito em lugar nenhum.
         </p>
 
-        <p class="escopo"><b>a seguir</b><span>Cada linha do quadro vira um verbete com a data exata do instrumento, o texto oficial vinculado e o que muda na prática para quem contrata. Toda informação normativa será datada e reconferida na publicação — legislação de IA muda de mês para mês.</span></p>
+        <h3 style="margin:52px 0 8px">Linha por linha do quadro</h3>
+        <p class="prosa" style="font-size:.93em;color:var(--tinta-2);margin-bottom:6px">
+          Cada instrumento com a data em que passou a valer, o endereço do texto oficial e a
+          única pergunta que interessa a quem assina um contrato: o que muda na hora de
+          contratar. As datas abaixo valem para <strong>agosto de 2026</strong>.
+        </p>
+
+        <div class="normas">
+
+          <article class="norma" style="--acento:var(--jade)">
+            <div class="titulo-norma">
+              <span class="estagio e-vigor">em vigor</span>
+              <h4>🇪🇺 União Europeia · Regulamento (UE) 2024/1689</h4>
+            </div>
+            <p>
+              A primeira lei geral de inteligência artificial do mundo. Não regula a tecnologia,
+              e sim o <strong>uso</strong>: o mesmo programa pode ser livre numa aplicação e
+              proibido em outra. São quatro faixas — risco inaceitável (proibido), alto risco
+              (deveres pesados), risco de transparência (avisar que é máquina) e o restante,
+              livre. Seleção de candidatos a emprego, decisão sobre benefício social e uso
+              policial de biometria caem, quase sempre, na faixa alta.
+            </p>
+            <ul class="marcos">
+              <li><b>1 ago 2024</b><span>entrada em vigor do regulamento</span></li>
+              <li><b>2 fev 2025</b><span>práticas proibidas passam a valer — entre elas a pontuação social de cidadãos por órgão público</span></li>
+              <li><b>2 ago 2025</b><span>deveres dos modelos de uso geral, os que servem de base a tudo o mais</span></li>
+              <li><b>2 ago 2026</b><span>aplicação geral e dever de transparência: conteúdo sintético identificável, e a pessoa avisada de que fala com uma máquina</span></li>
+              <li class="futuro"><b>2 dez 2027</b><span>obrigações de alto risco — adiadas em mais de um ano pelo Regulamento (UE) 2026/1744, em vigor desde 27 de julho de 2026</span></li>
+            </ul>
+            <p class="decide">
+              <b>o que muda para quem contrata</b>
+              Vale a pena ler mesmo sem valer aqui, por dois motivos. Primeiro porque é a
+              gramática que o PL brasileiro copiou: quem entende as faixas europeias lê o projeto
+              nacional sem dicionário. Segundo porque o fornecedor global que já se adequou à
+              Europa <em>tem</em> a documentação técnica pronta — e um edital brasileiro pode
+              simplesmente exigir que ele a entregue. O adiamento de 2027 é a parte que mais
+              importa comercialmente: até lá, "estamos em conformidade com a lei europeia" é uma
+              frase que ainda não significa quase nada, e convém perguntar com qual artigo.
+            </p>
+            <p class="oficial">
+              <b>texto oficial</b>
+              <a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj" target="_blank" rel="noopener noreferrer">eur-lex.europa.eu · Regulamento (UE) 2024/1689</a>
+              <span style="color:var(--tinta-3)">— há versão integral em português no seletor de idioma</span>
+            </p>
+          </article>
+
+          <article class="norma" style="--acento:var(--ocre)">
+            <div class="titulo-norma">
+              <span class="estagio e-tramite">em tramitação</span>
+              <h4>🇧🇷 Brasil · PL 2.338/2023</h4>
+            </div>
+            <p>
+              O marco legal brasileiro. Adota a lógica europeia de faixas de risco e acrescenta
+              uma coisa que a lei europeia não tem com essa clareza: um capítulo de
+              <strong>direitos da pessoa afetada</strong> — saber que houve decisão automatizada,
+              receber explicação, contestar e pedir revisão humana. Para o serviço público há
+              exigências adicionais quando o sistema participa de decisão que atinge direito.
+            </p>
+            <ul class="marcos">
+              <li><b>3 mai 2023</b><span>apresentado no Senado, a partir do relatório de uma comissão de juristas</span></li>
+              <li><b>10 dez 2024</b><span>aprovado no plenário do Senado</span></li>
+              <li><b>2025 – 2026</b><span>comissão especial na Câmara dos Deputados, com audiências públicas e seminários regionais</span></li>
+              <li class="futuro"><b>até ago 2026</b><span>sem votação em plenário na Câmara; ano eleitoral costuma empurrar pauta polêmica para depois</span></li>
+            </ul>
+            <p class="decide">
+              <b>o que muda para quem contrata</b>
+              Hoje, nada — e é justamente esse o ponto. Nenhum edital pode exigir conformidade
+              com projeto de lei; mas nada impede que o contrato exija, por cláusula, aquilo que
+              o projeto exigirá: registro de quem decidiu o quê, explicação em linguagem
+              compreensível, canal de contestação. Quem escrever isso agora não terá de reescrever
+              o contrato depois. E há o inverso, mais desconfortável: um sistema comprado hoje
+              com contrato de cinco anos vai atravessar a vigência da lei futura sem cláusula
+              nenhuma que permita adaptá-lo.
+            </p>
+            <p class="oficial">
+              <b>tramitação oficial</b>
+              <a href="https://www25.senado.leg.br/web/atividade/materias/-/materia/157233" target="_blank" rel="noopener noreferrer">senado.leg.br · matéria 157233, com o texto aprovado</a>
+            </p>
+          </article>
+
+          <article class="norma" style="--acento:var(--carimbo)">
+            <div class="titulo-norma">
+              <span class="estagio e-setor">normas setoriais</span>
+              <h4>🇨🇳 China · cinco normas, uma por aplicação</h4>
+            </div>
+            <p>
+              Nenhuma lei geral, e isso é escolha deliberada: em vez de esperar um texto que
+              cubra tudo, o regulador publica uma norma curta assim que um uso concreto ganha
+              escala. O resultado é uma regulamentação que chega antes — e que se aplica a um
+              recorte estreito de cada vez. Duas exigências atravessam todas: o serviço precisa
+              ser <strong>registrado antes</strong> de ser oferecido ao público, e o conteúdo
+              gerado por máquina precisa ser <strong>identificado como tal</strong>.
+            </p>
+            <ul class="marcos">
+              <li><b>1 mar 2022</b><span>recomendação algorítmica: quem ordena o que o usuário vê deve declarar o critério e oferecer a opção de desligá-lo</span></li>
+              <li><b>10 jan 2023</b><span>síntese profunda: rosto e voz sintetizados exigem consentimento de quem foi imitado</span></li>
+              <li><b>15 ago 2023</b><span>medidas provisórias de IA generativa: as primeiras regras do mundo para serviços do tipo</span></li>
+              <li><b>1 dez 2023</b><span>revisão ética em ciência e tecnologia: comitê interno obrigatório para pesquisa de alto risco, inclusive em IA</span></li>
+              <li><b>1 set 2025</b><span>rotulagem obrigatória: rótulo visível para a pessoa e marca embutida no próprio arquivo, que sobrevive ao recorte e ao reenvio</span></li>
+            </ul>
+            <p class="decide">
+              <b>o que muda para quem contrata</b>
+              A rotulagem embutida é a peça exportável, e a mais interessante para o Estado
+              brasileiro: ela não depende de o cidadão acreditar no aviso na tela, porque viaja
+              dentro do arquivo. É uma exigência que cabe inteira numa cláusula de edital — todo
+              conteúdo sintético entregue deve trazer marcação legível por máquina — e que hoje
+              nenhuma lei brasileira obriga. O preço do modelo chinês está declarado no quadro
+              acima: registro prévio é também autorização prévia, e quem autoriza pode negar.
+            </p>
+            <p class="oficial">
+              <b>texto e cronologia</b>
+              <a href="https://digichina.stanford.edu/" target="_blank" rel="noopener noreferrer">digichina.stanford.edu</a>
+              <span style="color:var(--tinta-3)">— traduções e análises das normas chinesas, mantidas pela Universidade Stanford</span>
+            </p>
+          </article>
+
+          <article class="norma" style="--acento:var(--tinta-2)">
+            <div class="titulo-norma">
+              <span class="estagio e-voluntario">sem lei federal geral</span>
+              <h4>🇺🇸 Estados Unidos · os estados legislam, a União contesta</h4>
+            </div>
+            <p>
+              Não há lei federal de IA. O que existe é o direito comum aplicado ao caso — defesa
+              do consumidor, concorrência, discriminação — mais um mosaico de leis estaduais que
+              começaram a valer e, desde o fim de 2025, um esforço declarado do governo federal
+              para derrubá-las. É o único caso do quadro em que os dois níveis de governo puxam
+              em sentidos contrários, e vale acompanhar porque o desfecho vai influenciar o
+              debate em todo lugar.
+            </p>
+            <ul class="marcos">
+              <li><b>22 jun 2025</b><span>Texas sanciona sua lei de IA, com responsabilização por uso intencionalmente lesivo</span></li>
+              <li><b>29 set 2025</b><span>Califórnia sanciona a SB 53: os maiores laboratórios passam a publicar protocolo de segurança e a relatar incidentes graves ao estado</span></li>
+              <li><b>11 dez 2025</b><span>ordem executiva presidencial cria uma força-tarefa no Departamento de Justiça para contestar leis estaduais de IA nos tribunais</span></li>
+              <li><b>1 jan 2026</b><span>entram em vigor as leis do Texas e da Califórnia</span></li>
+              <li><b>14 mai 2026</b><span>Colorado revoga a própria lei — a primeira do país — e a substitui por uma versão mais estreita, sem avaliação de impacto, que só valerá em 2027</span></li>
+            </ul>
+            <p class="decide">
+              <b>o que muda para quem contrata</b>
+              Quase todo fornecedor grande de IA é americano, e nenhum deles responde a uma lei
+              federal que o obrigue a documentar o que vende. A conformidade que ele exibe é
+              voluntária, ou é estadual — e valer na Califórnia não é valer no Brasil. A pergunta
+              útil no edital não é "a empresa cumpre a legislação de IA?", que não tem resposta,
+              e sim "que documento público a empresa já publica sobre este modelo, e o senhor me
+              entrega uma cópia anexada ao contrato?". A SB 53 californiana é útil por isso: ela
+              obriga a publicar, e o que é público pode ser exigido.
+            </p>
+            <p class="oficial">
+              <b>texto oficial</b>
+              <a href="https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=202520260SB53" target="_blank" rel="noopener noreferrer">leginfo.legislature.ca.gov · SB 53, Califórnia</a>
+            </p>
+          </article>
+
+          <article class="norma" style="--acento:var(--tinta-2)">
+            <div class="titulo-norma">
+              <span class="estagio e-voluntario">diretriz voluntária</span>
+              <h4>🇮🇳 Índia · Diretrizes de Governança de IA</h4>
+            </div>
+            <p>
+              A Índia examinou a hipótese de fazer uma lei própria e decidiu, por escrito, não
+              fazer. O documento sustenta que a maior parte dos riscos já é alcançada pela
+              legislação existente — proteção de dados, consumidor, responsabilidade civil — e
+              que criar um regime paralelo atrasaria a adoção sem aumentar a proteção. É a
+              posição oposta à europeia, sustentada com argumento, e não por omissão.
+            </p>
+            <ul class="marcos">
+              <li><b>5 nov 2025</b><span>o Ministério de Eletrônica e Tecnologia da Informação publica as diretrizes, com sete princípios e um plano de ação por prazos</span></li>
+            </ul>
+            <p class="decide">
+              <b>o que muda para quem contrata</b>
+              É o precedente que o Brasil vai ouvir citado toda vez que alguém defender adiar o
+              marco legal — e o argumento é honesto o bastante para merecer resposta, não
+              desdém. Vale reter a condição embutida nele: só funciona onde a legislação
+              existente já é aplicada de fato. Sem isso, "o direito atual dá conta" é a forma
+              elegante de dizer que ninguém responde.
+            </p>
+            <p class="oficial">
+              <b>documento oficial</b>
+              <a href="https://indiaai.gov.in/" target="_blank" rel="noopener noreferrer">indiaai.gov.in</a>
+              <span style="color:var(--tinta-3)">— portal do governo indiano, onde as diretrizes estão publicadas na íntegra</span>
+            </p>
+          </article>
+
+          <article class="norma" style="--acento:var(--tinta-2)">
+            <div class="titulo-norma">
+              <span class="estagio e-voluntario">diretriz voluntária</span>
+              <h4>🇷🇺 Rússia · Código de Ética de IA</h4>
+            </div>
+            <p>
+              Um código assinado por empresas e instituições, sem sanção associada. Quem adere
+              declara compromissos de conduta; quem descumpre não responde por isso perante
+              nenhuma autoridade. Em paralelo, o país opera regimes jurídicos experimentais —
+              recortes de território e de setor onde a regra comum é suspensa para permitir
+              testes acompanhados.
+            </p>
+            <ul class="marcos">
+              <li><b>26 out 2021</b><span>assinatura do código em Moscou pelas maiores empresas de tecnologia do país e por instituições estatais</span></li>
+            </ul>
+            <p class="decide">
+              <b>o que muda para quem contrata</b>
+              Serve de exemplo do que a autorregulação entrega e do que ela não entrega. Um
+              compromisso sem sanção é útil como declaração de intenção e inútil como garantia
+              contratual — e é exatamente essa a diferença entre uma carta de princípios anexada
+              à proposta e uma cláusula com multa. Quando um fornecedor apresentar seu código de
+              ética de IA, esta é a distinção a fazer.
+            </p>
+            <p class="oficial">
+              <b>texto do código</b>
+              <a href="https://ethics.a-ai.ru/" target="_blank" rel="noopener noreferrer">ethics.a-ai.ru</a>
+              <span style="color:var(--tinta-3)">— com a lista das organizações signatárias</span>
+            </p>
+          </article>
+
+          <article class="norma" style="--acento:var(--carimbo)">
+            <div class="titulo-norma">
+              <span class="estagio e-tramite">recomeçada do zero</span>
+              <h4>🇿🇦 África do Sul · a política retirada em dezesseis dias</h4>
+            </div>
+            <p>
+              A política nacional de IA sul-africana foi aprovada pelo governo e publicada no
+              diário oficial para consulta pública. Dias depois, jornalistas conferiram a
+              bibliografia: das 67 referências, pelo menos seis não existiam — periódicos
+              acadêmicos inventados, artigos que nunca foram escritos. O ministro responsável
+              declarou que a explicação mais plausível era o uso de citações geradas por
+              inteligência artificial, incluídas sem verificação. O documento atravessou todas
+              as instâncias de revisão do ministério sem que ninguém abrisse uma referência.
+            </p>
+            <ul class="marcos">
+              <li><b>10 abr 2026</b><span>publicação no diário oficial, com prazo de consulta pública até junho</span></li>
+              <li><b>26 abr 2026</b><span>retirada integral do documento pelo ministro; o processo recomeça do zero</span></li>
+            </ul>
+            <p class="decide">
+              <b>o que muda para quem contrata</b>
+              Este é o caso que o senhor deve guardar, e não por escárnio: nenhum dos revisores
+              era incompetente, e mesmo assim o texto passou. Uma referência inventada é
+              tipograficamente idêntica a uma verdadeira — autor plausível, periódico plausível,
+              ano plausível —, e o único jeito de distinguir as duas é abrir. Daí a regra que
+              vale para qualquer documento oficial que tenha passado perto de uma máquina:
+              <strong>conferir referência não é revisão de forma, é revisão de conteúdo</strong>,
+              e precisa de responsável nomeado. É a competência do Discernimento, no Fólio 07,
+              custando a um país inteiro a política que ele levara meses para escrever.
+            </p>
+            <p class="oficial">
+              <b>cobertura do episódio</b>
+              <a href="https://african.business/2026/04/technology-information/south-africas-ai-policy-withdrawn-after-ai-generated-citations-found" target="_blank" rel="noopener noreferrer">african.business · a retirada e as referências inventadas</a>
+            </p>
+          </article>
+
+        </div>
+
+        <div class="fontes">
+          <h4>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+            Referências deste fólio
+          </h4>
+          <ol>
+            <li>União Europeia. <em>Regulamento (UE) 2024/1689</em>, de 13 de junho de 2024 — Lei de Inteligência Artificial. E <em>Regulamento (UE) 2026/1744</em>, publicado em 24 de julho de 2026, que altera os prazos de aplicação. Disponíveis em: <a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj" target="_blank" rel="noopener noreferrer">eur-lex.europa.eu</a></li>
+            <li>Comissão Europeia. <em>AI Act — regulatory framework</em>, calendário oficial de aplicação. Disponível em: <a href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" target="_blank" rel="noopener noreferrer">digital-strategy.ec.europa.eu</a></li>
+            <li>Brasil. Senado Federal. <em>Projeto de Lei nº 2.338, de 2023</em> — texto aprovado em 10 de dezembro de 2024 e tramitação subsequente na Câmara dos Deputados.</li>
+            <li>Stanford University. <em>DigiChina</em> — traduções comentadas das normas chinesas de recomendação algorítmica, síntese profunda, IA generativa e rotulagem de conteúdo sintético.</li>
+            <li>Califórnia. <em>Senate Bill 53 — Transparency in Frontier Artificial Intelligence Act</em>, sancionada em 29 de setembro de 2025, em vigor desde 1º de janeiro de 2026.</li>
+            <li>Estados Unidos. Ordem executiva <em>Ensuring a National Policy Framework for Artificial Intelligence</em>, de 11 de dezembro de 2025.</li>
+            <li>Índia. Ministério de Eletrônica e Tecnologia da Informação. <em>India AI Governance Guidelines</em>, 5 de novembro de 2025.</li>
+            <li>Rússia. <em>Código de Ética no Campo da Inteligência Artificial</em>, assinado em 26 de outubro de 2021.</li>
+            <li>África do Sul. Departamento de Comunicações e Tecnologias Digitais. Retirada da <em>Draft National Artificial Intelligence Policy</em> em 26 de abril de 2026.</li>
+          </ol>
+        </div>
       </div>
     </section>
     <!-- 07 ───────────────────────────────────────────────── -->
@@ -2595,27 +3233,286 @@ footer{
           </p>
         </div>
 
-        <article class="caso">
-          <div class="relato">
-            <span class="pastilha">🇧🇷 Brasil · Judiciário</span>
-            <h3>Victor — triagem de recursos no Supremo Tribunal Federal</h3>
-            <p>
-              Um sistema lê os recursos que chegam ao STF e identifica a qual tema de repercussão
-              geral cada um pertence. O que um servidor levava dezenas de minutos para fazer passou
-              a levar segundos — e a decisão final continua sendo humana.
-            </p>
-            <p class="rodape-nota">
-              Formato de todo caso: <strong>o problema → o que foi feito → resultado medido → quem
-              assina a fonte</strong>. Nenhum número entra sem fonte.
-            </p>
-          </div>
-          <div class="placar">
-            <div><strong>segundos</strong><span>tempo de classificação, antes contado em minutos</span></div>
-            <div><strong>humana</strong><span>a decisão final permanece com o servidor</span></div>
-          </div>
-        </article>
+        <p class="criterio">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg>
+          <span><strong>O placar é o mesmo em todos os casos.</strong> À direita, dois campos:
+          o <strong>número publicado</strong> — escala ou resultado medido, nunca estimativa de
+          fornecedor — e <strong>onde a decisão continua humana</strong>. O segundo campo importa
+          tanto quanto o primeiro, e é ele que o último caso desta página não consegue
+          preencher.</span>
+        </p>
 
-        <p class="escopo"><b>a seguir</b><span>De 8 a 10 casos — Brasil, Estônia, Portugal, Singapura, China e Índia — todos com o mesmo placar comparável.</span></p>
+        <div class="casos">
+
+          <article class="caso">
+            <div class="relato">
+              <span class="pastilha">🇧🇷 Brasil · Supremo Tribunal Federal</span>
+              <h3>Victor — triagem dos recursos que chegam ao Supremo</h3>
+              <p>
+                O problema era de volume: dezenas de milhares de recursos extraordinários por ano,
+                e cada um precisa ser lido para se descobrir a que tema de repercussão geral
+                pertence. Desenvolvido com a Universidade de Brasília a partir de 2017, o Victor
+                aprendeu a converter as imagens em texto, separar as peças do processo e apontar o
+                tema provável. Na primeira versão de laboratório, em 2018, reconhecia os 27 temas
+                de maior incidência.
+              </p>
+              <p class="rodape-nota">
+                <b>quem assina o número</b>
+                Supremo Tribunal Federal e Universidade de Brasília — apresentação pública do
+                projeto e relatórios subsequentes de pesquisa e desenvolvimento.
+              </p>
+            </div>
+            <div class="placar">
+              <div><strong>27 temas</strong><span>de repercussão geral reconhecidos pela primeira versão, em 2018</span></div>
+              <div><strong>o servidor</strong><span>o sistema sugere a classificação; quem a confirma é gente, e a decisão nunca deixou de ser do ministro</span></div>
+            </div>
+          </article>
+
+          <article class="caso">
+            <div class="relato">
+              <span class="pastilha">🇧🇷 Brasil · Conselho Nacional de Justiça</span>
+              <h3>O retrato nacional — e a norma que veio junto</h3>
+              <p>
+                O Victor não é exceção: é parte de um movimento que o próprio Judiciário mediu.
+                A pesquisa do CNJ referente a 2024, publicada em setembro de 2025, contou
+                <strong>178 projetos de inteligência artificial</strong> em andamento, com resposta
+                de 92 dos 95 tribunais e conselhos do país; quase metade deles já usava IA
+                generativa. No mesmo movimento veio a Resolução CNJ nº 615, de 2025, que
+                estabelece as regras de uso — inclusive a exigência de supervisão humana e de
+                registro dos sistemas.
+              </p>
+              <p class="rodape-nota">
+                <b>quem assina o número</b>
+                Conselho Nacional de Justiça, <em>Pesquisa Inteligência Artificial no Judiciário
+                2024</em> — resumo executivo publicado em setembro de 2025.
+                <a href="https://www.cnj.jus.br/wp-content/uploads/2025/09/relatorio-ia-2024-resumo-executivo-set2025.pdf" target="_blank" rel="noopener noreferrer">cnj.jus.br · resumo executivo</a>
+              </p>
+            </div>
+            <div class="placar">
+              <div><strong>178</strong><span>projetos de IA registrados nos tribunais brasileiros em 2024</span></div>
+              <div><strong>Resolução 615</strong><span>o Judiciário escreveu a própria norma antes de o país ter lei: supervisão humana obrigatória</span></div>
+            </div>
+          </article>
+
+          <article class="caso">
+            <div class="relato">
+              <span class="pastilha">🇧🇷 Brasil · Tribunal de Contas da União</span>
+              <h3>Alice — a leitura diária dos editais de licitação</h3>
+              <p>
+                Todo dia útil são publicados mais editais do que qualquer equipe consegue ler.
+                A Alice lê os do Diário Oficial da União, procura sinais conhecidos de risco —
+                exigência que restringe concorrência, valor fora da curva, fornecedor com histórico
+                — e manda ao auditor, no fim do dia, uma lista do que merece olhar humano. O TCU
+                mantém hoje dezoito ferramentas do tipo em operação, entre elas um assistente de
+                conversa interno com mais de 1.400 usuários, e compartilhou a experiência com
+                cerca de 80 instituições federais.
+              </p>
+              <p class="rodape-nota">
+                <b>quem assina o número</b>
+                Tribunal de Contas da União — comunicado institucional sobre o uso de inteligência
+                artificial em processos internos.
+                <a href="https://portal.tcu.gov.br/imprensa/noticias/uso-de-inteligencia-artificial-aprimora-processos-internos-no-tribunal-de-contas-da-uniao" target="_blank" rel="noopener noreferrer">portal.tcu.gov.br</a>
+              </p>
+            </div>
+            <div class="placar">
+              <div><strong>18</strong><span>ferramentas de IA em operação no tribunal</span></div>
+              <div><strong>o auditor</strong><span>a máquina só levanta a suspeita; abrir fiscalização é ato de servidor, com nome e responsabilidade</span></div>
+            </div>
+          </article>
+
+          <article class="caso">
+            <div class="relato">
+              <span class="pastilha">🇪🇪 Estônia · governo digital</span>
+              <h3>X-Road, Bürokratt — e o juiz-robô que nunca existiu</h3>
+              <p>
+                A Estônia não começou pela inteligência artificial: começou pelo encanamento.
+                O X-Road é o barramento que permite a um órgão consultar o dado que outro já tem,
+                sem pedir de novo ao cidadão — e é sobre ele que assistentes como o Bürokratt
+                funcionam. O governo estima em <strong>1.345 anos de trabalho por ano</strong> o
+                que se poupa por não redigitar informação que o Estado já possui. Em 2019 a
+                imprensa internacional anunciou que o país construiria um "juiz-robô" para causas
+                pequenas. O Ministério da Justiça publicou desmentido formal: não havia projeto,
+                nem ambição de haver.
+              </p>
+              <p class="rodape-nota">
+                <b>quem assina o número</b>
+                e-Estonia, portal oficial do programa de governo digital, e Ministério da Justiça
+                e Assuntos Digitais da Estônia (nota <em>Estonia does not develop AI Judge</em>).
+                <a href="https://e-estonia.com/solutions/interoperability-services/x-road/" target="_blank" rel="noopener noreferrer">e-estonia.com · X-Road</a>
+              </p>
+            </div>
+            <div class="placar">
+              <div><strong>1.345 anos</strong><span>de trabalho poupados por ano, segundo o próprio governo</span></div>
+              <div><strong>o juiz</strong><span>o país desmentiu por escrito que fosse substituí-lo — e o desmentido circulou menos que o boato</span></div>
+            </div>
+          </article>
+
+          <article class="caso">
+            <div class="relato">
+              <span class="pastilha">🇵🇹 Portugal · Serviço Nacional de Saúde</span>
+              <h3>Linha SNS 24 — triagem antes da consulta</h3>
+              <p>
+                Uma linha telefônica nacional em que o cidadão descreve o sintoma e recebe
+                orientação: cuidar em casa, procurar o centro de saúde, ir à urgência. Em 2025 a
+                linha atendeu cerca de 5,7 milhões de chamadas e marcou mais de um milhão de
+                consultas nos cuidados primários — perto de 2.800 por dia. Foi aí que entrou a
+                inteligência artificial: um assistente de avaliação de sintomas respiratórios, para
+                o volume que se repete, e um mecanismo de retorno de chamada para que ninguém fique
+                sem resposta.
+              </p>
+              <p class="rodape-nota">
+                <b>quem assina o número</b>
+                Serviços Partilhados do Ministério da Saúde e portal do Governo de Portugal —
+                balanço público da Linha SNS 24 referente a 2025.
+              </p>
+            </div>
+            <div class="placar">
+              <div><strong>2.800/dia</strong><span>consultas agendadas nos cuidados primários pela linha, em 2025</span></div>
+              <div><strong>o profissional</strong><span>a máquina triava sintoma; quem diagnostica, prescreve e encaminha continua sendo clínico</span></div>
+            </div>
+          </article>
+
+          <article class="caso">
+            <div class="relato">
+              <span class="pastilha">🇸🇬 Singapura · serviço público</span>
+              <h3>Pair — assistente interno para 150 mil servidores</h3>
+              <p>
+                Em vez de proibir o uso de assistentes de conversa e assistir os servidores usarem
+                escondido, Singapura construiu o seu e o colocou dentro do ambiente do governo, onde
+                o dado não sai. O resultado é o número mais alto de adoção que um serviço público já
+                publicou: cerca de <strong>80% dos 150 mil servidores</strong> já usaram a
+                ferramenta. Em 2026 o governo passou a montar um registro dos agentes de IA em uso —
+                cada um declarado, com dono e finalidade.
+              </p>
+              <p class="rodape-nota">
+                <b>quem assina o número</b>
+                Ministério do Desenvolvimento Digital e da Informação de Singapura, em resposta
+                escrita a questionamento parlamentar sobre adoção de ferramentas de IA no serviço
+                público.
+              </p>
+            </div>
+            <div class="placar">
+              <div><strong>80%</strong><span>dos 150 mil servidores públicos já usaram o assistente oficial</span></div>
+              <div><strong>o registro</strong><span>nenhum agente roda anônimo: cada um é declarado, com responsável e finalidade</span></div>
+            </div>
+          </article>
+
+          <article class="caso">
+            <div class="relato">
+              <span class="pastilha">🇨🇳 China · Hangzhou</span>
+              <h3>Cérebro da Cidade — semáforo, ambulância e o preço disso</h3>
+              <p>
+                Hangzhou ligou as câmeras de trânsito a um sistema que ajusta os semáforos em tempo
+                real e abre corredor para veículo de emergência. Os números publicados são
+                expressivos: a cidade caiu da terceira para a 48ª posição no ranking nacional de
+                congestionamento no primeiro ano, e o tempo de chegada das ambulâncias caiu pela
+                metade. O preço também está declarado, e não é pequeno: o sistema funciona porque
+                observa tudo, o tempo todo, e a mesma infraestrutura que abre caminho para a
+                ambulância serve para acompanhar quem passa.
+              </p>
+              <p class="rodape-nota">
+                <b>quem assina o número</b>
+                Alibaba Cloud, fornecedora do sistema, e cobertura do <em>China Daily</em>. É o
+                único caso desta página cujo número principal vem de quem vendeu a solução — e
+                por isso vale lê-lo com a reserva que se lê um material de fornecedor.
+              </p>
+            </div>
+            <div class="placar">
+              <div><strong>3º → 48º</strong><span>posição da cidade no ranking de congestionamento, no primeiro ano</span></div>
+              <div><strong>quase nenhuma</strong><span>o ajuste do semáforo é automático; a decisão humana ficou no projeto, não na operação</span></div>
+            </div>
+          </article>
+
+          <article class="caso">
+            <div class="relato">
+              <span class="pastilha">🇮🇳 Índia · Suprema Corte</span>
+              <h3>Tradução de sentenças para as línguas do país</h3>
+              <p>
+                A Índia julga em inglês e vive em dezenas de línguas — o que significa que o
+                cidadão comum não lê a decisão que o atinge. A Suprema Corte adotou um tradutor
+                automático treinado em vocabulário jurídico e passou a publicar as decisões
+                traduzidas: mais de 36 mil para o híndi e outras 17 mil em dezesseis idiomas
+                regionais, disponíveis no repositório eletrônico do tribunal. É o caso mais direto
+                de IA usada não para acelerar o Estado, e sim para tornar o Estado legível.
+              </p>
+              <p class="rodape-nota">
+                <b>quem assina o número</b>
+                Suprema Corte da Índia — estatísticas do repositório eletrônico de decisões
+                (e-SCR) e do programa de tradução judicial.
+              </p>
+            </div>
+            <div class="placar">
+              <div><strong>53 mil</strong><span>decisões judiciais traduzidas para 17 idiomas do país</span></div>
+              <div><strong>o revisor</strong><span>a tradução automática é conferida antes de publicar: em texto de sentença, palavra errada é direito errado</span></div>
+            </div>
+          </article>
+
+        </div>
+
+        <h3 style="margin:52px 0 10px">A contraprova</h3>
+        <p class="prosa" style="font-size:.95em;color:var(--tinta-2);margin-bottom:6px">
+          Uma página só com acertos seria propaganda. O caso abaixo é o mais estudado do mundo
+          em administração pública, e não está aqui como advertência genérica: está porque cada
+          um dos oito casos acima poderia ter terminado nele, e o que os separa cabe numa linha
+          do placar.
+        </p>
+
+        <div class="casos">
+          <article class="caso contraprova">
+            <div class="relato">
+              <span class="pastilha">🇳🇱 Países Baixos · benefício social</span>
+              <h3>O caso do auxílio-creche — quando o placar não fecha</h3>
+              <p>
+                A administração fiscal holandesa usou um sistema de pontuação de risco para
+                escolher quem investigar por fraude no auxílio-creche. Entre outros critérios, o
+                sistema considerou a <strong>segunda nacionalidade</strong> do beneficiário como
+                sinal de risco. Cerca de 26 mil famílias foram acusadas indevidamente e obrigadas
+                a devolver o benefício integral, em valores que chegavam a dezenas de milhares de
+                euros, sem parcelamento e sem recurso efetivo. Mais de mil crianças foram
+                retiradas das famílias. Em fevereiro de 2020 um tribunal de Haia derrubou um
+                sistema aparentado, o SyRI, por violação de direitos fundamentais; em janeiro de
+                2021 o gabinete inteiro renunciou.
+              </p>
+              <p class="rodape-nota">
+                <b>quem assina o número</b>
+                Comissão parlamentar de inquérito do Parlamento neerlandês, decisão do Tribunal
+                Distrital de Haia de 5 de fevereiro de 2020 e a investigação jornalística da
+                Lighthouse Reports que reconstituiu o funcionamento do sistema.
+              </p>
+            </div>
+            <div class="placar">
+              <div><strong>26 mil</strong><span>famílias acusadas indevidamente de fraude</span></div>
+              <div><strong>nenhuma</strong><span>não havia revisão humana capaz de contestar o escore: o servidor via a suspeita, não o critério que a produziu</span></div>
+            </div>
+          </article>
+        </div>
+
+        <p class="margem-nota" style="max-width:66ch;margin-top:30px">
+          <strong>O que os oito primeiros casos têm e o nono não tinha:</strong> em todos eles a
+          máquina entrega uma <em>sugestão</em> a alguém que pode recusá-la, e esse alguém tem
+          nome. Repare que a diferença não é técnica — o sistema holandês não era mais primitivo
+          que o do Supremo. A diferença é de desenho institucional: quem pode dizer não, com que
+          informação na mão, e em que prazo. É a pergunta a fazer em qualquer contratação, e ela
+          não aparece na ficha técnica do produto.
+        </p>
+
+        <div class="fontes">
+          <h4>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+            Referências deste fólio
+          </h4>
+          <ol>
+            <li>Supremo Tribunal Federal e Universidade de Brasília. Projeto Victor — apresentação pública, 2018, e relatórios de pesquisa e desenvolvimento posteriores.</li>
+            <li>Conselho Nacional de Justiça. <em>Pesquisa Inteligência Artificial no Judiciário 2024</em>, resumo executivo, setembro de 2025. E Resolução CNJ nº 615, de 2025, sobre uso de inteligência artificial no Poder Judiciário.</li>
+            <li>Tribunal de Contas da União. <em>Uso de inteligência artificial aprimora processos internos no TCU</em> — comunicado institucional.</li>
+            <li>e-Estonia. <em>X-Road</em> — página oficial do programa estoniano de governo digital. E Ministério da Justiça e Assuntos Digitais da Estônia, <em>Estonia does not develop AI Judge</em>.</li>
+            <li>Portugal. Serviços Partilhados do Ministério da Saúde. Balanço da Linha SNS 24 referente a 2025.</li>
+            <li>Singapura. Ministério do Desenvolvimento Digital e da Informação — resposta a questionamento parlamentar sobre a adoção de ferramentas de IA no serviço público.</li>
+            <li>Alibaba Cloud e <em>China Daily</em>. Resultados publicados do sistema Cérebro da Cidade em Hangzhou.</li>
+            <li>Suprema Corte da Índia. Repositório eletrônico de decisões (e-SCR) e programa de tradução automática de sentenças.</li>
+            <li>Países Baixos. Comissão parlamentar de inquérito sobre o auxílio-creche; Tribunal Distrital de Haia, decisão sobre o sistema SyRI, 5 de fevereiro de 2020; Lighthouse Reports, <em>The Algorithm Addiction</em>.</li>
+          </ol>
+        </div>
       </div>
     </section>
     <!-- Metodo 4D -->
@@ -2672,7 +3569,7 @@ footer{
               <p class="en">discernment</p>
               <p class="pergunta">Isto que voltou presta?</p>
               <p>Avaliar o resultado, o processo e o comportamento do sistema com ceticismo
-              treinado. A dificuldade é específica: o texto errado chega com a mesma fluidência
+              treinado. A dificuldade é específica: o texto errado chega com a mesma fluência
               e a mesma confiança do texto certo.</p>
               <p class="no-servico">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
@@ -2704,6 +3601,120 @@ footer{
           E é possível conferir com rigor (Discernimento) e ainda assim publicar sem dizer que
           houve máquina no meio (Diligência). Cada competência cobre um ponto cego das outras.
         </p>
+
+        <h3 style="margin:52px 0 8px">As doze partes, no expediente</h3>
+        <p class="prosa" style="font-size:.93em;color:var(--tinta-2);margin-bottom:18px">
+          Cada competência se divide em três. Os nomes da coluna do meio são os do material
+          original da Anthropic, traduzidos; a coluna da direita traz o equivalente no trabalho
+          de repartição.
+        </p>
+
+        <div class="rolagem-tabela">
+          <table class="quadro">
+            <caption class="sr">As doze partes do método 4D, com o exemplo correspondente no serviço público</caption>
+            <thead>
+              <tr><th scope="col">Competência</th><th scope="col">A parte, e o que ela pede</th><th scope="col">No expediente</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" rowspan="3">Delegação</th>
+                <td><b>Consciência do problema</b> — saber o que se quer antes de abrir a ferramenta.</td>
+                <td>Antes de pedir "um resumo deste processo", decidir para que serve o resumo: instruir despacho, responder ofício ou subsidiar reunião. Cada finalidade produz um resumo diferente.</td>
+              </tr>
+              <tr>
+                <td><b>Consciência da plataforma</b> — saber o que aquela ferramenta faz e onde ela falha.</td>
+                <td>Um assistente sem acesso ao documento responde pelo que é provável, e é assim que aparece jurisprudência inexistente. Com o arquivo anexado, o mesmo assistente passa a responder pelo que está escrito.</td>
+              </tr>
+              <tr>
+                <td><b>Distribuição da tarefa</b> — repartir o trabalho entre o senhor e a máquina.</td>
+                <td>A Lei nº 9.784/1999, no art. 13, veda delegar a edição de ato normativo, a decisão de recurso administrativo e matéria de competência exclusiva. O que não se delega a um subordinado não se delega a um sistema.</td>
+              </tr>
+              <tr>
+                <th scope="row" rowspan="3">Descrição</th>
+                <td><b>Descrição do produto</b> — o que deve sair: formato, extensão, destinatário.</td>
+                <td>"Cinco itens, linguagem para o cidadão, sem sigla não explicada" é uma especificação. "Faça um resumo" é um pedido de sorte.</td>
+              </tr>
+              <tr>
+                <td><b>Descrição do processo</b> — o caminho a percorrer, e em que ordem.</td>
+                <td>"Leia primeiro a manifestação da área técnica, depois o parecer jurídico, e aponte onde os dois divergem" — a ordem de leitura é parte da instrução.</td>
+              </tr>
+              <tr>
+                <td><b>Descrição do desempenho</b> — como a máquina deve se portar durante o trabalho.</td>
+                <td>"Escreva 'não consta' quando o documento não disser" e "aponte o que enfraquece minha tese" são regras de conduta, não de formato. São elas que impedem o texto complacente.</td>
+              </tr>
+              <tr>
+                <th scope="row" rowspan="3">Discernimento</th>
+                <td><b>Discernimento do produto</b> — avaliar o que voltou.</td>
+                <td>Abrir cada referência citada. A política nacional de IA da África do Sul, no Fólio 05, foi retirada porque ninguém abriu — e uma citação inventada é tipograficamente idêntica a uma verdadeira.</td>
+              </tr>
+              <tr>
+                <td><b>Discernimento do processo</b> — avaliar como chegou ali.</td>
+                <td>Pedir os passos antes da conclusão e conferir o terceiro passo, não o último. Erro de premissa produz conclusão coerente e falsa.</td>
+              </tr>
+              <tr>
+                <td><b>Discernimento do desempenho</b> — avaliar o comportamento do sistema na conversa.</td>
+                <td>Se a ferramenta concorda com tudo, ela deixou de servir. Sustentar diante dela a tese contrária à sua e observar se muda de lado é um teste de trinta segundos.</td>
+              </tr>
+              <tr>
+                <th scope="row" rowspan="3">Diligência</th>
+                <td><b>Diligência de criação</b> — escolher a ferramenta e o que se coloca dentro dela.</td>
+                <td>Dado pessoal de cidadão em serviço não contratado pelo órgão é tratamento de dado fora da base legal — a Lei nº 13.709/2018 alcança a administração pública, e o servidor é agente de tratamento.</td>
+              </tr>
+              <tr>
+                <td><b>Diligência de transparência</b> — declarar que houve máquina no caminho.</td>
+                <td>No Judiciário isso já é norma: a Resolução CNJ nº 615, de 11 de março de 2025, exige supervisão humana efetiva, veda sistema que dificulte a revisão da decisão automatizada e determina que o uso seja auditável e rastreável.</td>
+              </tr>
+              <tr>
+                <td><b>Diligência de implantação</b> — responder pelo que se entrega.</td>
+                <td>A assinatura não se divide com o fornecedor. Nenhuma cláusula contratual transfere a responsabilidade do ato administrativo para quem vendeu a ferramenta.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="autoteste">
+          <h4>Onde o senhor está hoje</h4>
+          <p class="intro">
+            Doze afirmações, três por competência. Marque as que descrevem o que o senhor
+            faria hoje, sem precisar lembrar de fazer. Nada é gravado, e não há nota no fim.
+          </p>
+
+          <div class="bloco" style="--acento:var(--carimbo)">
+            <p>Delegação</p>
+            <label><input type="checkbox"><span>Sei dizer, antes de abrir a ferramenta, para que servirá o texto que vou pedir.</span></label>
+            <label><input type="checkbox"><span>Sei de cabeça duas coisas que a ferramenta que uso faz mal.</span></label>
+            <label><input type="checkbox"><span>Consigo apontar, no meu trabalho, uma tarefa que a lei não permite delegar.</span></label>
+          </div>
+
+          <div class="bloco" style="--acento:var(--jade)">
+            <p>Descrição</p>
+            <label><input type="checkbox"><span>Meus pedidos dizem o formato e o destinatário, não só o assunto.</span></label>
+            <label><input type="checkbox"><span>Já indiquei por qual documento começar e em que ordem ler.</span></label>
+            <label><input type="checkbox"><span>Escrevo regra de conduta no pedido — o que fazer quando a informação não existir.</span></label>
+          </div>
+
+          <div class="bloco" style="--acento:var(--ocre)">
+            <p>Discernimento</p>
+            <label><input type="checkbox"><span>Abro as referências antes de aproveitar o texto, sempre, mesmo com pressa.</span></label>
+            <label><input type="checkbox"><span>Peço o raciocínio e confiro o meio dele, não apenas a conclusão.</span></label>
+            <label><input type="checkbox"><span>Já testei se a ferramenta muda de opinião quando eu discordo dela.</span></label>
+          </div>
+
+          <div class="bloco" style="--acento:var(--tinta-2)">
+            <p>Diligência</p>
+            <label><input type="checkbox"><span>Sei qual dado do cidadão não pode entrar na ferramenta que uso.</span></label>
+            <label><input type="checkbox"><span>Registro, em algum lugar verificável, que houve IA na produção do documento.</span></label>
+            <label><input type="checkbox"><span>Conferi cada afirmação do que assinei — e assinaria de novo se me perguntassem a origem.</span></label>
+          </div>
+
+          <p class="apuracao">
+            <b>como ler o resultado</b>
+            As marcadas mostram o que já é hábito. As em branco são a lista de estudo, e a
+            ordem importa: uma lacuna em Delegação estraga tudo o que vem depois, porque o
+            pedido mais bem escrito do mundo não conserta a decisão de ter pedido. Se a linha
+            em branco estiver em Diligência, o risco é jurídico, não de qualidade.
+          </p>
+        </div>
 
 
         <h3 style="margin:52px 0 10px">Do outro lado: a constituição da máquina</h3>
@@ -2768,15 +3779,17 @@ footer{
             Referências deste fólio
           </h4>
           <ol>
-            <li>Anthropic. <em>AI Fluency: Frameworks &amp; Foundations</em> — curso aberto, 2025. Enquadramento das quatro competências (Delegation, Description, Discernment, Diligence).</li>
+            <li>Anthropic. <em>AI Fluency: Frameworks &amp; Foundations</em> — curso aberto, 2025. Quatro competências (Delegation, Description, Discernment, Diligence) e seus três subcomponentes cada: <em>problem, platform, task delegation</em>; <em>product, process, performance description</em>; <em>product, process, performance discernment</em>; <em>creation, transparency, deployment diligence</em>. Disponível em: <a href="https://www.anthropic.com/ai-fluency" target="_blank" rel="noopener noreferrer">anthropic.com/ai-fluency</a></li>
             <li>Dakan, R.; Feller, J. <em>AI Fluency</em> — material desenvolvido em parceria entre a Ringling College of Art and Design, a University College Cork e a Anthropic.</li>
+            <li>Brasil. <em>Lei nº 9.784, de 29 de janeiro de 1999</em>, art. 13 — atos que não podem ser objeto de delegação no processo administrativo federal.</li>
+            <li>Brasil. <em>Lei nº 13.709, de 14 de agosto de 2018</em> — Lei Geral de Proteção de Dados Pessoais, aplicável ao tratamento de dados pelo poder público.</li>
+            <li>Conselho Nacional de Justiça. <em>Resolução nº 615, de 11 de março de 2025</em> — uso de inteligência artificial no Poder Judiciário: supervisão humana, auditabilidade e vedação a sistema que dificulte a revisão de decisão automatizada. Disponível em: <a href="https://atos.cnj.jus.br/atos/detalhar/6001" target="_blank" rel="noopener noreferrer">atos.cnj.jus.br · Resolução 615/2025</a></li>
             <li>Anthropic. <em>Prompt engineering overview</em> — documentação oficial, para o desdobramento técnico da competência de Descrição.</li>
             <li>Bai, Y. <em>et al.</em> "Constitutional AI: Harmlessness from AI Feedback". Anthropic, dezembro de 2022. Disponível em: <a href="https://arxiv.org/abs/2212.08073" target="_blank" rel="noopener noreferrer">arxiv.org/abs/2212.08073</a></li>
             <li>Anthropic. <em>Claude’s Constitution</em>, maio de 2023 — texto dos princípios e das fontes de onde foram tirados. Disponível em: <a href="https://www.anthropic.com/news/claudes-constitution" target="_blank" rel="noopener noreferrer">anthropic.com/news/claudes-constitution</a></li>
           </ol>
         </div>
 
-        <p class="escopo"><b>a seguir</b><span>Cada uma das quatro competências ganha exemplos de trabalho de repartição e um pequeno teste de autoavaliação. A nomenclatura dos subcomponentes será reconferida contra o material original da Anthropic na publicação.</span></p>
       </div>
     </section>
     <!-- 02 ───────────────────────────────────────────────── -->
@@ -2857,7 +3870,247 @@ footer{
           </article>
         </div>
 
-        <p class="escopo"><b>a seguir</b><span>De 12 a 15 ferramentas, cada uma com "para que serve", "quanto custa", "dá para confiar?" e um passo a passo ilustrado.</span></p>
+        <h3 style="margin:52px 0 8px">Catorze ferramentas, uma ficha cada</h3>
+        <p class="prosa" style="font-size:.93em;color:var(--tinta-2);margin-bottom:14px">
+          Cada ficha traz três campos e um botão que abre a plataforma. Os valores foram
+          conferidos nas páginas oficiais em <strong>agosto de 2026</strong>; preço de assinatura
+          muda com frequência, e a cobrança em dólar ainda passa por câmbio e imposto sobre
+          operação de crédito. O terceiro campo é o que mais importa aqui.
+        </p>
+
+        <p class="criterio">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg>
+          <span><strong>Regra que vale para todas, sem exceção:</strong> dado pessoal de cidadão,
+          documento sigiloso e peça de processo restrito não entram em ferramenta que o órgão não
+          contratou. A Lei nº 13.709/2018 alcança a administração pública, e quem cola o texto na
+          tela é agente de tratamento. Para estudar, treinar e redigir minuta genérica, as
+          gratuitas servem.</span>
+        </p>
+
+        <div class="regiao">
+          <h4>Assistentes de conversa</h4>
+          <div class="caixa-ferramentas">
+
+            <article class="ferramenta">
+              <div class="cabeca-f">
+                <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">C</span></span>
+                <div class="corpo-f"><h4>ChatGPT</h4><p class="proc">OpenAI · Estados Unidos</p></div>
+                <a class="abrir-f" href="https://chatgpt.com" target="_blank" rel="noopener noreferrer">abrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </div>
+              <dl class="campos">
+                <div><dt>para que serve</dt><dd>O mais usado do mundo, e o mais generalista: redigir, resumir, traduzir, explicar, organizar lista. Lê arquivo anexado e pesquisa na internet quando solicitado.</dd></div>
+                <div><dt>quanto custa</dt><dd>Versão gratuita com limite diário. Assinatura individual a US$ 20 por mês; há planos de valor menor em alguns países e planos corporativos por usuário.</dd></div>
+                <div class="confiar"><dt>dá para confiar?</dt><dd>Para redação e explicação, sim, com conferência. Nas contas de consumidor, a conversa pode ser usada para melhorar o modelo, salvo se o senhor desligar isso nas configurações de dados — nos planos corporativos, não é usada. Inventa referência bibliográfica com desenvoltura.</dd></div>
+              </dl>
+            </article>
+
+            <article class="ferramenta">
+              <div class="cabeca-f">
+                <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">C</span></span>
+                <div class="corpo-f"><h4>Claude</h4><p class="proc">Anthropic · Estados Unidos</p></div>
+                <a class="abrir-f" href="https://claude.ai" target="_blank" rel="noopener noreferrer">abrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </div>
+              <dl class="campos">
+                <div><dt>para que serve</dt><dd>Texto longo e documento extenso: aguenta um edital inteiro na conversa e sustenta o raciocínio ao longo dele. É a ferramenta com que este site foi construído.</dd></div>
+                <div><dt>quanto custa</dt><dd>Versão gratuita com limite. Pro a US$ 20 por mês (US$ 17 no plano anual) e Max a partir de US$ 100, para uso intenso.</dd></div>
+                <div class="confiar"><dt>dá para confiar?</dt><dd>Mesma regra das demais: confere-se tudo. A empresa publica a constituição que orienta o comportamento do modelo, tratada no Fólio 07 — é o raro caso em que o senhor pode ler por escrito os valores que governam a máquina, e discordar deles.</dd></div>
+              </dl>
+            </article>
+
+            <article class="ferramenta">
+              <div class="cabeca-f">
+                <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">G</span></span>
+                <div class="corpo-f"><h4>Gemini</h4><p class="proc">Google · Estados Unidos</p></div>
+                <a class="abrir-f" href="https://gemini.google.com" target="_blank" rel="noopener noreferrer">abrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </div>
+              <dl class="campos">
+                <div><dt>para que serve</dt><dd>Assistente da Google, integrado ao Gmail, ao Documentos e ao Drive de quem já vive nesse ambiente. Trabalha bem com imagem e com vídeo.</dd></div>
+                <div><dt>quanto custa</dt><dd>Gratuito com conta Google. Planos em reais na página oficial: AI Plus a R$ 24,99, AI Pro a R$ 96,99 e AI Ultra a partir de R$ 779,90 por mês.</dd></div>
+                <div class="confiar"><dt>dá para confiar?</dt><dd>Revisores humanos podem ler amostras das conversas para avaliar qualidade — o próprio aviso da Google recomenda não inserir informação confidencial. A atividade pode ser desligada nas configurações, e o histórico, apagado.</dd></div>
+              </dl>
+            </article>
+
+            <article class="ferramenta">
+              <div class="cabeca-f">
+                <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">C</span></span>
+                <div class="corpo-f"><h4>Microsoft Copilot</h4><p class="proc">Microsoft · Estados Unidos</p></div>
+                <a class="abrir-f" href="https://copilot.microsoft.com" target="_blank" rel="noopener noreferrer">abrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </div>
+              <dl class="campos">
+                <div><dt>para que serve</dt><dd>O assistente que já está dentro do Word, do Excel e do Outlook. Para uma repartição que trabalha em Office, é o de menor atrito: não exige mudar de tela nem transportar arquivo.</dd></div>
+                <div><dt>quanto custa</dt><dd>Versão gratuita na web. A integração aos programas do Office é adicional contratado por usuário — a ordem de grandeza publicada é de US$ 30 por usuário ao mês, somada à licença Microsoft 365 que o órgão já paga.</dd></div>
+                <div class="confiar"><dt>dá para confiar?</dt><dd>É a via mais defensável institucionalmente: quando contratado pelo órgão, o tratamento ocorre dentro do ambiente corporativo já coberto pelo contrato existente. A versão gratuita e pessoal não tem essa proteção, e a diferença entre as duas é invisível na tela.</dd></div>
+              </dl>
+            </article>
+
+            <article class="ferramenta">
+              <div class="cabeca-f">
+                <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">D</span></span>
+                <div class="corpo-f"><h4>DeepSeek</h4><p class="proc">DeepSeek · China</p></div>
+                <a class="abrir-f" href="https://chat.deepseek.com" target="_blank" rel="noopener noreferrer">abrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </div>
+              <dl class="campos">
+                <div><dt>para que serve</dt><dd>Conversa e raciocínio, no mesmo padrão dos anteriores. A importância dele é outra: os modelos são de pesos abertos, o que permite a um país ou a um órgão baixá-los e rodá-los em servidor próprio.</dd></div>
+                <div><dt>quanto custa</dt><dd>Gratuito no site. O acesso por programa é cobrado por volume, a preço notoriamente baixo — foi isso que mexeu com o setor inteiro em 2025.</dd></div>
+                <div class="confiar"><dt>dá para confiar?</dt><dd>A política de privacidade declara armazenamento de dados na China, o que já motivou restrição de uso em órgãos públicos de vários países. Para dado brasileiro em serviço, isso encerra a conversa; para estudar a técnica e comparar respostas, é legítimo e instrutivo.</dd></div>
+              </dl>
+            </article>
+
+            <article class="ferramenta">
+              <div class="cabeca-f">
+                <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">L</span></span>
+                <div class="corpo-f"><h4>Le Chat</h4><p class="proc">Mistral AI · França</p></div>
+                <a class="abrir-f" href="https://chat.mistral.ai" target="_blank" rel="noopener noreferrer">abrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </div>
+              <dl class="campos">
+                <div><dt>para que serve</dt><dd>Assistente europeu, com desempenho competitivo e parte dos modelos publicada em pesos abertos. Existe porque a Europa decidiu não depender só de fornecedor americano — o mesmo argumento que o Brasil vem fazendo.</dd></div>
+                <div><dt>quanto custa</dt><dd>Gratuito, com limite diário de mensagens. Assinatura individual na faixa de US$ 15 por mês; planos por usuário para equipe.</dd></div>
+                <div class="confiar"><dt>dá para confiar?</dt><dd>Empresa francesa, submetida ao regulamento europeu de proteção de dados e à Lei de IA do Fólio 05. É o fornecedor cuja jurisdição mais se aproxima do que o marco brasileiro pretende exigir.</dd></div>
+              </dl>
+            </article>
+
+            <article class="ferramenta">
+              <div class="cabeca-f">
+                <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">M</span></span>
+                <div class="corpo-f"><h4>MariTalk</h4><p class="proc">Maritaca AI · Brasil</p></div>
+                <a class="abrir-f" href="https://chat.maritaca.ai" target="_blank" rel="noopener noreferrer">abrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </div>
+              <dl class="campos">
+                <div><dt>para que serve</dt><dd>Assistente de conversa movido pelos modelos Sabiá, treinados com foco em português do Brasil. Empresa nascida na Unicamp em 2022 — é o nome nacional que aparece no Fólio 03.</dd></div>
+                <div><dt>quanto custa</dt><dd>Gratuito no site e no aplicativo. Acesso por programa cobrado por volume, para quem for integrar a um sistema.</dd></div>
+                <div class="confiar"><dt>dá para confiar?</dt><dd>Não iguala os maiores em tarefa complexa, e não promete isso. O que oferece é o que nenhum concorrente oferece: empresa brasileira, sujeita à lei brasileira, com foro no Brasil. Em contratação pública, isso não é detalhe.</dd></div>
+              </dl>
+            </article>
+
+          </div>
+        </div>
+
+        <div class="regiao">
+          <h4>Leitura de documento e pesquisa com fonte</h4>
+          <div class="caixa-ferramentas">
+
+            <article class="ferramenta">
+              <div class="cabeca-f">
+                <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">N</span></span>
+                <div class="corpo-f"><h4>NotebookLM</h4><p class="proc">Google · Estados Unidos</p></div>
+                <a class="abrir-f" href="https://notebooklm.google.com" target="_blank" rel="noopener noreferrer">abrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </div>
+              <dl class="campos">
+                <div><dt>para que serve</dt><dd>O senhor sobe os documentos e faz perguntas só sobre eles. Responde apontando o trecho de origem, o que resolve o problema central: dá para verificar cada afirmação sem sair da tela.</dd></div>
+                <div><dt>quanto custa</dt><dd>Gratuito com conta Google, com limite de arquivos por caderno. Limites maiores acompanham os planos pagos da Google.</dd></div>
+                <div class="confiar"><dt>dá para confiar?</dt><dd>É a ferramenta desta lista com menor tendência a inventar, porque trabalha preso ao material fornecido. Ainda assim resume mal quando o documento se contradiz, e a citação apontada precisa ser aberta. Vale a mesma regra: documento público, não sigiloso.</dd></div>
+              </dl>
+            </article>
+
+            <article class="ferramenta">
+              <div class="cabeca-f">
+                <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">P</span></span>
+                <div class="corpo-f"><h4>Perplexity</h4><p class="proc">Perplexity AI · Estados Unidos</p></div>
+                <a class="abrir-f" href="https://www.perplexity.ai" target="_blank" rel="noopener noreferrer">abrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </div>
+              <dl class="campos">
+                <div><dt>para que serve</dt><dd>Busca na internet e devolve a resposta redigida com os endereços de onde tirou cada parte. Substitui a primeira meia hora de pesquisa, não a leitura.</dd></div>
+                <div><dt>quanto custa</dt><dd>Gratuito com limite diário de buscas aprofundadas. Assinatura individual a US$ 20 por mês.</dd></div>
+                <div class="confiar"><dt>dá para confiar?</dt><dd>Confiável na medida em que o senhor abrir os links — e o hábito de não abrir é justamente o que a ferramenta induz. A fonte citada às vezes não sustenta a frase que a citou. Aqui o Discernimento do Fólio 07 não é conselho: é a condição de uso.</dd></div>
+              </dl>
+            </article>
+
+            <article class="ferramenta">
+              <div class="cabeca-f">
+                <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">D</span></span>
+                <div class="corpo-f"><h4>DeepL</h4><p class="proc">DeepL · Alemanha</p></div>
+                <a class="abrir-f" href="https://www.deepl.com/pt-BR/translator" target="_blank" rel="noopener noreferrer">abrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </div>
+              <dl class="campos">
+                <div><dt>para que serve</dt><dd>Tradução de texto e de documento inteiro preservando a formatação. Para ler norma estrangeira, relatório de organismo internacional ou proposta de fornecedor de fora, é mais preciso que os assistentes generalistas.</dd></div>
+                <div><dt>quanto custa</dt><dd>Gratuito até uma cota mensal de caracteres. Assinatura individual a partir de aproximadamente US$ 9 por mês no plano anual.</dd></div>
+                <div class="confiar"><dt>dá para confiar?</dt><dd>A diferença entre as versões é jurídica, não de qualidade: na gratuita, o texto enviado pode ser usado para melhorar o serviço; nos planos pagos, a empresa se compromete a apagá-lo após a tradução. Documento de trabalho não vai na gratuita.</dd></div>
+              </dl>
+            </article>
+
+          </div>
+        </div>
+
+        <div class="regiao">
+          <h4>Imagem, vídeo e voz</h4>
+          <div class="caixa-ferramentas">
+
+            <article class="ferramenta">
+              <div class="cabeca-f">
+                <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">M</span></span>
+                <div class="corpo-f"><h4>Midjourney</h4><p class="proc">Midjourney · Estados Unidos</p></div>
+                <a class="abrir-f" href="https://www.midjourney.com" target="_blank" rel="noopener noreferrer">abrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </div>
+              <dl class="campos">
+                <div><dt>para que serve</dt><dd>Geração de imagem a partir de descrição escrita. É a de melhor resultado estético, e a que exige mais prática para obter o que se quer.</dd></div>
+                <div><dt>quanto custa</dt><dd>Não tem versão gratuita. O plano de entrada custa US$ 10 por mês.</dd></div>
+                <div class="confiar"><dt>dá para confiar?</dt><dd>Duas ressalvas para uso institucional: nos planos básicos as imagens ficam visíveis na galeria pública do serviço, e a origem do material de treinamento é objeto de litígio judicial em curso nos Estados Unidos. Para peça oficial, isso é risco a declarar antes, não depois.</dd></div>
+              </dl>
+            </article>
+
+            <article class="ferramenta">
+              <div class="cabeca-f">
+                <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">F</span></span>
+                <div class="corpo-f"><h4>Adobe Firefly</h4><p class="proc">Adobe · Estados Unidos</p></div>
+                <a class="abrir-f" href="https://firefly.adobe.com" target="_blank" rel="noopener noreferrer">abrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </div>
+              <dl class="campos">
+                <div><dt>para que serve</dt><dd>Geração e edição de imagem dentro do ambiente da Adobe. Resultado mais contido que o do Midjourney, e suficiente para material de campanha e peça de comunicação.</dd></div>
+                <div><dt>quanto custa</dt><dd>Cota gratuita mensal de créditos; planos pagos e valores atuais na página oficial.</dd></div>
+                <div class="confiar"><dt>dá para confiar?</dt><dd>É a opção mais confortável para órgão público, por um motivo específico: a Adobe declara ter treinado o modelo com acervo licenciado próprio e oferece garantia contratual contra reivindicação de direito autoral nos planos corporativos. Nenhuma concorrente desta lista oferece o mesmo.</dd></div>
+              </dl>
+            </article>
+
+            <article class="ferramenta">
+              <div class="cabeca-f">
+                <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">K</span></span>
+                <div class="corpo-f"><h4>Kling</h4><p class="proc">Kuaishou · China</p></div>
+                <a class="abrir-f" href="https://app.klingai.com" target="_blank" rel="noopener noreferrer">abrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </div>
+              <dl class="campos">
+                <div><dt>para que serve</dt><dd>Geração de vídeo curto a partir de texto ou de uma imagem parada. Está entre as melhores do mundo nessa tarefa, o que por si só diz algo sobre onde a técnica avançou.</dd></div>
+                <div><dt>quanto custa</dt><dd>Créditos gratuitos diários; planos pagos por volume de geração.</dd></div>
+                <div class="confiar"><dt>dá para confiar?</dt><dd>Empresa chinesa, sujeita às normas do Fólio 05 — inclusive a rotulagem obrigatória do conteúdo sintético, que vem embutida no arquivo. Vale abrir uma vez, pelo motivo do Fólio 04: quem nunca viu um vídeo falso convincente não reconhece um quando ele chegar pelo aplicativo de mensagens.</dd></div>
+              </dl>
+            </article>
+
+            <article class="ferramenta">
+              <div class="cabeca-f">
+                <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">E</span></span>
+                <div class="corpo-f"><h4>ElevenLabs</h4><p class="proc">ElevenLabs · Estados Unidos e Reino Unido</p></div>
+                <a class="abrir-f" href="https://elevenlabs.io" target="_blank" rel="noopener noreferrer">abrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </div>
+              <dl class="campos">
+                <div><dt>para que serve</dt><dd>Transforma texto em voz de qualidade próxima à humana, em português. Uso legítimo e útil: acessibilidade — ouvir um relatório longo, ou publicar versão falada de um comunicado.</dd></div>
+                <div><dt>quanto custa</dt><dd>Cota gratuita de cerca de dez minutos por mês, sem direito de uso comercial. Planos pagos a partir de US$ 5 por mês.</dd></div>
+                <div class="confiar"><dt>dá para confiar?</dt><dd>A tecnologia funciona bem demais, e é ela que sustenta o golpe do telefonema com a voz de um parente. Clonar voz alheia exige consentimento, e no serviço público exige mais do que isso. Para leitura de texto próprio com voz sintética declarada, não há objeção.</dd></div>
+              </dl>
+            </article>
+
+          </div>
+        </div>
+
+        <p class="margem-nota" style="max-width:66ch;margin-top:32px">
+          <strong>Por onde começar, se for para começar por uma:</strong> o NotebookLM. Não porque
+          seja a mais avançada, e sim porque é a única que ensina o hábito certo junto com a
+          ferramenta — trabalhar sobre documento que o senhor escolheu, com a fonte apontada ao
+          lado de cada afirmação. Quem aprende assim depois cobra isso das outras.
+        </p>
+
+        <div class="fontes">
+          <h4>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+            Referências deste fólio
+          </h4>
+          <ol>
+            <li>Páginas oficiais de preços e de termos de uso de cada fornecedor, consultadas em agosto de 2026 — os endereços estão nos botões de cada ficha. Destaque para <a href="https://claude.com/pricing" target="_blank" rel="noopener noreferrer">claude.com/pricing</a> e <a href="https://gemini.google/br/subscriptions/?hl=pt-BR" target="_blank" rel="noopener noreferrer">gemini.google/br/subscriptions</a>, de onde vêm os valores citados em dólar e em real.</li>
+            <li>Brasil. <em>Lei nº 13.709, de 14 de agosto de 2018</em> — Lei Geral de Proteção de Dados Pessoais, arts. 7º e 23, sobre o tratamento de dados pelo poder público.</li>
+            <li>Maritaca AI. Documentação oficial dos modelos Sabiá e do assistente MariTalk. Disponível em: <a href="https://docs.maritaca.ai/pt/introducao" target="_blank" rel="noopener noreferrer">docs.maritaca.ai</a></li>
+            <li>Políticas de privacidade e de uso de dados de OpenAI, Google, Anthropic, DeepSeek e DeepL — a distinção entre conta pessoal e contrato corporativo, citada nas fichas, está nesses documentos e muda com frequência.</li>
+          </ol>
+        </div>
+
+        <p class="escopo"><b>o que muda depois desta página</b><span>Preço, limite de uso e política de dados são a parte mais perecível deste site. Os valores acima valem para agosto de 2026 e devem ser reconferidos nas páginas oficiais antes de embasar qualquer decisão de contratação.</span></p>
       </div>
     </section>
     <!-- 09 ───────────────────────────────────────────────── -->
@@ -2949,7 +4202,218 @@ se o texto não disser algo, escreva
           </div>
         </div>
 
-        <p class="escopo"><b>a seguir</b><span>Cada degrau ganha 2 ou 3 exemplos reais de trabalho de repartição — despacho, resumo de processo, resposta a cidadão — no formato "antes e depois" acima, mais uma folha de bolso para imprimir.</span></p>
+        <h3 style="margin:52px 0 8px">Nove técnicas, e quando cada uma paga o trabalho</h3>
+        <p class="prosa" style="font-size:.93em;color:var(--tinta-2);margin-bottom:18px">
+          A escada acima é a progressão. Esta é a caixa de ferramentas: a frase exata a escrever e
+          a situação que a pede. Nenhuma delas exige conhecimento técnico — todas exigem decidir
+          antes o que se quer.
+        </p>
+
+        <div class="rolagem-tabela">
+          <table class="quadro">
+            <caption class="sr">Técnicas de formulação de pedido, com a frase a usar e a situação em que se aplica</caption>
+            <thead>
+              <tr><th scope="col">Técnica</th><th scope="col">O que se escreve</th><th scope="col">Quando vale o esforço</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Papel e público</th>
+                <td>"Você é servidor público e escreve para o cidadão comum."</td>
+                <td>Quando o mesmo conteúdo muda de forma conforme quem lê. Define vocabulário e tom numa linha.</td>
+              </tr>
+              <tr>
+                <th scope="row">Delimitar o material</th>
+                <td>"O texto do edital está entre as marcas &lt;&lt;&lt; e &gt;&gt;&gt;. Trabalhe somente sobre ele."</td>
+                <td>Sempre que houver documento colado no pedido. Sem a marca, a máquina confunde a instrução com o conteúdo e passa a obedecer ao que está escrito no documento.</td>
+              </tr>
+              <tr>
+                <th scope="row">Exemplo pronto</th>
+                <td>"Siga exatamente este modelo:" — e colar dois ou três despachos antigos que ficaram bons.</td>
+                <td>Quando existe padrão da casa que ninguém nunca escreveu. Imitar é mais fácil para a máquina do que interpretar descrição de estilo.</td>
+              </tr>
+              <tr>
+                <th scope="row">Raciocínio antes da resposta</th>
+                <td>"Liste os passos do seu raciocínio primeiro; só depois escreva a conclusão."</td>
+                <td>Decisão com mais de duas variáveis. O ganho não é só de acerto: o senhor passa a ver <em>onde</em> errou, e não apenas <em>que</em> errou.</td>
+              </tr>
+              <tr>
+                <th scope="row">Ancorar e exigir citação</th>
+                <td>"Responda só com base no texto anexado e transcreva o trecho que sustenta cada afirmação."</td>
+                <td>Sempre que a resposta puder virar fundamento de ato. É o antídoto prático contra a invenção — e transforma conferência em tarefa de minutos.</td>
+              </tr>
+              <tr>
+                <th scope="row">Abrir a resposta pelo senhor</th>
+                <td>"Comece a resposta exatamente por: <em>Trata-se de expediente encaminhado por…</em>"</td>
+                <td>Quando o documento tem abertura fixa. Corta o preâmbulo cordial da máquina e obriga o texto a nascer no formato certo.</td>
+              </tr>
+              <tr>
+                <th scope="row">Etapas encadeadas</th>
+                <td>Um pedido por vez: extrair os fatos → organizar em ordem cronológica → redigir a minuta.</td>
+                <td>Tarefa longa. Pedir tudo de uma vez produz um resultado médio em todas as partes; encadear permite corrigir a etapa errada sem refazer o conjunto.</td>
+              </tr>
+              <tr>
+                <th scope="row">Autocrítica e revisão</th>
+                <td>"Agora aponte as três fragilidades deste texto como faria o revisor mais rigoroso, e reescreva corrigindo-as."</td>
+                <td>Antes de dar por pronto. Custa uma linha e costuma render mais que reescrever à mão.</td>
+              </tr>
+              <tr>
+                <th scope="row">Regra do "não consta"</th>
+                <td>"Se a informação não estiver no documento, escreva 'não consta'. Não preencha lacuna com o provável."</td>
+                <td>Em todo pedido, sem exceção. É a única instrução desta tabela que trata da falha característica da tecnologia, descrita no início desta página.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="margin:52px 0 4px">Três casos de repartição, antes e depois</h3>
+        <p class="prosa" style="font-size:.93em;color:var(--tinta-2)">
+          Os mesmos três documentos que aparecem em qualquer expediente. À esquerda, o pedido que
+          quase todo mundo faz na primeira vez; à direita, o mesmo pedido com as técnicas acima.
+        </p>
+
+        <p class="caso-prompt">Caso 1 · despacho de encaminhamento</p>
+        <div class="confronto">
+          <div class="pedaco p-fraco">
+            <p class="titulo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+              como se pede na primeira vez
+            </p>
+            <p class="fala">Faça um despacho encaminhando este
+processo para a área técnica.</p>
+            <p class="porque">Volta um texto genérico, com fórmulas que não são as da casa e um fundamento inventado no meio — porque não se disse qual é.</p>
+          </div>
+          <div class="pedaco p-bom">
+            <p class="titulo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>
+              com papel, exemplo e abertura fixa
+            </p>
+            <p class="fala"><mark>Você é servidor público</mark> e redige
+despacho de encaminhamento.
+
+<mark>Siga exatamente este modelo</mark> de
+despacho da nossa unidade:
+&lt;&lt;&lt; [colar dois despachos antigos] &gt;&gt;&gt;
+
+<mark>Processo:</mark> o conteúdo está entre
+as marcas: &lt;&lt;&lt; [colar] &gt;&gt;&gt;
+
+<mark>Comece exatamente por:</mark>
+"Trata-se de expediente"
+
+<mark>Regra:</mark> não cite norma que não
+esteja no processo. Se faltar
+fundamento, escreva "não consta".</p>
+            <p class="porque">Três técnicas somadas: exemplo pronto, material delimitado e regra do "não consta". A última é a que evita assinar norma inexistente.</p>
+          </div>
+        </div>
+
+        <p class="caso-prompt">Caso 2 · resumo de processo volumoso</p>
+        <div class="confronto">
+          <div class="pedaco p-fraco">
+            <p class="titulo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+              como se pede na primeira vez
+            </p>
+            <p class="fala">Resuma este processo de 300 páginas.</p>
+            <p class="porque">Sai um resumo correto e inútil: conta a história do processo sem responder à pergunta que levou o senhor a abri-lo.</p>
+          </div>
+          <div class="pedaco p-bom">
+            <p class="titulo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>
+              com finalidade, ordem e citação
+            </p>
+            <p class="fala"><mark>Finalidade:</mark> vou instruir decisão
+sobre prorrogação de prazo.
+
+<mark>Ordem de leitura:</mark> primeiro a
+manifestação da área técnica,
+depois o parecer jurídico.
+
+<mark>Formato:</mark> quadro com data, peça,
+o que ela pede e quem assinou.
+
+<mark>Cada linha</mark> deve trazer, entre
+aspas, o trecho que a sustenta e
+o número da folha.
+
+Aponte, ao final, onde a área
+técnica e o jurídico divergem.</p>
+            <p class="porque">Dizer a finalidade muda o resumo inteiro. A exigência de trecho e folha transforma a conferência em uma passada de olho, em vez de nova leitura.</p>
+          </div>
+        </div>
+
+        <p class="caso-prompt">Caso 3 · resposta a cidadão</p>
+        <div class="confronto">
+          <div class="pedaco p-fraco">
+            <p class="titulo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+              como se pede na primeira vez
+            </p>
+            <p class="fala">Responda a este cidadão explicando
+que o pedido dele foi negado.</p>
+            <p class="porque">Vem um texto amável e evasivo, que não diz o motivo com clareza nem informa o prazo de recurso — e gera o segundo pedido, sobre o mesmo assunto.</p>
+          </div>
+          <div class="pedaco p-bom">
+            <p class="titulo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>
+              com público, limites e autocrítica
+            </p>
+            <p class="fala"><mark>Público:</mark> pessoa sem formação
+jurídica, possivelmente irritada.
+
+<mark>Tarefa:</mark> comunicar o indeferimento
+com base apenas no que está no
+despacho entre &lt;&lt;&lt; e &gt;&gt;&gt;.
+
+<mark>Deve conter:</mark> o motivo em uma
+frase, o que falta para reverter,
+o prazo e onde recorrer.
+
+<mark>Proibido:</mark> sigla sem explicação,
+jargão e promessa de resultado.
+
+Depois de escrever, <mark>aponte o que
+um leitor irritado entenderia
+errado</mark> e reescreva.</p>
+            <p class="porque">A última instrução é a mais barata das nove e a que mais evita retrabalho: quem responde a cidadão sabe que o mal-entendido custa mais caro que a negativa.</p>
+          </div>
+        </div>
+
+        <div class="bolso">
+          <h4>Folha de bolso</h4>
+          <p class="intro">Para imprimir e deixar na gaveta. Cabe em meia página.</p>
+          <ol>
+            <li><b>Diga para que serve</b> antes de dizer o que quer. A finalidade determina o formato.</li>
+            <li><b>Papel e público</b> em uma linha: quem escreve, para quem.</li>
+            <li><b>Delimite o material</b> colado com marcas visíveis, e mande trabalhar só sobre ele.</li>
+            <li><b>Mostre um exemplo</b> do que já ficou bom. Vale mais que descrever o estilo.</li>
+            <li><b>Peça o raciocínio</b> antes da conclusão, quando a decisão tiver mais de duas variáveis.</li>
+            <li><b>Exija a citação</b> do trecho e da folha em toda afirmação que possa virar fundamento.</li>
+            <li><b>Escreva a regra do "não consta"</b> — sempre, mesmo nos pedidos curtos.</li>
+            <li><b>Peça a autocrítica</b> e a reescrita antes de considerar pronto.</li>
+            <li><b>Confira, e assine.</b> A responsabilidade não foi delegada junto com a tarefa.</li>
+          </ol>
+          <p class="modelo">MODELO EM BRANCO
+
+Papel: você é ______, e escreve para ______.
+Finalidade: vou usar este texto para ______.
+Material: está entre &lt;&lt;&lt; e &gt;&gt;&gt;; use só ele.
+Formato: ______ (extensão, estrutura, campos).
+Regras: se não constar, escreva "não consta";
+        não use sigla sem explicar.
+Ao final: aponte as fragilidades e reescreva.</p>
+        </div>
+
+        <div class="fontes">
+          <h4>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+            Referências deste fólio
+          </h4>
+          <ol>
+            <li>Anthropic. <em>Prompt engineering overview</em> e <em>Prompting best practices</em> — documentação oficial, de onde vêm as técnicas de clareza, exemplos, estruturação por marcas, atribuição de papel, raciocínio explícito e encadeamento de pedidos. Disponível em: <a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview" target="_blank" rel="noopener noreferrer">platform.claude.com · prompt engineering</a></li>
+            <li>Anthropic. <em>AI Fluency: Frameworks &amp; Foundations</em> — a competência de Descrição e seus três subcomponentes, detalhados no Fólio 07.</li>
+          </ol>
+        </div>
       </div>
     </section>
     <!-- SocialTech -->
@@ -3003,78 +4467,198 @@ se o texto não disser algo, escreva
 
         <div class="regiao">
           <h4>🇧🇷 Brasil</h4>
-        <div class="org">
-          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">G</span></span>
-          <span class="corpo"><h4>Gerando Falcões</h4><p>São Paulo · usa dados e gestão por indicadores para transformar favelas; o programa Favela 3D trata urbanização, renda e dignidade como um problema só</p></span>
-          <span class="selo-txt">território</span>
-        </div>
-        <div class="org">
-          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">I</span></span>
-          <span class="corpo"><h4>Instituto Ayrton Senna</h4><p>São Paulo · análise de dados educacionais em parceria com redes públicas de ensino, para identificar quem está prestes a desistir da escola</p></span>
-          <span class="selo-txt">educação</span>
-        </div>
-        <div class="org">
-          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">F</span></span>
-          <span class="corpo"><h4>Fundação Banco do Brasil</h4><p>Brasília · mantém desde 2001 o Banco de Tecnologias Sociais, catálogo público de soluções certificadas e prontas para reaplicação</p></span>
-          <span class="selo-txt">catálogo</span>
-        </div>
+          <div class="caixa-ferramentas">
+
+            <article class="ferramenta">
+              <div class="cabeca-f">
+                <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">G</span></span>
+                <div class="corpo-f"><h4>Gerando Falcões</h4><p class="proc">São Paulo · território</p></div>
+                <a class="abrir-f" href="https://www.gerandofalcoes.com/favela-3d" target="_blank" rel="noopener noreferrer">site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </div>
+              <dl class="campos">
+                <div><dt>o problema</dt><dd>Política de favela costuma atacar uma carência por vez — moradia numa secretaria, renda em outra, esgoto numa terceira. O programa Favela 3D trata urbanização, renda e serviço como um problema único, com metas por indicador e prazo.</dd></div>
+                <div><dt>alcance publicado</dt><dd>Atuação declarada em cerca de 6 mil favelas e mais de 700 mil pessoas alcançadas em 2022. No território-modelo de Ferraz de Vasconcelos, 164 famílias.</dd></div>
+                <div><dt>quem assina</dt><dd>A própria organização, em relatório de atividades, e cobertura de imprensa sobre o projeto-piloto.</dd></div>
+                <div class="limite"><dt>o limite</dt><dd>O modelo concentra investimento privado alto num território pequeno, e o resultado é real. Reaplicá-lo exige encontrar o mesmo patrocínio de novo — o que colide com o critério de reaplicabilidade da definição adotada nesta página.</dd></div>
+              </dl>
+            </article>
+
+            <article class="ferramenta">
+              <div class="cabeca-f">
+                <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">I</span></span>
+                <div class="corpo-f"><h4>Instituto Ayrton Senna</h4><p class="proc">São Paulo · educação</p></div>
+                <a class="abrir-f" href="https://institutoayrtonsenna.org.br/" target="_blank" rel="noopener noreferrer">site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </div>
+              <dl class="campos">
+                <div><dt>o problema</dt><dd>Aluno com dois ou três anos de atraso escolar não se recupera sozinho, e a rede só descobre a evasão depois que ela aconteceu. Os programas trabalham com dados da própria rede para identificar antes.</dd></div>
+                <div><dt>alcance publicado</dt><dd>Mais de 36 milhões de atendimentos a estudantes em três décadas, em mais de 3 mil municípios de todos os estados.</dd></div>
+                <div><dt>quem assina</dt><dd>O próprio instituto. A avaliação de retorno social de um dos programas, que estima R$ 5,06 de benefício por real investido, também é encomendada por ele.</dd></div>
+                <div class="limite"><dt>o limite</dt><dd>O número conta atendimentos, não pessoas: o mesmo aluno em três anos aparece três vezes. E medir competência socioemocional continua sendo matéria em disputa metodológica — o instrumento existe, o consenso sobre o que ele mede, não.</dd></div>
+              </dl>
+            </article>
+
+            <article class="ferramenta">
+              <div class="cabeca-f">
+                <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">F</span></span>
+                <div class="corpo-f"><h4>Fundação Banco do Brasil</h4><p class="proc">Brasília · catálogo público</p></div>
+                <a class="abrir-f" href="https://transforma.fbb.org.br/" target="_blank" rel="noopener noreferrer">site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </div>
+              <dl class="campos">
+                <div><dt>o problema</dt><dd>A boa solução local morre onde nasceu. O Banco de Tecnologias Sociais, criado em 2001, existe para que uma prefeitura possa procurar o que já funcionou em outra e copiar com método, em vez de recomeçar.</dd></div>
+                <div><dt>alcance publicado</dt><dd>Acervo com mais de 767 tecnologias sociais certificadas. Só na 13ª edição do prêmio, em 2026, foram 148 novas certificações.</dd></div>
+                <div><dt>quem assina</dt><dd>Fundação Banco do Brasil, na plataforma Transforma! e nos comunicados do prêmio.</dd></div>
+                <div class="limite"><dt>o limite</dt><dd>Certificar não é reaplicar. O catálogo registra que a solução funcionou uma vez; quem a leva ao município seguinte é a administração seguinte, e essa etapa não aparece em nenhum indicador. É a lacuna mais útil desta página para quem trabalha no Estado — e é preenchível por decisão administrativa.</dd></div>
+              </dl>
+            </article>
+
+          </div>
         </div>
 
         <div class="regiao">
           <h4>BRICS · Índia, China e África do Sul</h4>
-        <div class="org">
-          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">I</span></span>
-          <span class="corpo"><h4>India Stack e UPI</h4><p>Índia · infraestrutura pública digital de identidade e pagamentos; talvez o maior projeto de inclusão financeira já executado, operado como bem público e não como produto</p></span>
-          <span class="selo-txt">infraestrutura</span>
-        </div>
-        <div class="org">
-          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">A</span></span>
-          <span class="corpo"><h4>Ant Forest</h4><p>China · converte redução de pegada de carbono de centenas de milhões de usuários em árvores plantadas; reconhecido pela ONU em 2019</p></span>
-          <span class="selo-txt">clima</span>
-        </div>
-        <div class="org">
-          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">P</span></span>
-          <span class="corpo"><h4>Praekelt.org</h4><p>África do Sul · construiu com o Ministério da Saúde o MomConnect, que acompanha gestantes por mensagem de celular simples, sem exigir internet boa</p></span>
-          <span class="selo-txt">saúde</span>
-        </div>
+          <div class="caixa-ferramentas">
+
+            <article class="ferramenta">
+              <div class="cabeca-f">
+                <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">I</span></span>
+                <div class="corpo-f"><h4>India Stack e UPI</h4><p class="proc">Índia · infraestrutura pública</p></div>
+                <a class="abrir-f" href="https://www.npci.org.in/what-we-do/upi/product-statistics" target="_blank" rel="noopener noreferrer">estatísticas <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </div>
+              <dl class="campos">
+                <div><dt>o problema</dt><dd>Centenas de milhões de pessoas sem conta bancária, sem documento aceito e sem meio de receber benefício do Estado. A resposta foi construir identidade e pagamento como infraestrutura pública, aberta a qualquer banco ou aplicativo, em vez de produto de um fornecedor.</dd></div>
+                <div><dt>alcance publicado</dt><dd>23,66 bilhões de transações em julho de 2026, o maior volume mensal já registrado. No ano fiscal de 2025-26 foram 241,6 bilhões de operações.</dd></div>
+                <div><dt>quem assina</dt><dd>National Payments Corporation of India, a operadora do sistema, em estatística mensal pública.</dd></div>
+                <div class="limite"><dt>o que deu errado</dt><dd>A mesma infraestrutura que incluiu também excluiu. A autenticação biométrica falha em cerca de 6,5% das aproximadamente 312 milhões de tentativas mensais, e a impressão digital gasta pelo trabalho braçal está entre as causas. Um levantamento apontou 28% dos domicílios com cartão de ração relatando negativa de benefício por problema no cadastro; a Campanha pelo Direito à Alimentação documentou mortes por fome em que a falha de autenticação teve papel direto. Um estudo do J-PAL concluiu que 88% dos cartões cancelados em Jharkhand pertenciam a beneficiários legítimos, não a fraudadores.</dd></div>
+              </dl>
+            </article>
+
+            <article class="ferramenta">
+              <div class="cabeca-f">
+                <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">A</span></span>
+                <div class="corpo-f"><h4>Ant Forest</h4><p class="proc">China · clima</p></div>
+                <a class="abrir-f" href="https://www.unep.org/championsofearth/laureates/2019/ant-forest" target="_blank" rel="noopener noreferrer">ONU <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </div>
+              <dl class="campos">
+                <div><dt>o problema</dt><dd>Ação climática individual não tem retorno visível, e por isso não vira hábito. O programa converte escolhas cotidianas registradas no aplicativo de pagamentos — andar a pé, pagar conta sem papel — em árvores efetivamente plantadas em regiões áridas.</dd></div>
+                <div><dt>alcance publicado</dt><dd>122 milhões de árvores até 2019, quando recebeu o prêmio Campeões da Terra, do Programa das Nações Unidas para o Meio Ambiente. A empresa informou 326 milhões de árvores e mais de 600 milhões de participantes em cinco anos.</dd></div>
+                <div><dt>quem assina</dt><dd>O PNUMA assina o reconhecimento e o número de 2019. Os números maiores são divulgados pela operadora do programa, e valem a reserva que se aplica a dado de quem opera.</dd></div>
+                <div class="limite"><dt>o limite</dt><dd>A boa ação depende de o usuário permanecer dentro do aplicativo de pagamentos que registra o comportamento. Isso torna o programa inseparável do produto comercial que o hospeda, e entrega a uma empresa o registro de boa parte da rotina de meio bilhão de pessoas.</dd></div>
+              </dl>
+            </article>
+
+            <article class="ferramenta">
+              <div class="cabeca-f">
+                <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">P</span></span>
+                <div class="corpo-f"><h4>Praekelt.org · MomConnect</h4><p class="proc">África do Sul · saúde</p></div>
+                <a class="abrir-f" href="https://www.health.gov.za/momconnect/" target="_blank" rel="noopener noreferrer">site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </div>
+              <dl class="campos">
+                <div><dt>o problema</dt><dd>Entre uma consulta de pré-natal e a seguinte passam semanas em que a gestante não tem a quem perguntar. O serviço acompanha por mensagem de celular comum, sem exigir internet boa nem aparelho caro — decisão de projeto que define quem consegue usar.</dd></div>
+                <div><dt>alcance publicado</dt><dd>Perto de 5 milhões de mães registradas desde 2014, com presença em mais de 95% das unidades públicas de saúde do país.</dd></div>
+                <div><dt>quem assina</dt><dd>Departamento Nacional de Saúde da África do Sul, com avaliações independentes publicadas em periódicos revisados por pares.</dd></div>
+                <div class="limite"><dt>o que deu errado</dt><dd>As avaliações apontaram viés de seleção: quem se registra tende a ser a gestante de menor risco. O serviço alcança mais quem já vinha sendo alcançado, e menos quem mais precisa — o problema clássico do programa que depende de adesão espontânea. Falhas no próprio cadastro, em que a mãe tenta registrar-se e não conclui, agravam o efeito.</dd></div>
+              </dl>
+            </article>
+
+          </div>
         </div>
 
         <div class="regiao">
           <h4>🇺🇸 Estados Unidos</h4>
-        <div class="org">
-          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">K</span></span>
-          <span class="corpo"><h4>Khan Academy</h4><p>Estados Unidos · ensino gratuito em escala mundial, sem cobrança e sem anúncio; hoje experimenta tutoria com IA em redes públicas</p></span>
-          <span class="selo-txt">educação</span>
-        </div>
-        <div class="org">
-          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">B</span></span>
-          <span class="corpo"><h4>Benetech</h4><p>Estados Unidos · tecnologia de acessibilidade; a biblioteca Bookshare entrega livros em formato legível a pessoas com deficiência visual ou dislexia</p></span>
-          <span class="selo-txt">acessibilidade</span>
-        </div>
-        <div class="org">
-          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">D</span></span>
-          <span class="corpo"><h4>DataKind</h4><p>Estados Unidos · coloca cientistas de dados voluntários a serviço de organizações sociais que têm os dados mas não têm quem os leia</p></span>
-          <span class="selo-txt">dados</span>
-        </div>
+          <div class="caixa-ferramentas">
+
+            <article class="ferramenta">
+              <div class="cabeca-f">
+                <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">K</span></span>
+                <div class="corpo-f"><h4>Khan Academy</h4><p class="proc">Estados Unidos · educação</p></div>
+                <a class="abrir-f" href="https://pt.khanacademy.org/" target="_blank" rel="noopener noreferrer">site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </div>
+              <dl class="campos">
+                <div><dt>o problema</dt><dd>Aula particular é o recurso educacional de maior efeito comprovado e o mais desigualmente distribuído, porque depende da renda da família. A organização oferece o conteúdo gratuitamente, sem anúncio, inclusive em português.</dd></div>
+                <div><dt>alcance publicado</dt><dd>O conteúdo permanece gratuito e sem publicidade. O tutor com inteligência artificial, lançado em 2023, é vendido a redes de ensino americanas por cerca de US$ 15 por aluno, com mínimo de 250 licenças.</dd></div>
+                <div><dt>quem assina</dt><dd>Khan Academy, na página de preços do programa para redes escolares.</dd></div>
+                <div class="limite"><dt>o limite</dt><dd>A parte gratuita segue gratuita, e a parte com IA nasceu paga. O preço por aluno é modesto para uma rede americana e proibitivo para a maioria das redes municipais brasileiras — de modo que a tecnologia criada para reduzir desigualdade de acesso entrou pela porta que a reproduz. Não há aqui número de usuários no Brasil que resista a verificação, e por isso nenhum é citado.</dd></div>
+              </dl>
+            </article>
+
+            <article class="ferramenta">
+              <div class="cabeca-f">
+                <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">B</span></span>
+                <div class="corpo-f"><h4>Benetech · Bookshare</h4><p class="proc">Estados Unidos · acessibilidade</p></div>
+                <a class="abrir-f" href="https://www.bookshare.org/" target="_blank" rel="noopener noreferrer">site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </div>
+              <dl class="campos">
+                <div><dt>o problema</dt><dd>A maior parte dos livros publicados nunca ganha edição em braille ou em formato que um leitor de tela consiga ler. Para quem tem deficiência visual ou dislexia, a biblioteca do mundo é uma prateleira estreita.</dd></div>
+                <div><dt>alcance publicado</dt><dd>Acervo de quase 1,4 milhão de títulos em formato acessível.</dd></div>
+                <div><dt>quem assina</dt><dd>Benetech, organização mantenedora da biblioteca.</dd></div>
+                <div class="limite"><dt>o limite</dt><dd>O acervo é predominantemente em inglês, e o acesso depende de comprovação de deficiência sob a lei americana. O Tratado de Marraqueche, do qual o Brasil é parte, criou a via legal para que obras acessíveis circulem entre países — a barreira que resta é de catálogo em português, não de direito autoral.</dd></div>
+              </dl>
+            </article>
+
+            <article class="ferramenta">
+              <div class="cabeca-f">
+                <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">D</span></span>
+                <div class="corpo-f"><h4>DataKind</h4><p class="proc">Estados Unidos · dados</p></div>
+                <a class="abrir-f" href="https://www.datakind.org/" target="_blank" rel="noopener noreferrer">site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </div>
+              <dl class="campos">
+                <div><dt>o problema</dt><dd>Organização social costuma ter anos de dados acumulados e ninguém capaz de lê-los. A iniciativa emparelha cientistas de dados voluntários com esses acervos parados.</dd></div>
+                <div><dt>alcance publicado</dt><dd>Cerca de 20 mil voluntários cadastrados e mais de 300 projetos executados.</dd></div>
+                <div><dt>quem assina</dt><dd>DataKind, em suas páginas institucionais e relatos de comunidade.</dd></div>
+                <div class="limite"><dt>o limite</dt><dd>Projeto de voluntário termina quando o voluntário sai. Sem alguém dentro da organização capaz de manter o modelo, o resultado envelhece e vira relatório antigo — defeito estrutural de todo mutirão técnico, e a razão pela qual capacitação vale mais que entrega.</dd></div>
+              </dl>
+            </article>
+
+          </div>
         </div>
 
         <div class="regiao">
           <h4>🇪🇺 União Europeia e Reino Unido</h4>
-        <div class="org">
-          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">D</span></span>
-          <span class="corpo"><h4>Decidim</h4><p>Barcelona, Espanha · plataforma livre de participação cidadã, usada por prefeituras e governos para consulta e orçamento participativo — código aberto e auditavel</p></span>
-          <span class="selo-txt">democracia</span>
-        </div>
-        <div class="org">
-          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">m</span></span>
-          <span class="corpo"><h4>mySociety</h4><p>Reino Unido · criou o FixMyStreet e o WhatDoTheyKnow, que transformam reclamação urbana e pedido de informação em processo público rastreável</p></span>
-          <span class="selo-txt">cívico</span>
-        </div>
-        <div class="org">
-          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">O</span></span>
-          <span class="corpo"><h4>Open Knowledge Foundation</h4><p>Reino Unido · defende e instrumenta dados abertos; boa parte do vocabulário de transparência pública saiu dali</p></span>
-          <span class="selo-txt">dados abertos</span>
-        </div>
+          <div class="caixa-ferramentas">
+
+            <article class="ferramenta">
+              <div class="cabeca-f">
+                <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">D</span></span>
+                <div class="corpo-f"><h4>Decidim</h4><p class="proc">Barcelona, Espanha · democracia</p></div>
+                <a class="abrir-f" href="https://decidim.org/usedby/" target="_blank" rel="noopener noreferrer">quem usa <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </div>
+              <dl class="campos">
+                <div><dt>o problema</dt><dd>Consulta pública que não deixa rastro: o cidadão opina, a proposta some, e ninguém consegue mostrar o que foi feito com ela. A plataforma registra cada proposta, cada apoio e cada resposta oficial, com código aberto e auditável.</dd></div>
+                <div><dt>alcance publicado</dt><dd>Mais de 450 organizações e instituições — prefeituras, governos regionais, universidades e associações — já a utilizaram.</dd></div>
+                <div><dt>quem assina</dt><dd>O projeto Decidim, em página pública com a lista nominal de quem usa.</dd></div>
+                <div class="limite"><dt>o limite</dt><dd>A plataforma garante rastreabilidade, não participação. Onde foi medida, a adesão concentra-se em quem já participava — e instrumento melhor de escuta não produz, sozinho, quem fale.</dd></div>
+              </dl>
+            </article>
+
+            <article class="ferramenta">
+              <div class="cabeca-f">
+                <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">m</span></span>
+                <div class="corpo-f"><h4>mySociety</h4><p class="proc">Reino Unido · cívico</p></div>
+                <a class="abrir-f" href="https://www.mysociety.org/" target="_blank" rel="noopener noreferrer">site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </div>
+              <dl class="campos">
+                <div><dt>o problema</dt><dd>Reclamação de buraco na rua e pedido de informação pública têm o mesmo destino: uma caixa de entrada privada, sem prazo e sem testemunha. As ferramentas da organização tornam pedido e resposta públicos desde o primeiro minuto.</dd></div>
+                <div><dt>alcance publicado</dt><dd>Mais de um milhão de problemas urbanos relatados a prefeituras britânicas desde 2007, hoje na casa de 12 mil relatos por mês.</dd></div>
+                <div><dt>quem assina</dt><dd>mySociety, em páginas de dados abertos sobre o próprio funcionamento — a organização publica as próprias estatísticas, o que é raro.</dd></div>
+                <div class="limite"><dt>o limite</dt><dd>Tornar o pedido público não obriga ninguém a responder. O efeito depende de haver imprensa local e eleitor atento do outro lado; onde não há, o registro permanece, e o buraco também.</dd></div>
+              </dl>
+            </article>
+
+            <article class="ferramenta">
+              <div class="cabeca-f">
+                <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">O</span></span>
+                <div class="corpo-f"><h4>Open Knowledge Foundation</h4><p class="proc">Reino Unido · dados abertos</p></div>
+                <a class="abrir-f" href="https://ckan.org/" target="_blank" rel="noopener noreferrer">CKAN <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </div>
+              <dl class="campos">
+                <div><dt>o problema</dt><dd>Dado público existe e não serve: está em formato fechado, espalhado por sistemas que não conversam. A organização criou o CKAN, programa livre que organiza acervos de dados públicos, e boa parte do vocabulário de transparência hoje em uso.</dd></div>
+                <div><dt>alcance publicado</dt><dd>Centenas de instalações no mundo. O portal brasileiro de dados abertos está entre os que rodam sobre o CKAN, ao lado dos portais americano e indiano.</dd></div>
+                <div><dt>quem assina</dt><dd>Documentação do projeto CKAN e relatórios anuais da Open Knowledge Foundation.</dd></div>
+                <div class="limite"><dt>o limite</dt><dd>Publicar não é prestar contas. Um portal com milhares de planilhas sem dicionário de dados cumpre a lei e não informa ninguém, e a distância entre as duas coisas é onde a transparência costuma morrer.</dd></div>
+              </dl>
+            </article>
+
+          </div>
         </div>
 
         <p class="margem-nota" style="max-width:66ch;margin-top:30px">
@@ -3095,10 +4679,14 @@ se o texto não disser algo, escreva
             <li>Fundação Banco do Brasil. <em>Prêmio Fundação Banco do Brasil de Tecnologia Social</em> e Banco de Tecnologias Sociais, desde 2001 — base pública de soluções certificadas e reaplicáveis.</li>
             <li>Rede de Tecnologia Social (RTS). Documentos constitutivos, 2005.</li>
             <li>UNESCO. <em>Recommendation on the Ethics of Artificial Intelligence</em>, 2021 — seção sobre desenvolvimento inclusivo e redução de desigualdades.</li>
+            <li>National Payments Corporation of India. Estatísticas mensais do UPI — volume de julho de 2026 e do ano fiscal 2025-26.</li>
+            <li>Right to Food Campaign (Índia) e Abdul Latif Jameel Poverty Action Lab (J-PAL). Levantamentos sobre exclusão por falha de autenticação biométrica no sistema público de distribuição de alimentos, incluindo o estudo sobre cartões cancelados em Jharkhand.</li>
+            <li>Programa das Nações Unidas para o Meio Ambiente. <em>Champions of the Earth 2019 — Ant Forest</em>.</li>
+            <li>África do Sul. Departamento Nacional de Saúde, programa MomConnect; e avaliações publicadas em periódicos revisados por pares sobre alcance, exposição às mensagens e viés de seleção.</li>
+            <li>Fundação Banco do Brasil. Plataforma Transforma! e comunicados da 13ª edição do Prêmio de Tecnologia Social, 2026.</li>
+            <li>Páginas institucionais e de estatísticas de Gerando Falcões, Instituto Ayrton Senna, Khan Academy, Benetech, DataKind, Decidim, mySociety e Open Knowledge Foundation — os endereços estão nos botões de cada ficha.</li>
           </ol>
         </div>
-
-        <p class="escopo"><b>a seguir</b><span>Cada organização ganha ficha própria com o problema que atacou, o número publicado de alcance, a fonte que assina esse número e o que deu errado — porque as tentativas fracassadas ensinam mais a quem vai contratar do que as vitrines.</span></p>
       </div>
     </section>
     <!-- 05 ───────────────────────────────────────────────── -->
@@ -3129,17 +4717,17 @@ se o texto não disser algo, escreva
           <article class="ficha">
             <span class="glifo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg></span>
             <h3>O plano de Estado</h3>
-            <p>Desde 2017 há uma meta pública e datada para a IA, com etapas intermediárias e responsáveis definidos. Planejamento, não improviso.</p>
+            <p>Um documento de 2017 fixa três prazos — 2020, 2025 e 2030 — e atribui cada etapa a um ministério. O que se aprende aqui é de gestão pública, e independe de regime: prazo com responsável nomeado obriga a prestar contas em data certa.</p>
           </article>
           <article class="ficha">
             <span class="glifo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></span>
             <h3>Cidade e cidadão</h3>
-            <p>Transporte, saúde e atendimento ao público com IA em larga escala — com ganhos reais e perguntas duras sobre privacidade.</p>
+            <p>Semáforo, hospital e guichê operando com IA em escala de centenas de milhões de pessoas. Os ganhos são medidos e publicados; a mesma infraestrutura que os produz é a que observa. As duas coisas estão adiante, com número e com fonte.</p>
           </article>
           <article class="ficha">
             <span class="glifo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20 15 15 0 010-20z"/></svg></span>
             <h3>Abrir o código ao mundo</h3>
-            <p>Ao liberar modelos gratuitos, a China oferece ao Sul Global uma alternativa à dependência de fornecedores americanos.</p>
+            <p>Modelos de pesos abertos, que qualquer país pode baixar e executar em servidor próprio. Para quem não fabrica o equipamento, é a diferença entre alugar capacidade de um fornecedor estrangeiro e possuí-la.</p>
           </article>
         </div>
 
@@ -3347,6 +4935,138 @@ se o texto não disser algo, escreva
           preço não obriga a descartar o planejamento.
         </p>
 
+        <h3 style="margin:52px 0 4px">O que isso virou na vida de quem mora lá</h3>
+        <p class="prosa" style="font-size:.93em;color:var(--tinta-2);margin-bottom:6px">
+          Três aplicações, no mesmo formato dos casos do Fólio 06 — número publicado à esquerda,
+          e onde a decisão continua humana à direita. O caso do trânsito de Hangzhou, que seria o
+          quarto, já está lá.
+        </p>
+
+        <div class="casos">
+
+          <article class="caso">
+            <div class="relato">
+              <span class="pastilha">🇨🇳 saúde</span>
+              <h3>Consulta pela internet, do hospital público</h3>
+              <p>
+                A distância entre o paciente do interior e o especialista da capital é problema de
+                qualquer país continental. A resposta chinesa foi autorizar hospitais públicos a
+                operar um serviço de consulta remota vinculado à instituição física — não uma
+                empresa à parte, e sim o mesmo hospital atendendo por outro canal, com triagem
+                automatizada na entrada. O número de hospitais com esse serviço saiu de 17, em
+                2016, para mais de 3 mil em 2023.
+              </p>
+              <p class="rodape-nota">
+                <b>quem assina o número</b>
+                Análise agrupada de dados multicêntricos sobre hospitais na internet na China,
+                publicada em periódico revisado por pares (<em>BMC Health Services Research</em>),
+                e balanços da imprensa estatal.
+              </p>
+            </div>
+            <div class="placar">
+              <div><strong>17 → 3 mil</strong><span>hospitais públicos com atendimento remoto, entre 2016 e 2023</span></div>
+              <div><strong>o médico</strong><span>a triagem é automática; prescrição e diagnóstico permanecem com profissional habilitado e identificado</span></div>
+            </div>
+          </article>
+
+          <article class="caso">
+            <div class="relato">
+              <span class="pastilha">🇨🇳 transporte</span>
+              <h3>Pagar a passagem com o rosto</h3>
+              <p>
+                Em Zhengzhou, capital de uma província de mais de noventa milhões de habitantes, o
+                metrô passou a aceitar o rosto como forma de pagamento: o passageiro cadastra a
+                imagem uma vez e depois entra sem cartão e sem telefone. Cerca de dez mil pessoas
+                por dia passaram a usar o recurso. O ganho é real para quem tem dificuldade com
+                aplicativo — idoso, pessoa com deficiência motora, quem esqueceu o celular.
+              </p>
+              <p class="rodape-nota">
+                <b>quem assina o número</b>
+                Agência estatal Xinhua, em cobertura do lançamento do serviço na cidade.
+              </p>
+            </div>
+            <div class="placar">
+              <div><strong>10 mil/dia</strong><span>passageiros pagando a passagem por reconhecimento facial</span></div>
+              <div><strong>a alternativa</strong><span>o cartão continua existindo, e é isso que separa comodidade de imposição — a pergunta a fazer em qualquer sistema do tipo</span></div>
+            </div>
+          </article>
+
+          <article class="caso">
+            <div class="relato">
+              <span class="pastilha">🇨🇳 atendimento ao público</span>
+              <h3>"Correr no máximo uma vez"</h3>
+              <p>
+                A reforma administrativa iniciada na província de Zhejiang tem um nome que é a
+                própria meta: para resolver um assunto com o Estado, o cidadão deve ir presencialmente
+                no máximo uma vez. Isso exige que os órgãos troquem dados entre si em vez de pedir a
+                mesma certidão de novo — a mesma ideia que a Estônia implantou pelo X-Road, no
+                Fólio 06, e que no Brasil aparece na Lei nº 13.726/2018, que dispensou reconhecimento
+                de firma e cópia autenticada.
+              </p>
+              <p class="rodape-nota">
+                <b>quem assina o número</b>
+                Banco Mundial, em análise sobre governo digital na China; e a documentação
+                provincial da reforma. Não há aqui indicador consolidado de cumprimento da meta que
+                resista a verificação, e por isso nenhum é citado.
+              </p>
+            </div>
+            <div class="placar">
+              <div><strong>uma vez</strong><span>é a meta declarada de comparecimento presencial por assunto</span></div>
+              <div><strong>o servidor</strong><span>a integração muda o balcão, não a decisão: quem defere continua respondendo pelo ato</span></div>
+            </div>
+          </article>
+
+        </div>
+
+        <h3 style="margin:52px 0 4px">O contraponto, com fonte primária</h3>
+        <p class="prosa" style="font-size:.95em;color:var(--tinta-2)">
+          Uma seção de admiração que omitisse esta parte não seria admiração: seria propaganda.
+          E há uma diferença entre as duas coisas que importa a quem lê documento oficial —
+          a admiração aguenta o contraditório.
+        </p>
+
+        <div class="casos">
+          <article class="caso contraprova">
+            <div class="relato">
+              <span class="pastilha">🇨🇳 Xinjiang · vigilância</span>
+              <h3>Quando a mesma técnica muda de finalidade</h3>
+              <p>
+                Em agosto de 2022, o Alto Comissariado das Nações Unidas para os Direitos Humanos
+                publicou avaliação sobre a Região Autônoma Uigur de Xinjiang. O documento descreve
+                um sistema de vigilância construído em parceria com empresas privadas de tecnologia,
+                incluindo coleta biométrica — imagem facial e leitura de íris — e conclui pela
+                ocorrência de graves violações de direitos humanos. Três anos antes, a Human Rights
+                Watch havia feito engenharia reversa do aplicativo usado pela polícia local: ele
+                reúne dados de várias origens e sinaliza pessoas a partir de comportamentos
+                comuns — usar determinado aplicativo, consumir energia elétrica acima do padrão do
+                vizinho, deixar de usar o telefone por um período.
+              </p>
+              <p class="rodape-nota">
+                <b>quem assina</b>
+                Alto Comissariado das Nações Unidas para os Direitos Humanos, <em>Assessment of
+                human rights concerns in the Xinjiang Uyghur Autonomous Region</em>, 31 de agosto de
+                2022; e Human Rights Watch, <em>China’s Algorithms of Repression</em>, maio de 2019.
+                <a href="https://www.ohchr.org/sites/default/files/documents/countries/2022-08-31/22-08-31-final-assesment.pdf" target="_blank" rel="noopener noreferrer">ohchr.org · texto integral da avaliação</a>
+              </p>
+            </div>
+            <div class="placar">
+              <div><strong>a mesma câmera</strong><span>a infraestrutura que abre caminho para a ambulância em Hangzhou é, tecnicamente, a que sinaliza pessoas em Xinjiang</span></div>
+              <div><strong>a finalidade</strong><span>o que separa um uso do outro não está no equipamento: está na norma que o autoriza e em quem pode contestá-la</span></div>
+            </div>
+          </article>
+        </div>
+
+        <p class="margem-nota" style="max-width:66ch;margin-top:26px">
+          <strong>E o "crédito social"?</strong> Aqui convém desfazer um exagero antes de manter a
+          crítica. Não existe uma nota única, nacional, que pontue cada cidadão chinês e determine
+          o que ele pode fazer — essa versão circulou no Ocidente e é imprecisa. O que existe é um
+          conjunto de listas setoriais e programas locais, boa parte deles voltada a empresas e a
+          inadimplência judicial, com regras que variam de província para província. A pesquisadora
+          Jamie Horsley, da Universidade Yale, documentou a diferença em detalhe. Reter isso não
+          suaviza o caso de Xinjiang: torna a crítica mais difícil de descartar, porque ela deixa de
+          depender de um exagero verificável.
+        </p>
+
         <p class="criterio">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg>
           <span><strong>Uma ressalva sobre as fontes desta seção:</strong> os documentos oficiais
@@ -3376,10 +5096,14 @@ se o texto não disser algo, escreva
             <li>China. Ministério das Relações Exteriores. <em>Global AI Governance Action Plan</em>, 26 de julho de 2025. Disponível em: <a href="https://www.fmprc.gov.cn/mfa_eng/xw/zyxw/202507/t20250729_11679232.html" target="_blank" rel="noopener noreferrer">fmprc.gov.cn</a>. Conselho de Estado, plano de ação "inteligência artificial mais", 26 de agosto de 2025.</li>
             <li>China. Administração do Ciberespaço. <em>Measures for Labeling AI-Generated Synthetic Content</em> e norma nacional obrigatória GB 45438-2025, publicadas em 14 de março de 2025, em vigor desde 1º de setembro de 2025. Tradução: <a href="https://www.chinalawtranslate.com/en/ai-labeling/" target="_blank" rel="noopener noreferrer">chinalawtranslate.com · AI labeling</a></li>
             <li>Stanford Institute for Human-Centered Artificial Intelligence. <em>The 2026 AI Index Report</em>. Disponível em: <a href="https://hai.stanford.edu/ai-index/2026-ai-index-report" target="_blank" rel="noopener noreferrer">hai.stanford.edu/ai-index/2026-ai-index-report</a></li>
+            <li>Análise agrupada de dados multicêntricos sobre serviços de consulta remota em hospitais na internet operados por hospitais físicos na China. <em>BMC Health Services Research</em>, 2025.</li>
+            <li>Agência Xinhua. Cobertura do serviço de embarque por reconhecimento facial no metrô de Zhengzhou, dezembro de 2019.</li>
+            <li>Banco Mundial. <em>Taking the pulse of digital government in China</em> — sobre a reforma administrativa de comparecimento único iniciada em Zhejiang. E Brasil, <em>Lei nº 13.726, de 8 de outubro de 2018</em>, sobre desburocratização.</li>
+            <li>Alto Comissariado das Nações Unidas para os Direitos Humanos. <em>OHCHR Assessment of human rights concerns in the Xinjiang Uyghur Autonomous Region, People’s Republic of China</em>, 31 de agosto de 2022. Disponível em: <a href="https://www.ohchr.org/sites/default/files/documents/countries/2022-08-31/22-08-31-final-assesment.pdf" target="_blank" rel="noopener noreferrer">ohchr.org · avaliação integral</a></li>
+            <li>Human Rights Watch. <em>China’s Algorithms of Repression: Reverse Engineering a Xinjiang Police Mass Surveillance App</em>, maio de 2019. Disponível em: <a href="https://www.hrw.org/report/2019/05/01/chinas-algorithms-repression/reverse-engineering-xinjiang-police-mass" target="_blank" rel="noopener noreferrer">hrw.org · relatório</a></li>
+            <li>Horsley, J. P. <em>China’s Orwellian Social Credit Score Isn’t Real</em>. Paul Tsai China Center, Yale Law School, 2018 — sobre a inexistência de nota única nacional e a natureza fragmentada dos programas.</li>
           </ol>
         </div>
-
-        <p class="escopo"><b>o que ainda falta nesta seção</b><span>Os casos de aplicação urbana — transporte, atendimento de saúde, fila de serviço público — com número publicado e fonte que assine cada número, no mesmo formato dos casos do Fólio 06. E o contraponto sobre vigilância, que hoje só aparece de passagem: ele exige fonte primária, e o principal livro sobre o assunto continua sem tradução para o português, como a estante do Fólio 12 declara.</span></p>
       </div>
     </section>
     <!-- Livros -->
@@ -3390,8 +5114,8 @@ se o texto não disser algo, escreva
           <h2><span class="selo-secao" aria-hidden="true">人</span>Livros</h2>
           <p class="abertura">
             Um site se lê em uma tarde e se esquece em duas. Livro é outra coisa: obriga a
-            demorar, e o que se demora fica. Esta é a estante que acompanha a seção anterior —
-            China e inteligência artificial — e vai crescer conforme as demais forem escritas.
+            demorar, e o que se demora fica. Quatro prateleiras, uma por linha de interesse deste
+            guia: China, ética, Estado e história da técnica.
           </p>
         </div>
 
@@ -3448,7 +5172,165 @@ se o texto não disser algo, escreva
           </article>
                 </div>
 
-        <p class="escopo"><b>a seguir</b><span>Uma prateleira por seção — ética, serviço público, história da técnica —, cada livro com preço atual, disponibilidade em bibliotecas públicas e o capítulo por onde começar.</span></p>
+        <h3 style="margin:48px 0 6px">Ética e sociedade</h3>
+        <p class="prosa" style="font-size:.93em;color:var(--tinta-2);margin-bottom:20px">
+          A prateleira que sustenta o Fólio 04. Dois dos quatro títulos foram escritos por
+          pesquisadoras que examinaram sistemas em operação, não hipóteses — e um deles é
+          brasileiro, sobre o Brasil.
+        </p>
+
+        <div class="estante">
+          <article class="livro" style="--acento:var(--ocre)">
+            <span class="lombada" aria-hidden="true"></span>
+            <div class="miolo">
+              <h4>Algoritmos de Destruição em Massa</h4>
+              <p class="autoria">Cathy O’Neil · Rua do Sabão, 2021 · tradução de Rafael Abraham</p>
+              <p class="porque">Matemática de formação, a autora trabalhou em fundo de investimento antes de escrever sobre o que os modelos fazem quando saem do laboratório: pontuar professor, negar crédito, escolher quem a polícia aborda. Ela propõe três critérios para reconhecer um modelo perigoso — opacidade, escala e capacidade de causar dano que se retroalimenta. É o vocabulário mais útil desta estante para quem lê edital.</p>
+              <p class="porque"><strong>Por onde começar:</strong> pela introdução, em que ela define esses três critérios. Depois disso, os capítulos podem ser lidos fora de ordem.</p>
+              <p class="edicoes">
+                <span class="ed ed-br">edição brasileira · Rua do Sabão</span>
+                <a class="comprar" href="https://www.editoraruadosabao.com.br/rua-do-sabao/algoritmos-de-destruicao-em-massa" target="_blank" rel="noopener noreferrer">ver na editora <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </p>
+            </div>
+          </article>
+
+          <article class="livro" style="--acento:var(--ocre)">
+            <span class="lombada" aria-hidden="true"></span>
+            <div class="miolo">
+              <h4>Racismo Algorítmico · inteligência artificial e discriminação nas redes digitais</h4>
+              <p class="autoria">Tarcízio Silva · Edições Sesc São Paulo, 2022 · escrito em português</p>
+              <p class="porque">O único desta estante que não precisou de tradução, e o que mais fala do país do senhor. Reúne casos documentados no Brasil — reconhecimento facial em abordagem policial, moderação de conteúdo, pontuação de crédito — e mostra que o problema não chegou traduzido do exterior: ele acontece aqui, com sistemas contratados por órgãos públicos brasileiros.</p>
+              <p class="porque"><strong>Por onde começar:</strong> pelo capítulo sobre reconhecimento facial, o caso em que a discussão brasileira está mais adiantada e em que já há decisão judicial.</p>
+              <p class="edicoes">
+                <span class="ed ed-br">obra brasileira · Edições Sesc</span>
+                <a class="comprar" href="https://portal.sescsp.org.br/online/edicoes-sesc/1076_RACISMO+ALGORITMICO+INTELIGENCIA+ARTIFICIAL+E+DISCRIMINACAO+NAS+REDES+DIGITAIS" target="_blank" rel="noopener noreferrer">ver na editora <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </p>
+            </div>
+          </article>
+
+          <article class="livro" style="--acento:var(--ocre)">
+            <span class="lombada" aria-hidden="true"></span>
+            <div class="miolo">
+              <h4>Algoritmos da Opressão · como os mecanismos de busca reforçam o racismo</h4>
+              <p class="autoria">Safiya Umoja Noble · Rua do Sabão, 2021 · tradução de Felipe Damorim</p>
+              <p class="porque">A pesquisa começou com um gesto banal: a autora buscou por "meninas negras" e examinou o que o buscador devolveu. O livro que saiu daí trata de uma pergunta administrativa séria — quando um resultado de busca é editoria e quando é publicidade, e quem responde pela diferença.</p>
+              <p class="porque"><strong>Por onde começar:</strong> pelo primeiro capítulo, que reconstitui a busca original. É a parte que dispensa qualquer conhecimento técnico.</p>
+              <p class="edicoes">
+                <span class="ed ed-br">edição brasileira · Rua do Sabão</span>
+                <a class="comprar" href="https://www.amazon.com.br/s?k=Algoritmos+da+Opress%C3%A3o+Safiya+Noble" target="_blank" rel="noopener noreferrer">ver na Amazon <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </p>
+            </div>
+          </article>
+
+          <article class="livro" style="--acento:var(--ocre)">
+            <span class="lombada" aria-hidden="true"></span>
+            <div class="miolo">
+              <h4>Atlas de IA · poder, política e os custos planetários da inteligência artificial</h4>
+              <p class="autoria">Kate Crawford · Edições Sesc São Paulo, 2025 · tradução de Humberto do Amaral</p>
+              <p class="porque">Contra a ideia de que a IA é imaterial, a autora percorre o que ela consome de fato: mineração de lítio, energia, trabalho humano mal pago de classificação de dados. É o contraponto físico ao Tema 13 do Fólio 04 — e o livro que mais muda a maneira de ler a palavra "nuvem" num contrato.</p>
+              <p class="porque"><strong>Por onde começar:</strong> pelo capítulo sobre a extração mineral. É o que menos se parece com um livro de tecnologia, e o que melhor prova a tese.</p>
+              <p class="edicoes">
+                <span class="ed ed-br">edição brasileira · Edições Sesc</span>
+                <a class="comprar" href="https://www.amazon.com.br/s?k=Atlas+de+IA+Kate+Crawford+Sesc" target="_blank" rel="noopener noreferrer">ver na Amazon <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <h3 style="margin:48px 0 6px">Poder, Estado e informação</h3>
+        <p class="prosa" style="font-size:.93em;color:var(--tinta-2);margin-bottom:20px">
+          Três livros sobre quem manda na informação — e sobre o papel que o Estado teve, e
+          tem, em tecnologia que o mercado costuma reivindicar como sua.
+        </p>
+
+        <div class="estante">
+          <article class="livro" style="--acento:var(--jade)">
+            <span class="lombada" aria-hidden="true"></span>
+            <div class="miolo">
+              <h4>A Era do Capitalismo de Vigilância</h4>
+              <p class="autoria">Shoshana Zuboff · Intrínseca, 2020 · tradução de George Schlesinger</p>
+              <p class="porque">Professora emérita de Harvard, a autora sustenta que a matéria-prima do setor não é o dado que o senhor entrega, e sim o excedente comportamental que sobra do uso — o resíduo que serve para prever o que o senhor fará em seguida. É um livro longo e difícil de esquecer, e o mais citado da última década sobre o assunto.</p>
+              <p class="porque"><strong>Por onde começar:</strong> pela primeira parte, em que ela reconstitui a descoberta do excedente comportamental. As partes seguintes desdobram o que ali já está posto.</p>
+              <p class="edicoes">
+                <span class="ed ed-br">edição brasileira · Intrínseca</span>
+                <a class="comprar" href="https://intrinseca.com.br/livro/a-era-do-capitalismo-de-vigilancia/" target="_blank" rel="noopener noreferrer">ver na editora <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </p>
+            </div>
+          </article>
+
+          <article class="livro" style="--acento:var(--jade)">
+            <span class="lombada" aria-hidden="true"></span>
+            <div class="miolo">
+              <h4>O Estado Empreendedor · desmascarando o mito do setor público vs. setor privado</h4>
+              <p class="autoria">Mariana Mazzucato · Portfolio-Penguin, 2014 · tradução de Elvira Serapicos</p>
+              <p class="porque">A tese, sustentada com documentação de financiamento: as tecnologias que compõem os produtos mais celebrados do setor privado — inclusive as que hoje sustentam a IA — nasceram de investimento público de longo prazo, feito quando ninguém sabia se daria certo. O livro devolve ao Estado a autoria de uma parte da história que ele deixou de reivindicar.</p>
+              <p class="porque"><strong>Por onde começar:</strong> pelo capítulo que desmonta a origem dos componentes do telefone celular. É o argumento inteiro em um exemplo.</p>
+              <p class="edicoes">
+                <span class="ed ed-br">edição brasileira · Portfolio-Penguin</span>
+                <a class="comprar" href="https://www.companhiadasletras.com.br/livro/9788582850039/o-estado-empreendedor" target="_blank" rel="noopener noreferrer">ver na editora <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </p>
+            </div>
+          </article>
+
+          <article class="livro" style="--acento:var(--jade)">
+            <span class="lombada" aria-hidden="true"></span>
+            <div class="miolo">
+              <h4>Nexus · uma breve história das redes de informação, da Idade da Pedra à inteligência artificial</h4>
+              <p class="autoria">Yuval Noah Harari · Companhia das Letras, 2024 · tradução de Berilo Vargas e Denise Bottmann</p>
+              <p class="porque">Harari coloca a IA numa linhagem que começa no mito e passa pelo cânone bíblico, pela imprensa e pela burocracia moderna: todas são tecnologias de organizar informação, e todas mudaram quem manda. A pergunta que ele persegue interessa diretamente a quem trabalha no Estado — o que acontece quando a rede de informação deixa de precisar de um humano em algum ponto da cadeia.</p>
+              <p class="porque"><strong>Por onde começar:</strong> pelo capítulo sobre burocracia e documento. É o mais próximo do expediente, e o que menos se parece com futurologia.</p>
+              <p class="edicoes">
+                <span class="ed ed-br">edição brasileira · Companhia das Letras</span>
+                <a class="comprar" href="https://www.companhiadasletras.com.br/livro/9788535937817/nexus" target="_blank" rel="noopener noreferrer">ver na editora <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <h3 style="margin:48px 0 6px">História da técnica e o problema do controle</h3>
+        <p class="prosa" style="font-size:.93em;color:var(--tinta-2);margin-bottom:20px">
+          De onde veio a máquina, e a discussão sobre até onde ela deve ir — escrita por quem
+          construiu boa parte do campo.
+        </p>
+
+        <div class="estante">
+          <article class="livro" style="--acento:var(--carimbo)">
+            <span class="lombada" aria-hidden="true"></span>
+            <div class="miolo">
+              <h4>Os Inovadores · uma biografia da revolução digital</h4>
+              <p class="autoria">Walter Isaacson · Companhia das Letras, 2014 · tradução de Berilo Vargas, Luciano Vieira Machado e Pedro Maia Soares</p>
+              <p class="porque">A história do computador contada como história de colaboração, e não de gênios isolados — começando por Ada Lovelace, que descreveu no século XIX o que uma máquina programável poderia fazer, e o que ela não poderia. Serve de contexto para a cronologia do Fólio 02.</p>
+              <p class="porque"><strong>Por onde começar:</strong> pelo capítulo de Ada Lovelace. Ela formulou, antes de a máquina existir, a objeção que ainda se faz hoje: a máquina não origina nada, executa o que se manda.</p>
+              <p class="edicoes">
+                <span class="ed ed-br">edição brasileira · Companhia das Letras</span>
+                <a class="comprar" href="https://www.companhiadasletras.com.br/livro/9788535925029/os-inovadores" target="_blank" rel="noopener noreferrer">ver na editora <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </p>
+            </div>
+          </article>
+
+          <article class="livro" style="--acento:var(--carimbo)">
+            <span class="lombada" aria-hidden="true"></span>
+            <div class="miolo">
+              <h4>Inteligência Artificial a Nosso Favor · como manter o controle sobre a tecnologia</h4>
+              <p class="autoria">Stuart Russell · Companhia das Letras, 2021 · tradução de Berilo Vargas</p>
+              <p class="porque">Russell é coautor do manual com que se estuda inteligência artificial nas universidades do mundo inteiro — e este livro é ele argumentando contra a própria disciplina, ou pelo menos contra o modo como ela define sucesso. A tese: construir máquinas que perseguem um objetivo fixo é erro de projeto; elas deveriam ser incertas quanto ao que queremos, e por isso dispostas a serem corrigidas.</p>
+              <p class="porque"><strong>Por onde começar:</strong> pelo capítulo sobre o problema do controle. É onde a tese aparece inteira, sem exigir os capítulos técnicos anteriores.</p>
+              <p class="edicoes">
+                <span class="ed ed-br">edição brasileira · Companhia das Letras</span>
+                <a class="comprar" href="https://www.companhiadasletras.com.br/livro/9786559213085/inteligencia-artificial-a-nosso-favor" target="_blank" rel="noopener noreferrer">ver na editora <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a>
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <p class="margem-nota" style="max-width:66ch;margin-top:34px">
+          <strong>O que a regra derrubou desta vez:</strong> <em>Turing’s Cathedral</em>, de George
+          Dyson, sobre a construção da primeira máquina de programa armazenado, tem edição em
+          espanhol e não em português. Fica fora, e fica registrado — a estante recomenda o que se
+          pode ler, não o que bastaria ler.
+        </p>
+
+        <p class="escopo"><b>preço e biblioteca</b><span>Preço de capa varia por edição e por loja, e por isso não é citado aqui: os links levam à página da editora, onde o valor está atualizado. Para exemplar usado, a Estante Virtual costuma trazer os quatro primeiros títulos por menos da metade. Em biblioteca pública, os volumes das Edições Sesc costumam estar disponíveis na rede de bibliotecas do próprio Sesc; para os demais, vale consultar o catálogo da biblioteca municipal, que aceita pedido de aquisição de título ainda não incorporado.</span></p>
       </div>
     </section>
     <!-- Trilha -->
@@ -3460,7 +5342,8 @@ se o texto não disser algo, escreva
           <p class="abertura">
             Este site dá o mapa. Quem dá a aula é outra pessoa — e com voz, quadro e tempo,
             que nenhum texto substitui. Quatro aulas de <strong>Karine Lago</strong> sobre
-            inteligência artificial, na ordem em que foram ao ar.
+            inteligência artificial, publicadas entre 3 e 6 de agosto de 2026, na ordem em que
+            foram ao ar. Somadas, dão pouco menos de dez horas.
           </p>
         </div>
 
@@ -3473,7 +5356,8 @@ se o texto não disser algo, escreva
             <span class="aula-corpo">
               <span class="aula-num">aula 01</span>
               <h4>[AULA 1] Como os profissionais mais valorizados do mercado estão usando a IA</h4>
-              <p class="detalhe">continua onde o vídeo da capa parou, aos 4:07</p>
+              <p class="detalhe">3 de agosto de 2026 · 1 h 57 min</p>
+              <p class="resolve">Responde à primeira pergunta de quem chega agora: o que as pessoas já estão fazendo com isso no trabalho, de concreto. Continua de onde o vídeo da capa parou.</p>
               <span class="ir">abrir no YouTube ↗</span>
             </span>
           </a>
@@ -3485,7 +5369,8 @@ se o texto não disser algo, escreva
             <span class="aula-corpo">
               <span class="aula-num">aula 02</span>
               <h4>[AULA 2] Faça em 20 minutos o que levaria 6 horas</h4>
-              <p class="detalhe">aula ao vivo</p>
+              <p class="detalhe">4 de agosto de 2026 · 2 h 12 min</p>
+              <p class="resolve">Trata do ganho de tempo, que é a promessa mais repetida e a menos examinada. Serve para separar onde as horas economizadas são reais e onde só mudam de lugar.</p>
               <span class="ir">abrir no YouTube ↗</span>
             </span>
           </a>
@@ -3497,7 +5382,8 @@ se o texto não disser algo, escreva
             <span class="aula-corpo">
               <span class="aula-num">aula 03</span>
               <h4>[AULA 3] O plano completo: como usar IA para crescer na carreira nos próximos 6 meses</h4>
-              <p class="detalhe">aula ao vivo</p>
+              <p class="detalhe">5 de agosto de 2026 · 2 h 50 min</p>
+              <p class="resolve">A mais longa das quatro, e a que responde ao "e agora?": transforma interesse solto em plano com prazo, para quem quer aprender de forma continuada.</p>
               <span class="ir">abrir no YouTube ↗</span>
             </span>
           </a>
@@ -3509,7 +5395,8 @@ se o texto não disser algo, escreva
             <span class="aula-corpo">
               <span class="aula-num">aula 04</span>
               <h4>[AULA 4] Claude Code: como criar, automatizar e desenvolver projetos com IA sem saber programar</h4>
-              <p class="detalhe">aula ao vivo</p>
+              <p class="detalhe">6 de agosto de 2026 · 2 h 44 min</p>
+              <p class="resolve">A fronteira seguinte: fazer a máquina executar tarefas de vários passos sem escrever programa. É o degrau 5 do Fólio 09 em funcionamento — e o ponto em que a supervisão humana deixa de ser recomendação.</p>
               <span class="ir">abrir no YouTube ↗</span>
             </span>
           </a>
@@ -3524,7 +5411,12 @@ se o texto não disser algo, escreva
           é contada para quem produziu.
         </p>
 
-        <p class="escopo"><b>a seguir</b><span>Título, data e duração de cada aula, transcritos do próprio canal — e uma linha por aula dizendo o que ela resolve, para que ele escolha por onde começar.</span></p>
+        <p class="margem-nota" style="max-width:66ch;margin-top:26px">
+          <strong>Sugestão de ordem, se as dez horas assustarem:</strong> comece pela aula 3, a
+          do plano. Ela é a mais longa e a única que organiza as outras — depois dela, o senhor
+          decide se as demais entram, e em que semana. Título, data e duração acima foram
+          conferidos no próprio canal em agosto de 2026.
+        </p>
       </div>
     </section>
 
@@ -3540,10 +5432,11 @@ se o texto não disser algo, escreva
     <section class="aprovacao" id="aprovacao">
       <div class="caixa">
         <p class="etiqueta">Folha de aprovação</p>
-        <h2 style="margin-bottom:12px">O que este MVP está propondo</h2>
+        <h2 style="margin-bottom:12px">O que este arquivo decidiu</h2>
         <p class="abertura" style="margin-bottom:32px">
-          Este arquivo decide <strong>aparência e experiência</strong>. O conteúdo real de cada
-          seção entra na etapa seguinte — depois do seu aval.
+          Esta folha registra as decisões de <strong>aparência e experiência</strong>, tomadas na
+          primeira etapa do projeto. O conteúdo das seções já foi escrito sobre elas — e esta
+          página sai da versão final.
         </p>
 
         <div class="malha">
@@ -3801,12 +5694,27 @@ se o texto não disser algo, escreva
     reconciliar(corpo.dataset.nivel || "simples");
   })();
 
-  /* ── abas de amostra ── */
+  /* ── abas: cada uma governa o painel que declara em aria-controls ── */
   document.querySelectorAll(".abas").forEach(function(grupo){
+    var abas = Array.prototype.slice.call(grupo.querySelectorAll(".aba"));
+    function selecionar(b){
+      abas.forEach(function(x){
+        var ativo = (x === b);
+        x.setAttribute("aria-selected", String(ativo));
+        var painel = document.getElementById(x.getAttribute("aria-controls") || "");
+        if(painel) painel.hidden = !ativo;
+      });
+    }
     grupo.addEventListener("click", function(e){
-      var b = e.target.closest(".aba"); if(!b) return;
-      grupo.querySelectorAll(".aba").forEach(function(x){ x.setAttribute("aria-selected","false"); });
-      b.setAttribute("aria-selected","true");
+      var b = e.target.closest(".aba"); if(b) selecionar(b);
+    });
+    /* setas <- -> percorrem as abas, como manda o padrao de tablist */
+    grupo.addEventListener("keydown", function(e){
+      if(e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      var i = abas.indexOf(document.activeElement); if(i < 0) return;
+      e.preventDefault(); e.stopPropagation();
+      var alvo = abas[(i + (e.key === "ArrowRight" ? 1 : abas.length - 1)) % abas.length];
+      selecionar(alvo); alvo.focus();
     });
   });
 
