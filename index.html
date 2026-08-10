@@ -410,6 +410,10 @@ body[data-nivel="mais"]     .so-simples{ display:none; }
 .china .ficha{ border-top:2px solid var(--china-vermelho); }
 .china .glifo{ background:var(--carimbo-f); color:var(--carimbo); }
 .china .ficha h3{ font-size:1.28rem; }
+/* o losango da linha do tempo assume o vermelho da bandeira — campo e traco.
+   A data ao lado permanece em --carimbo: #DE2910 alcanca so 4,09:1 sobre o
+   papel e nao serve para texto.                                            */
+.china .evento::before{ background:var(--china-vermelho); }
 
 /* ética */
 .temas{ display:grid; gap:9px; grid-template-columns:repeat(auto-fill,minmax(238px,1fr)); }
@@ -3139,7 +3143,243 @@ se o texto não disser algo, escreva
           </article>
         </div>
 
-        <p class="escopo"><b>a seguir</b><span>Cronologia chinesa e regulação própria, com o que muda para quem contrata tecnologia no Brasil.</span></p>
+        <h3 style="margin:52px 0 8px">Cronologia: doze marcos chineses</h3>
+        <p class="prosa" style="font-size:.93em;color:var(--tinta-2);margin-bottom:22px">
+          Repare, ao percorrer a lista, que ela quase não tem invenções — tem documentos. É a
+          característica que mais distingue o caso chinês: cada avanço técnico vem acompanhado,
+          em meses, de uma norma que decide o que se pode fazer com ele. As referências ao final
+          seguem esta mesma ordem.
+        </p>
+
+        <div class="cronologia">
+          <article class="evento">
+            <p class="quando">março de 2016</p>
+            <h3>Uma derrota no tabuleiro vira política de Estado</h3>
+            <p>O programa AlphaGo, de uma empresa britânica comprada pelo Google, derrota o
+            campeão sul-coreano Lee Sedol no gô — jogo de origem chinesa, praticado há mais de dois
+            mil anos e tido como o último reduto da intuição humana. Nos Estados Unidos a partida
+            foi notícia de tecnologia. Na China foi lida como aviso.</p>
+            <span class="marco-nota"><b>por que isso importa</b> Kai-Fu Lee, cujo livro está na
+            estante do próximo fólio, compara o episódio ao lançamento do satélite soviético que
+            tirou os Estados Unidos da inércia em 1957. O gesto seguinte confirma a leitura: um
+            ano depois havia plano nacional. É a diferença entre assistir a um resultado e
+            transformá-lo em política.</span>
+            <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Seul, Coreia do Sul</span>
+          </article>
+
+          <article class="evento">
+            <p class="quando">20 de julho de 2017</p>
+            <h3>O plano com data marcada</h3>
+            <p>O Conselho de Estado publica o Plano de Desenvolvimento da Inteligência Artificial
+            de Nova Geração. Não é carta de intenções: traz três etapas datadas — alcançar o nível
+            internacional até 2020, liderar em partes do campo até 2025 e ser o principal centro
+            mundial de inovação em inteligência artificial até 2030 —, com ministérios
+            responsáveis por cada uma.</p>
+            <span class="marco-nota"><b>por que isso importa</b> é o documento que explica o resto
+            desta lista. Um plano com prazo e responsável nomeado obriga a prestar contas em data
+            certa; um plano sem prazo é uma opinião. A diferença é de gestão pública, não de
+            tecnologia — e é replicável em qualquer país, inclusive num que não tenha o mesmo
+            regime.</span>
+            <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Pequim, China</span>
+          </article>
+
+          <article class="evento">
+            <p class="quando">novembro de 2017</p>
+            <h3>O Estado escala um time e divide o campo</h3>
+            <p>O Ministério da Ciência e Tecnologia designa quatro empresas para liderar
+            plataformas abertas de inovação, cada uma num domínio: Baidu na condução autônoma,
+            Alibaba nas cidades, Tencent no diagnóstico por imagem médica e iFlytek no
+            reconhecimento de voz. Em agosto de 2019 o arranjo já reunia quinze plataformas.</p>
+            <span class="marco-nota"><b>por que isso importa</b> não foi subsídio distribuído por
+            edital: foi atribuição de missão, com domínio exclusivo e obrigação de abrir a
+            plataforma a terceiros. É um modelo de contratação que o Brasil raramente usa — e vale
+            conhecer antes de decidir que a única alternativa ao mercado livre é a estatal.</span>
+            <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Pequim, China</span>
+          </article>
+
+          <article class="evento">
+            <p class="quando">junho de 2019</p>
+            <h3>Oito princípios, antes de qualquer lei</h3>
+            <p>Um comitê de especialistas ligado ao ministério publica os Princípios de Governança
+            para a Inteligência Artificial de Nova Geração: harmonia e amizade, justiça e equidade,
+            inclusão e compartilhamento, respeito à privacidade, segurança e controlabilidade,
+            responsabilidade compartilhada, colaboração aberta e governança ágil.</p>
+            <span class="marco-nota"><b>por que isso importa</b> o último princípio é o mais
+            revelador. <em>Governança ágil</em> significa, assumidamente, regular por norma
+            setorial rápida e corrigir depois — em vez de esperar uma lei geral. As três normas dos
+            marcos seguintes são esse princípio em exercício.</span>
+            <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Pequim, China</span>
+          </article>
+
+          <article class="evento">
+            <p class="quando">setembro e novembro de 2021</p>
+            <h3>Duas leis de dados e um código de ética</h3>
+            <p>Entram em vigor a Lei de Segurança de Dados, em 1º de setembro, e a Lei de Proteção
+            de Informações Pessoais, em 1º de novembro — esta última bastante próxima, em estrutura
+            e em vocabulário, do regulamento europeu de proteção de dados. No mesmo setembro sai a
+            Norma Ética para a Inteligência Artificial de Nova Geração, que manda incorporar a
+            avaliação ética a todo o ciclo de vida do sistema, da pesquisa ao uso.</p>
+            <span class="marco-nota"><b>por que isso importa</b> a matéria-prima foi regulada
+            antes da máquina — a mesma ordem que o Brasil seguiu com a LGPD, em 2018. Não é
+            coincidência: sem regra sobre o dado, qualquer regra sobre o sistema fica sem
+            objeto.</span>
+            <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Pequim, China</span>
+          </article>
+
+          <article class="evento">
+            <p class="quando">1º de março de 2022</p>
+            <h3>A primeira regra do mundo sobre recomendação algorítmica</h3>
+            <p>Entram em vigor as disposições sobre recomendação algorítmica. Serviços que ordenam,
+            filtram ou sugerem conteúdo passam a ter de informar ao usuário que há um algoritmo
+            decidindo o que ele vê, explicar em termos gerais como funciona e oferecer a
+            possibilidade de desligá-lo. Os algoritmos com capacidade de influenciar a opinião
+            pública precisam ser registrados perante o Estado.</p>
+            <span class="marco-nota"><b>por que isso importa</b> aqui está a ambivalência que
+            atravessa o caso chinês inteiro, e convém encará-la de frente. O direito de desligar a
+            recomendação é uma proteção real ao cidadão, que a Europa só viria a ter depois. O
+            registro prévio dos algoritmos que movem a opinião pública é, na mesma norma, um
+            instrumento de controle do discurso. As duas coisas são o mesmo artigo.</span>
+            <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Pequim, China</span>
+          </article>
+
+          <article class="evento">
+            <p class="quando">janeiro de 2023</p>
+            <h3>A regra do rosto e da voz fabricados</h3>
+            <p>Entram em vigor as disposições sobre síntese profunda — o nome oficial para a
+            técnica de gerar ou alterar rosto, voz e cena de modo convincente. Conteúdo assim
+            produzido passa a ter de ser rotulado, e é proibido usá-lo para falsificar identidade,
+            documento ou notícia. É quase um ano antes de o Tribunal Superior Eleitoral brasileiro
+            editar sua resolução sobre o mesmo problema.</p>
+            <span class="marco-nota"><b>por que isso importa</b> a China chegou primeiro porque
+            regula por aplicação concreta, uma de cada vez, em vez de esperar uma lei geral. É a
+            vantagem do método, e o Fólio 05 traz o preço dele. Vale ao senhor comparar as duas
+            normas: o desenho brasileiro é mais estreito, restrito ao período eleitoral.</span>
+            <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Pequim, China</span>
+          </article>
+
+          <article class="evento">
+            <p class="quando">agosto de 2023</p>
+            <h3>As medidas para a inteligência artificial generativa</h3>
+            <p>Oito meses depois do assistente de conversa que popularizou a tecnologia no mundo, a
+            China publica medidas provisórias para serviços de inteligência artificial generativa
+            oferecidos ao público. Elas valem independentemente de onde a empresa fornecedora
+            esteja sediada, desde que o serviço seja prestado dentro do país.</p>
+            <span class="marco-nota"><b>por que isso importa</b> essa cláusula de alcance é a mesma
+            que a Europa adotaria e que o projeto brasileiro prevê. Para um órgão público
+            brasileiro, a consequência é direta: a origem estrangeira do fornecedor não o retira
+            da lei do país onde o serviço é prestado — e é isso que o contrato precisa dizer por
+            escrito.</span>
+            <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Pequim, China</span>
+          </article>
+
+          <article class="evento">
+            <p class="quando">setembro de 2024</p>
+            <h3>Um quadro para classificar o risco</h3>
+            <p>Sai o Quadro de Governança de Segurança da Inteligência Artificial, que organiza os
+            riscos previsíveis em categorias, aponta as medidas técnicas capazes de reduzir cada
+            um e distribui as obrigações entre quem desenvolve, quem fornece e quem usa.</p>
+            <span class="marco-nota"><b>por que isso importa</b> é o ponto em que os três modelos
+            do mundo começam a convergir apesar de terem partido de filosofias opostas: todos
+            acabaram organizando o problema por grau de risco. Um servidor que entenda a lógica do
+            risco lê qualquer um dos três.</span>
+            <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Pequim, China</span>
+          </article>
+
+          <article class="evento">
+            <p class="quando">27 de janeiro de 2025</p>
+            <h3>O dia em que o custo de entrada desabou</h3>
+            <p>Depois do lançamento de um modelo de raciocínio chinês de pesos abertos — isto é,
+            que qualquer pessoa pode baixar e executar em máquina própria —, as ações da Nvidia
+            caem 17% em um único pregão e a empresa perde cerca de 589 bilhões de dólares em valor
+            de mercado. É a maior queda diária já registrada para uma companhia na bolsa
+            americana.</p>
+            <span class="marco-nota"><b>por que isso importa</b> o mercado não reagiu a um produto:
+            reagiu à descoberta de que o resultado podia custar muito menos do que se supunha
+            necessário. Para um país que não fabrica os equipamentos, essa é a notícia relevante —
+            é a diferença entre alugar a capacidade de um fornecedor estrangeiro e possuí-la.</span>
+            <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Hangzhou, China, e Nova York</span>
+          </article>
+
+          <article class="evento">
+            <p class="quando">julho a setembro de 2025</p>
+            <h3>Para fora, para dentro e para o cidadão</h3>
+            <p>Em 26 de julho, na conferência mundial de inteligência artificial em Xangai, a
+            China apresenta um plano de ação para a governança global do tema e propõe criar uma
+            organização internacional de cooperação em inteligência artificial, com sede naquela
+            cidade. Em 26 de agosto, o Conselho de Estado publica o plano de ação chamado
+            "inteligência artificial mais", que fixa metas de adoção da tecnologia em todos os
+            setores: 70% até 2027 e 90% até 2030. E em 1º de setembro passa a ser obrigatório
+            rotular todo conteúdo gerado por máquina — com marca visível para o leitor e marca
+            legível por máquina embutida no próprio arquivo.</p>
+            <span class="marco-nota"><b>por que isso importa</b> três movimentos em dois meses, nas
+            três escalas: diplomacia, indústria e cidadão. A rotulagem embutida no arquivo é a que
+            mais interessa a quem recebe documento: ela permite verificar a origem depois, sem
+            depender de o rótulo visível ter sobrevivido a um recorte de tela.</span>
+            <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Xangai e Pequim, China</span>
+          </article>
+
+          <article class="evento">
+            <p class="quando">março de 2026</p>
+            <h3>A distância, finalmente medida</h3>
+            <p>O relatório anual do índice de inteligência artificial da Universidade Stanford
+            registra que a diferença de desempenho entre o melhor modelo americano e o melhor
+            modelo chinês caiu a poucos pontos percentuais, depois de os dois países terem trocado
+            a liderança mais de uma vez desde o início de 2025. O mesmo relatório mostra a
+            distância entre modelos fechados e modelos abertos encolhendo na mesma direção.</p>
+            <span class="marco-nota"><b>por que isso importa</b> é o marco que fecha a lista porque
+            desfaz a premissa dos outros onze. A pergunta deixa de ser quem chega primeiro e passa
+            a ser sob quais condições cada um oferece o que construiu — a que preço, com qual
+            licença, sob a jurisdição de quem. Essa é uma pergunta de contrato, e é a que cabe a
+            um servidor público fazer.</span>
+            <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Stanford, Estados Unidos</span>
+          </article>
+        </div>
+
+        <p class="margem-nota" style="max-width:66ch;margin-top:30px">
+          <strong>O que esta lista sustenta, e o que ela não sustenta:</strong> ela sustenta que a
+          China trata tecnologia como política pública — com prazo, responsável e norma —, e que
+          nisso há muito a aprender, inclusive para quem discorda do regime. Ela não sustenta que
+          o arranjo chinês seja transplantável. Boa parte do que o torna rápido é o que o torna
+          incompatível com garantias que a Constituição brasileira assegura: o registro prévio de
+          algoritmos que influenciam a opinião pública, por exemplo, é eficaz contra a mentira
+          fabricada e é, ao mesmo tempo, um poder sobre o discurso que nenhuma agência brasileira
+          poderia exercer. Admirar o planejamento não obriga a aceitar o preço, e reconhecer o
+          preço não obriga a descartar o planejamento.
+        </p>
+
+        <p class="criterio">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg>
+          <span><strong>Uma ressalva sobre as fontes desta seção:</strong> os documentos oficiais
+          chineses foram consultados em tradução para o inglês, feita por instituições acadêmicas
+          — o projeto DigiChina, da Universidade Stanford, e o China Law Translate. Nenhum deles é
+          fonte oficial do governo chinês, e traduções de norma admitem divergência de leitura em
+          pontos que importam. Onde a data ou o conteúdo dependiam da tradução, ficaram registrados
+          o mês e o efeito prático, e não a redação literal do artigo.</span>
+        </p>
+
+        <div class="fontes">
+          <h4>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+            Referências deste fólio
+          </h4>
+          <ol>
+            <li>Silver, D. <em>et al.</em> "Mastering the game of Go with deep neural networks and tree search". <em>Nature</em>, v. 529, p. 484–489, 2016. A leitura do episódio como ponto de virada chinês é de Kai-Fu Lee, <em>Inteligência Artificial</em> — Globo Livros, 2019, tradução de Marcelo Barbão, na estante do Fólio 12.</li>
+            <li>China. Conselho de Estado. <em>New Generation Artificial Intelligence Development Plan</em>, 20 de julho de 2017. Tradução integral: <a href="https://digichina.stanford.edu/work/full-translation-chinas-new-generation-artificial-intelligence-development-plan-2017/" target="_blank" rel="noopener noreferrer">digichina.stanford.edu</a></li>
+            <li>China. Ministério da Ciência e Tecnologia. Designação das plataformas abertas de inovação em inteligência artificial, novembro de 2017; ampliação para quinze plataformas em agosto de 2019. Análise: <a href="https://digichina.stanford.edu/work/drafting-chinas-national-ai-team-for-governance" target="_blank" rel="noopener noreferrer">digichina.stanford.edu · national AI team</a></li>
+            <li>China. Comitê de Especialistas em Governança da IA de Nova Geração. <em>Governance Principles for a New Generation of Artificial Intelligence: Develop Responsible Artificial Intelligence</em>, junho de 2019.</li>
+            <li>China. <em>Data Security Law</em>, em vigor desde 1º de setembro de 2021, e <em>Personal Information Protection Law</em>, em vigor desde 1º de novembro de 2021. Tradução: <a href="https://digichina.stanford.edu/work/translation-personal-information-protection-law-of-the-peoples-republic-of-china-effective-nov-1-2021/" target="_blank" rel="noopener noreferrer">digichina.stanford.edu · PIPL</a>. No mesmo período, <em>Ethical Norms for New Generation Artificial Intelligence</em>, setembro de 2021.</li>
+            <li>China. <em>Provisions on the Management of Algorithmic Recommendations in Internet Information Services</em>, em vigor desde 1º de março de 2022.</li>
+            <li>China. <em>Provisions on the Administration of Deep Synthesis Internet Information Services</em>, em vigor desde janeiro de 2023.</li>
+            <li>China. <em>Interim Measures for the Management of Generative Artificial Intelligence Services</em>, em vigor desde agosto de 2023.</li>
+            <li>China. <em>AI Safety Governance Framework</em>, setembro de 2024.</li>
+            <li>CNBC. "Nvidia sheds almost $600 billion in market cap, biggest drop ever", 27 de janeiro de 2025. Disponível em: <a href="https://www.cnbc.com/2025/01/27/nvidia-sheds-almost-600-billion-in-market-cap-biggest-drop-ever.html" target="_blank" rel="noopener noreferrer">cnbc.com · 27/1/2025</a></li>
+            <li>China. Ministério das Relações Exteriores. <em>Global AI Governance Action Plan</em>, 26 de julho de 2025. Disponível em: <a href="https://www.fmprc.gov.cn/mfa_eng/xw/zyxw/202507/t20250729_11679232.html" target="_blank" rel="noopener noreferrer">fmprc.gov.cn</a>. Conselho de Estado, plano de ação "inteligência artificial mais", 26 de agosto de 2025.</li>
+            <li>China. Administração do Ciberespaço. <em>Measures for Labeling AI-Generated Synthetic Content</em> e norma nacional obrigatória GB 45438-2025, publicadas em 14 de março de 2025, em vigor desde 1º de setembro de 2025. Tradução: <a href="https://www.chinalawtranslate.com/en/ai-labeling/" target="_blank" rel="noopener noreferrer">chinalawtranslate.com · AI labeling</a></li>
+            <li>Stanford Institute for Human-Centered Artificial Intelligence. <em>The 2026 AI Index Report</em>. Disponível em: <a href="https://hai.stanford.edu/ai-index/2026-ai-index-report" target="_blank" rel="noopener noreferrer">hai.stanford.edu/ai-index/2026-ai-index-report</a></li>
+          </ol>
+        </div>
+
+        <p class="escopo"><b>o que ainda falta nesta seção</b><span>Os casos de aplicação urbana — transporte, atendimento de saúde, fila de serviço público — com número publicado e fonte que assine cada número, no mesmo formato dos casos do Fólio 06. E o contraponto sobre vigilância, que hoje só aparece de passagem: ele exige fonte primária, e o principal livro sobre o assunto continua sem tradução para o português, como a estante do Fólio 12 declara.</span></p>
       </div>
     </section>
     <!-- Livros -->
