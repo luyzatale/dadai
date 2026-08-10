@@ -294,6 +294,21 @@ main{ min-width:0; }
   display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:var(--r-1);
   background:var(--papel-2); border:1px solid var(--fio); font-size:.76rem; font-weight:600; color:var(--tinta-2);
 }
+/* pastilha que leva à ficha da ferramenta, mais abaixo na mesma página */
+a.pastilha{
+  text-decoration:none; min-height:32px; cursor:pointer;
+  transition:border-color .16s, color .16s, background .16s;
+}
+a.pastilha::after{
+  content:"↓"; font-family:var(--dado); font-size:.8em; color:var(--tinta-3); margin-left:1px;
+}
+@media (hover:hover){
+  a.pastilha:hover{ border-color:var(--jade); color:var(--jade); background:var(--jade-f); }
+  a.pastilha:hover::after{ color:var(--jade); }
+}
+a.pastilha:focus-visible{ outline:2px solid var(--carimbo); outline-offset:2px; }
+/* a ficha de destino não pode nascer sob o cabeçalho fixo */
+.ferramenta[id]{ scroll-margin-top:96px; }
 
 /* termo explicado */
 .termo{
@@ -3843,9 +3858,9 @@ footer span:last-child{ flex-basis:100%; }
             <h3>Assistentes de conversa</h3>
             <p>O senhor escreve a pergunta em português comum e recebe a resposta por escrito. Serve para redigir, resumir e explicar.</p>
             <div class="pastilhas">
-              <span class="pastilha">🇺🇸 ChatGPT</span>
-              <span class="pastilha">🇺🇸 Claude</span>
-              <span class="pastilha">🇨🇳 DeepSeek</span>
+              <a class="pastilha" href="#f-chatgpt" title="ver a ficha de ChatGPT nesta página">🇺🇸 ChatGPT</a>
+              <a class="pastilha" href="#f-claude" title="ver a ficha de Claude nesta página">🇺🇸 Claude</a>
+              <a class="pastilha" href="#f-deepseek" title="ver a ficha de DeepSeek nesta página">🇨🇳 DeepSeek</a>
             </div>
             <p class="no-servico">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
@@ -3858,8 +3873,8 @@ footer span:last-child{ flex-basis:100%; }
             <h3>Leitores de documento</h3>
             <p>O senhor entrega um PDF longo e ele devolve o resumo, os pontos-chave e responde perguntas sobre aquele arquivo específico.</p>
             <div class="pastilhas">
-              <span class="pastilha">🇺🇸 NotebookLM</span>
-              <span class="pastilha">🇺🇸 Copilot</span>
+              <a class="pastilha" href="#f-notebooklm" title="ver a ficha de NotebookLM nesta página">🇺🇸 NotebookLM</a>
+              <a class="pastilha" href="#f-copilot" title="ver a ficha de Microsoft Copilot nesta página">🇺🇸 Copilot</a>
             </div>
             <p class="no-servico">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
@@ -3872,9 +3887,9 @@ footer span:last-child{ flex-basis:100%; }
             <h3>Criação de imagem e voz</h3>
             <p>Descreva com palavras e a máquina desenha; entregue um texto e ela fala. Útil — e também o berço das falsificações.</p>
             <div class="pastilhas">
-              <span class="pastilha">🇺🇸 Midjourney</span>
-              <span class="pastilha">🇨🇳 Kling</span>
-              <span class="pastilha">🇨🇳 Hailuo</span>
+              <a class="pastilha" href="#f-midjourney" title="ver a ficha de Midjourney nesta página">🇺🇸 Midjourney</a>
+              <a class="pastilha" href="#f-kling" title="ver a ficha de Kling nesta página">🇨🇳 Kling</a>
+              <a class="pastilha" href="#f-elevenlabs" title="ver a ficha de ElevenLabs nesta página">🇺🇸 ElevenLabs</a>
             </div>
             <p class="no-servico">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
@@ -3904,7 +3919,7 @@ footer span:last-child{ flex-basis:100%; }
           <h4>Assistentes de conversa</h4>
           <div class="caixa-ferramentas">
 
-            <article class="ferramenta">
+            <article class="ferramenta" id="f-chatgpt">
               <div class="cabeca-f">
                 <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">C</span></span>
                 <div class="corpo-f"><h4>ChatGPT</h4><p class="proc">OpenAI · Estados Unidos</p></div>
@@ -3917,7 +3932,7 @@ footer span:last-child{ flex-basis:100%; }
               </dl>
             </article>
 
-            <article class="ferramenta">
+            <article class="ferramenta" id="f-claude">
               <div class="cabeca-f">
                 <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">C</span></span>
                 <div class="corpo-f"><h4>Claude</h4><p class="proc">Anthropic · Estados Unidos</p></div>
@@ -3930,7 +3945,7 @@ footer span:last-child{ flex-basis:100%; }
               </dl>
             </article>
 
-            <article class="ferramenta">
+            <article class="ferramenta" id="f-gemini">
               <div class="cabeca-f">
                 <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">G</span></span>
                 <div class="corpo-f"><h4>Gemini</h4><p class="proc">Google · Estados Unidos</p></div>
@@ -3943,7 +3958,7 @@ footer span:last-child{ flex-basis:100%; }
               </dl>
             </article>
 
-            <article class="ferramenta">
+            <article class="ferramenta" id="f-copilot">
               <div class="cabeca-f">
                 <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">C</span></span>
                 <div class="corpo-f"><h4>Microsoft Copilot</h4><p class="proc">Microsoft · Estados Unidos</p></div>
@@ -3956,7 +3971,7 @@ footer span:last-child{ flex-basis:100%; }
               </dl>
             </article>
 
-            <article class="ferramenta">
+            <article class="ferramenta" id="f-deepseek">
               <div class="cabeca-f">
                 <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">D</span></span>
                 <div class="corpo-f"><h4>DeepSeek</h4><p class="proc">DeepSeek · China</p></div>
@@ -3969,7 +3984,7 @@ footer span:last-child{ flex-basis:100%; }
               </dl>
             </article>
 
-            <article class="ferramenta">
+            <article class="ferramenta" id="f-lechat">
               <div class="cabeca-f">
                 <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">L</span></span>
                 <div class="corpo-f"><h4>Le Chat</h4><p class="proc">Mistral AI · França</p></div>
@@ -3982,7 +3997,7 @@ footer span:last-child{ flex-basis:100%; }
               </dl>
             </article>
 
-            <article class="ferramenta">
+            <article class="ferramenta" id="f-maritalk">
               <div class="cabeca-f">
                 <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">M</span></span>
                 <div class="corpo-f"><h4>MariTalk</h4><p class="proc">Maritaca AI · Brasil</p></div>
@@ -4002,7 +4017,7 @@ footer span:last-child{ flex-basis:100%; }
           <h4>Leitura de documento e pesquisa com fonte</h4>
           <div class="caixa-ferramentas">
 
-            <article class="ferramenta">
+            <article class="ferramenta" id="f-notebooklm">
               <div class="cabeca-f">
                 <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">N</span></span>
                 <div class="corpo-f"><h4>NotebookLM</h4><p class="proc">Google · Estados Unidos</p></div>
@@ -4015,7 +4030,7 @@ footer span:last-child{ flex-basis:100%; }
               </dl>
             </article>
 
-            <article class="ferramenta">
+            <article class="ferramenta" id="f-perplexity">
               <div class="cabeca-f">
                 <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">P</span></span>
                 <div class="corpo-f"><h4>Perplexity</h4><p class="proc">Perplexity AI · Estados Unidos</p></div>
@@ -4028,7 +4043,7 @@ footer span:last-child{ flex-basis:100%; }
               </dl>
             </article>
 
-            <article class="ferramenta">
+            <article class="ferramenta" id="f-deepl">
               <div class="cabeca-f">
                 <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">D</span></span>
                 <div class="corpo-f"><h4>DeepL</h4><p class="proc">DeepL · Alemanha</p></div>
@@ -4048,7 +4063,7 @@ footer span:last-child{ flex-basis:100%; }
           <h4>Imagem, vídeo e voz</h4>
           <div class="caixa-ferramentas">
 
-            <article class="ferramenta">
+            <article class="ferramenta" id="f-midjourney">
               <div class="cabeca-f">
                 <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">M</span></span>
                 <div class="corpo-f"><h4>Midjourney</h4><p class="proc">Midjourney · Estados Unidos</p></div>
@@ -4061,7 +4076,7 @@ footer span:last-child{ flex-basis:100%; }
               </dl>
             </article>
 
-            <article class="ferramenta">
+            <article class="ferramenta" id="f-firefly">
               <div class="cabeca-f">
                 <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">F</span></span>
                 <div class="corpo-f"><h4>Adobe Firefly</h4><p class="proc">Adobe · Estados Unidos</p></div>
@@ -4074,7 +4089,7 @@ footer span:last-child{ flex-basis:100%; }
               </dl>
             </article>
 
-            <article class="ferramenta">
+            <article class="ferramenta" id="f-kling">
               <div class="cabeca-f">
                 <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">K</span></span>
                 <div class="corpo-f"><h4>Kling</h4><p class="proc">Kuaishou · China</p></div>
@@ -4087,7 +4102,7 @@ footer span:last-child{ flex-basis:100%; }
               </dl>
             </article>
 
-            <article class="ferramenta">
+            <article class="ferramenta" id="f-elevenlabs">
               <div class="cabeca-f">
                 <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">E</span></span>
                 <div class="corpo-f"><h4>ElevenLabs</h4><p class="proc">ElevenLabs · Estados Unidos e Reino Unido</p></div>
