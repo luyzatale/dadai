@@ -582,11 +582,11 @@ body[data-nivel="mais"]     .so-simples{ display:none; }
   font-family:var(--dado); font-size:.66rem; letter-spacing:.06em;
   color:var(--tinta-3); background:var(--papel-2); border:1px solid var(--fio);
 }
-.def .decide{
+.decide{
   margin:14px 0 0; padding-top:12px; border-top:1px dashed var(--fio-2);
   font-size:.88em; color:var(--tinta-2); max-width:64ch;
 }
-.def .decide b{
+.decide b{
   font-family:var(--dado); font-size:.66rem; letter-spacing:.11em; text-transform:uppercase;
   color:var(--tinta-3); display:block; margin-bottom:4px;
 }
@@ -613,6 +613,24 @@ body[data-nivel="mais"]     .so-simples{ display:none; }
   font-family:var(--dado); font-size:.72rem; color:var(--carimbo); font-weight:600;
 }
 .esqueleto-comum li b{ color:var(--tinta); }
+
+/* origens de um documento: conjunto, nao sequencia — sem numeros */
+.origens{
+  margin:22px 0 0; padding:24px; background:var(--folha);
+  border:1px solid var(--fio); border-radius:var(--r-2);
+}
+.origens > h4{ margin-bottom:6px; }
+.origens > .intro{ margin:0 0 18px; font-size:.88em; color:var(--tinta-3); max-width:62ch; }
+.origens ul{ margin:0; padding:0; list-style:none; display:grid; gap:15px; }
+.origens li{ display:grid; grid-template-columns:9px 1fr; gap:15px; align-items:start; }
+.origens li::before{
+  content:""; width:9px; height:9px; margin-top:.42em; border-radius:1px;
+  background:var(--carimbo); transform:rotate(45deg);
+}
+.origens .fonte-nome{
+  display:block; font-weight:650; color:var(--tinta); font-size:.96em; margin-bottom:3px;
+}
+.origens .fonte-pq{ display:block; font-size:.88em; color:var(--tinta-2); line-height:1.55; max-width:62ch; }
 
 /* trilha de aulas: miniatura, numero e link */
 .trilha-grade{ display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(268px,1fr)); }
@@ -882,7 +900,7 @@ footer{
     gap:10px;
   }
   .marca-txt i{ display:none; }
-  .marca-txt b{ font-size:.98rem; }
+  .marca-txt b{ font-size:.92rem; }
   .tecla .rotulo{ display:none; }
   .tecla{ padding:0 12px; }
   .letras button{ min-width:38px; }
@@ -933,7 +951,7 @@ footer{
   <a class="marca" href="#capa">
     <span class="marca-selo" aria-hidden="true" title="人 (rén) — humano. Primeiro caractere de 人工智能, inteligência artificial">人</span>
     <span class="marca-txt">
-      <b>Dad AI</b>
+      <b>Dad AI - Júlio Cesar</b>
       <i>O Homem que Revisa a IA</i>
     </span>
   </a>
@@ -1670,15 +1688,16 @@ footer{
           </article>
         </div>
 
-        <div class="esqueleto-comum">
+        <div class="origens">
           <h4>De onde vieram os princípios</h4>
-          <ol>
-            <li><b>Declaração Universal dos Direitos Humanos</b> — escolhida por ter sido redigida por representantes de tradições jurídicas e culturais diversas.</li>
-            <li><b>Termos de serviço de grandes plataformas</b> — para cobrir o que um documento de 1948 não poderia prever: privacidade de dados, falsificação de identidade.</li>
-            <li><b>Regras de pesquisa de outro laboratório</b> — os princípios do Sparrow, da DeepMind.</li>
-            <li><b>Perspectivas não ocidentais</b> — princípios escritos de propósito para considerar valores de fora do mundo ocidental, industrializado e rico.</li>
-            <li><b>Tentativa e erro dos próprios pesquisadores</b> — a parte que a empresa admite ter sido feita de modo improvisado.</li>
-          </ol>
+          <p class="intro">Cinco procedências, sem ordem de importância entre elas.</p>
+          <ul>
+            <li><span><span class="fonte-nome">Declaração Universal dos Direitos Humanos</span><span class="fonte-pq">Escolhida por ter sido redigida por representantes de tradições jurídicas e culturais diversas — o documento menos parcial que havia à mão.</span></span></li>
+            <li><span><span class="fonte-nome">Termos de serviço de grandes plataformas</span><span class="fonte-pq">Para cobrir o que um texto de 1948 não poderia prever: privacidade de dados, falsificação de identidade.</span></span></li>
+            <li><span><span class="fonte-nome">Regras de pesquisa de outro laboratório</span><span class="fonte-pq">Os princípios do Sparrow, da DeepMind — um concorrente citado como fonte, o que é menos comum do que deveria ser.</span></span></li>
+            <li><span><span class="fonte-nome">Perspectivas não ocidentais</span><span class="fonte-pq">Princípios escritos de propósito para considerar valores de fora do mundo ocidental, industrializado e rico.</span></span></li>
+            <li><span><span class="fonte-nome">Tentativa e erro dos próprios pesquisadores</span><span class="fonte-pq">A parte que a empresa admite ter sido feita de modo improvisado — e admiti-lo por escrito já diz algo sobre o método.</span></span></li>
+          </ul>
         </div>
 
         <p class="margem-nota" style="max-width:66ch">
