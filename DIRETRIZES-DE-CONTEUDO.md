@@ -64,7 +64,7 @@ Os controles do site obedecem à mesma regra.
 
 ---
 
-## Ética e sociedade (Fólio 06) — nota específica
+## Ética e sociedade (Fólio 04) — nota específica
 
 É a seção onde a regra mais importa. Os 16 temas são filosóficos por natureza: colonialismo
 de dados, identidade digital, a morte na era digital, economia cognitiva.
@@ -101,3 +101,40 @@ a uma companhia ao longo do site.
 
 `mvp/logos/<empresa>.svg` — o nome do arquivo em minúsculas, sem acento
 (`deepseek.svg`, `alibaba.svg`, `baidu.svg`, `openai.svg`, `anthropic.svg`).
+
+---
+
+## Nada em chinês no conteúdo
+
+> **Não usar palavras em chinês no texto.**
+
+O leitor não lê chinês. Caractere sem tradução no meio da frase é ruído, não erudição —
+e contraria a regra maior deste site, que é remover barreira sem remover profundidade.
+
+**Vale para:** nomes de empresa (`DeepSeek`, não `DeepSeek · 深度求索`), títulos de livro,
+legendas, glossários e qualquer prosa. Se um termo chinês for indispensável ao argumento,
+escrevê-lo em português, ou transliterado e explicado na mesma frase.
+
+**Não vale para as três marcas gráficas do projeto**, que são identidade visual e não texto:
+
+| Marca | Onde | Por quê |
+|---|---|---|
+| 人 | logotipo, favicon, selo antes de cada título | encomendado como símbolo do site; explicado no atributo `title` |
+| 父亲节 | selo da dedicatória | é o presente; descrito para leitor de tela |
+| 中 | marca-d'água da seção China | textura a 9% de opacidade, `aria-hidden` |
+
+Se essas três também tiverem de sair, é decisão consciente a tomar — não descuido.
+
+---
+
+## Livros: só com edição em português
+
+> **Recomendar apenas títulos com edição brasileira ou portuguesa confirmada.**
+
+Indicar livro que o leitor não consegue ler é recomendação vazia. Antes de entrar na estante,
+confirmar **editora e tradutor** — não basta o título existir.
+
+Quando a regra derrubar um livro importante, **dizer o que se perdeu**. A estante da seção
+China declara, no próprio texto, que o principal contraponto crítico sobre vigilância ficou
+de fora por falta de tradução. Uma estante honesta recomenda o que se pode ler e admite o
+que não se pode.
