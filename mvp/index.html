@@ -546,6 +546,52 @@ body[data-nivel="mais"]     .so-simples{ display:none; }
 .quadro tbody tr:last-child th, .quadro tbody tr:last-child td{ border-bottom:0; }
 @media (hover:hover){ .quadro tbody tr:hover th, .quadro tbody tr:hover td{ background:var(--papel-2); } }
 
+/* trilha de aulas: miniatura, numero e link */
+.trilha-grade{ display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(268px,1fr)); }
+.aula{
+  display:flex; flex-direction:column; text-decoration:none;
+  background:var(--folha); border:1px solid var(--fio); border-radius:var(--r-2); overflow:hidden;
+  transition:border-color .18s, transform .18s, box-shadow .18s;
+}
+@media (hover:hover){
+  .aula:hover{ border-color:var(--carimbo); transform:translateY(-3px); box-shadow:var(--sombra-2); }
+  .aula:hover .aula-play{ transform:scale(1.1); background:var(--carimbo); }
+  .aula:hover h4{ color:var(--carimbo); }
+}
+.aula-thumb{
+  position:relative; aspect-ratio:16/9; background:var(--tinta); overflow:hidden;
+  display:grid; place-items:center;
+}
+.aula-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+.aula-play{
+  position:absolute; width:52px; height:52px; border-radius:50%;
+  background:rgba(19,30,25,.72); color:#fff; display:grid; place-items:center;
+  box-shadow:0 6px 20px -8px rgba(0,0,0,.8); transition:transform .18s, background .18s;
+}
+.aula-play svg{ width:20px; height:20px; margin-left:3px; }
+.thumb-falha{
+  position:absolute; inset:0; display:flex; flex-direction:column; align-items:center;
+  justify-content:center; gap:9px; padding:18px; text-align:center; background:var(--tinta);
+}
+.thumb-falha .rotulo-han{
+  font-family:var(--han); font-size:1.5rem; color:color-mix(in srgb,var(--papel) 26%,transparent);
+}
+.thumb-falha span{
+  font-family:var(--dado); font-size:.66rem; letter-spacing:.1em; text-transform:uppercase;
+  color:color-mix(in srgb,var(--papel) 52%,transparent);
+}
+.aula-corpo{ padding:16px 18px 18px; display:flex; flex-direction:column; gap:6px; flex:1; }
+.aula-num{
+  font-family:var(--dado); font-size:.68rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--carimbo); font-weight:600; font-variant-numeric:tabular-nums;
+}
+.aula h4{ font-family:var(--display); font-size:1.08rem; font-weight:600; line-height:1.3; transition:color .18s; }
+.aula .detalhe{ margin:0; font-size:.83em; color:var(--tinta-3); }
+.aula .ir{
+  margin-top:auto; padding-top:10px; font-family:var(--dado); font-size:.72rem;
+  letter-spacing:.05em; color:var(--jade);
+}
+
 /* vídeo: fachada que só carrega o player no clique */
 .video-bloco{ margin:44px 0 0; max-width:720px; }
 .video-tit{
@@ -873,6 +919,10 @@ footer{
     <p class="divisao">Parte III · Um país à parte</p>
     <ol>
       <li><a href="#china"><span class="folio">10</span> China em foco</a></li>
+    </ol>
+    <p class="divisao">Parte IV · Aulas</p>
+    <ol>
+      <li><a href="#trilha"><span class="folio">11</span> Recomendação de trilha</a></li>
     </ol>
   </nav>
 
@@ -1740,6 +1790,82 @@ se o texto não disser algo, escreva
         <p class="escopo"><b>a seguir</b><span>Cronologia chinesa, regulação própria e pequeno glossário 中文 → português. Na estante: capa, editora, tradutor e disponibilidade em bibliotecas públicas — e a confirmação de quais títulos já saíram em português.</span></p>
       </div>
     </section>
+    <!-- Trilha -->
+    <section class="parte" id="trilha">
+      <div class="caixa">
+        <div class="cabeca">
+          <p class="etiqueta">Fólio 11 · para continuar depois</p>
+          <h2><span class="selo-secao" aria-hidden="true">人</span>Recomendação de trilha</h2>
+          <p class="abertura">
+            Este site dá o mapa. Quem dá a aula é outra pessoa — e com voz, quadro e tempo,
+            que nenhum texto substitui. Quatro aulas de <strong>Karine Lago</strong> sobre
+            inteligência artificial, na ordem em que foram ao ar.
+          </p>
+        </div>
+
+        <div class="trilha-grade">
+          <a class="aula" href="https://www.youtube.com/watch?v=QQ-Drt-9Ils&t=247s" target="_blank" rel="noopener noreferrer">
+            <span class="aula-thumb">
+              <img src="https://i.ytimg.com/vi/QQ-Drt-9Ils/hqdefault.jpg" alt="Miniatura da aula 01 de Karine Lago" loading="lazy" width="480" height="360">
+              <span class="aula-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+            </span>
+            <span class="aula-corpo">
+              <span class="aula-num">aula 01</span>
+              <h4>Karine Lago · inteligência artificial</h4>
+              <p class="detalhe">continua onde o vídeo da capa parou, aos 4:07</p>
+              <span class="ir">abrir no YouTube ↗</span>
+            </span>
+          </a>
+          <a class="aula" href="https://www.youtube.com/watch?v=3h_6k64oWFc" target="_blank" rel="noopener noreferrer">
+            <span class="aula-thumb">
+              <img src="https://i.ytimg.com/vi/3h_6k64oWFc/hqdefault.jpg" alt="Miniatura da aula 02 de Karine Lago" loading="lazy" width="480" height="360">
+              <span class="aula-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+            </span>
+            <span class="aula-corpo">
+              <span class="aula-num">aula 02</span>
+              <h4>Karine Lago · inteligência artificial</h4>
+              <p class="detalhe">aula ao vivo</p>
+              <span class="ir">abrir no YouTube ↗</span>
+            </span>
+          </a>
+          <a class="aula" href="https://www.youtube.com/watch?v=kx4fR3d65l8" target="_blank" rel="noopener noreferrer">
+            <span class="aula-thumb">
+              <img src="https://i.ytimg.com/vi/kx4fR3d65l8/hqdefault.jpg" alt="Miniatura da aula 03 de Karine Lago" loading="lazy" width="480" height="360">
+              <span class="aula-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+            </span>
+            <span class="aula-corpo">
+              <span class="aula-num">aula 03</span>
+              <h4>Karine Lago · inteligência artificial</h4>
+              <p class="detalhe">aula ao vivo</p>
+              <span class="ir">abrir no YouTube ↗</span>
+            </span>
+          </a>
+          <a class="aula" href="https://www.youtube.com/watch?v=sy2qYWa0nwQ" target="_blank" rel="noopener noreferrer">
+            <span class="aula-thumb">
+              <img src="https://i.ytimg.com/vi/sy2qYWa0nwQ/hqdefault.jpg" alt="Miniatura da aula 04 de Karine Lago" loading="lazy" width="480" height="360">
+              <span class="aula-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+            </span>
+            <span class="aula-corpo">
+              <span class="aula-num">aula 04</span>
+              <h4>Karine Lago · inteligência artificial</h4>
+              <p class="detalhe">aula ao vivo</p>
+              <span class="ir">abrir no YouTube ↗</span>
+            </span>
+          </a>
+        </div>
+
+        <p class="direitos" style="margin-top:20px">
+          <b>direitos autorais</b>
+          As aulas são de <strong>Karine Lago</strong> e do canal dela, a quem pertencem
+          integralmente os direitos. Este site apenas indica e encaminha: nada é hospedado,
+          copiado ou reproduzido aqui, e as miniaturas vêm do próprio YouTube, exibidas como
+          identificação do material de origem. Todo clique leva ao canal, onde a audiência
+          é contada para quem produziu.
+        </p>
+
+        <p class="escopo"><b>a seguir</b><span>Título, data e duração de cada aula, transcritos do próprio canal — e uma linha por aula dizendo o que ela resolve, para que ele escolha por onde começar.</span></p>
+      </div>
+    </section>
 
 
 
@@ -2021,6 +2147,19 @@ se o texto não disser algo, escreva
       moldura.replaceChildren(q);
     });
   }
+
+
+  /* ── miniaturas: se o host bloquear i.ytimg.com, desenha o lugar delas ── */
+  document.querySelectorAll(".aula-thumb img").forEach(function(img){
+    img.addEventListener("error", function(){
+      var cx = img.parentNode;
+      img.remove();
+      var f = document.createElement("span");
+      f.className = "thumb-falha";
+      f.innerHTML = '<span class="rotulo-han">\u4eba</span><span>miniatura indispon\u00edvel aqui</span>';
+      cx.insertBefore(f, cx.firstChild);
+    });
+  });
 
   /* ── balão de glossário ── */
   var glossario = {

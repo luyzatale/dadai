@@ -25,7 +25,7 @@ Para ver: abra `mvp/index.html` em qualquer navegador. Não requer servidor nem 
 
 ## Estrutura
 
-Dez seções em três partes, ordenadas por importância para o leitor. Cada uma é uma
+Onze seções em quatro partes, ordenadas por importância para o leitor. Cada uma é uma
 **página independente** — não há rolagem contínua entre seções.
 
 **Parte I · A questão**
@@ -36,6 +36,9 @@ Dez seções em três partes, ordenadas por importância para o leitor. Cada uma
 
 **Parte III · Um país à parte**
 `10` China em foco
+
+**Parte IV · Aulas**
+`11` Recomendação de trilha
 
 ---
 
