@@ -72,3 +72,32 @@ de dados, identidade digital, a morte na era digital, economia cognitiva.
 Tratá-los como "curiosidades sobre tecnologia" seria a pior traição possível ao leitor.
 Cada verbete termina com suas **referências completas e verificáveis** — porque ele vai
 querer conferir, e talvez citar.
+
+---
+
+## Logotipos de empresas
+
+> **Sempre que uma empresa for referenciada, exibir o logotipo dela.**
+
+Vale para as fichas de organizações, as pastilhas de ferramentas e qualquer menção nominal
+a uma companhia ao longo do site.
+
+### Regras de uso
+
+1. **Somente arquivo oficial.** O logotipo vem da página de marca da própria empresa (ou do
+   repositório oficial dela). Nunca desenhado de memória, nunca redesenhado "parecido".
+   Marca aproximada é marca errada.
+2. **Sem recolorir, sem distorcer.** Proporção original preservada; nada de forçar a marca
+   na paleta do site.
+3. **Fundo neutro.** Cada logotipo assenta sobre um ladrilho claro próprio, para não brigar
+   com o papel ofício nem com o modo escuro.
+4. **SVG embutido no arquivo**, não referência a CDN — o site precisa funcionar offline e
+   sem depender de servidor de terceiros.
+5. **Texto alternativo** com o nome da empresa, sempre.
+6. **Enquanto o arquivo oficial não existir**, exibir o monograma neutro. É uma ausência
+   honesta; um logotipo inventado não é.
+
+### Onde colocar os arquivos
+
+`mvp/logos/<empresa>.svg` — o nome do arquivo em minúsculas, sem acento
+(`deepseek.svg`, `alibaba.svg`, `baidu.svg`, `openai.svg`, `anthropic.svg`).

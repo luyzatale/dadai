@@ -351,9 +351,21 @@ body[data-nivel="mais"]     .so-simples{ display:none; }
   transition:border-color .18s, transform .18s;
 }
 @media (hover:hover){ .org:hover{ border-color:var(--fio-2); transform:translateX(3px); } }
-.org .inicial{
-  width:44px; height:44px; flex:none; border-radius:var(--r-2); display:grid; place-items:center;
-  font-family:var(--display); font-weight:600; font-size:1.1rem; color:var(--folha-2); background:var(--tinta);
+/* ladrilho de marca: recebe o SVG oficial; sem ele, monograma neutro.
+   Fundo claro sempre, para não recolorir nem competir com a marca.      */
+.logo-org{
+  width:46px; height:46px; flex:none; display:grid; place-items:center; overflow:hidden;
+  background:#fff; border:1px solid var(--fio); border-radius:var(--r-2); padding:7px;
+}
+.logo-org svg, .logo-org img{ width:100%; height:100%; object-fit:contain; }
+.logo-org .monograma{
+  font-family:var(--display); font-weight:600; font-size:1.15rem; color:var(--tinta-3);
+  line-height:1;
+}
+.logo-org[data-pendente]{ position:relative; }
+.logo-org[data-pendente]::after{
+  content:""; position:absolute; right:3px; bottom:3px; width:5px; height:5px;
+  border-radius:50%; background:var(--ocre); opacity:.65;
 }
 .org .corpo{ flex:1; min-width:0; }
 .org .corpo p{ margin:2px 0 0; font-size:.85em; color:var(--tinta-3); }
@@ -1018,20 +1030,22 @@ footer{
         </div>
 
         <div class="org">
-          <span class="inicial" style="background:var(--carimbo)">D</span>
+          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">D</span></span>
           <span class="corpo"><h4>DeepSeek · 深度求索</h4><p>Hangzhou · modelos abertos que qualquer país pode baixar e rodar por conta própria</p></span>
           <span class="selo-txt">aberto</span>
         </div>
         <div class="org">
-          <span class="inicial" style="background:var(--jade)">A</span>
+          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">A</span></span>
           <span class="corpo"><h4>Alibaba · Qwen</h4><p>Hangzhou · família de modelos adotada por empresas no mundo inteiro</p></span>
           <span class="selo-txt">aberto</span>
         </div>
         <div class="org">
-          <span class="inicial" style="background:var(--ocre)">B</span>
+          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">B</span></span>
           <span class="corpo"><h4>Baidu · Ernie</h4><p>Pequim · busca e IA integradas a serviços urbanos e mapas</p></span>
           <span class="selo-txt">plataforma</span>
         </div>
+
+        <p class="escopo"><b>logotipos</b><span>O ladrilho branco aguarda o arquivo oficial de cada empresa — o ponto ocre no canto marca os que ainda estão pendentes. Até lá fica o monograma: marca desenhada de memória seria marca errada, e num site que exige fonte para tudo isso não passa.</span></p>
 
         <p class="escopo"><b>a seguir</b><span>As abas trocam a lista. De 6 a 8 organizações por região, com porte, o que fazem e por que importam ao Brasil.</span></p>
       </div>
@@ -1797,6 +1811,11 @@ se o texto não disser algo, escreva
   "use strict";
   var raiz = document.documentElement, corpo = document.body;
 
+  /* A marca é fixada aqui, e não lida de document.title: quando a página
+     roda hospedada em outro site, o título chega vazio ao script.        */
+  var MARCA = "Dad AI";
+  var tituloPagina = MARCA;
+
   /* ── favicon: reafirma o selo em tempo de execução ──
      Quando a página é servida dentro de outro site, o ícone do
      hospedeiro vence o <link> do documento. Removemos os dele e
@@ -1814,9 +1833,11 @@ se o texto não disser algo, escreva
       l.rel = "icon"; l.type = "image/svg+xml";
       l.href = "data:image/svg+xml," + encodeURIComponent(selo);
       document.head.appendChild(l);
+      if(document.title !== tituloPagina) document.title = tituloPagina;
     }
     fixar();
     setTimeout(fixar, 900);   /* o hospedeiro às vezes repõe o dele depois da carga */
+    setTimeout(fixar, 2500);
   })();
 
   function guardar(c,v){ try{ localStorage.setItem("iacc."+c, v); }catch(e){} }
@@ -1889,7 +1910,6 @@ se o texto não disser algo, escreva
   var itens   = Array.prototype.slice.call(document.querySelectorAll(".sumario a"));
   var barra   = document.getElementById("barra");
   var navP    = document.getElementById("navPaginas");
-  var base    = document.title;
 
   var titulos = {};
   itens.forEach(function(a){
@@ -1914,7 +1934,8 @@ se o texto não disser algo, escreva
       a.setAttribute("aria-current", String(a.getAttribute("href") === "#" + id));
     });
     navP.innerHTML = lado(ids[i - 1], "ant") + lado(ids[i + 1], "prox");
-    document.title = titulos[id] + " · " + base;
+    tituloPagina = MARCA + " · " + titulos[id];
+    document.title = tituloPagina;
     scrollTo({ top:0, behavior:"auto" });
     paginas[i].setAttribute("tabindex", "-1");
     paginas[i].focus({ preventScroll:true });
