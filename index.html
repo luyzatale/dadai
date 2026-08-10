@@ -426,6 +426,15 @@ body[data-nivel="mais"]     .so-simples{ display:none; }
    posição, não destaque decorativo.                                        */
 .tema[aria-pressed="true"]{ border-color:var(--carimbo); background:var(--carimbo-f); color:var(--carimbo); }
 .tema[aria-pressed="true"] .folio{ color:var(--carimbo); }
+/* o comutador Essencial/Aprofundar corta a lista de temas, nao a extensao do
+   texto: cada .tema declara a que corte pertence.                          */
+body[data-nivel="simples"] .tema[data-corte="mais"]{ display:none; }
+body[data-nivel="mais"]    .tema[data-corte="simples"]{ display:none; }
+/* ...e por isso, dentro do verbete, o texto e sempre integral: as duas versoes
+   do paragrafo se somam como resumo e desdobramento, em vez de se excluirem.
+   Especificidade maior que a regra global de .so-simples/.so-mais.          */
+body[data-nivel="simples"] .verbete .so-mais,
+body[data-nivel="mais"]    .verbete .so-simples{ display:block; }
 
 .verbete{
   margin-top:22px; padding:32px; background:var(--folha);
@@ -629,6 +638,10 @@ body[data-nivel="mais"]     .so-simples{ display:none; }
   margin:0; padding:0; list-style:none; display:grid; gap:9px;
   counter-reset:passo;
 }
+/* o conteudo de cada <li> precisa vir dentro de um unico <span>: o li e uma
+   grade de duas colunas, e cada elemento ou trecho de texto solto vira um
+   item de grade proprio — texto sem o span cai na coluna de 26px e quebra
+   uma palavra por linha. Mesma convencao de .origens.                     */
 .esqueleto-comum li{
   display:grid; grid-template-columns:26px 1fr; gap:12px; align-items:baseline;
   font-size:.93em; color:var(--tinta-2);
@@ -1199,11 +1212,11 @@ footer{
         <div class="esqueleto-comum">
           <h4>O esqueleto que as quatro compartilham</h4>
           <ol>
-            <li><b>É uma máquina</b> — não uma pessoa, nem uma instituição, nem um procedimento no papel.</li>
-            <li><b>Persegue objetivos</b> — que alguém pode ter escrito, ou que podem ter simplesmente surgido.</li>
-            <li><b>Infere</b> — este é o verbo decisivo. Não executa uma regra pronta: deduz o caminho a partir do que recebeu.</li>
-            <li><b>Gera resultados</b> — previsão, conteúdo, recomendação, decisão.</li>
-            <li><b>Influencia o mundo</b> — o físico ou o virtual. Sem essa consequência, seria apenas cálculo.</li>
+            <li><span><b>É uma máquina</b> — não uma pessoa, nem uma instituição, nem um procedimento no papel.</span></li>
+            <li><span><b>Persegue objetivos</b> — que alguém pode ter escrito, ou que podem ter simplesmente surgido.</span></li>
+            <li><span><b>Infere</b> — este é o verbo decisivo. Não executa uma regra pronta: deduz o caminho a partir do que recebeu.</span></li>
+            <li><span><b>Gera resultados</b> — previsão, conteúdo, recomendação, decisão.</span></li>
+            <li><span><b>Influencia o mundo</b> — o físico ou o virtual. Sem essa consequência, seria apenas cálculo.</span></li>
           </ol>
           <p class="decide" style="margin-top:16px">
             <b>a diferença que fica de fora</b>
@@ -1497,10 +1510,12 @@ footer{
         </div>
 
         <p class="prosa" style="font-size:.93em;color:var(--tinta-2);margin-bottom:18px">
-          Cada um dos temas abaixo abre um verbete. O comutador troca a extensão do texto:
-          <strong>Essencial</strong> dá o argumento inteiro em um parágrafo;
-          <strong>Aprofundar</strong> o substitui pela versão com a norma, a data e a
-          controvérsia. A nota em ocre e as referências permanecem nos dois.
+          Cada um dos temas abre um verbete completo — argumento, norma, data, a nota do que
+          isso muda para o senhor e as referências. O comutador não encurta nenhum deles: ele
+          troca <em>quais</em> temas a lista mostra. <strong>Essencial</strong> reúne os nove que
+          já tocam a sua mesa — norma vigente, dever legal, decisão de contratação.
+          <strong>Aprofundar</strong> reúne os sete que explicam o mundo em volta dela — método,
+          filosofia, geopolítica, consequência de longo prazo. Nenhum é pré-requisito do outro.
         </p>
 
         <div class="niveis" role="group" aria-label="Nível de explicação">
@@ -1509,28 +1524,28 @@ footer{
         </div>
 
         <div class="temas" id="temasEtica">
-          <button class="tema" data-verbete="v01" aria-pressed="true"><span class="folio">01</span> Design Sensível a Valores</button>
-          <button class="tema" data-verbete="v02" aria-pressed="false"><span class="folio">02</span> Lei de IA da União Europeia</button>
-          <button class="tema" data-verbete="v03" aria-pressed="false"><span class="folio">03</span> Legislação brasileira de IA</button>
-          <button class="tema" data-verbete="v04" aria-pressed="false"><span class="folio">04</span> A abordagem dos BRICS</button>
-          <button class="tema" data-verbete="v05" aria-pressed="false"><span class="folio">05</span> Sociedade 5.0</button>
-          <button class="tema" data-verbete="v06" aria-pressed="false"><span class="folio">06</span> Governança de dados</button>
-          <button class="tema" data-verbete="v07" aria-pressed="false"><span class="folio">07</span> Direitos humanos digitais</button>
-          <button class="tema" data-verbete="v08" aria-pressed="false"><span class="folio">08</span> Mídia sintética e a crise do real</button>
-          <button class="tema" data-verbete="v09" aria-pressed="false"><span class="folio">09</span> IA e democracia</button>
-          <button class="tema" data-verbete="v10" aria-pressed="false"><span class="folio">10</span> Economia cognitiva</button>
-          <button class="tema" data-verbete="v11" aria-pressed="false"><span class="folio">11</span> IA agêntica e o ato administrativo</button>
-          <button class="tema" data-verbete="v12" aria-pressed="false"><span class="folio">12</span> Colonialismo de dados</button>
-          <button class="tema" data-verbete="v13" aria-pressed="false"><span class="folio">13</span> IA e clima</button>
-          <button class="tema" data-verbete="v14" aria-pressed="false"><span class="folio">14</span> Identidade digital e o "eu"</button>
-          <button class="tema" data-verbete="v15" aria-pressed="false"><span class="folio">15</span> A morte na era digital</button>
-          <button class="tema" data-verbete="v16" aria-pressed="false"><span class="folio">16</span> Tecnologia e inclusão social</button>
+          <button class="tema" data-verbete="v01" data-corte="mais" aria-pressed="false"><span class="folio">01</span> Design Sensível a Valores</button>
+          <button class="tema" data-verbete="v02" data-corte="simples" aria-pressed="true"><span class="folio">02</span> Lei de IA da União Europeia</button>
+          <button class="tema" data-verbete="v03" data-corte="simples" aria-pressed="false"><span class="folio">03</span> Legislação brasileira de IA</button>
+          <button class="tema" data-verbete="v04" data-corte="mais" aria-pressed="false"><span class="folio">04</span> A abordagem dos BRICS</button>
+          <button class="tema" data-verbete="v05" data-corte="mais" aria-pressed="false"><span class="folio">05</span> Sociedade 5.0</button>
+          <button class="tema" data-verbete="v06" data-corte="simples" aria-pressed="false"><span class="folio">06</span> Governança de dados</button>
+          <button class="tema" data-verbete="v07" data-corte="simples" aria-pressed="false"><span class="folio">07</span> Direitos humanos digitais</button>
+          <button class="tema" data-verbete="v08" data-corte="simples" aria-pressed="false"><span class="folio">08</span> Mídia sintética e a crise do real</button>
+          <button class="tema" data-verbete="v09" data-corte="simples" aria-pressed="false"><span class="folio">09</span> IA e democracia</button>
+          <button class="tema" data-verbete="v10" data-corte="mais" aria-pressed="false"><span class="folio">10</span> Economia cognitiva</button>
+          <button class="tema" data-verbete="v11" data-corte="simples" aria-pressed="false"><span class="folio">11</span> IA agêntica e o ato administrativo</button>
+          <button class="tema" data-verbete="v12" data-corte="mais" aria-pressed="false"><span class="folio">12</span> Colonialismo de dados</button>
+          <button class="tema" data-verbete="v13" data-corte="mais" aria-pressed="false"><span class="folio">13</span> IA e clima</button>
+          <button class="tema" data-verbete="v14" data-corte="simples" aria-pressed="false"><span class="folio">14</span> Identidade digital e o "eu"</button>
+          <button class="tema" data-verbete="v15" data-corte="mais" aria-pressed="false"><span class="folio">15</span> A morte na era digital</button>
+          <button class="tema" data-verbete="v16" data-corte="simples" aria-pressed="false"><span class="folio">16</span> Tecnologia e inclusão social</button>
         </div>
 
         <div id="verbetesEtica">
 
         <!-- 01 ─────────────────────────────────────────────── -->
-        <article class="verbete" id="v01">
+        <article class="verbete" id="v01" hidden>
           <p class="etiqueta">Tema 01 · antes da primeira linha</p>
           <h3>Design Sensível a Valores</h3>
           <p class="eixo">Um sistema pode estar tecnicamente correto e, ainda assim, ser injusto por construção?</p>
@@ -1591,7 +1606,7 @@ footer{
         </article>
 
         <!-- 02 ─────────────────────────────────────────────── -->
-        <article class="verbete" id="v02" hidden>
+        <article class="verbete" id="v02">
           <p class="etiqueta">Tema 02 · a primeira lei geral do mundo</p>
           <h3>A Lei de IA da União Europeia</h3>
           <p class="eixo">Quem decide o quanto um sistema é perigoso — e decide antes ou depois de ele funcionar?</p>
@@ -3409,9 +3424,13 @@ se o texto não disser algo, escreva
 
   /* ── nível de explicação ── */
   var botoesNivel = Array.prototype.slice.call(document.querySelectorAll(".niveis button"));
+  /* quem depender do nivel se inscreve aqui — no Folio 04 o comutador corta a
+     lista de temas, e o tema aberto pode deixar de existir na lista nova.   */
+  var aoTrocarNivel = [];
   function aplicarNivel(n){
     corpo.dataset.nivel = n;
     botoesNivel.forEach(function(b){ b.setAttribute("aria-pressed", String(b.dataset.nivel === n)); });
+    aoTrocarNivel.forEach(function(fn){ fn(n); });
   }
   aplicarNivel(lembrar("nivel") || "simples");
   botoesNivel.forEach(function(b){
@@ -3510,17 +3529,36 @@ se o texto não disser algo, escreva
     if(!grupo) return;
     var botoes = Array.prototype.slice.call(grupo.querySelectorAll(".tema"));
     var suave  = !matchMedia("(prefers-reduced-motion: reduce)").matches;
-    grupo.addEventListener("click", function(e){
-      var b = e.target.closest(".tema"); if(!b) return;
+
+    function abrir(b, rolar){
       botoes.forEach(function(x){
         var ativo = (x === b);
         x.setAttribute("aria-pressed", String(ativo));
         var v = document.getElementById(x.dataset.verbete);
         if(v) v.hidden = !ativo;
       });
-      var alvo = document.getElementById(b.dataset.verbete);
-      if(alvo) alvo.scrollIntoView({ behavior: suave ? "smooth" : "auto", block:"start" });
+      if(rolar){
+        var alvo = document.getElementById(b.dataset.verbete);
+        if(alvo) alvo.scrollIntoView({ behavior: suave ? "smooth" : "auto", block:"start" });
+      }
+    }
+
+    grupo.addEventListener("click", function(e){
+      var b = e.target.closest(".tema"); if(!b) return;
+      abrir(b, true);
     });
+
+    /* trocou o corte: se o tema aberto saiu da lista, abre o primeiro que ficou.
+       Sem rolagem — o leitor mexeu no comutador, nao pediu para ir a lugar nenhum. */
+    function reconciliar(n){
+      var visiveis = botoes.filter(function(x){ return x.dataset.corte === n; });
+      if(!visiveis.length) return;
+      var aberto = botoes.filter(function(x){ return x.getAttribute("aria-pressed") === "true"; })[0];
+      if(!aberto || aberto.dataset.corte !== n) abrir(visiveis[0], false);
+    }
+    aoTrocarNivel.push(reconciliar);
+    /* o nivel ja foi aplicado na carga, antes deste modulo existir */
+    reconciliar(corpo.dataset.nivel || "simples");
   })();
 
   /* ── abas de amostra ── */
