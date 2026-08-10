@@ -534,6 +534,63 @@ body[data-nivel="mais"]     .so-simples{ display:none; }
 .quadro tbody tr:last-child th, .quadro tbody tr:last-child td{ border-bottom:0; }
 @media (hover:hover){ .quadro tbody tr:hover th, .quadro tbody tr:hover td{ background:var(--papel-2); } }
 
+/* vídeo: fachada que só carrega o player no clique */
+.video-bloco{ margin:44px 0 0; max-width:720px; }
+.video-tit{
+  display:flex; align-items:center; gap:11px; margin:0 0 14px;
+  font-family:var(--dado); font-size:.71rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--tinta-3);
+}
+.video-tit::after{ content:""; height:1px; flex:1; background:var(--fio); }
+.moldura{
+  position:relative; width:100%; aspect-ratio:16/9; overflow:hidden;
+  background:var(--tinta); border:1px solid var(--fio); border-radius:var(--r-2);
+}
+.moldura iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+.video-capa{
+  position:absolute; inset:0; display:flex; flex-direction:column; align-items:center;
+  justify-content:center; gap:16px; width:100%; padding:24px;
+  background:var(--tinta); border:0; cursor:pointer; font:inherit; color:var(--papel);
+  text-align:center; transition:background .2s;
+}
+.video-capa:hover{ background:#1B2B24; }
+.play{
+  width:74px; height:74px; border-radius:50%; background:var(--carimbo); color:#fff;
+  display:grid; place-items:center; flex:none; box-shadow:0 8px 28px -10px rgba(0,0,0,.7);
+  transition:transform .2s cubic-bezier(.2,.7,.3,1);
+}
+.play svg{ width:28px; height:28px; margin-left:4px; }
+.video-capa:hover .play{ transform:scale(1.07); }
+.video-capa .chamar{ font-family:var(--display); font-size:1.16rem; line-height:1.3; max-width:34ch; }
+.video-capa .marca-tempo{
+  font-family:var(--dado); font-size:.75rem; letter-spacing:.05em;
+  color:color-mix(in srgb,var(--papel) 62%,transparent);
+}
+.video-pe{ display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center; margin-top:12px; }
+.video-pe a{
+  font-family:var(--dado); font-size:.76rem; color:var(--jade); text-underline-offset:3px;
+  word-break:break-word;
+}
+.direitos{
+  margin:12px 0 0; padding:14px 16px; background:var(--papel-2);
+  border:1px solid var(--fio); border-radius:var(--r-2);
+  font-size:.82em; line-height:1.55; color:var(--tinta-3); max-width:66ch;
+}
+.direitos b{
+  display:block; margin-bottom:5px; font-family:var(--dado); font-size:.66rem;
+  letter-spacing:.12em; text-transform:uppercase; color:var(--tinta-3);
+}
+
+/* selo de secao: o mesmo logo, carimbado antes de cada titulo */
+.selo-secao{
+  display:inline-grid; place-items:center; width:1.26em; height:1.26em;
+  margin-right:.42em; vertical-align:-.05em;
+  background:var(--carimbo); color:#fff; border-radius:.12em;
+  font-family:var(--han); font-size:.62em; line-height:1; font-weight:600;
+  user-select:none;
+}
+.estandarte .selo-secao{ background:#fff; color:var(--carimbo); }
+
 /* leitura de fonte primária */
 .leitura{
   display:grid; grid-template-columns:auto 1fr; gap:18px; align-items:start;
@@ -846,13 +903,45 @@ footer{
         <span class="sr">Selo vermelho com os caracteres chineses 父亲节, fùqīn jié, que significam Dia dos Pais.</span>
       </figure>
 
+      <figure class="video-bloco">
+        <figcaption class="video-tit">Antes de começar, quatro minutos</figcaption>
+
+        <div class="moldura" id="moldura">
+          <button class="video-capa" id="abrirVideo"
+                  data-src="https://www.youtube-nocookie.com/embed/QQ-Drt-9Ils?start=0&amp;end=247&amp;rel=0"
+                  aria-label="Reproduzir o vídeo de abertura, do início até 4 minutos e 7 segundos">
+            <span class="play" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+            <span class="chamar">Um trecho para assistir antes de virar a página.</span>
+            <span class="marca-tempo">do início até 4:07 · o vídeo só carrega quando o senhor clicar</span>
+          </button>
+        </div>
+
+        <p class="video-pe">
+          <a href="https://www.youtube.com/watch?v=QQ-Drt-9Ils&amp;end=247" target="_blank" rel="noopener noreferrer">
+            assistir direto no YouTube ↗
+          </a>
+        </p>
+
+        <p class="direitos">
+          <b>direitos autorais</b>
+          O vídeo é hospedado no YouTube e pertence integralmente ao seu autor e ao canal que o
+          publicou. Aqui ele aparece apenas incorporado, pelo recurso de compartilhamento da
+          própria plataforma e nos termos dela: nada é copiado, hospedado ou redistribuído por
+          este site, e nenhum direito é reivindicado sobre a obra. A reprodução acontece nos
+          servidores do YouTube, e o trecho exibido serve a finalidade educativa, com crédito à
+          fonte original.
+        </p>
+      </figure>
+
     </section>
     <!-- 03 ───────────────────────────────────────────────── -->
     <section class="parte" id="cronologia">
       <div class="caixa">
         <div class="cabeca">
           <p class="etiqueta">Fólio 02 · em ordem, porque a ordem explica</p>
-          <h2>Como a IA chegou até aqui</h2>
+          <h2><span class="selo-secao" aria-hidden="true">人</span>Como a IA chegou até aqui</h2>
           <p class="abertura">
             A IA não nasceu em 2023. Tem fases, invernos, promessas quebradas e retomadas —
             e cada uma aconteceu em um lugar do mundo, por razões bem humanas.
@@ -897,7 +986,7 @@ footer{
       <div class="caixa">
         <div class="cabeca">
           <p class="etiqueta">Fólio 03</p>
-          <h2>Quem realmente constrói a IA</h2>
+          <h2><span class="selo-secao" aria-hidden="true">人</span>Quem realmente constrói a IA</h2>
           <p class="abertura">
             Poucas organizações, em poucos países, decidem hoje o que a máquina pode ou não
             responder. Saber quem são é o primeiro passo para não depender de uma só.
@@ -935,7 +1024,7 @@ footer{
       <div class="caixa">
         <div class="cabeca">
           <p class="etiqueta">Fólio 04 · o coração deste guia</p>
-          <h2>Ética, sociedade e o Estado</h2>
+          <h2><span class="selo-secao" aria-hidden="true">人</span>Ética, sociedade e o Estado</h2>
           <p class="abertura">
             Dezesseis questões que a tecnologia não resolve — e que, exatamente por isso,
             terminam na mesa de quem administra o Estado. Nenhuma delas será poupada de sua
@@ -1074,7 +1163,7 @@ footer{
       <div class="caixa">
         <div class="cabeca">
           <p class="etiqueta">Fólio 05 · o mundo escrevendo as regras</p>
-          <h2>Quem já está regulamentando a IA</h2>
+          <h2><span class="selo-secao" aria-hidden="true">人</span>Quem já está regulamentando a IA</h2>
           <p class="abertura">
             Nenhum país chegou a um regime completo. Mas três filosofias distintas já se
             desenharam, e a escolha entre elas não é técnica: é uma decisão sobre onde se
@@ -1186,7 +1275,7 @@ footer{
       <div class="caixa">
         <div class="cabeca">
           <p class="etiqueta">Fólio 06</p>
-          <h2>O que os governos já fazem — e o que deu certo</h2>
+          <h2><span class="selo-secao" aria-hidden="true">人</span>O que os governos já fazem — e o que deu certo</h2>
           <p class="abertura">
             Sem futurologia. Projetos reais, em operação, com números publicados e fonte
             verificável. Inclusive brasileiros.
@@ -1221,7 +1310,7 @@ footer{
       <div class="caixa">
         <div class="cabeca">
           <p class="etiqueta">Fólio 07 · o concreto primeiro</p>
-          <h2>As ferramentas que já estão no dia a dia</h2>
+          <h2><span class="selo-secao" aria-hidden="true">人</span>As ferramentas que já estão no dia a dia</h2>
           <p class="abertura">
             Depois das questões, os objetos. Estas são as ferramentas que milhões de pessoas
             já abrem todo dia para escrever, resumir, pesquisar e organizar o trabalho —
@@ -1302,7 +1391,7 @@ footer{
       <div class="caixa">
         <div class="cabeca">
           <p class="etiqueta">Fólio 08 · as quatro competências</p>
-          <h2>O método 4D</h2>
+          <h2><span class="selo-secao" aria-hidden="true">人</span>O método 4D</h2>
           <p class="abertura">
             A Anthropic — uma das empresas que constroem esses sistemas — publicou um
             enquadramento aberto para trabalhar com IA sem se dissolver nela. São quatro
@@ -1404,7 +1493,7 @@ footer{
       <div class="caixa">
         <div class="cabeca">
           <p class="etiqueta">Fólio 09 · a competência da Descrição, em detalhe</p>
-          <h2>Engenharia de prompt: como pedir bem</h2>
+          <h2><span class="selo-secao" aria-hidden="true">人</span>Engenharia de prompt: como pedir bem</h2>
           <p class="abertura">
             "Prompt" é só o pedido que o senhor escreve. A diferença entre uma resposta inútil e
             uma resposta pronta para usar quase nunca está na máquina — está em como o pedido foi
@@ -1507,7 +1596,7 @@ se o texto não disser algo, escreva
           </svg>
           <p class="etiqueta">Fólio 10</p>
           <p class="hanzi">中国</p>
-          <h2>China em foco</h2>
+          <h2><span class="selo-secao" aria-hidden="true">人</span>China em foco</h2>
           <p class="abertura">
             Uma seção só para o país que o senhor admira. Um caso concreto de Estado,
             planejamento de longo prazo e tecnologia caminhando juntos.
@@ -1828,6 +1917,20 @@ se o texto não disser algo, escreva
       b.setAttribute("aria-selected","true");
     });
   });
+
+  /* ── vídeo: o player só entra na página depois do clique ── */
+  var capa = document.getElementById("abrirVideo");
+  if(capa){
+    capa.addEventListener("click", function(){
+      var q = document.createElement("iframe");
+      q.src = capa.dataset.src + "&autoplay=1";
+      q.title = "Vídeo de abertura";
+      q.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share";
+      q.referrerPolicy = "strict-origin-when-cross-origin";
+      q.allowFullscreen = true;
+      document.getElementById("moldura").replaceChildren(q);
+    });
+  }
 
   /* ── balão de glossário ── */
   var glossario = {
