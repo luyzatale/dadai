@@ -566,6 +566,23 @@ body[data-nivel="mais"]     .so-simples{ display:none; }
   font-family:var(--dado); font-size:.75rem; letter-spacing:.05em;
   color:color-mix(in srgb,var(--papel) 62%,transparent);
 }
+.video-falha{
+  position:absolute; inset:0; display:flex; flex-direction:column; align-items:center;
+  justify-content:center; gap:14px; padding:26px; text-align:center;
+  background:var(--tinta); color:color-mix(in srgb,var(--papel) 80%,transparent);
+}
+.video-falha p{ margin:0; font-size:.9rem; line-height:1.5; max-width:44ch; }
+.video-falha .aviso{
+  font-family:var(--dado); font-size:.68rem; letter-spacing:.11em; text-transform:uppercase;
+  color:var(--ocre);
+}
+.video-falha a{
+  display:inline-flex; align-items:center; gap:9px; min-height:48px; padding:0 22px;
+  background:var(--carimbo); color:#fff; border-radius:var(--r-2);
+  font-size:.92rem; font-weight:650; text-decoration:none;
+}
+.video-falha a svg{ width:16px; height:16px; }
+
 .video-pe{ display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center; margin-top:12px; }
 .video-pe a{
   font-family:var(--dado); font-size:.76rem; color:var(--jade); text-underline-offset:3px;
@@ -914,7 +931,7 @@ footer{
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
             </span>
             <span class="chamar">Um trecho para assistir antes de virar a página.</span>
-            <span class="marca-tempo">do início até 4:07 · o vídeo só carrega quando o senhor clicar</span>
+            <span class="marca-tempo">do início até 4:07</span>
           </button>
         </div>
 
@@ -1780,6 +1797,28 @@ se o texto não disser algo, escreva
   "use strict";
   var raiz = document.documentElement, corpo = document.body;
 
+  /* ── favicon: reafirma o selo em tempo de execução ──
+     Quando a página é servida dentro de outro site, o ícone do
+     hospedeiro vence o <link> do documento. Removemos os dele e
+     inserimos o nosso, que passa a ser o único.                    */
+  (function(){
+    var selo = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">'
+             + '<rect width="100" height="100" rx="12" fill="#B3372A"/>'
+             + '<text x="50" y="53" fill="#ffffff" font-size="76" '
+             + 'font-family="Songti SC,STSong,SimSun,Noto Serif CJK SC,serif" '
+             + 'text-anchor="middle" dominant-baseline="central">人</text></svg>';
+    function fixar(){
+      document.querySelectorAll('link[rel~="icon"],link[rel="shortcut icon"],link[rel="apple-touch-icon"]')
+        .forEach(function(n){ n.parentNode.removeChild(n); });
+      var l = document.createElement("link");
+      l.rel = "icon"; l.type = "image/svg+xml";
+      l.href = "data:image/svg+xml," + encodeURIComponent(selo);
+      document.head.appendChild(l);
+    }
+    fixar();
+    setTimeout(fixar, 900);   /* o hospedeiro às vezes repõe o dele depois da carga */
+  })();
+
   function guardar(c,v){ try{ localStorage.setItem("iacc."+c, v); }catch(e){} }
   function lembrar(c){ try{ return localStorage.getItem("iacc."+c); }catch(e){ return null; } }
 
@@ -1921,6 +1960,22 @@ se o texto não disser algo, escreva
   /* ── vídeo: o player só entra na página depois do clique ── */
   var capa = document.getElementById("abrirVideo");
   if(capa){
+    var moldura = document.getElementById("moldura");
+    var LINK = "https://www.youtube.com/watch?v=QQ-Drt-9Ils&end=247";
+
+    function falhou(){
+      moldura.innerHTML =
+        '<div class="video-falha">'
+      + '  <p class="aviso">conteúdo externo bloqueado</p>'
+      + '  <p>Este ambiente de pré-visualização não permite carregar vídeos de outros sites.'
+      + '  No site publicado o trecho toca aqui mesmo, sem sair da página.</p>'
+      + '  <a href="' + LINK + '" target="_blank" rel="noopener noreferrer">'
+      + '    Assistir no YouTube'
+      + '    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg>'
+      + '  </a>'
+      + '</div>';
+    }
+
     capa.addEventListener("click", function(){
       var q = document.createElement("iframe");
       q.src = capa.dataset.src + "&autoplay=1";
@@ -1928,7 +1983,21 @@ se o texto não disser algo, escreva
       q.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share";
       q.referrerPolicy = "strict-origin-when-cross-origin";
       q.allowFullscreen = true;
-      document.getElementById("moldura").replaceChildren(q);
+
+      /* Um quadro do YouTube que carrega é de outra origem: tocar no
+         contentDocument dele lança exceção. Se o acesso funcionar, o que
+         está ali dentro não é o YouTube — foi bloqueado.                */
+      var resolvido = false;
+      q.addEventListener("load", function(){
+        if(resolvido) return;
+        resolvido = true;
+        var bloqueado = false;
+        try { bloqueado = !!q.contentDocument; } catch(e){ bloqueado = false; }
+        if(bloqueado) falhou();
+      });
+      setTimeout(function(){ if(!resolvido){ resolvido = true; falhou(); } }, 4000);
+
+      moldura.replaceChildren(q);
     });
   }
 
