@@ -596,10 +596,14 @@ body[data-nivel="mais"]    .verbete .so-simples{ display:block; }
 .bolso h4{ margin-bottom:4px; }
 .bolso > .intro{ margin:0 0 18px; font-size:.86em; color:var(--tinta-3); }
 .bolso ol{ margin:0; padding:0; list-style:none; display:grid; gap:11px; counter-reset:bolso; }
+/* mesma convenção de .esqueleto-comum: todo o conteúdo do <li> vem dentro de
+   um único <span>. Texto solto ao lado do <b> viraria item de grade próprio e
+   cairia na coluna de 22px, quebrando uma palavra por linha.               */
 .bolso li{
   display:grid; grid-template-columns:22px 1fr; gap:12px; align-items:baseline;
   font-size:.92em; color:var(--tinta-2); line-height:1.5;
 }
+.bolso li > span{ display:block; }
 .bolso li::before{
   counter-increment:bolso; content:counter(bolso);
   font-family:var(--dado); font-size:.72rem; color:var(--carimbo); font-weight:600;
@@ -4472,15 +4476,15 @@ errado</mark> e reescreva.</p>
           <h4>Folha de bolso</h4>
           <p class="intro">Para imprimir e deixar na gaveta. Cabe em meia página.</p>
           <ol>
-            <li><b>Diga para que serve</b> antes de dizer o que quer. A finalidade determina o formato.</li>
-            <li><b>Papel e público</b> em uma linha: quem escreve, para quem.</li>
-            <li><b>Delimite o material</b> colado com marcas visíveis, e mande trabalhar só sobre ele.</li>
-            <li><b>Mostre um exemplo</b> do que já ficou bom. Vale mais que descrever o estilo.</li>
-            <li><b>Peça o raciocínio</b> antes da conclusão, quando a decisão tiver mais de duas variáveis.</li>
-            <li><b>Exija a citação</b> do trecho e da folha em toda afirmação que possa virar fundamento.</li>
-            <li><b>Escreva a regra do "não consta"</b> — sempre, mesmo nos pedidos curtos.</li>
-            <li><b>Peça a autocrítica</b> e a reescrita antes de considerar pronto.</li>
-            <li><b>Confira, e assine.</b> A responsabilidade não foi delegada junto com a tarefa.</li>
+            <li><span><b>Diga para que serve</b> antes de dizer o que quer. A finalidade determina o formato.</span></li>
+            <li><span><b>Papel e público</b> em uma linha: quem escreve, para quem.</span></li>
+            <li><span><b>Delimite o material</b> colado com marcas visíveis, e mande trabalhar só sobre ele.</span></li>
+            <li><span><b>Mostre um exemplo</b> do que já ficou bom. Vale mais que descrever o estilo.</span></li>
+            <li><span><b>Peça o raciocínio</b> antes da conclusão, quando a decisão tiver mais de duas variáveis.</span></li>
+            <li><span><b>Exija a citação</b> do trecho e da folha em toda afirmação que possa virar fundamento.</span></li>
+            <li><span><b>Escreva a regra do "não consta"</b> — sempre, mesmo nos pedidos curtos.</span></li>
+            <li><span><b>Peça a autocrítica</b> e a reescrita antes de considerar pronto.</span></li>
+            <li><span><b>Confira, e assine.</b> A responsabilidade não foi delegada junto com a tarefa.</span></li>
           </ol>
           <p class="modelo">MODELO EM BRANCO
 
