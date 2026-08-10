@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Crect width="100" height="100" rx="12" fill="%23B3372A"/%3E%3Ctext x="50" y="53" fill="%23ffffff" font-size="76" font-family="Songti SC%2CSTSong%2CSimSun%2CNoto Serif CJK SC%2Cserif" text-anchor="middle" dominant-baseline="central"%3E%E4%BA%BA%3C/text%3E%3C/svg%3E">
-<title>Dad AI — MVP de design</title>
+<title>O Homem que Revisa a IA</title>
 <style>
 /* ═══════════════════════════════════════════════════════════
    DAD AI  ·  direção visual "Processo"
@@ -546,6 +546,79 @@ body[data-nivel="mais"]     .so-simples{ display:none; }
 .quadro tbody tr:last-child th, .quadro tbody tr:last-child td{ border-bottom:0; }
 @media (hover:hover){ .quadro tbody tr:hover th, .quadro tbody tr:hover td{ background:var(--papel-2); } }
 
+/* socialtech: grupos por regiao */
+.regiao{ margin-top:30px; }
+.regiao > h4{
+  display:flex; align-items:center; gap:11px; margin-bottom:12px;
+  font-family:var(--dado); font-size:.72rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--tinta-3); font-weight:600;
+}
+.regiao > h4::after{ content:""; height:1px; flex:1; background:var(--fio); }
+.criterio{
+  display:inline-flex; align-items:flex-start; gap:9px; margin:0 0 4px; padding:11px 14px;
+  background:var(--carimbo-f); border-radius:var(--r-1); font-size:.85em;
+  color:var(--carimbo); line-height:1.5; max-width:66ch;
+}
+.criterio svg{ width:15px; height:15px; flex:none; margin-top:3px; }
+
+/* definicoes oficiais */
+.definicoes{ display:grid; gap:14px; margin:26px 0 0; }
+.def{
+  padding:22px 24px; background:var(--folha); border:1px solid var(--fio);
+  border-left:3px solid var(--acento); border-radius:var(--r-2);
+}
+.def .orgao{
+  display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 12px; margin:0 0 12px;
+}
+.def .orgao strong{
+  font-family:var(--dado); font-size:.72rem; letter-spacing:.11em; text-transform:uppercase;
+  color:var(--acento); font-weight:600;
+}
+.def .orgao em{
+  font-style:normal; font-family:var(--dado); font-size:.7rem; color:var(--tinta-3);
+  font-variant-numeric:tabular-nums;
+}
+.def blockquote{
+  margin:0; font-family:var(--display); font-size:1.04em; line-height:1.55; color:var(--tinta);
+  max-width:64ch;
+}
+.def .lingua{
+  display:inline-block; margin-top:10px; padding:2px 9px; border-radius:var(--r-1);
+  font-family:var(--dado); font-size:.66rem; letter-spacing:.06em;
+  color:var(--tinta-3); background:var(--papel-2); border:1px solid var(--fio);
+}
+.def .decide{
+  margin:14px 0 0; padding-top:12px; border-top:1px dashed var(--fio-2);
+  font-size:.88em; color:var(--tinta-2); max-width:64ch;
+}
+.def .decide b{
+  font-family:var(--dado); font-size:.66rem; letter-spacing:.11em; text-transform:uppercase;
+  color:var(--tinta-3); display:block; margin-bottom:4px;
+}
+.d-ocde{ --acento:var(--jade); }
+.d-ue{ --acento:var(--carimbo); }
+.d-br{ --acento:var(--ocre); }
+.d-un{ --acento:var(--tinta-2); }
+
+.esqueleto-comum{
+  margin:26px 0 0; padding:24px; background:var(--papel-2);
+  border:1px solid var(--fio); border-radius:var(--r-2);
+}
+.esqueleto-comum h4{ margin-bottom:14px; }
+.esqueleto-comum ol{
+  margin:0; padding:0; list-style:none; display:grid; gap:9px;
+  counter-reset:passo;
+}
+.esqueleto-comum li{
+  display:grid; grid-template-columns:26px 1fr; gap:12px; align-items:baseline;
+  font-size:.93em; color:var(--tinta-2);
+}
+.esqueleto-comum li::before{
+  counter-increment:passo; content:counter(passo);
+  font-family:var(--dado); font-size:.72rem; color:var(--carimbo); font-weight:600;
+}
+.esqueleto-comum li b{ color:var(--tinta); }
+
 /* trilha de aulas: miniatura, numero e link */
 .trilha-grade{ display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(268px,1fr)); }
 .aula{
@@ -715,7 +788,16 @@ body[data-nivel="mais"]     .so-simples{ display:none; }
   margin:0 0 10px; font-variant-numeric:tabular-nums;
 }
 .livro .porque{ margin:0 0 11px; font-size:.9em; color:var(--tinta-2); max-width:64ch; }
-.livro .edicoes{ display:flex; flex-wrap:wrap; gap:6px; }
+.livro .edicoes{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+.comprar{
+  display:inline-flex; align-items:center; gap:7px; min-height:36px; padding:0 13px;
+  border:1px solid var(--fio-2); border-radius:var(--r-1); background:var(--papel-2);
+  font-family:var(--dado); font-size:.7rem; letter-spacing:.04em; font-weight:600;
+  color:var(--tinta-2); text-decoration:none; transition:border-color .18s,color .18s;
+}
+.comprar svg{ width:13px; height:13px; }
+@media (hover:hover){ .comprar:hover{ border-color:var(--carimbo); color:var(--carimbo); } }
+
 .ed{
   display:inline-block; padding:3px 9px; border-radius:var(--r-1);
   font-family:var(--dado); font-size:.68rem; letter-spacing:.05em; font-weight:600;
@@ -880,7 +962,7 @@ footer{
     <span class="marca-selo" aria-hidden="true" title="人 (rén) — humano. Primeiro caractere de 人工智能, inteligência artificial">人</span>
     <span class="marca-txt">
       <b>Dad AI</b>
-      <i>O Homem que revisa a IA</i>
+      <i>O Homem que Revisa a IA</i>
     </span>
   </a>
 
@@ -904,7 +986,7 @@ footer{
     <p class="divisao">Parte I · A questão</p>
     <ol>
       <li><a href="#capa"><span class="folio">01</span> Início</a></li>
-      <li><a href="#cronologia"><span class="folio">02</span> Como a IA chegou aqui</a></li>
+      <li><a href="#cronologia"><span class="folio">02</span> Conceitos e Cronologia</a></li>
       <li><a href="#empresas"><span class="folio">03</span> Quem constrói a IA</a></li>
       <li><a href="#etica"><span class="folio">04</span> Ética e sociedade</a></li>
       <li><a href="#regulacao"><span class="folio">05</span> Regulamentação da IA</a></li>
@@ -912,17 +994,18 @@ footer{
     </ol>
     <p class="divisao">Parte II · A prática</p>
     <ol>
-      <li><a href="#ferramentas"><span class="folio">07</span> Ferramentas do dia a dia</a></li>
-      <li><a href="#quatrod"><span class="folio">08</span> O método 4D</a></li>
+      <li><a href="#quatrod"><span class="folio">07</span> O método 4D</a></li>
+      <li><a href="#ferramentas"><span class="folio">08</span> Ferramentas do dia a dia</a></li>
       <li><a href="#prompt"><span class="folio">09</span> Engenharia de prompt</a></li>
+      <li><a href="#socialtech"><span class="folio">10</span> SocialTech</a></li>
     </ol>
     <p class="divisao">Parte III · Um país à parte</p>
     <ol>
-      <li><a href="#china"><span class="folio">10</span> China em foco</a></li>
+      <li><a href="#china"><span class="folio">11</span> China em foco</a></li>
     </ol>
     <p class="divisao">Parte IV · Aulas</p>
     <ol>
-      <li><a href="#trilha"><span class="folio">11</span> Recomendação de trilha</a></li>
+      <li><a href="#trilha"><span class="folio">12</span> Recomendação de trilha</a></li>
     </ol>
   </nav>
 
@@ -1019,14 +1102,121 @@ footer{
     <section class="parte" id="cronologia">
       <div class="caixa">
         <div class="cabeca">
-          <p class="etiqueta">Fólio 02 · em ordem, porque a ordem explica</p>
-          <h2><span class="selo-secao" aria-hidden="true">人</span>Como a IA chegou até aqui</h2>
+          <p class="etiqueta">Fólio 02 · primeiro o que é, depois de onde veio</p>
+          <h2><span class="selo-secao" aria-hidden="true">人</span>Conceitos e Cronologia</h2>
           <p class="abertura">
-            A IA não nasceu em 2023. Tem fases, invernos, promessas quebradas e retomadas —
-            e cada uma aconteceu em um lugar do mundo, por razões bem humanas.
+            Antes de contar de onde veio, é preciso dizer do que se está falando — e aí
+            começa a primeira surpresa: não há uma definição, há várias, e escrevê-las foi
+            trabalho de organismos internacionais e de parlamentos. Definir aqui não é
+            preliminar burocrática: a definição é a porta da lei. O que couber dentro dela
+            será fiscalizado; o que ficar de fora, não.
           </p>
         </div>
 
+
+        <div class="definicoes">
+          <article class="def d-ocde">
+            <p class="orgao"><strong>OCDE</strong> <em>Recomendação do Conselho sobre IA · definição revista em novembro de 2023</em></p>
+            <blockquote>
+              "Um sistema de IA é um sistema baseado em máquina que, para objetivos explícitos
+              ou implícitos, infere, a partir da entrada que recebe, como gerar resultados — como
+              previsões, conteúdo, recomendações ou decisões — capazes de influenciar ambientes
+              físicos ou virtuais. Diferentes sistemas de IA variam em seus níveis de autonomia e
+              de adaptabilidade após a implantação."
+            </blockquote>
+            <span class="lingua">tradução livre do original em inglês</span>
+            <p class="decide">
+              <b>o que essa definição decide</b>
+              É a matriz de quase todas as outras. A revisão de 2023 fez uma mudança discreta e
+              enorme: a versão anterior falava em objetivos <em>definidos por humanos</em>, e essa
+              expressão caiu. Um sistema cujos objetivos emergiram sem que ninguém os tenha
+              escrito continua sendo, para efeito de regra, um sistema de IA.
+            </p>
+          </article>
+
+          <article class="def d-ue">
+            <p class="orgao"><strong>União Europeia</strong> <em>Regulamento (UE) 2024/1689 · artigo 3º, item 1</em></p>
+            <blockquote>
+              "Sistema baseado em máquina concebido para funcionar com níveis variáveis de
+              autonomia, que pode apresentar capacidade de adaptação após a implantação e que,
+              para objetivos explícitos ou implícitos, infere, a partir das entradas que recebe,
+              como gerar resultados — tais como previsões, conteúdos, recomendações ou decisões —
+              capazes de influenciar ambientes físicos ou virtuais."
+            </blockquote>
+            <span class="lingua">tradução livre · há versão oficial em português de Portugal</span>
+            <p class="decide">
+              <b>o que essa definição decide</b>
+              É a única da lista que já é lei em vigor. Cada palavra dela delimita quem responde
+              perante um fiscal: o que não couber aqui simplesmente não é alcançado pelo
+              regulamento europeu, por mais sofisticado que seja.
+            </p>
+          </article>
+
+          <article class="def d-br">
+            <p class="orgao"><strong>Brasil</strong> <em>PL 2.338/2023 · artigo 4º · aprovado no Senado em dezembro de 2024</em></p>
+            <blockquote>
+              "Sistema baseado em máquina que, com graus diferentes de autonomia e para objetivos
+              explícitos ou implícitos, infere, a partir de um conjunto de dados ou informações que
+              recebe, como gerar resultados, em especial, previsão, conteúdo, recomendação ou
+              decisão que possa influenciar o ambiente virtual, físico ou real."
+            </blockquote>
+            <span class="lingua">texto original em português</span>
+            <p class="decide">
+              <b>o que essa definição decide</b>
+              É a que vai valer aqui, se aprovada como está. Note que o legislador brasileiro
+              seguiu a OCDE quase palavra por palavra — escolha deliberada, que facilita
+              reconhecimento mútuo e contratação internacional.
+            </p>
+          </article>
+
+          <article class="def d-un">
+            <p class="orgao"><strong>UNESCO</strong> <em>Recomendação sobre a Ética da IA · 2021 · 193 Estados-membros</em></p>
+            <blockquote>
+              "Sistemas capazes de processar dados e informações de maneira que se assemelha a um
+              comportamento inteligente, tipicamente incluindo aspectos de raciocínio,
+              aprendizagem, percepção, predição, planejamento ou controle."
+            </blockquote>
+            <span class="lingua">tradução livre do original em inglês</span>
+            <p class="decide">
+              <b>o que essa definição decide</b>
+              É a única que ousa a palavra <em>inteligente</em> — e ainda assim recua para
+              "assemelha-se a". A UNESCO evita de propósito fechar uma definição rígida: seu
+              instrumento trata de ética, e uma cerca estreita demais deixaria de fora
+              justamente o que precisa ser discutido.
+            </p>
+          </article>
+        </div>
+
+        <div class="esqueleto-comum">
+          <h4>O esqueleto que as quatro compartilham</h4>
+          <ol>
+            <li><b>É uma máquina</b> — não uma pessoa, nem uma instituição, nem um procedimento no papel.</li>
+            <li><b>Persegue objetivos</b> — que alguém pode ter escrito, ou que podem ter simplesmente surgido.</li>
+            <li><b>Infere</b> — este é o verbo decisivo. Não executa uma regra pronta: deduz o caminho a partir do que recebeu.</li>
+            <li><b>Gera resultados</b> — previsão, conteúdo, recomendação, decisão.</li>
+            <li><b>Influencia o mundo</b> — o físico ou o virtual. Sem essa consequência, seria apenas cálculo.</li>
+          </ol>
+          <p class="decide" style="margin-top:16px">
+            <b>a diferença que fica de fora</b>
+            Uma planilha que soma números segue regras que alguém escreveu, e por isso não é IA
+            em nenhuma das quatro definições. O que separa uma coisa da outra não é complexidade
+            nem tamanho: é o verbo <em>inferir</em>. E é também por isso que a responsabilidade
+            muda de lugar — quando a máquina deduz, ninguém escreveu a regra que produziu aquele
+            resultado específico.
+          </p>
+        </div>
+
+        <p class="margem-nota" style="max-width:66ch">
+          <strong>Antes que a história comece:</strong> nenhuma dessas definições existia quando o
+          nome foi inventado. Em 1955, ao propor o encontro que batizaria o campo, John McCarthy
+          e três colegas não definiram nada — apostaram: <em>"o estudo deve prosseguir com base
+          na conjectura de que todo aspecto da aprendizagem, ou qualquer outra característica da
+          inteligência, pode em princípio ser descrito com tanta precisão que uma máquina possa
+          ser construída para simulá-lo"</em>. Setenta anos de definições oficiais começam nessa
+          frase — que não era uma definição, e sim uma conjectura ainda hoje em aberto.
+        </p>
+
+        <h3 style="margin:48px 0 20px">Cronologia: a história em quatro momentos</h3>
         <div class="cronologia">
           <article class="evento">
             <p class="quando">1956</p>
@@ -1055,6 +1245,20 @@ footer{
             <p>Modelos abertos chineses passam a competir de igual para igual com os americanos, a um custo muito menor. O tabuleiro muda e o Sul Global entra na conversa.</p>
             <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Hangzhou e Pequim, China</span>
           </article>
+        </div>
+
+        <div class="fontes">
+          <h4>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+            Referências deste fólio
+          </h4>
+          <ol>
+            <li>OCDE. <em>Recommendation of the Council on Artificial Intelligence</em> (OECD/LEGAL/0449). Definição de “sistema de IA” revista em novembro de 2023. Disponível em: <a href="https://oecd.ai/en/ai-principles" target="_blank" rel="noopener noreferrer">oecd.ai/en/ai-principles</a></li>
+            <li>União Europeia. <em>Regulamento (UE) 2024/1689</em>, artigo 3º, item 1. Jornal Oficial da União Europeia, 2024. Disponível em: <a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng" target="_blank" rel="noopener noreferrer">eur-lex.europa.eu/eli/reg/2024/1689</a></li>
+            <li>Brasil. Senado Federal. <em>Projeto de Lei nº 2.338, de 2023</em>, artigo 4º. Aprovado na forma do Substitutivo em 10 de dezembro de 2024 e remetido à Câmara dos Deputados. Disponível em: <a href="https://www25.senado.leg.br/web/atividade/materias/-/materia/157233" target="_blank" rel="noopener noreferrer">senado.leg.br · matéria 157233</a></li>
+            <li>UNESCO. <em>Recommendation on the Ethics of Artificial Intelligence</em>. Adotada por aclamação pelos 193 Estados-membros em novembro de 2021. Disponível em: <a href="https://www.unesco.org/en/artificial-intelligence/recommendation-ethics" target="_blank" rel="noopener noreferrer">unesco.org · recommendation-ethics</a></li>
+            <li>McCarthy, J.; Minsky, M.; Rochester, N.; Shannon, C. <em>A Proposal for the Dartmouth Summer Research Project on Artificial Intelligence</em>, 31 de agosto de 1955. Reeditado em <em>AI Magazine</em>, v. 27, n. 4, 2006.</li>
+          </ol>
         </div>
 
         <p class="escopo"><b>a seguir</b><span>Doze marcos, cada um com "por que isso importa para o senhor" e a fonte histórica correspondente.</span></p>
@@ -1386,92 +1590,11 @@ footer{
         <p class="escopo"><b>a seguir</b><span>De 8 a 10 casos — Brasil, Estônia, Portugal, Singapura, China e Índia — todos com o mesmo placar comparável.</span></p>
       </div>
     </section>
-    <!-- 02 ───────────────────────────────────────────────── -->
-    <section class="parte" id="ferramentas">
-      <div class="caixa">
-        <div class="cabeca">
-          <p class="etiqueta">Fólio 07 · o concreto primeiro</p>
-          <h2><span class="selo-secao" aria-hidden="true">人</span>As ferramentas que já estão no dia a dia</h2>
-          <p class="abertura">
-            Depois das questões, os objetos. Estas são as ferramentas que milhões de pessoas
-            já abrem todo dia para escrever, resumir, pesquisar e organizar o trabalho —
-            inclusive dentro de repartições públicas.
-          </p>
-        </div>
-
-        <div class="niveis" role="group" aria-label="Nível de explicação">
-          <button data-nivel="simples" aria-pressed="true">Essencial</button>
-          <button data-nivel="mais"    aria-pressed="false">Aprofundar</button>
-        </div>
-
-        <p class="prosa so-simples">
-          São sistemas que leram uma quantidade de texto que nenhuma vida humana alcançaria e
-          que respondem por escrito. Eles não compreendem no sentido em que o senhor compreende:
-          reconhecem regularidades. A distância entre reconhecer e compreender é pequena no
-          resultado e enorme na responsabilidade.
-        </p>
-        <p class="prosa so-mais">
-          Tecnicamente são <button class="termo" data-termo="modelo">modelos de linguagem</button>:
-          preveem a palavra seguinte de um texto, e dessa única operação nascem o resumo, a tradução
-          e a redação. Note o que isso implica — eles não consultam um repositório de verdades, e sim
-          produzem o enunciado mais provável. Errar com absoluta confiança não é uma falha do sistema;
-          é o que ele faz quando o mais provável não é o verdadeiro.
-        </p>
-
-        <div class="malha" style="margin-top:30px">
-          <article class="ficha">
-            <span class="glifo g-jade"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
-            <h3>Assistentes de conversa</h3>
-            <p>O senhor escreve a pergunta em português comum e recebe a resposta por escrito. Serve para redigir, resumir e explicar.</p>
-            <div class="pastilhas">
-              <span class="pastilha">🇺🇸 ChatGPT</span>
-              <span class="pastilha">🇺🇸 Claude</span>
-              <span class="pastilha">🇨🇳 DeepSeek</span>
-            </div>
-            <p class="no-servico">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
-              <span><strong>No serviço público:</strong> transformar um parecer técnico em linguagem cidadã.</span>
-            </p>
-          </article>
-
-          <article class="ficha">
-            <span class="glifo g-carimbo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 15h6M9 11h3"/></svg></span>
-            <h3>Leitores de documento</h3>
-            <p>O senhor entrega um PDF longo e ele devolve o resumo, os pontos-chave e responde perguntas sobre aquele arquivo específico.</p>
-            <div class="pastilhas">
-              <span class="pastilha">🇺🇸 NotebookLM</span>
-              <span class="pastilha">🇺🇸 Copilot</span>
-            </div>
-            <p class="no-servico">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
-              <span><strong>No serviço público:</strong> ler 200 páginas de edital e apontar o que mudou.</span>
-            </p>
-          </article>
-
-          <article class="ficha">
-            <span class="glifo g-ocre"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span>
-            <h3>Criação de imagem e voz</h3>
-            <p>Descreva com palavras e a máquina desenha; entregue um texto e ela fala. Útil — e também o berço das falsificações.</p>
-            <div class="pastilhas">
-              <span class="pastilha">🇺🇸 Midjourney</span>
-              <span class="pastilha">🇨🇳 Kling</span>
-              <span class="pastilha">🇨🇳 Hailuo</span>
-            </div>
-            <p class="no-servico">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
-              <span><strong>No serviço público:</strong> material de campanha — e treino do olho para reconhecer fraude.</span>
-            </p>
-          </article>
-        </div>
-
-        <p class="escopo"><b>a seguir</b><span>De 12 a 15 ferramentas, cada uma com "para que serve", "quanto custa", "dá para confiar?" e um passo a passo ilustrado.</span></p>
-      </div>
-    </section>
     <!-- Metodo 4D -->
     <section class="parte" id="quatrod">
       <div class="caixa">
         <div class="cabeca">
-          <p class="etiqueta">Fólio 08 · as quatro competências</p>
+          <p class="etiqueta">Fólio 07 · as quatro competências</p>
           <h2><span class="selo-secao" aria-hidden="true">人</span>O método 4D</h2>
           <p class="abertura">
             A Anthropic — uma das empresas que constroem esses sistemas — publicou um
@@ -1569,6 +1692,87 @@ footer{
         <p class="escopo"><b>a seguir</b><span>Cada uma das quatro competências ganha exemplos de trabalho de repartição e um pequeno teste de autoavaliação. A nomenclatura dos subcomponentes será reconferida contra o material original da Anthropic na publicação.</span></p>
       </div>
     </section>
+    <!-- 02 ───────────────────────────────────────────────── -->
+    <section class="parte" id="ferramentas">
+      <div class="caixa">
+        <div class="cabeca">
+          <p class="etiqueta">Fólio 08 · o concreto primeiro</p>
+          <h2><span class="selo-secao" aria-hidden="true">人</span>As ferramentas que já estão no dia a dia</h2>
+          <p class="abertura">
+            Depois do método, os objetos. Estas são as ferramentas que milhões de pessoas
+            já abrem todo dia para escrever, resumir, pesquisar e organizar o trabalho —
+            inclusive dentro de repartições públicas.
+          </p>
+        </div>
+
+        <div class="niveis" role="group" aria-label="Nível de explicação">
+          <button data-nivel="simples" aria-pressed="true">Essencial</button>
+          <button data-nivel="mais"    aria-pressed="false">Aprofundar</button>
+        </div>
+
+        <p class="prosa so-simples">
+          São sistemas que leram uma quantidade de texto que nenhuma vida humana alcançaria e
+          que respondem por escrito. Eles não compreendem no sentido em que o senhor compreende:
+          reconhecem regularidades. A distância entre reconhecer e compreender é pequena no
+          resultado e enorme na responsabilidade.
+        </p>
+        <p class="prosa so-mais">
+          Tecnicamente são <button class="termo" data-termo="modelo">modelos de linguagem</button>:
+          preveem a palavra seguinte de um texto, e dessa única operação nascem o resumo, a tradução
+          e a redação. Note o que isso implica — eles não consultam um repositório de verdades, e sim
+          produzem o enunciado mais provável. Errar com absoluta confiança não é uma falha do sistema;
+          é o que ele faz quando o mais provável não é o verdadeiro.
+        </p>
+
+        <div class="malha" style="margin-top:30px">
+          <article class="ficha">
+            <span class="glifo g-jade"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
+            <h3>Assistentes de conversa</h3>
+            <p>O senhor escreve a pergunta em português comum e recebe a resposta por escrito. Serve para redigir, resumir e explicar.</p>
+            <div class="pastilhas">
+              <span class="pastilha">🇺🇸 ChatGPT</span>
+              <span class="pastilha">🇺🇸 Claude</span>
+              <span class="pastilha">🇨🇳 DeepSeek</span>
+            </div>
+            <p class="no-servico">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+              <span><strong>No serviço público:</strong> transformar um parecer técnico em linguagem cidadã.</span>
+            </p>
+          </article>
+
+          <article class="ficha">
+            <span class="glifo g-carimbo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 15h6M9 11h3"/></svg></span>
+            <h3>Leitores de documento</h3>
+            <p>O senhor entrega um PDF longo e ele devolve o resumo, os pontos-chave e responde perguntas sobre aquele arquivo específico.</p>
+            <div class="pastilhas">
+              <span class="pastilha">🇺🇸 NotebookLM</span>
+              <span class="pastilha">🇺🇸 Copilot</span>
+            </div>
+            <p class="no-servico">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+              <span><strong>No serviço público:</strong> ler 200 páginas de edital e apontar o que mudou.</span>
+            </p>
+          </article>
+
+          <article class="ficha">
+            <span class="glifo g-ocre"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span>
+            <h3>Criação de imagem e voz</h3>
+            <p>Descreva com palavras e a máquina desenha; entregue um texto e ela fala. Útil — e também o berço das falsificações.</p>
+            <div class="pastilhas">
+              <span class="pastilha">🇺🇸 Midjourney</span>
+              <span class="pastilha">🇨🇳 Kling</span>
+              <span class="pastilha">🇨🇳 Hailuo</span>
+            </div>
+            <p class="no-servico">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+              <span><strong>No serviço público:</strong> material de campanha — e treino do olho para reconhecer fraude.</span>
+            </p>
+          </article>
+        </div>
+
+        <p class="escopo"><b>a seguir</b><span>De 12 a 15 ferramentas, cada uma com "para que serve", "quanto custa", "dá para confiar?" e um passo a passo ilustrado.</span></p>
+      </div>
+    </section>
     <!-- 09 ───────────────────────────────────────────────── -->
     <section class="parte" id="prompt">
       <div class="caixa">
@@ -1661,6 +1865,155 @@ se o texto não disser algo, escreva
         <p class="escopo"><b>a seguir</b><span>Cada degrau ganha 2 ou 3 exemplos reais de trabalho de repartição — despacho, resumo de processo, resposta a cidadão — no formato "antes e depois" acima, mais uma folha de bolso para imprimir.</span></p>
       </div>
     </section>
+    <!-- SocialTech -->
+    <section class="parte" id="socialtech">
+      <div class="caixa">
+        <div class="cabeca">
+          <p class="etiqueta">Fólio 10 · tecnologia com destinatário</p>
+          <h2><span class="selo-secao" aria-hidden="true">人</span>SocialTech</h2>
+          <p class="abertura">
+            Nem toda tecnologia procura mercado. Existe um campo inteiro cujo critério de
+            sucesso não é receita, e sim problema resolvido para quem não podia pagar pela
+            solução. No Brasil isso tem nome próprio, definição formal e prêmio desde 2001 —
+            e é mais exigente do que parece.
+          </p>
+        </div>
+
+        <div class="definicoes">
+          <article class="def d-br">
+            <p class="orgao"><strong>Tecnologia Social</strong> <em>Instituto de Tecnologia Social e Rede de Tecnologia Social · definição brasileira</em></p>
+            <blockquote>
+              "Produtos, técnicas e/ou metodologias reaplicáveis, desenvolvidas na interação com
+              a comunidade e que representem efetivas soluções de transformação social."
+            </blockquote>
+            <span class="lingua">texto original em português</span>
+            <p class="decide">
+              <b>o que essa definição decide</b>
+              Repare nas três exigências, porque cada uma exclui alguma coisa.
+              <strong>Reaplicável</strong> derruba o projeto-piloto que nunca sai do lugar.
+              <strong>Desenvolvida na interação com a comunidade</strong> derruba a solução
+              pensada de gabinete e entregue pronta. E <strong>efetiva transformação</strong>
+              derruba o que apenas alivia sem mudar a causa. É uma definição com dentes.
+            </p>
+          </article>
+        </div>
+
+        <p class="margem-nota" style="max-width:66ch">
+          <strong>A distinção que importa na hora de contratar:</strong> "tecnologia social" e
+          "tecnologia com discurso social" se parecem no <i>slide</i> e se separam no critério.
+          A pergunta que separa uma da outra é curta: <em>a comunidade participou de decidir o
+          que seria construído, ou apenas recebeu o resultado?</em> Um edital que não pergunta
+          isso compra as duas coisas pelo mesmo preço.
+        </p>
+
+        <h3 style="margin:48px 0 8px">Quem faz isso pelo mundo</h3>
+        <p class="criterio">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg>
+          <span><strong>Critério desta lista:</strong> não é ranking de porte — faturamento de
+          organização social raramente é comparável entre países. São os casos de maior
+          <strong>consequência documentada</strong>: alcance verificado e resultado publicado.</span>
+        </p>
+
+        <div class="regiao">
+          <h4>🇧🇷 Brasil</h4>
+        <div class="org">
+          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">G</span></span>
+          <span class="corpo"><h4>Gerando Falcões</h4><p>São Paulo · usa dados e gestão por indicadores para transformar favelas; o programa Favela 3D trata urbanização, renda e dignidade como um problema só</p></span>
+          <span class="selo-txt">território</span>
+        </div>
+        <div class="org">
+          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">I</span></span>
+          <span class="corpo"><h4>Instituto Ayrton Senna</h4><p>São Paulo · análise de dados educacionais em parceria com redes públicas de ensino, para identificar quem está prestes a desistir da escola</p></span>
+          <span class="selo-txt">educação</span>
+        </div>
+        <div class="org">
+          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">F</span></span>
+          <span class="corpo"><h4>Fundação Banco do Brasil</h4><p>Brasília · mantém desde 2001 o Banco de Tecnologias Sociais, catálogo público de soluções certificadas e prontas para reaplicação</p></span>
+          <span class="selo-txt">catálogo</span>
+        </div>
+        </div>
+
+        <div class="regiao">
+          <h4>BRICS · Índia, China e África do Sul</h4>
+        <div class="org">
+          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">I</span></span>
+          <span class="corpo"><h4>India Stack e UPI</h4><p>Índia · infraestrutura pública digital de identidade e pagamentos; talvez o maior projeto de inclusão financeira já executado, operado como bem público e não como produto</p></span>
+          <span class="selo-txt">infraestrutura</span>
+        </div>
+        <div class="org">
+          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">A</span></span>
+          <span class="corpo"><h4>Ant Forest</h4><p>China · converte redução de pegada de carbono de centenas de milhões de usuários em árvores plantadas; reconhecido pela ONU em 2019</p></span>
+          <span class="selo-txt">clima</span>
+        </div>
+        <div class="org">
+          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">P</span></span>
+          <span class="corpo"><h4>Praekelt.org</h4><p>África do Sul · construiu com o Ministério da Saúde o MomConnect, que acompanha gestantes por mensagem de celular simples, sem exigir internet boa</p></span>
+          <span class="selo-txt">saúde</span>
+        </div>
+        </div>
+
+        <div class="regiao">
+          <h4>🇺🇸 Estados Unidos</h4>
+        <div class="org">
+          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">K</span></span>
+          <span class="corpo"><h4>Khan Academy</h4><p>Estados Unidos · ensino gratuito em escala mundial, sem cobrança e sem anúncio; hoje experimenta tutoria com IA em redes públicas</p></span>
+          <span class="selo-txt">educação</span>
+        </div>
+        <div class="org">
+          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">B</span></span>
+          <span class="corpo"><h4>Benetech</h4><p>Estados Unidos · tecnologia de acessibilidade; a biblioteca Bookshare entrega livros em formato legível a pessoas com deficiência visual ou dislexia</p></span>
+          <span class="selo-txt">acessibilidade</span>
+        </div>
+        <div class="org">
+          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">D</span></span>
+          <span class="corpo"><h4>DataKind</h4><p>Estados Unidos · coloca cientistas de dados voluntários a serviço de organizações sociais que têm os dados mas não têm quem os leia</p></span>
+          <span class="selo-txt">dados</span>
+        </div>
+        </div>
+
+        <div class="regiao">
+          <h4>🇪🇺 União Europeia e Reino Unido</h4>
+        <div class="org">
+          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">D</span></span>
+          <span class="corpo"><h4>Decidim</h4><p>Barcelona, Espanha · plataforma livre de participação cidadã, usada por prefeituras e governos para consulta e orçamento participativo — código aberto e auditavel</p></span>
+          <span class="selo-txt">democracia</span>
+        </div>
+        <div class="org">
+          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">m</span></span>
+          <span class="corpo"><h4>mySociety</h4><p>Reino Unido · criou o FixMyStreet e o WhatDoTheyKnow, que transformam reclamação urbana e pedido de informação em processo público rastreável</p></span>
+          <span class="selo-txt">cívico</span>
+        </div>
+        <div class="org">
+          <span class="logo-org" data-pendente><span class="monograma" aria-hidden="true">O</span></span>
+          <span class="corpo"><h4>Open Knowledge Foundation</h4><p>Reino Unido · defende e instrumenta dados abertos; boa parte do vocabulário de transparência pública saiu dali</p></span>
+          <span class="selo-txt">dados abertos</span>
+        </div>
+        </div>
+
+        <p class="margem-nota" style="max-width:66ch;margin-top:30px">
+          <strong>O padrão que atravessa as quatro regiões:</strong> as iniciativas que mais
+          duraram não foram as que inventaram a melhor tecnologia, e sim as que se acoplaram a
+          um serviço público que já existia — a maternidade, a escola, o sistema de pagamentos,
+          a prefeitura. Isso diz algo direto a quem trabalha no Estado: a infraestrutura social
+          mais difícil de construir já está construída, e o senhor trabalha dentro dela.
+        </p>
+
+        <div class="fontes">
+          <h4>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+            Referências deste fólio
+          </h4>
+          <ol>
+            <li>Instituto de Tecnologia Social (ITS Brasil). <em>Caderno de debate: tecnologia social no Brasil</em>. São Paulo, 2004 — origem da definição adotada acima.</li>
+            <li>Fundação Banco do Brasil. <em>Prêmio Fundação Banco do Brasil de Tecnologia Social</em> e Banco de Tecnologias Sociais, desde 2001 — base pública de soluções certificadas e reaplicáveis.</li>
+            <li>Rede de Tecnologia Social (RTS). Documentos constitutivos, 2005.</li>
+            <li>UNESCO. <em>Recommendation on the Ethics of Artificial Intelligence</em>, 2021 — seção sobre desenvolvimento inclusivo e redução de desigualdades.</li>
+          </ol>
+        </div>
+
+        <p class="escopo"><b>a seguir</b><span>Cada organização ganha ficha própria com o problema que atacou, o número publicado de alcance, a fonte que assina esse número e o que deu errado — porque as tentativas fracassadas ensinam mais a quem vai contratar do que as vitrines.</span></p>
+      </div>
+    </section>
     <!-- 05 ───────────────────────────────────────────────── -->
     <section class="parte china" id="china">
       <div class="estandarte">
@@ -1675,7 +2028,7 @@ se o texto não disser algo, escreva
               <polygon points="9.219,8.375 9.899,8.632 10.353,8.064 10.319,8.790 10.999,9.046 10.298,9.239 10.265,9.964 9.865,9.357 9.618,8.982"/>
             </g>
           </svg>
-          <p class="etiqueta">Fólio 10</p>
+          <p class="etiqueta">Fólio 11</p>
           <p class="hanzi">中国</p>
           <h2><span class="selo-secao" aria-hidden="true">人</span>China em foco</h2>
           <p class="abertura">
@@ -1723,7 +2076,7 @@ se o texto não disser algo, escreva
                 velocidade de aplicação e na escala de dados. É a tese mais influente do debate —
                 e convém conhecê-la antes de aceitá-la.
               </p>
-              <p class="edicoes"><span class="ed ed-br">edição brasileira</span></p>
+              <p class="edicoes"><span class="ed ed-br">edição brasileira</span><a class="comprar" href="https://www.amazon.com.br/s?k=Kai-Fu+Lee+Intelig%C3%AAncia+Artificial+livro" target="_blank" rel="noopener noreferrer">ver na Amazon <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a></p>
             </div>
           </article>
 
@@ -1738,7 +2091,7 @@ se o texto não disser algo, escreva
                 também vigia. Ler este junto do anterior é o que impede que a seção vire
                 propaganda — em qualquer direção.
               </p>
-              <p class="edicoes"><span class="ed ed-en">em inglês</span></p>
+              <p class="edicoes"><span class="ed ed-en">em inglês</span><a class="comprar" href="https://www.amazon.com.br/s?k=Surveillance+State+Josh+Chin+Liza+Lin" target="_blank" rel="noopener noreferrer">ver na Amazon <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a></p>
             </div>
           </article>
 
@@ -1753,7 +2106,7 @@ se o texto não disser algo, escreva
                 existe e o que ainda é imaginação. O formato resolve o problema de sempre:
                 separar a previsão do desejo.
               </p>
-              <p class="edicoes"><span class="ed ed-ver">edição brasileira a confirmar</span></p>
+              <p class="edicoes"><span class="ed ed-ver">edição brasileira a confirmar</span><a class="comprar" href="https://www.amazon.com.br/s?k=IA+2041+Kai-Fu+Lee+Chen+Qiufan" target="_blank" rel="noopener noreferrer">ver na Amazon <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a></p>
             </div>
           </article>
 
@@ -1767,7 +2120,7 @@ se o texto não disser algo, escreva
                 de inteligência artificial diretamente, e sim de quem paga a conta do progresso
                 tecnológico. É o livro desta lista que mais se aproxima de uma pergunta moral.
               </p>
-              <p class="edicoes"><span class="ed ed-ver">edição brasileira a confirmar</span></p>
+              <p class="edicoes"><span class="ed ed-ver">edição brasileira a confirmar</span><a class="comprar" href="https://www.amazon.com.br/s?k=Mar%C3%A9+T%C3%B3xica+Chen+Qiufan" target="_blank" rel="noopener noreferrer">ver na Amazon <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a></p>
             </div>
           </article>
 
@@ -1782,7 +2135,7 @@ se o texto não disser algo, escreva
                 espalhar a tecnologia por toda a economia. Uma tese com consequências diretas
                 para o Brasil.
               </p>
-              <p class="edicoes"><span class="ed ed-en">em inglês</span></p>
+              <p class="edicoes"><span class="ed ed-en">em inglês</span><a class="comprar" href="https://www.amazon.com.br/s?k=Technology+and+the+Rise+of+Great+Powers+Jeffrey+Ding" target="_blank" rel="noopener noreferrer">ver na Amazon <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg></a></p>
             </div>
           </article>
         </div>
@@ -1794,7 +2147,7 @@ se o texto não disser algo, escreva
     <section class="parte" id="trilha">
       <div class="caixa">
         <div class="cabeca">
-          <p class="etiqueta">Fólio 11 · para continuar depois</p>
+          <p class="etiqueta">Fólio 12 · para continuar depois</p>
           <h2><span class="selo-secao" aria-hidden="true">人</span>Recomendação de trilha</h2>
           <p class="abertura">
             Este site dá o mapa. Quem dá a aula é outra pessoa — e com voz, quadro e tempo,
@@ -1806,48 +2159,48 @@ se o texto não disser algo, escreva
         <div class="trilha-grade">
           <a class="aula" href="https://www.youtube.com/watch?v=QQ-Drt-9Ils&t=247s" target="_blank" rel="noopener noreferrer">
             <span class="aula-thumb">
-              <img src="https://i.ytimg.com/vi/QQ-Drt-9Ils/hqdefault.jpg" alt="Miniatura da aula 01 de Karine Lago" loading="lazy" width="480" height="360">
+              <img src="https://i.ytimg.com/vi/QQ-Drt-9Ils/hqdefault.jpg" alt="Miniatura: [AULA 1] Como os profissionais mais valorizados do mercado estão usando a IA" loading="lazy" width="480" height="360">
               <span class="aula-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
             </span>
             <span class="aula-corpo">
               <span class="aula-num">aula 01</span>
-              <h4>Karine Lago · inteligência artificial</h4>
+              <h4>[AULA 1] Como os profissionais mais valorizados do mercado estão usando a IA</h4>
               <p class="detalhe">continua onde o vídeo da capa parou, aos 4:07</p>
               <span class="ir">abrir no YouTube ↗</span>
             </span>
           </a>
           <a class="aula" href="https://www.youtube.com/watch?v=3h_6k64oWFc" target="_blank" rel="noopener noreferrer">
             <span class="aula-thumb">
-              <img src="https://i.ytimg.com/vi/3h_6k64oWFc/hqdefault.jpg" alt="Miniatura da aula 02 de Karine Lago" loading="lazy" width="480" height="360">
+              <img src="https://i.ytimg.com/vi/3h_6k64oWFc/hqdefault.jpg" alt="Miniatura: [AULA 2] Faça em 20 minutos o que levaria 6 horas" loading="lazy" width="480" height="360">
               <span class="aula-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
             </span>
             <span class="aula-corpo">
               <span class="aula-num">aula 02</span>
-              <h4>Karine Lago · inteligência artificial</h4>
+              <h4>[AULA 2] Faça em 20 minutos o que levaria 6 horas</h4>
               <p class="detalhe">aula ao vivo</p>
               <span class="ir">abrir no YouTube ↗</span>
             </span>
           </a>
           <a class="aula" href="https://www.youtube.com/watch?v=kx4fR3d65l8" target="_blank" rel="noopener noreferrer">
             <span class="aula-thumb">
-              <img src="https://i.ytimg.com/vi/kx4fR3d65l8/hqdefault.jpg" alt="Miniatura da aula 03 de Karine Lago" loading="lazy" width="480" height="360">
+              <img src="https://i.ytimg.com/vi/kx4fR3d65l8/hqdefault.jpg" alt="Miniatura: [AULA 3] O plano completo: como usar IA para crescer na carreira nos próximos 6 meses" loading="lazy" width="480" height="360">
               <span class="aula-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
             </span>
             <span class="aula-corpo">
               <span class="aula-num">aula 03</span>
-              <h4>Karine Lago · inteligência artificial</h4>
+              <h4>[AULA 3] O plano completo: como usar IA para crescer na carreira nos próximos 6 meses</h4>
               <p class="detalhe">aula ao vivo</p>
               <span class="ir">abrir no YouTube ↗</span>
             </span>
           </a>
           <a class="aula" href="https://www.youtube.com/watch?v=sy2qYWa0nwQ" target="_blank" rel="noopener noreferrer">
             <span class="aula-thumb">
-              <img src="https://i.ytimg.com/vi/sy2qYWa0nwQ/hqdefault.jpg" alt="Miniatura da aula 04 de Karine Lago" loading="lazy" width="480" height="360">
+              <img src="https://i.ytimg.com/vi/sy2qYWa0nwQ/hqdefault.jpg" alt="Miniatura: [AULA 4] Claude Code: como criar, automatizar e desenvolver projetos com IA sem saber programar" loading="lazy" width="480" height="360">
               <span class="aula-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
             </span>
             <span class="aula-corpo">
               <span class="aula-num">aula 04</span>
-              <h4>Karine Lago · inteligência artificial</h4>
+              <h4>[AULA 4] Claude Code: como criar, automatizar e desenvolver projetos com IA sem saber programar</h4>
               <p class="detalhe">aula ao vivo</p>
               <span class="ir">abrir no YouTube ↗</span>
             </span>
@@ -1923,7 +2276,7 @@ se o texto não disser algo, escreva
     <nav class="nav-paginas" id="navPaginas" aria-label="Navegação entre seções"></nav>
 
     <footer>
-      <span>Dad AI · O Homem que revisa a IA · MVP de design v1</span>
+      <span>Dad AI · O Homem que Revisa a IA · MVP de design v1</span>
       <span>feito para Julio César Alexandre</span>
     </footer>
 
@@ -1939,7 +2292,7 @@ se o texto não disser algo, escreva
 
   /* A marca é fixada aqui, e não lida de document.title: quando a página
      roda hospedada em outro site, o título chega vazio ao script.        */
-  var MARCA = "Dad AI";
+  var MARCA = "O Homem que Revisa a IA";
   var tituloPagina = MARCA;
 
   /* ── favicon: reafirma o selo em tempo de execução ──

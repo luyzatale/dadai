@@ -1,4 +1,4 @@
-# Dad AI · O Homem que revisa a IA
+# Dad AI · O Homem que Revisa a IA
 
 Um guia de inteligência artificial em português, escrito para **Julio César Alexandre** —
 servidor público, leitor culto, iniciante absoluto no assunto. Presente de Dia dos Pais, 2026.
@@ -25,7 +25,7 @@ Para ver: abra `mvp/index.html` em qualquer navegador. Não requer servidor nem 
 
 ## Estrutura
 
-Onze seções em quatro partes, ordenadas por importância para o leitor. Cada uma é uma
+Doze seções em quatro partes, ordenadas por importância para o leitor. Cada uma é uma
 **página independente** — não há rolagem contínua entre seções.
 
 **Parte I · A questão**
