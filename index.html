@@ -776,6 +776,33 @@ body[data-nivel="mais"]    .verbete .so-simples{ display:block; }
 }
 .origens .fonte-pq{ display:block; font-size:.88em; color:var(--tinta-2); line-height:1.55; max-width:62ch; }
 
+/* léxico: o vocabulário mínimo, um verbete curto por termo */
+.lexico{
+  display:grid; gap:10px; margin:14px 0 0;
+  grid-template-columns:repeat(auto-fill,minmax(304px,1fr));
+}
+.termo-verbete{
+  padding:18px 20px; background:var(--folha); border:1px solid var(--fio);
+  border-left:2px solid var(--acento,var(--fio-2)); border-radius:var(--r-2);
+}
+.termo-verbete h5{
+  margin:0 0 1px; font-family:var(--display); font-size:1.06rem; font-weight:600;
+  color:var(--tinta); line-height:1.25;
+}
+.termo-verbete .en{
+  display:block; margin-bottom:9px; font-family:var(--dado); font-size:.68rem;
+  letter-spacing:.04em; color:var(--tinta-3);
+}
+.termo-verbete p{ margin:0; font-size:.89em; color:var(--tinta-2); line-height:1.55; }
+.termo-verbete p + p{ margin-top:.6em; }
+.termo-verbete .exigir{
+  margin-top:11px; padding-top:9px; border-top:1px dashed var(--fio-2); font-size:.85em;
+}
+.termo-verbete .exigir b{
+  display:block; margin-bottom:3px; font-family:var(--dado); font-size:.64rem;
+  letter-spacing:.1em; text-transform:uppercase; color:var(--ocre);
+}
+
 /* trilha de aulas: miniatura, numero e link */
 .trilha-grade{ display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(268px,1fr)); }
 .aula{
@@ -1237,9 +1264,10 @@ footer span:last-child{ flex-basis:100%; }
       <li><a href="#china"><span class="folio">11</span> China em foco</a></li>
       <li><a href="#livros"><span class="folio">12</span> Livros</a></li>
     </ol>
-    <p class="divisao">Parte IV · Aulas</p>
+    <p class="divisao">Parte IV · IA Literacy</p>
     <ol>
-      <li><a href="#trilha"><span class="folio">13</span> Recomendação de trilha</a></li>
+      <li><a href="#alfabetizacao"><span class="folio">13</span> Alfabetização em IA</a></li>
+      <li><a href="#trilha"><span class="folio">14</span> Recomendação de trilha</a></li>
     </ol>
   </nav>
 
@@ -1302,8 +1330,7 @@ footer span:last-child{ flex-basis:100%; }
             <p class="convite-txt">
               Há uma aula que começa exatamente onde este site começa. Assista aos
               <strong>primeiros 4 minutos e 7 segundos</strong> — só esse trecho, que é a
-              abertura — e depois volte para cá. O resto da aula está na última seção,
-              quando fizer sentido.
+              abertura — e depois volte para cá.
             </p>
             <p class="convite-como">
               O vídeo abre em uma aba nova. Quando o relógio do YouTube passar de
@@ -5425,11 +5452,262 @@ Ao final: aponte as fragilidades e reescreva.</p>
         <p class="escopo"><b>preço e biblioteca</b><span>Preço de capa varia por edição e por loja, e por isso não é citado aqui: os links levam à página da editora, onde o valor está atualizado. Para exemplar usado, a Estante Virtual costuma trazer os quatro primeiros títulos por menos da metade. Em biblioteca pública, os volumes das Edições Sesc costumam estar disponíveis na rede de bibliotecas do próprio Sesc; para os demais, vale consultar o catálogo da biblioteca municipal, que aceita pedido de aquisição de título ainda não incorporado.</span></p>
       </div>
     </section>
+    <!-- Alfabetizacao em IA -->
+    <section class="parte" id="alfabetizacao">
+      <div class="caixa">
+        <div class="cabeca">
+          <p class="etiqueta">Fólio 13 · o vocabulário mínimo</p>
+          <h2><span class="selo-secao" aria-hidden="true">人</span>Alfabetização em IA</h2>
+          <p class="abertura">
+            Há um conjunto de palavras que aparece em edital, em parecer e em reportagem, e que
+            decide o sentido da frase inteira. Quem não as domina assina texto que não escreveu.
+            Esta é a lista — cada termo com o que ele significa e, quando cabe, o que se pode
+            exigir por causa dele.
+          </p>
+        </div>
+
+        <div class="definicoes">
+          <article class="def d-ue">
+            <p class="orgao"><strong>Alfabetização em IA</strong> <em>União Europeia · Regulamento (UE) 2024/1689, art. 3º, item 56</em></p>
+            <blockquote>
+              As competências, o conhecimento e a compreensão que permitem a fornecedores,
+              a implantadores e às pessoas afetadas fazer uma implantação informada de sistemas
+              de inteligência artificial, bem como tomar consciência das oportunidades e dos
+              riscos da IA e dos danos que ela pode causar.
+            </blockquote>
+            <span class="lingua">tradução do texto oficial em inglês</span>
+            <p class="decide">
+              <b>o que essa definição decide</b>
+              Repare em quem ela alcança: não só quem constrói, mas quem <strong>usa</strong> — e
+              também quem é <strong>afetado</strong> pelo sistema. E repare que não é conselho.
+              O art. 4º do mesmo regulamento transformou isso em dever: desde
+              <strong>2 de fevereiro de 2025</strong>, quem fornece e quem opera um sistema de IA
+              na Europa deve assegurar nível suficiente de alfabetização em IA de seu pessoal.
+              É a primeira vez que um ordenamento jurídico obriga uma organização a ensinar os
+              próprios servidores a entender a ferramenta que lhes deu.
+            </p>
+          </article>
+        </div>
+
+        <p class="margem-nota" style="max-width:66ch">
+          <strong>Por que isso interessa a quem trabalha no Estado brasileiro:</strong> não há
+          dever equivalente aqui, e o PL 2.338/2023 do Fólio 05 tampouco o traz nesses termos.
+          Mas a lógica do dever é transportável por decisão administrativa: um órgão que contrata
+          IA pode, sem lei nova, incluir capacitação no próprio contrato — e a Resolução CNJ nº
+          615/2025 já faz isso no Judiciário, ao exigir formação continuada sobre riscos da
+          automação e análise crítica de resultados.
+        </p>
+
+        <h3 style="margin:52px 0 4px">Como a máquina é feita</h3>
+        <p class="prosa" style="font-size:.93em;color:var(--tinta-2)">
+          Nove palavras que descrevem o objeto. Sem elas, toda discussão sobre risco vira
+          discussão sobre impressão.
+        </p>
+
+        <div class="lexico">
+          <article class="termo-verbete" style="--acento:var(--jade)">
+            <h5>Aprendizado de máquina</h5><span class="en">machine learning</span>
+            <p>Em vez de escrever a regra, mostram-se exemplos e o programa deriva a regra sozinho. É a inversão que funda tudo o mais.</p>
+            <p>A consequência incomoda: ninguém redigiu a regra que está sendo aplicada. Ela existe, produz efeito e não está escrita em lugar nenhum — o que torna difícil, às vezes impossível, enunciá-la depois.</p>
+          </article>
+
+          <article class="termo-verbete" style="--acento:var(--jade)">
+            <h5>Modelo</h5><span class="en">model</span>
+            <p>O resultado do treinamento: um arquivo de números que representa as regularidades encontradas nos exemplos. Não é um programa no sentido antigo, com instruções legíveis; é um conjunto de valores que, aplicados a uma entrada, produzem uma saída.</p>
+          </article>
+
+          <article class="termo-verbete" style="--acento:var(--jade)">
+            <h5>Parâmetros e pesos</h5><span class="en">parameters, weights</span>
+            <p>Os números que o treinamento ajustou. Quando se diz que um modelo é de <strong>pesos abertos</strong>, é isso que foi publicado — o arquivo pode ser baixado e executado em máquina própria.</p>
+            <p class="exigir"><b>por que importa ao contratar</b>Pesos abertos permitem rodar sem depender do fornecedor. Pesos fechados significam que o serviço pode mudar de preço, de comportamento ou desaparecer, e o senhor não tem cópia.</p>
+          </article>
+
+          <article class="termo-verbete" style="--acento:var(--jade)">
+            <h5>Dados de treinamento</h5><span class="en">training data</span>
+            <p>O material de onde o modelo tirou as regularidades. Determina o que ele sabe, o que ignora e o que reproduz — incluindo o que havia de errado no material.</p>
+            <p class="exigir"><b>o que perguntar</b>De onde vieram, com que autorização, e se há material brasileiro suficiente para o uso pretendido. Fornecedor que não responde a isso está pedindo confiança sem oferecer verificação.</p>
+          </article>
+
+          <article class="termo-verbete" style="--acento:var(--jade)">
+            <h5>IA generativa</h5><span class="en">generative AI</span>
+            <p>A que produz conteúdo novo — texto, imagem, som — em vez de apenas classificar ou prever um valor. É a família que popularizou o assunto a partir de 2022, e a que as normas do Fólio 05 nomeiam com mais frequência.</p>
+          </article>
+
+          <article class="termo-verbete" style="--acento:var(--jade)">
+            <h5>Modelo de uso geral</h5><span class="en">general-purpose AI</span>
+            <p>O modelo que não foi feito para uma tarefa, e sim para servir de base a muitas. É a categoria que a lei europeia regula em separado, porque um defeito nela se propaga a todos os sistemas construídos em cima.</p>
+          </article>
+
+          <article class="termo-verbete" style="--acento:var(--jade)">
+            <h5>Ajuste fino</h5><span class="en">fine-tuning</span>
+            <p>Treinar mais um pouco um modelo pronto, sobre material específico, para que ele adote um vocabulário ou um formato. É como um órgão adapta uma ferramenta geral ao próprio jeito de redigir — e é onde dado sensível entra sem que ninguém perceba.</p>
+          </article>
+
+          <article class="termo-verbete" style="--acento:var(--jade)">
+            <h5>Recuperação com geração</h5><span class="en">retrieval-augmented generation</span>
+            <p>Em vez de responder pelo que ficou no modelo, o programa procura os trechos relevantes num acervo escolhido e só então redige, apontando a origem. É a técnica por trás dos leitores de documento do Fólio 08.</p>
+            <p class="exigir"><b>a ressalva</b>A citação diz de onde veio o trecho — não que o trecho sustente a conclusão. Continua sendo preciso abrir.</p>
+          </article>
+
+          <article class="termo-verbete" style="--acento:var(--jade)">
+            <h5>Janela de contexto</h5><span class="en">context window</span>
+            <p>Quanto texto a máquina consegue considerar de uma vez. O que fica fora da janela não é esquecido: nunca esteve lá. Explica por que, em conversa longa, ela parece perder o combinado do início.</p>
+          </article>
+        </div>
+
+        <h3 style="margin:52px 0 4px">O que se pode exigir dela</h3>
+        <p class="prosa" style="font-size:.93em;color:var(--tinta-2)">
+          Aqui estão as palavras que aparecem em edital e em parecer. Várias são usadas como
+          sinônimos e não são — a diferença entre elas é o que se consegue cobrar depois.
+        </p>
+
+        <div class="lexico">
+          <article class="termo-verbete" style="--acento:var(--carimbo)">
+            <h5>Viés algorítmico</h5><span class="en">algorithmic bias</span>
+            <p>Quando o sistema erra de forma sistemática contra um grupo. Não costuma ser defeito de código nem má-fé de quem programou: é o passado presente nos dados. Um modelo treinado com décadas de decisões humanas aprende também as decisões injustas, e as aplica com regularidade que nenhum servidor teria.</p>
+            <p class="exigir"><b>onde isso já aconteceu</b>No caso do auxílio-creche holandês, no Fólio 06, e nos casos brasileiros reunidos em <em>Racismo Algorítmico</em>, na estante do Fólio 12.</p>
+          </article>
+
+          <article class="termo-verbete" style="--acento:var(--carimbo)">
+            <h5>Alucinação</h5><span class="en">hallucination</span>
+            <p>O nome consagrado para a afirmação inventada com aparência de verdadeira. O termo engana: sugere anomalia, defeito ocasional. É o contrário — a máquina produz o enunciado mais provável, e quando o mais provável não é o verdadeiro, ela o produz assim mesmo, com a mesma fluência.</p>
+            <p class="exigir"><b>o custo real</b>A política nacional de IA da África do Sul, no Fólio 05, foi retirada por seis referências inexistentes na bibliografia.</p>
+          </article>
+
+          <article class="termo-verbete" style="--acento:var(--carimbo)">
+            <h5>Explicabilidade</h5><span class="en">explainability</span>
+            <p>Conseguir dizer, em linguagem compreensível, por que aquele resultado saiu — quais fatores pesaram naquele caso concreto. É o que a pessoa afetada precisa para contestar.</p>
+          </article>
+
+          <article class="termo-verbete" style="--acento:var(--carimbo)">
+            <h5>Interpretabilidade</h5><span class="en">interpretability</span>
+            <p>Entender o mecanismo interno do modelo — o que acontece lá dentro. É problema de pesquisa, e continua largamente sem solução para os modelos maiores.</p>
+            <p class="exigir"><b>a distinção que vale ouro</b>Um sistema pode ser explicável sem ser interpretável: dá-se ao cidadão a razão da decisão sem que ninguém saiba descrever o funcionamento da máquina. Confundir os dois termos num edital é comprar o segundo e receber o primeiro.</p>
+          </article>
+
+          <article class="termo-verbete" style="--acento:var(--carimbo)">
+            <h5>Transparência</h5><span class="en">transparency</span>
+            <p>A palavra esconde três perguntas distintas, e é preciso separá-las: <strong>saber que se está diante de uma máquina</strong>; <strong>saber como ela decide</strong>; <strong>saber com que dados foi construída</strong>. Um fornecedor pode atender à primeira e recusar as outras duas — e ainda assim dizer, sem mentir, que seu produto é transparente.</p>
+            <p class="exigir"><b>como escrever no edital</b>Nomear qual das três, ou as três, com o documento correspondente exigido em anexo.</p>
+          </article>
+
+          <article class="termo-verbete" style="--acento:var(--carimbo)">
+            <h5>Rastreabilidade e auditabilidade</h5><span class="en">traceability, auditability</span>
+            <p>Guardar registro suficiente para reconstituir depois o que o sistema fez, quando e com que entrada. Sem isso não há como apurar erro, nem como responsabilizar ninguém.</p>
+            <p class="exigir"><b>já é norma no Judiciário</b>A Resolução CNJ nº 615/2025 determina que o uso de IA seja auditável e rastreável.</p>
+          </article>
+
+          <article class="termo-verbete" style="--acento:var(--carimbo)">
+            <h5>Supervisão humana significativa</h5><span class="en">meaningful human oversight</span>
+            <p>Não basta haver uma pessoa no caminho. A supervisão só existe se essa pessoa tiver informação para discordar, tempo para examinar e autoridade para reverter. Um servidor que vê a recomendação e o botão de confirmar, sem ver o critério, é testemunha — não supervisor.</p>
+            <p class="exigir"><b>a pergunta de teste</b>Quantas vezes, no último ano, alguém recusou a sugestão do sistema? Se a resposta for nenhuma, não há supervisão: há carimbo.</p>
+          </article>
+
+          <article class="termo-verbete" style="--acento:var(--carimbo)">
+            <h5>Direito à revisão</h5><span class="en">right to review</span>
+            <p>O art. 20 da Lei Geral de Proteção de Dados assegura ao titular pedir revisão de decisão tomada unicamente por tratamento automatizado que afete seus interesses, e obter informação clara sobre os critérios usados, ressalvado o segredo comercial.</p>
+            <p class="exigir"><b>o detalhe que quase ninguém sabe</b>O parágrafo que exigia revisão por <em>pessoa natural</em> foi vetado em 2019. Na lei vigente, a revisão pode ser feita por outra máquina. Quem quiser revisão humana no serviço público precisa escrevê-la no contrato ou na norma do órgão — ela não vem da LGPD.</p>
+          </article>
+
+          <article class="termo-verbete" style="--acento:var(--carimbo)">
+            <h5>Prestação de contas</h5><span class="en">accountability</span>
+            <p>Haver alguém identificável que responde pelo resultado, com poder de corrigi-lo. É o teste final de qualquer arranjo: se, diante de um erro, a resposta for "foi o sistema", o arranjo falhou antes de o sistema errar.</p>
+          </article>
+
+          <article class="termo-verbete" style="--acento:var(--carimbo)">
+            <h5>Robustez</h5><span class="en">robustness</span>
+            <p>Comportar-se de modo previsível diante do que não estava previsto — entrada malformada, caso raro, tentativa deliberada de enganar o sistema. Serviço público vive de caso raro: é a exceção que chega ao balcão.</p>
+          </article>
+        </div>
+
+        <h3 style="margin:52px 0 4px">O tamanho da promessa</h3>
+        <p class="prosa" style="font-size:.93em;color:var(--tinta-2)">
+          Quatro termos que separam o que existe do que se anuncia. É onde mais se erra, nos dois
+          sentidos: por deslumbramento e por desdém.
+        </p>
+
+        <div class="lexico">
+          <article class="termo-verbete" style="--acento:var(--ocre)">
+            <h5>IA estreita</h5><span class="en">narrow AI</span>
+            <p>Sistema competente numa faixa determinada de tarefas e incompetente fora dela. <strong>É tudo o que existe hoje</strong>, sem exceção — inclusive as ferramentas do Fólio 08, por mais versáteis que pareçam.</p>
+          </article>
+
+          <article class="termo-verbete" style="--acento:var(--ocre)">
+            <h5>IA geral</h5><span class="en">artificial general intelligence, AGI</span>
+            <p>A hipótese de um sistema que aprenda e transfira aprendizado entre domínios como uma pessoa faz. Não existe, não há definição consensual do que contaria como prova de que chegou, e as previsões de data divergem em décadas entre pesquisadores igualmente sérios.</p>
+            <p class="exigir"><b>como ler o termo num documento</b>Quando aparecer num material comercial, é promessa, não descrição. Quando aparecer num artigo, verifique se o autor define o que está afirmando — em geral não define.</p>
+          </article>
+
+          <article class="termo-verbete" style="--acento:var(--ocre)">
+            <h5>Antropomorfismo</h5><span class="en">anthropomorphism</span>
+            <p>Atribuir intenção, vontade ou compreensão à máquina porque ela escreve como gente. O texto sai em primeira pessoa, pede desculpa, hesita — e nada disso indica estado interno. É o erro mais barato de cometer e o mais caro de manter numa decisão administrativa.</p>
+          </article>
+
+          <article class="termo-verbete" style="--acento:var(--ocre)">
+            <h5>Referencial de avaliação</h5><span class="en">benchmark</span>
+            <p>A prova padronizada com que se comparam modelos. Útil e limitada: mede o que a prova mede. Nota alta em referencial não garante desempenho no expediente, e nenhum referencial existente avalia redação de despacho em português.</p>
+          </article>
+        </div>
+
+        <h3 style="margin:52px 0 4px">O vocabulário do risco</h3>
+        <p class="prosa" style="font-size:.93em;color:var(--tinta-2)">
+          Os termos que aparecem quando alguma coisa dá errado — e um que existe para evitar
+          que dê.
+        </p>
+
+        <div class="lexico">
+          <article class="termo-verbete" style="--acento:var(--tinta-2)">
+            <h5>Síntese profunda</h5><span class="en">deep synthesis, deepfake</span>
+            <p>Rosto, voz ou cena fabricados de modo convincente. "Síntese profunda" é o nome oficial na norma chinesa de janeiro de 2023, no Fólio 05; "deepfake" é o nome corrente. A diferença entre os dois termos é de registro, não de objeto.</p>
+          </article>
+
+          <article class="termo-verbete" style="--acento:var(--tinta-2)">
+            <h5>Proveniência e marcação</h5><span class="en">provenance, watermarking</span>
+            <p>Registro embutido no próprio arquivo, dizendo como aquele conteúdo foi produzido. Sobrevive ao recorte e ao reenvio, ao contrário do aviso escrito na tela. Há um padrão internacional aberto para isso, e a China tornou a marcação obrigatória em setembro de 2025.</p>
+            <p class="exigir"><b>cabe numa cláusula</b>Exigir que todo conteúdo sintético entregue ao órgão traga marcação legível por máquina. Nenhuma lei brasileira obriga; o contrato pode.</p>
+          </article>
+
+          <article class="termo-verbete" style="--acento:var(--tinta-2)">
+            <h5>Alinhamento</h5><span class="en">alignment</span>
+            <p>O esforço para que o sistema persiga o que se pretendia, e não o que foi literalmente pedido. É o problema de que trata o livro de Stuart Russell, na estante do Fólio 12, e a que a constituição escrita do Fólio 07 tenta responder por outro caminho.</p>
+          </article>
+
+          <article class="termo-verbete" style="--acento:var(--tinta-2)">
+            <h5>Injeção de instrução</h5><span class="en">prompt injection</span>
+            <p>Ataque em que o texto de um documento contém ordens dirigidas à máquina — e ela as obedece, confundindo conteúdo com instrução. Por isso o Fólio 09 manda delimitar o material colado com marcas visíveis: é defesa, não estilo.</p>
+          </article>
+        </div>
+
+        <p class="margem-nota" style="max-width:66ch;margin-top:34px">
+          <strong>O critério que atravessa a lista inteira:</strong> quase nenhum desses termos é
+          técnico no sentido de exigir matemática. São termos <em>institucionais</em> — dizem
+          respeito a quem responde, quem verifica e quem pode contestar. É por isso que a
+          alfabetização em IA cabe a um servidor público, e não ao setor de informática: o
+          vocabulário difícil aqui não é o da máquina, é o do dever.
+        </p>
+
+        <div class="fontes">
+          <h4>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+            Referências deste fólio
+          </h4>
+          <ol>
+            <li>União Europeia. <em>Regulamento (UE) 2024/1689</em> — art. 3º, item 56 (definição de alfabetização em IA) e art. 4º (dever de assegurá-la), aplicável desde 2 de fevereiro de 2025. Disponível em: <a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj" target="_blank" rel="noopener noreferrer">eur-lex.europa.eu</a></li>
+            <li>Brasil. <em>Lei nº 13.709, de 14 de agosto de 2018</em>, art. 20 — direito à revisão de decisões automatizadas. O § 3º, que exigia revisão por pessoa natural, foi vetado quando da <em>Lei nº 13.853, de 8 de julho de 2019</em> (Mensagem de veto nº 288/2019), e o veto foi mantido.</li>
+            <li>Conselho Nacional de Justiça. <em>Resolução nº 615, de 11 de março de 2025</em> — auditabilidade, rastreabilidade, supervisão humana e capacitação continuada.</li>
+            <li>OCDE. <em>Recommendation of the Council on Artificial Intelligence</em> — definição de sistema de IA adotada também pela União Europeia, tratada no Fólio 02.</li>
+            <li>Anthropic. <em>Constitutional AI</em> e <em>AI Fluency</em> — para os verbetes de alinhamento e para as quatro competências do Fólio 07.</li>
+            <li>China. Administração do Ciberespaço. Disposições sobre síntese profunda, em vigor desde 10 de janeiro de 2023, e medidas de rotulagem de conteúdo sintético, em vigor desde 1º de setembro de 2025.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
     <!-- Trilha -->
     <section class="parte" id="trilha">
       <div class="caixa">
         <div class="cabeca">
-          <p class="etiqueta">Fólio 13 · para continuar depois</p>
+          <p class="etiqueta">Fólio 14 · para continuar depois</p>
           <h2><span class="selo-secao" aria-hidden="true">人</span>Recomendação de trilha</h2>
           <p class="abertura">
             Este site dá o mapa. Quem dá a aula é outra pessoa — e com voz, quadro e tempo,
