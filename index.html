@@ -246,6 +246,8 @@ main{ min-width:0; }
   position:relative; margin:40px 0 0; max-width:620px; padding:32px 130px 28px 34px;
   background:var(--folha); border:1px solid var(--fio); border-radius:var(--r-2); box-shadow:var(--sombra-1);
 }
+/* na capa ela abre a página: sem margem acima, e com respiro antes da data */
+.capa > .dedicatoria:first-child{ margin:0 0 38px; }
 .dedicatoria p{ font-family:var(--display); font-size:1.1em; line-height:1.6; margin-bottom:.85em; }
 .votos{ font-family:var(--display); font-size:1.15em; color:var(--carimbo); margin:0 0 .5em; }
 .assinatura{ display:flex; align-items:center; gap:11px; font-size:.85rem; color:var(--tinta-3); }
@@ -1215,6 +1217,24 @@ footer{
 
     <!-- 01 ───────────────────────────────────────────────── -->
     <section class="capa" id="capa">
+      <figure class="dedicatoria">
+        <p>
+          Pai, o senhor escolheu um ofício que quase não aparece: ficar entre a norma e a
+          pessoa, e impedir que a primeira esmague a segunda. É trabalho de tradução — e é,
+          no fundo, trabalho filosófico, porque exige decidir todo dia o que é justo quando
+          a regra não alcança o caso.
+        </p>
+        <p>
+          A máquina que este site explica vai ocupar esse mesmo espaço nos próximos anos.
+          Queria que o senhor a conhecesse antes que ela chegasse ao seu setor, e que
+          continuasse sendo o senhor a assinar embaixo.
+        </p>
+        <p class="votos">Feliz Dia dos Pais.</p>
+        <figcaption class="assinatura">Sua filha — Luyza Alexandre</figcaption>
+        <span class="carimbo" aria-hidden="true" title="父亲节 (fùqīn jié) — Dia dos Pais">父亲节</span>
+        <span class="sr">Selo vermelho com os caracteres chineses 父亲节, fùqīn jié, que significam Dia dos Pais.</span>
+      </figure>
+
       <p class="data-capa">
         <span>Dia dos Pais</span><span class="ponto"></span><span>agosto de 2026</span><span class="ponto"></span><span>edição única</span>
       </p>
@@ -1240,24 +1260,6 @@ footer{
         por quais mãos ela passa, o que já vem decidindo em nome do Estado e em que ponto a
         decisão precisa voltar a ser de alguém que responde por ela.
       </p>
-
-      <figure class="dedicatoria">
-        <p>
-          Pai, o senhor escolheu um ofício que quase não aparece: ficar entre a norma e a
-          pessoa, e impedir que a primeira esmague a segunda. É trabalho de tradução — e é,
-          no fundo, trabalho filosófico, porque exige decidir todo dia o que é justo quando
-          a regra não alcança o caso.
-        </p>
-        <p>
-          A máquina que este site explica vai ocupar esse mesmo espaço nos próximos anos.
-          Queria que o senhor a conhecesse antes que ela chegasse ao seu setor, e que
-          continuasse sendo o senhor a assinar embaixo.
-        </p>
-        <p class="votos">Feliz Dia dos Pais.</p>
-        <figcaption class="assinatura">Sua filha — Luyza Alexandre</figcaption>
-        <span class="carimbo" aria-hidden="true" title="父亲节 (fùqīn jié) — Dia dos Pais">父亲节</span>
-        <span class="sr">Selo vermelho com os caracteres chineses 父亲节, fùqīn jié, que significam Dia dos Pais.</span>
-      </figure>
 
       <figure class="convite">
         <figcaption class="video-tit">Antes de começar, quatro minutos</figcaption>
