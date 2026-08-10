@@ -29,13 +29,13 @@ Dez seções em três partes, ordenadas por importância para o leitor. Cada uma
 **página independente** — não há rolagem contínua entre seções.
 
 **Parte I · A questão**
-`01` Início · `02` Quem constrói a IA · `03` Ética e sociedade · `04` Regulamentação da IA · `05` IA no serviço público
+`01` Início · `02` Como a IA chegou aqui · `03` Quem constrói a IA · `04` Ética e sociedade · `05` Regulamentação da IA · `06` IA no serviço público
 
 **Parte II · A prática**
-`06` Ferramentas do dia a dia · `07` O método 4D · `08` Engenharia de prompt
+`07` Ferramentas do dia a dia · `08` O método 4D · `09` Engenharia de prompt
 
-**Parte III · O mundo**
-`09` China em foco · `10` Como a IA chegou aqui
+**Parte III · Um país à parte**
+`10` China em foco
 
 ---
 
