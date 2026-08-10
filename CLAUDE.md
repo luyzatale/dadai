@@ -14,12 +14,12 @@ Ele é normativo, não sugestivo.
 
 ## Não há build, teste nem dependência
 
-`mvp/index.html` é **um único arquivo autocontido** — HTML, CSS e JavaScript no mesmo
+`index.html`, na raiz do repositório, é **um único arquivo autocontido** — HTML, CSS e JavaScript no mesmo
 documento, sem framework, sem pacote, sem etapa de compilação. Cerca de 2.500 linhas,
 das quais ~900 de CSS e ~210 de JS.
 
 ```bash
-start mvp/index.html          # abrir no navegador padrão (Windows)
+start index.html              # abrir no navegador padrão (Windows)
 ```
 
 Não crie `package.json`, bundler ou servidor. A ausência deles é decisão de projeto: o
@@ -31,7 +31,7 @@ Não há suíte de testes. Rode esta conferência — ela pegou vários defeitos
 (colisão de cascata, CSS órfão, tag desbalanceada):
 
 ```bash
-cd mvp && python -c "
+python -c "
 import io,re,collections,subprocess,tempfile,os
 s=io.open('index.html',encoding='utf-8').read()
 b=s[s.index('<body'):s.rindex('</body>')]
@@ -149,7 +149,7 @@ Detalhe e razão em [DIRETRIZES-DE-CONTEUDO.md](DIRETRIZES-DE-CONTEUDO.md). O re
   nos títulos, 父亲节 no selo da dedicatória, 中 na marca-d'água da China).
 - **Livros só com edição em português confirmada** (editora e tradutor). Quando a regra derrubar
   um título importante, dizer no texto o que se perdeu.
-- **Logotipos só a partir de arquivo oficial** em `mvp/logos/`. Enquanto não existirem, o
+- **Logotipos só a partir de arquivo oficial** em `logos/`. Enquanto não existirem, o
   ladrilho `.logo-org` mostra monograma neutro com ponto ocre de pendência. **Não desenhar marca
   registrada de memória.**
 - Quando faltar informação verificável, **deixar lacuna explícita** numa `.escopo` em vez de

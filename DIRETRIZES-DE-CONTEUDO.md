@@ -99,7 +99,7 @@ a uma companhia ao longo do site.
 
 ### Onde colocar os arquivos
 
-`mvp/logos/<empresa>.svg` — o nome do arquivo em minúsculas, sem acento
+`logos/<empresa>.svg` — o nome do arquivo em minúsculas, sem acento
 (`deepseek.svg`, `alibaba.svg`, `baidu.svg`, `openai.svg`, `anthropic.svg`).
 
 ---

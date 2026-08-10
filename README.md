@@ -11,15 +11,22 @@ Estado e em que ponto a decisão precisa voltar a ser de alguém que responde po
 
 ## Estado atual
 
-**MVP de design aprovado em revisão.** A estrutura, o sistema visual e a experiência estão
-definidos; o conteúdo integral de cada seção ainda será escrito.
+**Design aprovado; conteúdo em construção.** A estrutura, o sistema visual e a experiência
+estão definidos. Dois fólios já têm conteúdo integral, com fontes verificadas: o **04**
+(ética e sociedade, dezesseis verbetes) e a cronologia do **02** (doze marcos). Os demais
+ainda trazem amostra de formato e uma nota declarando o que falta.
 
 | | |
 |---|---|
-| Protótipo navegável | [`mvp/index.html`](mvp/index.html) — arquivo único, sem dependências |
+| No ar | <https://luyzatale.github.io/dadai/> |
+| Protótipo navegável | [`index.html`](index.html) — arquivo único, sem dependências |
 | Regra de conteúdo | [`DIRETRIZES-DE-CONTEUDO.md`](DIRETRIZES-DE-CONTEUDO.md) |
 
-Para ver: abra `mvp/index.html` em qualquer navegador. Não requer servidor nem build.
+Para ver localmente: abra `index.html` em qualquer navegador. Não requer servidor nem build.
+
+O site é publicado pelo GitHub Pages a partir da raiz do ramo `main` — por isso o arquivo
+mora na raiz, e não em subpasta. O `.nojekyll` desliga o processamento do Jekyll, para que
+o arquivo seja servido exatamente como está no repositório.
 
 ---
 

@@ -115,7 +115,7 @@ button,a,.aba,.tema{ touch-action:manipulation; -webkit-tap-highlight-color:tran
   border-bottom:1px solid var(--fio);
 }
 .marca{ display:flex; align-items:center; gap:11px; text-decoration:none; margin-right:auto; min-width:0; }
-/* logo: selo 白文 — caractere reservado em branco sobre campo vermelho */
+/* logo: selo de caractere reservado — glifo em branco sobre campo vermelho */
 .marca-selo{
   position:relative; width:36px; height:36px; flex:none; border-radius:var(--r-1);
   background:var(--carimbo); color:#fff; display:grid; place-items:center;
@@ -332,6 +332,12 @@ body[data-nivel="mais"]     .so-simples{ display:none; }
   background:var(--papel-2); border:1px solid var(--fio); font-size:.76rem; color:var(--tinta-3); font-weight:600;
 }
 .onde svg{ width:12px; height:12px; }
+/* "por que isso importa" de cada marco — ocre, como toda anotação de margem */
+.evento .marco-nota{
+  display:block; max-width:58ch; margin:0 0 10px; padding-left:12px;
+  border-left:2px solid var(--ocre); font-size:.88em; color:var(--tinta-2);
+}
+.evento .marco-nota b{ color:var(--ocre); font-weight:650; }
 
 /* abas */
 .abas{ display:flex; flex-wrap:wrap; gap:7px; margin-bottom:26px; padding-bottom:14px; border-bottom:1px solid var(--fio); }
@@ -416,6 +422,10 @@ body[data-nivel="mais"]     .so-simples{ display:none; }
 @media (hover:hover){ .tema:hover{ border-color:var(--carimbo); background:var(--carimbo-f); } }
 .tema:active{ border-color:var(--carimbo); background:var(--carimbo-f); }
 .tema .folio{ color:var(--tinta-3); }
+/* tema aberto: mesmo tratamento do item corrente do sumário — carimbo marca
+   posição, não destaque decorativo.                                        */
+.tema[aria-pressed="true"]{ border-color:var(--carimbo); background:var(--carimbo-f); color:var(--carimbo); }
+.tema[aria-pressed="true"] .folio{ color:var(--carimbo); }
 
 .verbete{
   margin-top:22px; padding:32px; background:var(--folha);
@@ -423,6 +433,21 @@ body[data-nivel="mais"]     .so-simples{ display:none; }
 }
 .verbete h3{ font-size:1.55rem; margin-bottom:12px; }
 .verbete .prosa{ color:var(--tinta-2); }
+/* a pergunta humana que abre cada verbete — exigida pelas diretrizes */
+.verbete .eixo{
+  font-family:var(--display); font-style:italic; font-size:1.12rem; line-height:1.5;
+  color:var(--tinta-2); margin:0 0 22px; padding-left:16px;
+  border-left:1px solid var(--fio-2); max-width:58ch;
+}
+/* onde os especialistas não concordam, o verbete diz que não concordam */
+.divergencia{
+  margin:20px 0 0; padding:15px 18px; border:1px dashed var(--fio-2);
+  border-radius:var(--r-2); background:var(--papel-2); font-size:.92em; color:var(--tinta-2);
+}
+.divergencia b{
+  display:block; font-family:var(--dado); font-size:.68rem; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--tinta-3); margin-bottom:5px;
+}
 .margem-nota{
   margin:20px 0; padding:16px 20px; background:var(--ocre-f);
   border-left:2px solid var(--ocre); border-radius:0 var(--r-1) var(--r-1) 0;
@@ -949,7 +974,7 @@ footer{
   </button>
 
   <a class="marca" href="#capa">
-    <span class="marca-selo" aria-hidden="true" title="人 (rén) — humano. Primeiro caractere de 人工智能, inteligência artificial">人</span>
+    <span class="marca-selo" aria-hidden="true" title="人 (rén) — humano. É também o primeiro caractere da expressão chinesa para inteligência artificial">人</span>
     <span class="marca-txt">
       <b>Dad AI - Júlio Cesar</b>
       <i>O Homem que Revisa a IA</i>
@@ -1191,7 +1216,7 @@ footer{
         </div>
 
         <p class="margem-nota" style="max-width:66ch">
-          <strong>Antes que a história comece:</strong> nenhuma dessas definições existia quando o
+          <strong>Antes da cronologia:</strong> nenhuma dessas definições existia quando o
           nome foi inventado. Em 1955, ao propor o encontro que batizaria o campo, John McCarthy
           e três colegas não definiram nada — apostaram: <em>"o estudo deve prosseguir com base
           na conjectura de que todo aspecto da aprendizagem, ou qualquer outra característica da
@@ -1200,36 +1225,191 @@ footer{
           frase — que não era uma definição, e sim uma conjectura ainda hoje em aberto.
         </p>
 
-        <h3 style="margin:48px 0 20px">Cronologia: a história em quatro momentos</h3>
+        <h3 style="margin:48px 0 8px">Cronologia: doze marcos</h3>
+        <p class="prosa" style="font-size:.93em;color:var(--tinta-2);margin-bottom:22px">
+          Não é a história completa da técnica — é a lista dos momentos em que ela mudou de
+          natureza, e não apenas de tamanho. As referências ao final seguem esta mesma ordem.
+        </p>
         <div class="cronologia">
           <article class="evento">
+            <p class="quando">1950</p>
+            <h3>A pergunta antes da coisa</h3>
+            <p>Seis anos antes de o campo ter nome, Alan Turing publica um artigo que começa
+            perguntando se máquinas podem pensar — e imediatamente descarta a própria pergunta
+            por considerá-la mal formulada. No lugar dela propõe um teste de conduta: se, numa
+            conversa por escrito, um interrogador não distinguir a máquina de uma pessoa, insistir
+            que ela não pensa passa a exigir um argumento que ninguém apresentou.</p>
+            <span class="marco-nota"><b>por que isso importa</b> a discussão nasce filosófica, não
+            técnica. Setenta e seis anos depois, a pergunta de Turing continua sem resposta — o que
+            se conseguiu foi construir a máquina que a torna incômoda.</span>
+            <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Manchester, Reino Unido</span>
+          </article>
+
+          <article class="evento">
             <p class="quando">1956</p>
-            <h3>O nome nasce numa sala de aula</h3>
-            <p>Um grupo de professores reserva um verão inteiro para "fazer máquinas pensarem". Cunham o termo <em>inteligência artificial</em> e erram feio no prazo: achavam que bastariam alguns meses.</p>
+            <h3>O nome nasce numa proposta de verão</h3>
+            <p>John McCarthy, Marvin Minsky, Nathaniel Rochester e Claude Shannon reservam um
+            verão inteiro em Dartmouth para "fazer máquinas pensarem". Cunham o termo
+            <em>inteligência artificial</em> e erram feio no prazo: achavam que bastariam alguns
+            meses e dez pessoas.</p>
+            <span class="marco-nota"><b>por que isso importa</b> a proposta não definia nada —
+            apostava. A conjectura que ela escreveu segue em aberto, e é sobre ela que todas as
+            definições oficiais do topo desta página vieram, depois, tentar fechar cerca.</span>
             <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Dartmouth, Estados Unidos</span>
+          </article>
+
+          <article class="evento">
+            <p class="quando">1966</p>
+            <h3>O susto de quem construiu a primeira</h3>
+            <p>Joseph Weizenbaum, professor no MIT, escreve ELIZA — um programa que devolvia a
+            fala do interlocutor em forma de pergunta, imitando um psicoterapeuta. Não havia
+            compreensão alguma ali, e ele sabia. O que o abalou foi outra coisa: pessoas informadas
+            do funcionamento do programa passaram a lhe confiar intimidades, e a pedir para
+            conversar a sós com ele.</p>
+            <span class="marco-nota"><b>por que isso importa</b> Weizenbaum passou o resto da vida
+            argumentando que a questão não é o que a máquina consegue fazer, e sim o que não se
+            deve entregar a ela — decisões que exijam compaixão e sabedoria. É a crítica mais antiga
+            do campo, escrita por um dos seus fundadores.</span>
+            <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Cambridge, Estados Unidos</span>
           </article>
 
           <article class="evento">
             <p class="quando">1974 – 1993</p>
             <h3>Os dois invernos</h3>
-            <p>Duas vezes o dinheiro seca e a área quase desaparece. A lição que ficou: entusiasmo sem resultado prático custa caro — inclusive em orçamento público.</p>
+            <p>Duas vezes o financiamento seca e a área quase desaparece. Não por fracasso técnico
+            isolado, e sim por distância entre o que fora prometido e o que fora entregue —
+            distância que relatórios de auditoria governamental documentaram e usaram como
+            fundamento para cortar.</p>
+            <span class="marco-nota"><b>por que isso importa</b> entusiasmo sem resultado
+            verificável custa caro, e o primeiro orçamento a ser cortado é sempre o público. Vale
+            lembrar disso ao ler qualquer promessa atual.</span>
             <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Reino Unido e Estados Unidos</span>
+          </article>
+
+          <article class="evento">
+            <p class="quando">11 de maio de 1997</p>
+            <h3>A máquina vence no xadrez</h3>
+            <p>O computador Deep Blue derrota Garry Kasparov, campeão mundial, numa partida
+            decisiva. Não houve intuição nem estratégia no sentido humano: houve capacidade de
+            examinar posições em volume que nenhuma pessoa alcança.</p>
+            <span class="marco-nota"><b>por que isso importa</b> foi a primeira vez que uma tarefa
+            tida como prova de inteligência caiu por força bruta. Toda vez que isso acontece, a
+            reação é a mesma — redefinir o que contava como inteligência para excluir o que a
+            máquina acabou de fazer.</span>
+            <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Nova York, Estados Unidos</span>
           </article>
 
           <article class="evento">
             <p class="quando">2012</p>
             <h3>A máquina aprende a enxergar</h3>
-            <p>Um programa passa a reconhecer objetos em fotos melhor que qualquer método anterior. É o estouro do <button class="termo" data-termo="profundo">aprendizado profundo</button> e o início de tudo que veio depois.</p>
+            <p>Num concurso anual de reconhecimento de imagens, um programa da Universidade de
+            Toronto reduz o erro de forma tão grande que o método anterior é abandonado pela área
+            inteira em poucos meses. É o estouro do
+            <button class="termo" data-termo="profundo">aprendizado profundo</button>.</p>
+            <span class="marco-nota"><b>por que isso importa</b> aqui a técnica muda de natureza:
+            deixa de seguir regras escritas por pessoas e passa a extrair os próprios critérios dos
+            exemplos. Daí em diante, ninguém consegue apontar a linha de código responsável por uma
+            decisão — porque ela não existe.</span>
             <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Toronto, Canadá</span>
+          </article>
+
+          <article class="evento">
+            <p class="quando">março de 2016</p>
+            <h3>Uma jogada que ninguém tinha visto</h3>
+            <p>O programa AlphaGo derrota Lee Sedol, um dos maiores jogadores de gô do mundo, por
+            quatro partidas a uma. O gô é grande demais para força bruta. E numa das partidas a
+            máquina fez uma jogada que comentaristas classificaram inicialmente como erro, e que se
+            revelou decisiva.</p>
+            <span class="marco-nota"><b>por que isso importa</b> não foi só uma vitória: foi a
+            primeira vez que um sistema produziu uma solução que os melhores especialistas humanos
+            não teriam considerado — e que nenhum deles soube explicar de imediato.</span>
+            <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Seul, Coreia do Sul</span>
+          </article>
+
+          <article class="evento">
+            <p class="quando">2017</p>
+            <h3>Dois documentos, um mês de distância</h3>
+            <p>Em junho, um artigo de pesquisa descreve a arquitetura que serve de base a
+            praticamente tudo o que veio depois — o texto passou a ser processado inteiro de uma
+            vez, e não palavra após palavra. Em 20 de julho, o Conselho de Estado da China publica
+            um plano nacional com metas datadas para 2020, 2025 e 2030, ano em que o país pretende
+            ser o principal centro mundial de inovação no assunto.</p>
+            <span class="marco-nota"><b>por que isso importa</b> num mês, a técnica ganhou o método
+            que a tornaria viável e um Estado a transformou em política pública com prazo. Nenhuma
+            das duas coisas funciona sem a outra, e o Brasil só teve a segunda muito depois.</span>
+            <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Estados Unidos e Pequim, China</span>
+          </article>
+
+          <article class="evento">
+            <p class="quando">14 de agosto de 2018</p>
+            <h3>O Brasil escreve sua lei de dados</h3>
+            <p>É sancionada a Lei Geral de Proteção de Dados Pessoais, que entraria em vigor em
+            setembro de 2020. Ela não trata de inteligência artificial pelo nome, mas trata da
+            matéria-prima dela — e assegura ao cidadão o direito de contestar decisão tomada apenas
+            por máquina.</p>
+            <span class="marco-nota"><b>por que isso importa</b> é a norma que já obriga o serviço
+            público brasileiro hoje, sem esperar a lei de IA. Toda exigência que um órgão pode fazer
+            a um fornecedor, neste momento, sai daqui.</span>
+            <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Brasília, Brasil</span>
+          </article>
+
+          <article class="evento">
+            <p class="quando">novembro e dezembro de 2022</p>
+            <h3>A técnica sai do laboratório</h3>
+            <p>Em 30 de novembro, um assistente de conversa é aberto ao público e alcança milhões
+            de usuários em dias. Semanas depois, em dezembro, a Anthropic publica um método
+            alternativo para orientar a conduta desses sistemas: escrever um documento de princípios
+            em linguagem comum — uma constituição — e ensinar a máquina a julgar as próprias
+            respostas contra ele.</p>
+            <span class="marco-nota"><b>por que isso importa</b> nas mesmas semanas, a tecnologia
+            chegou a qualquer pessoa e alguém propôs governá-la por texto escrito e revisável. O
+            Fólio 07 volta a esse ponto: é a forma de uma norma administrativa, redigida por quem
+            ninguém elegeu.</span>
+            <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> São Francisco, Estados Unidos</span>
+          </article>
+
+          <article class="evento">
+            <p class="quando">2024</p>
+            <h3>O ano em que a regra virou lei</h3>
+            <p>Em 1º de agosto entra em vigor o regulamento europeu de inteligência artificial, a
+            primeira lei geral do mundo sobre o assunto. Em 22 de setembro, a ONU adota o Pacto
+            Digital Global, primeiro acordo universal sobre governança do tema. Em 10 de dezembro,
+            o Senado brasileiro aprova por unanimidade o PL 2.338/2023.</p>
+            <span class="marco-nota"><b>por que isso importa</b> em quatro meses o assunto deixou
+            de ser objeto de recomendação e passou a ser objeto de norma exigível — primeiro fora,
+            e depois, parcialmente, aqui. É o ano em que a conversa mudou de área: saiu da
+            engenharia e entrou no direito.</span>
+            <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Bruxelas, Nova York e Brasília</span>
           </article>
 
           <article class="evento">
             <p class="quando">2025 – 2026</p>
             <h3>A corrida deixa de ser de um país só</h3>
-            <p>Modelos abertos chineses passam a competir de igual para igual com os americanos, a um custo muito menor. O tabuleiro muda e o Sul Global entra na conversa.</p>
-            <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Hangzhou e Pequim, China</span>
+            <p>Em 27 de janeiro de 2025, depois do lançamento de um modelo chinês aberto e barato,
+            as ações da Nvidia caem 17% num único dia e a empresa perde cerca de 589 bilhões de
+            dólares em valor de mercado — a maior queda diária já registrada para uma companhia na
+            bolsa americana. Em julho de 2025, no Rio de Janeiro, o BRICS assina sua primeira
+            declaração sobre governança de IA. Em julho de 2026, o painel científico da ONU publica
+            seu primeiro relatório.</p>
+            <span class="marco-nota"><b>por que isso importa</b> a queda da Nvidia não foi sobre
+            uma empresa: foi o mercado reconhecendo que o custo de entrada tinha despencado. Modelo
+            aberto significa que um Estado pode baixar e rodar por conta própria, sem depender de
+            fornecedor estrangeiro. É a diferença entre alugar e possuir.</span>
+            <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Hangzhou, Rio de Janeiro e Nova York</span>
           </article>
         </div>
+
+        <p class="criterio" style="margin-top:26px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg>
+          <span><strong>Uma ressalva sobre o custo do modelo chinês:</strong> os números
+          divulgados variam muito conforme o que se conta. O artigo publicado em setembro de 2025
+          na revista <em>Nature</em> informa cerca de 294 mil dólares para a etapa final de
+          treinamento do modelo de raciocínio — valor que não inclui o modelo de base sobre o qual
+          ele foi construído, nem pesquisa, pessoal e infraestrutura. A comparação com os bilhões
+          atribuídos a modelos americanos, portanto, não é entre coisas equivalentes. O que o
+          episódio demonstrou com segurança foi outra coisa: que o resultado podia ser alcançado
+          com muito menos do que o mercado supunha necessário.</span>
+        </p>
 
         <div class="fontes">
           <h4>
@@ -1237,15 +1417,29 @@ footer{
             Referências deste fólio
           </h4>
           <ol>
-            <li>OCDE. <em>Recommendation of the Council on Artificial Intelligence</em> (OECD/LEGAL/0449). Definição de “sistema de IA” revista em novembro de 2023. Disponível em: <a href="https://oecd.ai/en/ai-principles" target="_blank" rel="noopener noreferrer">oecd.ai/en/ai-principles</a></li>
-            <li>União Europeia. <em>Regulamento (UE) 2024/1689</em>, artigo 3º, item 1. Jornal Oficial da União Europeia, 2024. Disponível em: <a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng" target="_blank" rel="noopener noreferrer">eur-lex.europa.eu/eli/reg/2024/1689</a></li>
-            <li>Brasil. Senado Federal. <em>Projeto de Lei nº 2.338, de 2023</em>, artigo 4º. Aprovado na forma do Substitutivo em 10 de dezembro de 2024 e remetido à Câmara dos Deputados. Disponível em: <a href="https://www25.senado.leg.br/web/atividade/materias/-/materia/157233" target="_blank" rel="noopener noreferrer">senado.leg.br · matéria 157233</a></li>
-            <li>UNESCO. <em>Recommendation on the Ethics of Artificial Intelligence</em>. Adotada por aclamação pelos 193 Estados-membros em novembro de 2021. Disponível em: <a href="https://www.unesco.org/en/artificial-intelligence/recommendation-ethics" target="_blank" rel="noopener noreferrer">unesco.org · recommendation-ethics</a></li>
+            <li><b>Definições.</b> OCDE. <em>Recommendation of the Council on Artificial Intelligence</em> (OECD/LEGAL/0449), definição revista em novembro de 2023. Disponível em: <a href="https://oecd.ai/en/ai-principles" target="_blank" rel="noopener noreferrer">oecd.ai/en/ai-principles</a></li>
+            <li>União Europeia. <em>Regulamento (UE) 2024/1689</em>, artigo 3º, item 1. Publicado no Jornal Oficial em 12 de julho de 2024; em vigor desde 1º de agosto de 2024. Disponível em: <a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng" target="_blank" rel="noopener noreferrer">eur-lex.europa.eu/eli/reg/2024/1689</a></li>
+            <li>Brasil. Senado Federal. <em>Projeto de Lei nº 2.338, de 2023</em>, artigo 4º. Aprovado em 10 de dezembro de 2024 e remetido à Câmara. Disponível em: <a href="https://www25.senado.leg.br/web/atividade/materias/-/materia/157233" target="_blank" rel="noopener noreferrer">senado.leg.br · matéria 157233</a></li>
+            <li>UNESCO. <em>Recommendation on the Ethics of Artificial Intelligence</em>. Adotada pelos 193 Estados-membros em novembro de 2021. Disponível em: <a href="https://www.unesco.org/en/artificial-intelligence/recommendation-ethics" target="_blank" rel="noopener noreferrer">unesco.org · recommendation-ethics</a></li>
+            <li><b>Cronologia, na ordem dos marcos.</b> Turing, A. M. "Computing Machinery and Intelligence". <em>Mind</em>, v. LIX, n. 236, p. 433–460, outubro de 1950.</li>
             <li>McCarthy, J.; Minsky, M.; Rochester, N.; Shannon, C. <em>A Proposal for the Dartmouth Summer Research Project on Artificial Intelligence</em>, 31 de agosto de 1955. Reeditado em <em>AI Magazine</em>, v. 27, n. 4, 2006.</li>
+            <li>Weizenbaum, J. "ELIZA — A Computer Program for the Study of Natural Language Communication between Man and Machine". <em>Communications of the ACM</em>, v. 9, n. 1, 1966. E, do mesmo autor, <em>Computer Power and Human Reason: From Judgment to Calculation</em>. São Francisco: W. H. Freeman, 1976 — sem edição em português confirmada até esta data.</li>
+            <li>Reino Unido. <em>Lighthill Report — Artificial Intelligence: A General Survey</em>. Science Research Council, 1973 — documento que fundamentou o primeiro corte de financiamento britânico.</li>
+            <li>Deep Blue e Garry Kasparov, partida decisiva do segundo confronto, 11 de maio de 1997, Nova York.</li>
+            <li>Krizhevsky, A.; Sutskever, I.; Hinton, G. E. "ImageNet Classification with Deep Convolutional Neural Networks". <em>Advances in Neural Information Processing Systems 25</em>, 2012.</li>
+            <li>Silver, D. <em>et al.</em> "Mastering the game of Go with deep neural networks and tree search". <em>Nature</em>, v. 529, p. 484–489, 2016. Confronto com Lee Sedol em Seul, março de 2016.</li>
+            <li>Vaswani, A. <em>et al.</em> "Attention Is All You Need", junho de 2017. Disponível em: <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener noreferrer">arxiv.org/abs/1706.03762</a></li>
+            <li>China. Conselho de Estado. <em>New Generation Artificial Intelligence Development Plan</em>, publicado em 20 de julho de 2017. Tradução integral para o inglês pelo projeto DigiChina, Universidade Stanford: <a href="https://digichina.stanford.edu/work/full-translation-chinas-new-generation-artificial-intelligence-development-plan-2017/" target="_blank" rel="noopener noreferrer">digichina.stanford.edu</a></li>
+            <li>Brasil. <em>Lei nº 13.709, de 14 de agosto de 2018</em> (LGPD), publicada em 15 de agosto de 2018 e em vigor desde setembro de 2020. Disponível em: <a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm" target="_blank" rel="noopener noreferrer">planalto.gov.br · Lei 13.709/2018</a></li>
+            <li>Bai, Y. <em>et al.</em> "Constitutional AI: Harmlessness from AI Feedback". Anthropic, dezembro de 2022. Disponível em: <a href="https://arxiv.org/abs/2212.08073" target="_blank" rel="noopener noreferrer">arxiv.org/abs/2212.08073</a></li>
+            <li>Nações Unidas. <em>Global Digital Compact</em>, anexo ao <em>Pact for the Future</em>, adotado em 22 de setembro de 2024.</li>
+            <li>CNBC. "Nvidia sheds almost $600 billion in market cap, biggest drop ever", 27 de janeiro de 2025. Disponível em: <a href="https://www.cnbc.com/2025/01/27/nvidia-sheds-almost-600-billion-in-market-cap-biggest-drop-ever.html" target="_blank" rel="noopener noreferrer">cnbc.com · 27/1/2025</a></li>
+            <li>BRICS. <em>Declaração dos Líderes do BRICS sobre a Governança Global da Inteligência Artificial</em>. Rio de Janeiro, 6 de julho de 2025.</li>
+            <li>Painel Científico Internacional Independente e Multidisciplinar sobre Inteligência Artificial. Primeiro relatório, 1º de julho de 2026. Ver: <a href="https://brasil.un.org/pt-br/318460-painel-cient%C3%ADfico-sobre-intelig%C3%AAncia-artificial-lan%C3%A7a-primeiro-relat%C3%B3rio-sobre-oportunidades" target="_blank" rel="noopener noreferrer">brasil.un.org · primeiro relatório do painel</a></li>
           </ol>
         </div>
 
-        <p class="escopo"><b>a seguir</b><span>Doze marcos, cada um com "por que isso importa para o senhor" e a fonte histórica correspondente.</span></p>
+        <p class="escopo"><b>o que fica de fora</b><span>Doze marcos não são a história do campo. Ficaram de fora, entre outros, os sistemas especialistas dos anos 1980, a vitória do Watson no programa de perguntas em 2011 e a linhagem inteira da robótica — nenhum deles mudou a natureza da técnica, que é o critério desta lista. Datas e valores serão reconferidos antes da versão final.</span></p>
       </div>
     </section>
     <!-- 04 ───────────────────────────────────────────────── -->
@@ -1302,48 +1496,84 @@ footer{
           </p>
         </div>
 
-        <div class="temas">
-          <button class="tema"><span class="folio">01</span> Design Sensível a Valores (VSD)</button>
-          <button class="tema"><span class="folio">02</span> Lei de IA da União Europeia</button>
-          <button class="tema"><span class="folio">03</span> Legislação brasileira de IA</button>
-          <button class="tema"><span class="folio">04</span> A abordagem dos BRICS</button>
-          <button class="tema"><span class="folio">05</span> Sociedade 5.0</button>
-          <button class="tema"><span class="folio">06</span> Governança de dados (DMBOK)</button>
-          <button class="tema"><span class="folio">07</span> Direitos humanos digitais</button>
-          <button class="tema"><span class="folio">08</span> Mídia sintética e a crise do real</button>
-          <button class="tema"><span class="folio">09</span> IA e democracia</button>
-          <button class="tema"><span class="folio">10</span> Economia cognitiva</button>
-          <button class="tema"><span class="folio">11</span> IA agêntica e organizações autônomas</button>
-          <button class="tema"><span class="folio">12</span> Colonialismo de dados</button>
-          <button class="tema"><span class="folio">13</span> IA e clima</button>
-          <button class="tema"><span class="folio">14</span> Identidade digital e o "eu"</button>
-          <button class="tema"><span class="folio">15</span> A morte na era digital</button>
-          <button class="tema"><span class="folio">16</span> Tecnologia e inclusão social</button>
+        <p class="prosa" style="font-size:.93em;color:var(--tinta-2);margin-bottom:18px">
+          Cada um dos temas abaixo abre um verbete. O comutador troca a extensão do texto:
+          <strong>Essencial</strong> dá o argumento inteiro em um parágrafo;
+          <strong>Aprofundar</strong> o substitui pela versão com a norma, a data e a
+          controvérsia. A nota em ocre e as referências permanecem nos dois.
+        </p>
+
+        <div class="niveis" role="group" aria-label="Nível de explicação">
+          <button data-nivel="simples" aria-pressed="true">Essencial</button>
+          <button data-nivel="mais"    aria-pressed="false">Aprofundar</button>
         </div>
 
-        <article class="verbete">
-          <p class="etiqueta">Amostra do formato · tema 02</p>
-          <h3>A Lei de IA da União Europeia</h3>
+        <div class="temas" id="temasEtica">
+          <button class="tema" data-verbete="v01" aria-pressed="true"><span class="folio">01</span> Design Sensível a Valores</button>
+          <button class="tema" data-verbete="v02" aria-pressed="false"><span class="folio">02</span> Lei de IA da União Europeia</button>
+          <button class="tema" data-verbete="v03" aria-pressed="false"><span class="folio">03</span> Legislação brasileira de IA</button>
+          <button class="tema" data-verbete="v04" aria-pressed="false"><span class="folio">04</span> A abordagem dos BRICS</button>
+          <button class="tema" data-verbete="v05" aria-pressed="false"><span class="folio">05</span> Sociedade 5.0</button>
+          <button class="tema" data-verbete="v06" aria-pressed="false"><span class="folio">06</span> Governança de dados</button>
+          <button class="tema" data-verbete="v07" aria-pressed="false"><span class="folio">07</span> Direitos humanos digitais</button>
+          <button class="tema" data-verbete="v08" aria-pressed="false"><span class="folio">08</span> Mídia sintética e a crise do real</button>
+          <button class="tema" data-verbete="v09" aria-pressed="false"><span class="folio">09</span> IA e democracia</button>
+          <button class="tema" data-verbete="v10" aria-pressed="false"><span class="folio">10</span> Economia cognitiva</button>
+          <button class="tema" data-verbete="v11" aria-pressed="false"><span class="folio">11</span> IA agêntica e o ato administrativo</button>
+          <button class="tema" data-verbete="v12" aria-pressed="false"><span class="folio">12</span> Colonialismo de dados</button>
+          <button class="tema" data-verbete="v13" aria-pressed="false"><span class="folio">13</span> IA e clima</button>
+          <button class="tema" data-verbete="v14" aria-pressed="false"><span class="folio">14</span> Identidade digital e o "eu"</button>
+          <button class="tema" data-verbete="v15" aria-pressed="false"><span class="folio">15</span> A morte na era digital</button>
+          <button class="tema" data-verbete="v16" aria-pressed="false"><span class="folio">16</span> Tecnologia e inclusão social</button>
+        </div>
+
+        <div id="verbetesEtica">
+
+        <!-- 01 ─────────────────────────────────────────────── -->
+        <article class="verbete" id="v01">
+          <p class="etiqueta">Tema 01 · antes da primeira linha</p>
+          <h3>Design Sensível a Valores</h3>
+          <p class="eixo">Um sistema pode estar tecnicamente correto e, ainda assim, ser injusto por construção?</p>
 
           <div class="prosa">
             <p class="so-simples">
-              A Europa escreveu a primeira lei geral do mundo sobre inteligência artificial, e
-              organizou tudo em torno de um único eixo: quanto maior o risco do uso, maior a
-              exigência. Um brinquedo com IA responde por uma regra; um sistema que decide se
-              alguém recebe um benefício responde por outra, incomparavelmente mais dura. O que
-              a lei não resolve — e assume não resolver — é quem classifica cada caso.
+              Existe uma escola de projeto que inverte a ordem habitual do trabalho. Em vez de
+              construir o sistema e depois perguntar se ele ficou justo, ela obriga a escrever,
+              antes da primeira linha, quais valores estão em jogo e quem será atingido —
+              inclusive quem jamais vai tocar naquela tela. A tese é curta: valor que não foi
+              discutido no projeto não deixa de estar lá. Apenas entra sem que ninguém tenha
+              decidido que entrava.
             </p>
             <p class="so-mais">
-              O regulamento europeu adota abordagem <em>baseada em risco</em>, em quatro camadas:
-              risco inaceitável (proibido), alto risco (documentação, supervisão humana e registro
-              obrigatórios), risco limitado (dever de transparência) e risco mínimo. Sistemas usados
-              por autoridades públicas em serviços essenciais caem, em regra, na faixa de alto risco.
+              O método foi formulado por Batya Friedman na Universidade de Washington, nos anos
+              1990, e sistematizado em livro por Friedman e David Hendry em 2019. Organiza o
+              trabalho em três investigações que se corrigem umas às outras: a
+              <em>conceitual</em> — quais valores estão em disputa, quem são as partes
+              interessadas diretas e quem são as indiretas; a <em>empírica</em> — o que essas
+              pessoas de fato pensam, fazem e temem, apurado e não suposto; e a
+              <em>técnica</em> — o que a tecnologia escolhida favorece e o que ela impede. São
+              dezessete métodos descritos, entre eles as linhas do tempo de múltiplas gerações,
+              exercício de imaginar o efeito de um sistema sobre pessoas que ainda não nasceram
+              e que, portanto, não estarão presentes para reclamar dele.
             </p>
 
             <p class="margem-nota">
-              <strong>Por que isso importa para o senhor:</strong> quando o Brasil contratar um
-              sistema de IA, o edital tende a espelhar essas exigências. Entender a lógica do risco
-              é saber o que perguntar ao fornecedor antes de assinar.
+              <strong>Por que isso importa para o senhor:</strong> a pergunta operacional dessa
+              escola cabe inteira num termo de referência — <em>quem são as partes interessadas
+              indiretas deste sistema?</em>, isto é, quem sofrerá seus efeitos sem nunca operá-lo.
+              Num edital de contratação pública essa pergunta quase nunca aparece, e é ela que
+              separa um sistema feito para o cidadão de um sistema feito para o setor que o
+              comprou.
+            </p>
+
+            <p class="divergencia">
+              <b>onde não há acordo</b>
+              A objeção mais séria vem de dentro do próprio campo: o método ensina a levantar
+              valores, mas não a arbitrar entre eles. Quando privacidade e segurança colidem — e
+              colidem quase sempre —, a decisão continua sendo política, e nenhuma metodologia a
+              substitui. Os autores não escondem a lacuna. Parte dos críticos sustenta que um
+              método que não arbitra acaba dando aparência de processo à escolha de quem já tinha
+              o poder de decidir.
             </p>
           </div>
 
@@ -1353,38 +1583,223 @@ footer{
               Referências deste tema
             </h4>
             <ol>
-              <li>União Europeia. <em>Regulamento (UE) 2024/1689 — Regulamento da Inteligência Artificial</em>. Jornal Oficial da União Europeia, 2024.</li>
-              <li>Comissão Europeia. <em>AI Act: regulatory framework for AI</em>. Portal Shaping Europe's Digital Future, atualizado em 2025.</li>
+              <li>Friedman, B.; Hendry, D. G. <em>Value Sensitive Design: Shaping Technology with Moral Imagination</em>. Cambridge: The MIT Press, 2019. Disponível em: <a href="https://direct.mit.edu/books/monograph/4328/Value-Sensitive-DesignShaping-Technology-with" target="_blank" rel="noopener noreferrer">direct.mit.edu · Value Sensitive Design</a></li>
+              <li>Friedman, B.; Kahn, P. H.; Borning, A. "Value Sensitive Design and Information Systems". In: Zhang, P.; Galletta, D. (orgs.). <em>Human-Computer Interaction in Management Information Systems: Foundations</em>. Armonk: M. E. Sharpe, 2006.</li>
+              <li>Sem edição em português confirmada até esta data — o conceito circula no Brasil pelo original em inglês e por artigos acadêmicos que o comentam.</li>
+            </ol>
+          </div>
+        </article>
+
+        <!-- 02 ─────────────────────────────────────────────── -->
+        <article class="verbete" id="v02" hidden>
+          <p class="etiqueta">Tema 02 · a primeira lei geral do mundo</p>
+          <h3>A Lei de IA da União Europeia</h3>
+          <p class="eixo">Quem decide o quanto um sistema é perigoso — e decide antes ou depois de ele funcionar?</p>
+
+          <div class="prosa">
+            <p class="so-simples">
+              A Europa escreveu a primeira lei geral do mundo sobre inteligência artificial e
+              organizou tudo em torno de um único eixo: quanto maior o risco do uso, maior a
+              exigência. Um brinquedo com IA responde por uma regra; um sistema que decide se
+              alguém recebe um benefício responde por outra, incomparavelmente mais dura. O que
+              a lei não resolve — e assume não resolver — é quem classifica cada caso.
+            </p>
+            <p class="so-mais">
+              O regulamento adota abordagem <em>baseada em risco</em>, em quatro camadas: risco
+              inaceitável, que é proibido; alto risco, com documentação, supervisão humana e
+              registro obrigatórios; risco limitado, com dever de transparência; e risco mínimo,
+              sem exigência específica. Sistemas usados por autoridades públicas em serviços
+              essenciais caem, em regra, na faixa de alto risco.
+            </p>
+            <p class="so-mais">
+              A camada proibida deixou de ser abstrata em 2 de fevereiro de 2025, data em que o
+              artigo 5º passou a ser aplicável; a fiscalização e as sanções correspondentes
+              entraram em vigor em 2 de agosto do mesmo ano. A lista do que a Europa decidiu não
+              admitir em nenhuma hipótese vale ser lida devagar: pontuação social de pessoas a
+              partir de comportamento ou de traços pessoais; policiamento preditivo que avalie
+              risco criminal apenas por perfil; raspagem indiscriminada de imagens de rosto na
+              internet ou em câmeras de rua para formar bancos de reconhecimento facial;
+              reconhecimento de emoção no ambiente de trabalho e na escola; categorização
+              biométrica para inferir opinião política ou orientação sexual; e identificação
+              biométrica remota em tempo real em espaço público para fins policiais, com
+              exceções estritas. Cada item dessa lista descreve algo que já era tecnicamente
+              possível — o que a lei fez foi retirá-lo do mercado.
+            </p>
+
+            <p class="margem-nota">
+              <strong>Por que isso importa para o senhor:</strong> quando o Brasil contratar um
+              sistema de IA, o edital tende a espelhar essas exigências. Entender a lógica do
+              risco é saber o que perguntar ao fornecedor antes de assinar — e reconhecer, numa
+              proposta, a funcionalidade que na Europa já não poderia ser vendida.
+            </p>
+
+            <p class="divergencia">
+              <b>onde não há acordo</b>
+              A disputa não é sobre o texto, e sim sobre o preço dele. Uma parte sustenta que a
+              lei impõe custo de conformidade que empurra a inovação para fora do continente e
+              favorece as empresas grandes o bastante para pagá-lo. A outra responde que o custo
+              é o preço de evitar dano irreversível, e que mercado sem regra não é mercado
+              livre, é mercado sem responsável. Não é discussão técnica: é uma escolha sobre
+              onde se prefere errar.
+            </p>
+          </div>
+
+          <div class="fontes">
+            <h4>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+              Referências deste tema
+            </h4>
+            <ol>
+              <li>União Europeia. <em>Regulamento (UE) 2024/1689 — Regulamento da Inteligência Artificial</em>, artigos 5º, 6º e 50. Jornal Oficial da União Europeia, 2024. Disponível em: <a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng" target="_blank" rel="noopener noreferrer">eur-lex.europa.eu/eli/reg/2024/1689</a></li>
+              <li>Comissão Europeia. <em>Guidelines on prohibited artificial intelligence practices</em>, fevereiro de 2025 — documento que interpreta o artigo 5º. Ver também o balcão oficial de dúvidas: <a href="https://ai-act-service-desk.ec.europa.eu/en/ai-act/faq/what-systems-are-prohibited-under-article-5-ai-act-eg-social-scoring-emotion-recognition" target="_blank" rel="noopener noreferrer">ai-act-service-desk.ec.europa.eu</a></li>
               <li>Veale, M.; Zuiderveen Borgesius, F. "Demystifying the Draft EU Artificial Intelligence Act". <em>Computer Law Review International</em>, v. 22, n. 4, p. 97–112, 2021.</li>
             </ol>
           </div>
         </article>
 
+        <!-- 03 ─────────────────────────────────────────────── -->
+        <article class="verbete" id="v03" hidden>
+          <p class="etiqueta">Tema 03 · o que já obriga aqui</p>
+          <h3>A legislação brasileira de IA</h3>
+          <p class="eixo">O que o Estado brasileiro já pode exigir hoje, sem esperar a lei de inteligência artificial?</p>
 
-        <article class="verbete" style="margin-top:16px">
-          <p class="etiqueta">Amostra do formato · tema 05</p>
+          <div class="prosa">
+            <p class="so-simples">
+              A lei brasileira de inteligência artificial ainda não existe. O que existe — e já
+              obriga — é a Lei Geral de Proteção de Dados, de 2018. E ela contém o dispositivo
+              mais próximo do trabalho do senhor: o artigo 20 dá ao cidadão o direito de pedir a
+              revisão de uma decisão tomada apenas por máquina, e obriga quem a tomou a explicar,
+              quando solicitado, os critérios e os procedimentos que levaram àquele resultado.
+            </p>
+            <p class="so-mais">
+              O projeto de lei geral é o <strong>PL 2.338/2023</strong>. Foi aprovado por
+              unanimidade no plenário do Senado em 10 de dezembro de 2024 e desde então espera na
+              Câmara dos Deputados. O relator, deputado Aguinaldo Ribeiro, foi designado em 20 de
+              maio de 2025; até a última movimentação registrada, em 17 de junho de 2026, a
+              comissão especial ainda aguardava o parecer dele, com trinta e cinco proposições
+              apensadas ao texto principal. A votação em plenário foi anunciada para dezembro de
+              2025 e depois para maio de 2026, e adiada nas duas vezes. O projeto segue o desenho
+              europeu: classifica os sistemas por grau de risco, assegura ao afetado direitos de
+              informação, explicação e contestação, e cria um sistema nacional de regulação e
+              governança.
+            </p>
+            <p class="so-mais">
+              Há, porém, um detalhe do artigo 20 da lei em vigor que convém conhecer inteiro,
+              porque quase nunca é contado. O texto aprovado em 2018 dizia que a revisão seria
+              feita <em>por pessoa natural</em>. A Medida Provisória 869/2018, convertida na Lei
+              13.853/2019, retirou a expressão; o parágrafo que a restabelecia foi vetado, e o
+              Congresso manteve o veto. O direito de pedir revisão sobreviveu — a garantia de que
+              um ser humano a faça, não. Hoje, no Brasil, uma decisão automatizada pode
+              legalmente ser revista por outra máquina.
+            </p>
+
+            <p class="margem-nota">
+              <strong>Por que isso importa para o senhor:</strong> enquanto a lei geral não vem,
+              o fundamento para exigir explicação de um fornecedor já existe, e é a LGPD. Um
+              contrato que não obriga a empresa a entregar os critérios e os procedimentos da
+              decisão deixa o órgão sem como cumprir o artigo 20 no dia em que um cidadão pedir —
+              e quem responde ao cidadão é o órgão, não a empresa.
+            </p>
+          </div>
+
+          <div class="fontes">
+            <h4>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+              Referências deste tema
+            </h4>
+            <ol>
+              <li>Brasil. <em>Lei nº 13.709, de 14 de agosto de 2018</em> (Lei Geral de Proteção de Dados Pessoais), artigo 20.</li>
+              <li>Brasil. <em>Lei nº 13.853, de 8 de julho de 2019</em>, e a respectiva mensagem de veto ao § 3º do artigo 20 da LGPD. Disponível em: <a href="https://www2.camara.leg.br/legin/fed/lei/2019/lei-13853-8-julho-2019-788785-veto-158685-pl.html" target="_blank" rel="noopener noreferrer">camara.leg.br · veto à Lei 13.853/2019</a></li>
+              <li>Brasil. Senado Federal. <em>Projeto de Lei nº 2.338, de 2023</em>. Aprovado em 10 de dezembro de 2024. Disponível em: <a href="https://www25.senado.leg.br/web/atividade/materias/-/materia/157233" target="_blank" rel="noopener noreferrer">senado.leg.br · matéria 157233</a></li>
+              <li>Brasil. Câmara dos Deputados. <em>PL 2338/2023 — ficha de tramitação</em>. Situação em 17 de junho de 2026: aguardando parecer do relator na comissão especial. Disponível em: <a href="https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2487262" target="_blank" rel="noopener noreferrer">camara.leg.br · tramitação</a></li>
+            </ol>
+          </div>
+        </article>
+
+        <!-- 04 ─────────────────────────────────────────────── -->
+        <article class="verbete" id="v04" hidden>
+          <p class="etiqueta">Tema 04 · quem escreve as regras do mundo</p>
+          <h3>A abordagem dos BRICS</h3>
+          <p class="eixo">Uma regra global escrita por quem não estava na sala obriga quem ficou de fora?</p>
+
+          <div class="prosa">
+            <p class="so-simples">
+              Em 6 de julho de 2025, no Rio de Janeiro, os chefes de Estado do BRICS assinaram
+              uma declaração dedicada apenas à governança da inteligência artificial — a
+              primeira do grupo. O argumento central não é técnico: é que as regras dessa
+              tecnologia vêm sendo escritas por um punhado de países, e que os demais recebem
+              prontas tanto a tecnologia quanto a norma.
+            </p>
+            <p class="so-mais">
+              A declaração defende o desenvolvimento em código aberto, o compartilhamento de
+              tecnologia e de conhecimento, o fortalecimento do papel das Nações Unidas na
+              governança do tema e cautela diante da chamada inteligência artificial geral, para
+              evitar monopólio tecnológico e dependência. Não é documento vinculante: não tem
+              sanção, não tem prazo, não cria obrigação exigível. Seu peso está em outro lugar —
+              ela fixa um vocabulário comum, e é a esse vocabulário que os países do grupo
+              passam a poder recorrer em foro multilateral, quando negociam de um lado da mesa
+              só.
+            </p>
+
+            <p class="margem-nota">
+              <strong>Por que isso importa para o senhor:</strong> a expressão
+              <em>soberania digital</em> chega ao Brasil pela via diplomática antes de chegar
+              pela via legislativa. Ela vai aparecer em edital, em plano diretor de tecnologia e
+              em justificativa de contratação. Vale saber, desde já, que o termo carrega duas
+              leituras que não são a mesma coisa.
+            </p>
+
+            <p class="divergencia">
+              <b>onde não há acordo</b>
+              O grupo reúne países com regimes de liberdade de expressão e de proteção de dados
+              sem qualquer equivalência entre si. Uma declaração conjunta sobre tecnologia da
+              informação só se sustenta enquanto permanece no plano dos princípios. Críticos
+              apontam a ambiguidade central: soberania digital tanto pode significar autonomia
+              diante de fornecedores estrangeiros quanto controle estatal sobre o que circula
+              dentro do país — e o texto, deliberadamente, não escolhe entre as duas.
+            </p>
+          </div>
+
+          <div class="fontes">
+            <h4>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+              Referências deste tema
+            </h4>
+            <ol>
+              <li>BRICS. <em>Declaração dos Líderes do BRICS sobre a Governança Global da Inteligência Artificial</em>. Rio de Janeiro, 6 de julho de 2025.</li>
+              <li>BRICS. <em>Declaração de Líderes do BRICS</em> — XVII Cúpula. Rio de Janeiro, 6 de julho de 2025. Publicada pelo Ministério das Relações Exteriores: <a href="https://www.gov.br/mre/pt-br/canais_atendimento/imprensa/notas-a-imprensa/declaracao-de-lideres-do-brics-2014-rio-de-janeiro-06-de-julho-de-2025" target="_blank" rel="noopener noreferrer">gov.br/mre · declaração dos líderes</a></li>
+              <li>Agência Brasil. "Em declaração sobre IA, BRICS defende código aberto para a tecnologia", 6 de julho de 2025. Disponível em: <a href="https://agenciabrasil.ebc.com.br/internacional/noticia/2025-07/em-declaracao-sobre-ia-brics-defende-codigo-aberto-para-tecnologia" target="_blank" rel="noopener noreferrer">agenciabrasil.ebc.com.br</a></li>
+            </ol>
+          </div>
+        </article>
+
+        <!-- 05 ─────────────────────────────────────────────── -->
+        <article class="verbete" id="v05" hidden>
+          <p class="etiqueta">Tema 05 · tecnologia com finalidade declarada</p>
           <h3>Sociedade 5.0</h3>
+          <p class="eixo">Para que serve uma tecnologia que não promete mercado nenhum?</p>
 
           <div class="prosa">
             <p class="so-simples">
               O Japão deu nome a uma ideia que interessa diretamente a quem trabalha no Estado:
               depois da sociedade da caça, da agrícola, da industrial e da informação, viria uma
-              quinta — aquela em que a tecnologia existe para resolver problemas sociais concretos,
-              e não para criar mercados novos. Envelhecimento da população, cidades esvaziadas,
-              falta de médico no interior.
+              quinta — aquela em que a tecnologia existe para resolver problemas sociais
+              concretos, e não para criar mercados novos. Envelhecimento da população, cidades
+              esvaziadas, falta de médico no interior.
             </p>
             <p class="so-mais">
               Formulada no 5º Plano Básico de Ciência e Tecnologia do Japão, em 2016, a
               Sociedade 5.0 propõe a integração entre espaço físico e espaço digital com um
-              critério explícito: o centro é a pessoa, não o sistema. É uma resposta
-              deliberada à Indústria 4.0 alemã, que organiza o mesmo aparato em torno da
-              produtividade fabril. A diferença não é de tecnologia — é de finalidade.
+              critério explícito: o centro é a pessoa, não o sistema. É uma resposta deliberada
+              à Indústria 4.0 alemã, que organiza o mesmo aparato em torno da produtividade
+              fabril. A diferença não é de tecnologia — é de finalidade, e finalidade é o que se
+              escreve num plano de governo.
             </p>
 
             <p class="margem-nota">
               <strong>Por que isso importa para o senhor:</strong> é o vocabulário que permite
-              defender um projeto público de tecnologia pelo problema social que ele resolve,
-              e não pela economia que promete. Muda quem precisa provar o quê.
+              defender um projeto público de tecnologia pelo problema social que ele resolve, e
+              não pela economia que promete. Muda quem precisa provar o quê.
             </p>
           </div>
 
@@ -1424,7 +1839,617 @@ footer{
           </div>
         </article>
 
-        <p class="escopo"><b>a seguir</b><span>Clicar em qualquer um dos 16 temas abre um verbete como este, no mesmo formato e sempre com as referências ao final.</span></p>
+        <!-- 06 ─────────────────────────────────────────────── -->
+        <article class="verbete" id="v06" hidden>
+          <p class="etiqueta">Tema 06 · antes da máquina, o cadastro</p>
+          <h3>Governança de dados</h3>
+          <p class="eixo">De quem é o dado que o Estado guarda a respeito de uma pessoa?</p>
+
+          <div class="prosa">
+            <p class="so-simples">
+              Antes de qualquer inteligência artificial há uma questão administrativa banal e
+              mal resolvida: quem responde por cada base de dados de um órgão. Quem pode
+              corrigir, quem autoriza o acesso, quem diz o que aquele campo significa. Um
+              sistema treinado sobre uma base sem responsável não fica inteligente — fica
+              autorizado a repetir o erro em escala e com aparência de novidade.
+            </p>
+            <p class="so-mais">
+              O manual que a área usa para organizar isso chama-se DMBOK, guia de conhecimento
+              em gestão de dados, mantido pela DAMA International. A segunda edição, de 2017,
+              distribui o trabalho em onze áreas funcionais dispostas em torno de um centro: a
+              governança. A distinção que ele estabelece é a que mais interessa a quem trabalha
+              no Estado — <strong>governança</strong> é decidir quem tem autoridade sobre o
+              dado; <strong>gestão</strong> é executar. E há uma figura sem tradução consagrada
+              em português, o <em>data steward</em>, o zelador do dado: não é o dono nem o
+              técnico, é quem responde pela definição, isto é, por dizer o que aquele campo
+              significa e o que não significa.
+            </p>
+
+            <p class="margem-nota">
+              <strong>Por que isso importa para o senhor:</strong> a pergunta de auditoria que
+              quase nunca é feita antes de contratar um sistema de IA é sobre qual base ele vai
+              aprender, quem responde por essa base e quando ela foi corrigida pela última vez.
+              A LGPD já obriga o órgão a manter registro das operações de tratamento e permite à
+              autoridade nacional exigir relatório de impacto. É a mesma disciplina de um arquivo
+              bem organizado, aplicada a um material que ninguém vê.
+            </p>
+
+            <p class="divergencia">
+              <b>onde não há acordo</b>
+              Parte dos profissionais da área considera o DMBOK pesado e caro demais para
+              organizações pequenas, e prefere modelos mais enxutos. O ponto anterior a essa
+              disputa, em que praticamente ninguém diverge, é este: sem alguém nomeado como
+              responsável por cada base, nenhum modelo funciona — nem o pesado, nem o leve.
+            </p>
+          </div>
+
+          <div class="fontes">
+            <h4>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+              Referências deste tema
+            </h4>
+            <ol>
+              <li>DAMA International. <em>DAMA-DMBOK: Data Management Body of Knowledge</em>. 2. ed. Basking Ridge: Technics Publications, 2017.</li>
+              <li>DAMA International. <em>Guia DAMA para o Corpo de Conhecimento em Gestão de Dados (DAMA-DMBOK)</em>, edição em português, tradução de Rossano Tavares — corresponde à <strong>primeira</strong> edição; a segunda ainda não tem tradução publicada.</li>
+              <li>Brasil. <em>Lei nº 13.709/2018</em> (LGPD), artigos 37 e 38 — registro das operações de tratamento e relatório de impacto à proteção de dados pessoais.</li>
+            </ol>
+          </div>
+        </article>
+
+        <!-- 07 ─────────────────────────────────────────────── -->
+        <article class="verbete" id="v07" hidden>
+          <p class="etiqueta">Tema 07 · o mesmo direito, na tela</p>
+          <h3>Direitos humanos digitais</h3>
+          <p class="eixo">Um direito que só vale fora da tela ainda é um direito?</p>
+
+          <div class="prosa">
+            <p class="so-simples">
+              Em 2016 o Conselho de Direitos Humanos das Nações Unidas aprovou uma frase que
+              parece óbvia e não era: os direitos que as pessoas têm fora da internet devem ser
+              protegidos também dentro dela. Não se criou direito novo — afirmou-se que os
+              antigos não param na porta do navegador. O Brasil foi um dos países que
+              apresentaram a resolução.
+            </p>
+            <p class="so-mais">
+              A resolução A/HRC/RES/32/13, de 1º de julho de 2016, condena expressamente o corte
+              deliberado de acesso à internet como violação do direito internacional. No Brasil,
+              o Marco Civil da Internet, de 2014, já havia fixado a liberdade de expressão, a
+              privacidade e a proteção dos dados pessoais como fundamentos do uso da rede no
+              país. E em 22 de setembro de 2024 a ONU adotou o <strong>Pacto Digital
+              Global</strong>, anexo ao Pacto para o Futuro: o primeiro acordo universal sobre
+              governança internacional de inteligência artificial, que comprometeu os Estados a
+              constituir um painel científico independente sobre o tema.
+            </p>
+            <p class="so-mais">
+              Esse painel existe. Foi formado por quarenta especialistas, escolhidos entre mais
+              de 2.600 candidaturas vindas de mais de 140 países, e publicou seu primeiro
+              relatório em 1º de julho de 2026; a professora Teresa Ludermir, da Universidade
+              Federal de Pernambuco, representa o Brasil. A conclusão de abertura do relatório é
+              menos tranquilizadora do que o gesto institucional: as capacidades da tecnologia
+              estão superando tanto o entendimento científico quanto a capacidade de adaptação
+              dos governos, e quem formula política pública terá de decidir sob incerteza, com
+              evidência incompleta.
+            </p>
+
+            <p class="margem-nota">
+              <strong>Por que isso importa para o senhor:</strong> acesso é pressuposto do
+              direito. Um serviço público que passa a existir apenas em aplicativo exclui quem
+              não tem aparelho, dados ou familiaridade com a tela. A digitalização de um serviço
+              nunca é só uma decisão de eficiência: é também uma decisão sobre quem continuará
+              alcançando aquele serviço.
+            </p>
+          </div>
+
+          <div class="fontes">
+            <h4>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+              Referências deste tema
+            </h4>
+            <ol>
+              <li>Nações Unidas. Conselho de Direitos Humanos. <em>The promotion, protection and enjoyment of human rights on the Internet</em> — resolução A/HRC/RES/32/13, adotada em 1º de julho de 2016. Disponível em: <a href="https://digitallibrary.un.org/record/845727" target="_blank" rel="noopener noreferrer">digitallibrary.un.org · registro 845727</a></li>
+              <li>Brasil. <em>Lei nº 12.965, de 23 de abril de 2014</em> — Marco Civil da Internet, artigos 2º e 3º.</li>
+              <li>Nações Unidas. <em>Global Digital Compact</em>, anexo ao <em>Pact for the Future</em>, adotado em 22 de setembro de 2024.</li>
+              <li>Painel Científico Internacional Independente e Multidisciplinar sobre Inteligência Artificial. Primeiro relatório, 1º de julho de 2026. Ver: <a href="https://brasil.un.org/pt-br/318460-painel-cient%C3%ADfico-sobre-intelig%C3%AAncia-artificial-lan%C3%A7a-primeiro-relat%C3%B3rio-sobre-oportunidades" target="_blank" rel="noopener noreferrer">brasil.un.org · primeiro relatório do painel</a></li>
+            </ol>
+          </div>
+        </article>
+
+        <!-- 08 ─────────────────────────────────────────────── -->
+        <article class="verbete" id="v08" hidden>
+          <p class="etiqueta">Tema 08 · quando a imagem deixa de provar</p>
+          <h3>Mídia sintética e a crise do real</h3>
+          <p class="eixo">Se qualquer imagem pode ser fabricada, o que resta valendo como prova?</p>
+
+          <div class="prosa">
+            <p class="so-simples">
+              Uma fotografia já valeu como prova por si mesma. Não vale mais. A partir do momento
+              em que rosto e voz podem ser fabricados de modo convincente por qualquer pessoa com
+              um computador comum, a imagem deixa de ser evidência e passa a ser alegação — algo
+              que precisa ser confirmado por outra via antes de sustentar uma conclusão.
+            </p>
+            <p class="so-mais">
+              O efeito mais grave não é o mais evidente. Além de permitir que se acredite no
+              falso, a mera existência da falsificação permite que se descreia do verdadeiro:
+              quem é flagrado numa gravação autêntica passa a poder alegar que ela foi fabricada.
+              Os juristas Robert Chesney e Danielle Citron deram nome a isso em 2019 — o
+              <em>dividendo do mentiroso</em>. O dano não é à imagem de uma pessoa; é à
+              possibilidade de provar qualquer coisa por imagem.
+            </p>
+            <p class="so-mais">
+              No Brasil, o Tribunal Superior Eleitoral enfrentou o problema antes do legislador.
+              A Resolução 23.732, de 27 de fevereiro de 2024, proíbe o uso de conteúdo sintético
+              para prejudicar ou favorecer candidatura, exige aviso explícito sempre que houver
+              inteligência artificial na propaganda eleitoral e trata o descumprimento como abuso
+              de poder — o que pode levar à cassação de registro ou de mandato. Na União
+              Europeia, o artigo 50 do regulamento de IA impõe dever equivalente de rotulagem
+              para conteúdo gerado ou manipulado por máquina.
+            </p>
+
+            <p class="margem-nota">
+              <strong>Por que isso importa para o senhor:</strong> um áudio, um vídeo ou um
+              documento digitalizado que chega a um processo administrativo já não se sustenta
+              pela aparência. A pergunta que passa a ser obrigatória é sobre a cadeia: quem
+              gerou, quando, por qual via chegou até aqui. É o mesmo cuidado que o senhor sempre
+              teve com documento — apenas sem o amparo de "mas parece verdadeiro".
+            </p>
+          </div>
+
+          <div class="fontes">
+            <h4>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+              Referências deste tema
+            </h4>
+            <ol>
+              <li>Brasil. Tribunal Superior Eleitoral. <em>Resolução nº 23.732, de 27 de fevereiro de 2024</em>. Disponível em: <a href="https://www.tse.jus.br/legislacao/compilada/res/2024/resolucao-no-23-732-de-27-de-fevereiro-de-2024" target="_blank" rel="noopener noreferrer">tse.jus.br · Resolução 23.732/2024</a></li>
+              <li>Chesney, R.; Citron, D. K. "Deep Fakes: A Looming Challenge for Privacy, Democracy, and National Security". <em>California Law Review</em>, v. 107, p. 1753–1819, 2019. Disponível em: <a href="https://www.californialawreview.org/print/deep-fakes-a-looming-challenge-for-privacy-democracy-and-national-security" target="_blank" rel="noopener noreferrer">californialawreview.org</a></li>
+              <li>União Europeia. <em>Regulamento (UE) 2024/1689</em>, artigo 50 — deveres de transparência para conteúdo sintético.</li>
+            </ol>
+          </div>
+        </article>
+
+        <!-- 09 ─────────────────────────────────────────────── -->
+        <article class="verbete" id="v09" hidden>
+          <p class="etiqueta">Tema 09 · a conversa pública</p>
+          <h3>IA e democracia</h3>
+          <p class="eixo">Uma eleição continua sendo livre se o eleitor não sabe quem lhe falou?</p>
+
+          <div class="prosa">
+            <p class="so-simples">
+              A democracia supõe uma coisa simples e frágil: que exista um espaço comum onde as
+              pessoas discutem os mesmos fatos. A inteligência artificial ataca essa suposição
+              por dois lados ao mesmo tempo — permite produzir mensagem falsa em volume
+              industrial e permite entregar a cada pessoa uma mensagem diferente, calculada para
+              ela. O segundo é o mais silencioso: não há como contestar publicamente um discurso
+              que ninguém mais viu.
+            </p>
+            <p class="so-mais">
+              A União Europeia decidiu tratar parte disso como proibição, e não como
+              transparência. Desde 2 de fevereiro de 2025 o artigo 5º do regulamento europeu veda
+              sistemas que empreguem técnicas manipulativas ou subliminares capazes de distorcer
+              o comportamento de uma pessoa de modo a causar-lhe dano relevante, veda a
+              pontuação social de cidadãos e veda o policiamento preditivo baseado apenas em
+              perfil. São condutas que já eram tecnicamente viáveis; o que a lei fez foi
+              retirá-las do que se pode vender.
+            </p>
+            <p class="so-mais">
+              O primeiro relatório do painel científico da ONU sobre IA, de julho de 2026, trata
+              democracia como um de seus sete eixos e formula o problema de governo com precisão
+              desconfortável: as capacidades da tecnologia estão crescendo mais rápido do que a
+              compreensão científica sobre elas e do que a capacidade de resposta dos Estados.
+              Quem legisla terá de fazê-lo sem a evidência completa que normalmente exigiria.
+            </p>
+
+            <p class="margem-nota">
+              <strong>Por que isso importa para o senhor:</strong> 2026 é ano de eleição
+              geral no Brasil, e as regras do Tribunal Superior Eleitoral sobre uso de IA em
+              propaganda já estão em vigor desde 2024. Servidor público em ano eleitoral opera
+              sob restrição própria — e a matéria a que ele precisa estar atento deixou de ser
+              apenas o conteúdo da mensagem: passou a incluir como ela foi produzida.
+            </p>
+
+            <p class="divergencia">
+              <b>onde não há acordo</b>
+              Há divergência empírica genuína sobre o quanto a desinformação de fato muda voto.
+              Parte considerável da pesquisa encontra efeito pequeno e concentrado em quem já
+              estava convencido. Isso não torna o problema menor — apenas o desloca: o dano
+              principal talvez não seja a persuasão, e sim a erosão da confiança em qualquer
+              informação, inclusive na verdadeira.
+            </p>
+          </div>
+
+          <div class="fontes">
+            <h4>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+              Referências deste tema
+            </h4>
+            <ol>
+              <li>União Europeia. <em>Regulamento (UE) 2024/1689</em>, artigo 5º — práticas proibidas, aplicável desde 2 de fevereiro de 2025.</li>
+              <li>Comissão Europeia. <em>Guidelines on prohibited artificial intelligence practices</em>, fevereiro de 2025.</li>
+              <li>Painel Científico Internacional Independente e Multidisciplinar sobre Inteligência Artificial. Primeiro relatório, 1º de julho de 2026 — eixos sobre direitos humanos, democracia e governança.</li>
+              <li>Brasil. Tribunal Superior Eleitoral. <em>Resolução nº 23.732, de 27 de fevereiro de 2024</em>.</li>
+            </ol>
+          </div>
+        </article>
+
+        <!-- 10 ─────────────────────────────────────────────── -->
+        <article class="verbete" id="v10" hidden>
+          <p class="etiqueta">Tema 10 · o custo de pensar</p>
+          <h3>Economia cognitiva</h3>
+          <p class="eixo">Se pensar custa tempo e atenção, o que acontece quando alguém se oferece para pensar por nós?</p>
+
+          <div class="prosa">
+            <p class="so-simples">
+              Em 1971, muito antes de existir internet de uso comum, o economista Herbert Simon
+              escreveu a frase que ainda descreve melhor o problema: uma riqueza de informação
+              cria uma pobreza de atenção. O que a informação consome é a atenção de quem a
+              recebe — e atenção, ao contrário de informação, não se produz em escala.
+            </p>
+            <p class="so-mais">
+              A formulação completa vale ser lida: <em>"num mundo rico em informação, a
+              abundância de informação significa a escassez de outra coisa: a escassez daquilo
+              que a informação consome. O que a informação consome é bastante óbvio — ela consome
+              a atenção de seus destinatários. Portanto, uma riqueza de informação cria uma
+              pobreza de atenção."</em> Simon concluía dali algo que o mercado levou cinquenta
+              anos para admitir: quem projeta sistemas de informação costuma resolver o problema
+              errado, construindo máquinas excelentes em entregar mais, quando o necessário era
+              filtrar melhor.
+            </p>
+            <p class="so-mais">
+              A pesquisa em fatores humanos deu nome ao risco específico que isso cria numa mesa
+              de trabalho. Raja Parasuraman e Victor Riley, em 1997, distinguiram quatro relações
+              possíveis com a automação — uso, mau uso, desuso e abuso — e mostraram que o mau
+              uso não é o descuido, e sim a confiança excessiva: o operador deixa de monitorar
+              porque o sistema vem acertando. É um risco que cresce com o acerto, não com o erro.
+            </p>
+
+            <p class="margem-nota">
+              <strong>Por que isso importa para o senhor:</strong> numa repartição, o problema
+              não é o servidor que desconfia da máquina. É o que para de desconfiar depois do
+              vigésimo acerto seguido — e assina o vigésimo primeiro sem ler. A conferência
+              precisa ser um procedimento fixo, com registro, e não um estado de espírito.
+            </p>
+          </div>
+
+          <div class="fontes">
+            <h4>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+              Referências deste tema
+            </h4>
+            <ol>
+              <li>Simon, H. A. "Designing Organizations for an Information-Rich World". In: Greenberger, M. (org.). <em>Computers, Communications, and the Public Interest</em>. Baltimore: The Johns Hopkins Press, 1971, p. 40–41.</li>
+              <li>Parasuraman, R.; Riley, V. "Humans and Automation: Use, Misuse, Disuse, Abuse". <em>Human Factors</em>, v. 39, n. 2, p. 230–253, 1997.</li>
+              <li>Anthropic. <em>AI Fluency: Frameworks &amp; Foundations</em>, 2025 — a competência de Discernimento, tratada no Fólio 07 deste guia, é a resposta prática a esse problema.</li>
+            </ol>
+          </div>
+        </article>
+
+        <!-- 11 ─────────────────────────────────────────────── -->
+        <article class="verbete" id="v11" hidden>
+          <p class="etiqueta">Tema 11 · quando a máquina age</p>
+          <h3>IA agêntica e o ato administrativo</h3>
+          <p class="eixo">Quando o sistema deixa de responder e passa a agir, quem assinou o ato?</p>
+
+          <div class="prosa">
+            <p class="so-simples">
+              Há uma diferença de natureza entre um sistema que responde e um sistema que age. O
+              primeiro entrega um texto e espera. O segundo abre arquivos, consulta bases,
+              redige e envia — executa uma sequência inteira sem que ninguém confira cada passo.
+              O ganho é de tempo. A perda é de visibilidade, e ela não aparece enquanto tudo dá
+              certo.
+            </p>
+            <p class="so-mais">
+              Convém notar que a autonomia não é uma novidade que a lei ainda não alcançou: ela
+              já está dentro das definições oficiais. Tanto a definição da OCDE quanto a do
+              regulamento europeu descrevem sistemas que operam <em>com níveis variáveis de
+              autonomia</em> e que <em>podem apresentar capacidade de adaptação após a
+              implantação</em>. O problema prático não é de conceito, é de rastro: quando um
+              resultado foi produzido por uma cadeia de passos automáticos, reconstruir o caminho
+              depois só é possível se o registro tiver sido guardado antes. Ninguém audita o que
+              não foi anotado.
+            </p>
+
+            <p class="margem-nota">
+              <strong>Por que isso importa para o senhor:</strong> a Lei do Processo
+              Administrativo Federal exige que os atos sejam motivados, com indicação dos fatos e
+              dos fundamentos jurídicos. Delegar a execução de uma tarefa não delega a assinatura
+              — e um sistema que age sem registrar cada passo torna impossível exatamente aquilo
+              que a lei pede. Antes de aceitar a ferramenta, a pergunta é se ela produz trilha
+              auditável; se não produzir, o servidor assinará algo cuja motivação ele não
+              consegue reconstituir.
+            </p>
+          </div>
+
+          <div class="fontes">
+            <h4>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+              Referências deste tema
+            </h4>
+            <ol>
+              <li>Brasil. <em>Lei nº 9.784, de 29 de janeiro de 1999</em>, artigo 50 — dever de motivação dos atos administrativos.</li>
+              <li>OCDE. <em>Recommendation of the Council on Artificial Intelligence</em> (OECD/LEGAL/0449), definição revista em novembro de 2023. Disponível em: <a href="https://oecd.ai/en/ai-principles" target="_blank" rel="noopener noreferrer">oecd.ai/en/ai-principles</a></li>
+              <li>União Europeia. <em>Regulamento (UE) 2024/1689</em>, artigo 3º, item 1, e artigo 14 — supervisão humana de sistemas de alto risco.</li>
+              <li>NIST. <em>Artificial Intelligence Risk Management Framework (AI RMF 1.0)</em>. National Institute of Standards and Technology, 2023.</li>
+            </ol>
+          </div>
+        </article>
+
+        <!-- 12 ─────────────────────────────────────────────── -->
+        <article class="verbete" id="v12" hidden>
+          <p class="etiqueta">Tema 12 · de onde vem o material</p>
+          <h3>Colonialismo de dados</h3>
+          <p class="eixo">Quem fica com o valor do rastro que o senhor deixa todo dia?</p>
+
+          <div class="prosa">
+            <p class="so-simples">
+              Nenhum sistema desses aprende do nada. Ele aprende sobre texto, imagem e
+              comportamento produzidos por pessoas — em geral sem que essas pessoas tenham
+              negociado nada, recebido nada ou sequer sabido. Há uma corrente de pesquisa que
+              chama isso pelo nome mais incômodo disponível: colonialismo de dados. A analogia
+              não é sobre território; é sobre um material que se extrai de um lugar e cujo valor
+              se realiza em outro.
+            </p>
+            <p class="so-mais">
+              O termo foi formulado por Nick Couldry e Ulises Mejias em 2019, e sustenta que a
+              relação atual entre plataformas e usuários repete a estrutura da apropriação
+              colonial: um recurso antes fora do mercado — neste caso, a vida cotidiana
+              convertida em dado — é transformado em insumo econômico. No Brasil há uma
+              elaboração própria e disponível em português, organizada por Sérgio Amadeu da
+              Silveira, Joyce Souza e João Francisco Cassino, que acrescenta um segundo conceito
+              ao primeiro: o de <em>modulação algorítmica</em>, isto é, o uso do dado extraído
+              não apenas para prever o comportamento, mas para conduzi-lo.
+            </p>
+
+            <p class="margem-nota">
+              <strong>Por que isso importa para o senhor:</strong> contratar nuvem estrangeira é
+              decidir onde o dado do cidadão brasileiro vai ficar armazenado e sob qual
+              jurisdição ele poderá ser requisitado. Essa não é uma cláusula técnica do contrato:
+              é a única parte dele que trata de soberania. Vale ler antes de assinar, e vale
+              perguntar quem consegue acessar aquele dado sem passar pelo Estado brasileiro.
+            </p>
+
+            <p class="divergencia">
+              <b>onde não há acordo</b>
+              Parte dos economistas considera a analogia colonial imprecisa: não há território
+              ocupado nem violência de Estado, e o usuário formalmente consente. A réplica dos
+              autores é que consentimento sem alternativa disponível não constitui escolha — e
+              que a assimetria de poder, não a violência, é o que define a relação. A discordância
+              é real e não se resolve com dados; ela depende de que peso se dá ao consentimento
+              formal.
+            </p>
+          </div>
+
+          <div class="fontes">
+            <h4>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+              Referências deste tema
+            </h4>
+            <ol>
+              <li>Silveira, S. A. da; Souza, J.; Cassino, J. F. (orgs.). <em>Colonialismo de dados: como opera a trincheira algorítmica na guerra neoliberal</em>. São Paulo: Autonomia Literária, 2021. <strong>Em português</strong>, produzido por pesquisadores da Universidade Federal do ABC.</li>
+              <li>Couldry, N.; Mejias, U. A. <em>The Costs of Connection: How Data Is Colonizing Human Life and Appropriating It for Capitalism</em>. Stanford: Stanford University Press, 2019. Sem edição em português confirmada até esta data.</li>
+              <li>BRICS. <em>Declaração dos Líderes do BRICS sobre a Governança Global da Inteligência Artificial</em>. Rio de Janeiro, 6 de julho de 2025 — o mesmo argumento, em registro diplomático.</li>
+            </ol>
+          </div>
+        </article>
+
+        <!-- 13 ─────────────────────────────────────────────── -->
+        <article class="verbete" id="v13" hidden>
+          <p class="etiqueta">Tema 13 · o consumo de uma resposta</p>
+          <h3>IA e clima</h3>
+          <p class="eixo">Quanto custa, em energia, uma resposta que chega em dois segundos?</p>
+
+          <div class="prosa">
+            <p class="so-simples">
+              A resposta parece sair do ar, e não sai. Sai de galpões cheios de máquinas que
+              consomem eletricidade e água para não superaquecer. Em 2024, os centros de dados do
+              mundo consumiram cerca de 415 terawatts-hora de eletricidade — perto de 1,5% de
+              todo o consumo elétrico do planeta. É pouco em proporção e é enorme em volume, e a
+              curva está subindo depressa.
+            </p>
+            <p class="so-mais">
+              A Agência Internacional de Energia projetou, em abril de 2025, que essa demanda
+              mais que dobraria até 2030, chegando a algo em torno de 945 terawatts-hora — pouco
+              mais do que o Japão inteiro consome hoje. No ano seguinte, a própria agência
+              registrou que a demanda dos centros de dados crescera 17% em 2025, e que os
+              centros voltados especificamente a inteligência artificial devem triplicar seu
+              consumo até o fim da década. Há o outro lado da conta, e ele é real: a mesma
+              tecnologia é aplicada à previsão de tempo, à operação de redes elétricas e à
+              eficiência industrial, com ganho energético mensurável. O que não existe, ainda, é
+              um balanço confiável entre as duas colunas.
+            </p>
+
+            <p class="margem-nota">
+              <strong>Por que isso importa para o senhor:</strong> o Brasil tem matriz elétrica
+              majoritariamente renovável, o que faz do país destino atraente para instalação de
+              centros de dados. Isso é oportunidade econômica e é decisão pública: energia e água
+              têm outros usos, e o município que recebe o galpão não é necessariamente o que
+              colhe a receita. É uma discussão de licenciamento e de contrapartida, não de
+              tecnologia.
+            </p>
+
+            <p class="divergencia">
+              <b>onde não há acordo</b>
+              As projeções variam muito entre instituições, e por um motivo honesto: ninguém sabe
+              quanto do crescimento se deve especificamente a IA e quanto se deve à digitalização
+              em geral, nem quanto os ganhos de eficiência dos próprios equipamentos vão
+              compensar. Números divulgados sobre o consumo de uma consulta isolada devem ser
+              lidos com reserva — quase nenhum deles vem de medição auditada.
+            </p>
+          </div>
+
+          <div class="fontes">
+            <h4>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+              Referências deste tema
+            </h4>
+            <ol>
+              <li>International Energy Agency. <em>Energy and AI</em>, abril de 2025 — 415 TWh em 2024 (cerca de 1,5% do consumo elétrico mundial) e projeção de aproximadamente 945 TWh em 2030. Disponível em: <a href="https://www.iea.org/reports/energy-and-ai/executive-summary" target="_blank" rel="noopener noreferrer">iea.org/reports/energy-and-ai</a></li>
+              <li>International Energy Agency. "Data centre electricity use surged in 2025", 16 de abril de 2026 — alta de 17% no ano. Disponível em: <a href="https://www.iea.org/news/data-centre-electricity-use-surged-in-2025-even-with-tightening-bottlenecks-driving-a-scramble-for-solutions" target="_blank" rel="noopener noreferrer">iea.org · notícia de 16/4/2026</a></li>
+              <li>UNESCO. <em>Recommendation on the Ethics of Artificial Intelligence</em>, 2021 — seção sobre meio ambiente e ecossistemas.</li>
+            </ol>
+          </div>
+        </article>
+
+        <!-- 14 ─────────────────────────────────────────────── -->
+        <article class="verbete" id="v14" hidden>
+          <p class="etiqueta">Tema 14 · o perfil e a pessoa</p>
+          <h3>Identidade digital e o "eu"</h3>
+          <p class="eixo">O retrato que o sistema faz do senhor tem mais autoridade do que o senhor?</p>
+
+          <div class="prosa">
+            <p class="so-simples">
+              Existe hoje, em algum banco de dados, uma versão do senhor construída sem sua
+              participação: o que costuma comprar, por onde anda, que risco representa, que
+              probabilidade tem de pagar. Essa versão não precisa estar certa para produzir
+              efeito. Basta que um sistema a consulte para negar um crédito, sinalizar uma
+              inconsistência ou colocar um nome numa fila diferente.
+            </p>
+            <p class="so-mais">
+              A LGPD trata disso de frente: o artigo 20 fala em decisões que definem o perfil
+              pessoal, profissional, de consumo e de crédito de alguém, "ou os aspectos de sua
+              personalidade". A expressão é ampla de propósito. A União Europeia foi além e
+              proibiu, desde fevereiro de 2025, a categorização biométrica destinada a inferir
+              opinião política, filiação sindical ou orientação sexual, e o reconhecimento de
+              emoção no trabalho e na escola — reconhecendo, na prática, que certas inferências
+              não devem existir nem com consentimento.
+            </p>
+
+            <p class="margem-nota">
+              <strong>Por que isso importa para o senhor:</strong> um cadastro errado hoje é mais
+              difícil de corrigir do que um documento errado, porque ele se propaga: é copiado,
+              cruzado e reaproveitado por sistemas que nunca conversaram entre si. Quem atende ao
+              público conhece o caso — a pessoa corrige o dado em um lugar e ele volta pelo
+              outro. Saber que existe o direito de exigir a explicação dos critérios é o começo
+              de uma resposta.
+            </p>
+          </div>
+
+          <div class="fontes">
+            <h4>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+              Referências deste tema
+            </h4>
+            <ol>
+              <li>Brasil. <em>Lei nº 13.709/2018</em> (LGPD), artigo 20 — decisões automatizadas e definição de perfil.</li>
+              <li>União Europeia. <em>Regulamento (UE) 2024/1689</em>, artigo 5º — proibição de categorização biométrica para inferir atributos sensíveis e de reconhecimento de emoção em trabalho e escola.</li>
+              <li>UNESCO. <em>Recommendation on the Ethics of Artificial Intelligence</em>, 2021 — capítulo sobre privacidade e proteção de dados.</li>
+            </ol>
+          </div>
+        </article>
+
+        <!-- 15 ─────────────────────────────────────────────── -->
+        <article class="verbete" id="v15" hidden>
+          <p class="etiqueta">Tema 15 · o que fica</p>
+          <h3>A morte na era digital</h3>
+          <p class="eixo">O que se herda de alguém cuja vida também aconteceu numa tela?</p>
+
+          <div class="prosa">
+            <p class="so-simples">
+              Uma pessoa morre e permanecem as contas, as fotografias, as mensagens, o perfil que
+              continua recebendo felicitações de aniversário. O direito brasileiro sabe o que
+              fazer com uma casa e com um automóvel; ainda não decidiu o que fazer com isso. Não
+              existe, hoje, lei específica sobre herança digital no país.
+            </p>
+            <p class="so-mais">
+              A lacuna está sendo enfrentada dentro da reforma do Código Civil, em tramitação no
+              Senado a partir de 2025, que propõe reconhecer um <em>patrimônio digital</em> —
+              conjunto de bens intangíveis com valor econômico, pessoal ou cultural existentes em
+              formato digital — e separar, dentro dele, duas coisas que hoje se confundem: os
+              ativos transmissíveis por inventário e o conteúdo estritamente íntimo, que os
+              projetos em discussão excluem do acesso dos herdeiros. Fotos, áudios e mensagens
+              privadas ficariam de fora. É uma distinção que reconhece o essencial: nem tudo o
+              que uma pessoa deixou ela quis deixar.
+            </p>
+            <p class="so-mais">
+              E há a questão seguinte, que a lei ainda não alcançou em lugar nenhum. Já existem
+              serviços que usam o material deixado por alguém para simular a conversa dessa
+              pessoa depois de morta. Os pesquisadores Tomasz Hollanek e Katarzyna
+              Nowaczyk-Basińska, de Cambridge, examinaram o problema em 2024 e propuseram
+              exigências concretas: consentimento de quem deixou os dados <em>e</em> de quem vai
+              conversar com o simulacro, transparência permanente sobre a natureza artificial do
+              interlocutor, restrição a maiores de idade e — o ponto mais delicado — procedimentos
+              dignos para desativar o serviço. Alguém precisa poder desligar.
+            </p>
+
+            <p class="margem-nota">
+              <strong>Por que isso importa para o senhor:</strong> quando a lei vier, a
+              operacionalização cairá sobre cartório, inventário e órgão público. E há uma parte
+              que não é jurídica: decidir, ainda em vida, o que se quer que aconteça com o
+              próprio rastro é uma conversa de família, não de advogado. Vale ser tida antes de
+              ser necessária.
+            </p>
+
+            <p class="divergencia">
+              <b>onde não há acordo</b>
+              Não há consenso clínico sobre se um simulacro do falecido ajuda ou prolonga o luto.
+              A literatura em psicologia registra tanto relatos de conforto quanto de fixação, e
+              os estudos disponíveis são pequenos e recentes demais para sustentar recomendação.
+              Quem afirmar categoricamente uma coisa ou outra está indo além da evidência.
+            </p>
+          </div>
+
+          <div class="fontes">
+            <h4>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+              Referências deste tema
+            </h4>
+            <ol>
+              <li>Hollanek, T.; Nowaczyk-Basińska, K. "Griefbots, Deadbots, Postmortem Avatars: on Responsible Applications of Generative AI in the Digital Afterlife Industry". <em>Philosophy &amp; Technology</em>, v. 37, 2024. Disponível em: <a href="https://link.springer.com/article/10.1007/s13347-024-00744-w" target="_blank" rel="noopener noreferrer">link.springer.com · 10.1007/s13347-024-00744-w</a></li>
+              <li>Brasil. Senado Federal. <em>Projeto de Lei nº 4, de 2025</em> — reforma do Código Civil, dispositivos sobre patrimônio digital.</li>
+              <li>Brasil. Câmara dos Deputados. <em>Projeto de Lei nº 1.689, de 2021</em> — destino de perfis em redes sociais após a morte. Disponível em: <a href="https://www.camara.leg.br/enquetes/2280308" target="_blank" rel="noopener noreferrer">camara.leg.br · PL 1689/2021</a></li>
+            </ol>
+          </div>
+        </article>
+
+        <!-- 16 ─────────────────────────────────────────────── -->
+        <article class="verbete" id="v16" hidden>
+          <p class="etiqueta">Tema 16 · para quem foi desenhado</p>
+          <h3>Tecnologia e inclusão social</h3>
+          <p class="eixo">Para quem a tecnologia foi desenhada — e quem teve de se adaptar a ela?</p>
+
+          <div class="prosa">
+            <p class="so-simples">
+              A Lei Brasileira de Inclusão fez uma escolha que passa despercebida e é decisiva:
+              o desenho universal é a regra, e a adaptação posterior é a exceção — admitida
+              apenas quando se demonstre que o desenho universal não era possível. Isso inverte o
+              ônus. Não cabe à pessoa com deficiência pedir ajuste; cabe a quem projeta
+              demonstrar por que não conseguiu servir a todos desde o início.
+            </p>
+            <p class="so-mais">
+              A mesma lei obriga a acessibilidade nos sítios da internet mantidos por órgãos de
+              governo e por empresas com sede no país. A referência técnica internacional é o
+              conjunto de diretrizes do consórcio W3C, cuja versão 2.2 foi publicada em 5 de
+              outubro de 2023 com 87 critérios verificáveis em três níveis, hoje também norma da
+              Organização Internacional de Normalização. A inteligência artificial entra nessa
+              conta dos dois lados: amplia o acesso quando produz legenda automática, descrição
+              de imagem e leitura de texto em voz alta; e o fecha quando um serviço passa a
+              depender de verificação biométrica que não reconhece determinados rostos, ou de
+              atendimento por voz que não compreende determinadas falas.
+            </p>
+
+            <p class="margem-nota">
+              <strong>Por que isso importa para o senhor:</strong> quando um serviço migra para
+              aplicativo, a acessibilidade não é item de melhoria futura — é requisito legal
+              desde a primeira versão. Um edital que a trate como fase posterior está contratando
+              uma irregularidade e adiando o custo de corrigi-la, que é sempre maior depois.
+            </p>
+          </div>
+
+          <div class="fontes">
+            <h4>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+              Referências deste tema
+            </h4>
+            <ol>
+              <li>Brasil. <em>Lei nº 13.146, de 6 de julho de 2015</em> — Lei Brasileira de Inclusão da Pessoa com Deficiência, artigo 3º (desenho universal, tecnologia assistiva e adaptação razoável) e artigo 63 (acessibilidade obrigatória em sítios da internet).</li>
+              <li>W3C. <em>Web Content Accessibility Guidelines (WCAG) 2.2</em>. Recomendação de 5 de outubro de 2023. Disponível em: <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener noreferrer">w3.org/TR/WCAG22</a></li>
+              <li>ISO/IEC 40500:2025 — norma internacional idêntica à versão de outubro de 2023 do WCAG 2.2.</li>
+            </ol>
+          </div>
+        </article>
+
+        </div>
+
+        <p class="escopo"><b>a conferir na publicação</b><span>Legislação de IA muda de mês para mês. As datas de tramitação do PL 2.338/2023 e do novo Código Civil valem para agosto de 2026 e serão reconferidas antes da versão final, junto com os números de energia, que a Agência Internacional de Energia revisa anualmente.</span></p>
       </div>
     </section>
     <!-- Regulamentacao -->
@@ -2475,6 +3500,28 @@ se o texto não disser algo, escreva
   }
   addEventListener("scroll", function(){ if(!agendado){ agendado = true; requestAnimationFrame(medirBarra); } }, {passive:true});
   addEventListener("resize", medirBarra, {passive:true});
+
+  /* ── ética: dezesseis temas, um verbete aberto por vez ──
+     Os verbetes ficam todos no documento; só a visibilidade muda. Assim o
+     texto continua alcançável por busca do navegador e por leitor de tela
+     que percorra o documento inteiro.                                     */
+  (function(){
+    var grupo = document.getElementById("temasEtica");
+    if(!grupo) return;
+    var botoes = Array.prototype.slice.call(grupo.querySelectorAll(".tema"));
+    var suave  = !matchMedia("(prefers-reduced-motion: reduce)").matches;
+    grupo.addEventListener("click", function(e){
+      var b = e.target.closest(".tema"); if(!b) return;
+      botoes.forEach(function(x){
+        var ativo = (x === b);
+        x.setAttribute("aria-pressed", String(ativo));
+        var v = document.getElementById(x.dataset.verbete);
+        if(v) v.hidden = !ativo;
+      });
+      var alvo = document.getElementById(b.dataset.verbete);
+      if(alvo) alvo.scrollIntoView({ behavior: suave ? "smooth" : "auto", block:"start" });
+    });
+  })();
 
   /* ── abas de amostra ── */
   document.querySelectorAll(".abas").forEach(function(grupo){
