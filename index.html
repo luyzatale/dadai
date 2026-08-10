@@ -277,11 +277,6 @@ main{ min-width:0; }
 .ficha:active{ border-color:var(--fio-2); }
 .ficha h3{ margin-bottom:8px; }
 .ficha > p{ font-size:.92em; color:var(--tinta-2); margin-bottom:14px; }
-/* o desdobramento que só aparece em Aprofundar, dentro do próprio cartão:
-   o comutador é de nível de explicação, e precisa mudar a explicação.     */
-.ficha > p.so-mais{
-  padding-top:12px; border-top:1px dashed var(--fio-2); font-size:.88em; color:var(--tinta-3);
-}
 .glifo{ width:42px; height:42px; border-radius:var(--r-2); display:grid; place-items:center; margin-bottom:16px; background:var(--papel-2); color:var(--tinta-2); }
 .glifo svg{ width:22px; height:22px; }
 .g-carimbo{ background:var(--carimbo-f); color:var(--carimbo); }
@@ -3842,31 +3837,27 @@ footer span:last-child{ flex-basis:100%; }
           </p>
         </div>
 
-        <div class="niveis" role="group" aria-label="Nível de explicação">
-          <button data-nivel="simples" aria-pressed="true">Essencial</button>
-          <button data-nivel="mais"    aria-pressed="false">Aprofundar</button>
-        </div>
-
-        <p class="prosa so-simples">
-          São sistemas que leram uma quantidade de texto que nenhuma vida humana alcançaria e
-          que respondem por escrito. Eles não compreendem no sentido em que o senhor compreende:
-          reconhecem regularidades. A distância entre reconhecer e compreender é pequena no
-          resultado e enorme na responsabilidade.
-        </p>
-        <p class="prosa so-mais">
-          Tecnicamente são <button class="termo" data-termo="modelo">modelos de linguagem</button>:
-          preveem a palavra seguinte de um texto, e dessa única operação nascem o resumo, a tradução
-          e a redação. Note o que isso implica — eles não consultam um repositório de verdades, e sim
-          produzem o enunciado mais provável. Errar com absoluta confiança não é uma falha do sistema;
-          é o que ele faz quando o mais provável não é o verdadeiro.
-        </p>
-
         <div class="malha" style="margin-top:30px">
+          <article class="ficha">
+            <span class="glifo g-jade"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
+            <h3>Assistentes pessoais</h3>
+            <p>O senhor escreve a pergunta em português comum e recebe a resposta por escrito: redigir, resumir, explicar, discutir um problema. Os quatro abaixo são os mais procurados do mundo — participação em visitas em maio de 2026, nesta ordem.</p>
+            <div class="pastilhas">
+              <a class="pastilha" href="#f-chatgpt" title="ver a ficha de ChatGPT nesta página">🇺🇸 ChatGPT</a>
+              <a class="pastilha" href="#f-gemini" title="ver a ficha de Gemini nesta página">🇺🇸 Gemini</a>
+              <a class="pastilha" href="#f-claude" title="ver a ficha de Claude nesta página">🇺🇸 Claude</a>
+              <a class="pastilha" href="#f-deepseek" title="ver a ficha de DeepSeek nesta página">🇨🇳 DeepSeek</a>
+            </div>
+            <p class="no-servico">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+              <span><strong>No serviço público:</strong> transformar um parecer técnico em linguagem cidadã.</span>
+            </p>
+          </article>
+
           <article class="ficha">
             <span class="glifo g-jade"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h9M8.5 3v2c0 4-2 6.5-4.5 7.5"/><path d="M5.5 10.5c1.5 2.5 3.8 4.2 6.5 5"/><path d="M13 21l4.5-10L22 21M14.9 17h5.2"/></svg></span>
             <h3>Tradução entre idiomas</h3>
             <p>O senhor cola o texto em inglês, francês ou espanhol e recebe em português — ou entrega o arquivo inteiro e recebe outro, com a formatação preservada.</p>
-            <p class="so-mais">A tradução automática melhorou quando deixou de trocar palavra por palavra e passou a produzir a frase mais provável no idioma de destino — o mesmo mecanismo dos assistentes. Daí o defeito característico: o texto sai fluente mesmo quando o original era ambíguo, e a ambiguidade desaparece sem aviso. Em norma estrangeira, é exatamente aí que se perde o sentido jurídico.</p>
             <div class="pastilhas">
               <a class="pastilha" href="#f-deepl" title="ver a ficha de DeepL nesta página">🇩🇪 DeepL</a>
               <a class="pastilha" href="#f-gemini" title="ver a ficha de Gemini nesta página">🇺🇸 Gemini</a>
@@ -3882,7 +3873,6 @@ footer span:last-child{ flex-basis:100%; }
             <span class="glifo g-carimbo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 15h6M9 11h3"/></svg></span>
             <h3>Leitores de documento</h3>
             <p>O senhor entrega um PDF longo e ele devolve o resumo, os pontos-chave e responde perguntas sobre aquele arquivo específico.</p>
-            <p class="so-mais">O programa não responde pelo que o modelo guardou: ele procura no arquivo os trechos que interessam à pergunta e só então redige, apontando de onde tirou cada parte. É por isso que esta categoria inventa menos. E é por isso que a citação apontada precisa ser aberta — ela diz de onde veio o trecho, não que o trecho sustente a conclusão.</p>
             <div class="pastilhas">
               <a class="pastilha" href="#f-notebooklm" title="ver a ficha de NotebookLM nesta página">🇺🇸 NotebookLM</a>
               <a class="pastilha" href="#f-copilot" title="ver a ficha de Microsoft Copilot nesta página">🇺🇸 Copilot</a>
@@ -3897,7 +3887,6 @@ footer span:last-child{ flex-basis:100%; }
             <span class="glifo g-ocre"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span>
             <h3>Criação de imagem e voz</h3>
             <p>Descreva com palavras e a máquina desenha; entregue um texto e ela fala. Útil — e também o berço das falsificações.</p>
-            <p class="so-mais">Esses modelos não desenham no sentido usual: partem de uma imagem de puro ruído e a limpam passo a passo até restar algo compatível com a descrição. Daí produzirem, com naturalidade, imagens plausíveis de coisas que nunca existiram. É a mesma técnica por trás do vídeo falso do Tema 08 — conhecê-la é o que treina o olho.</p>
             <div class="pastilhas">
               <a class="pastilha" href="#f-midjourney" title="ver a ficha de Midjourney nesta página">🇺🇸 Midjourney</a>
               <a class="pastilha" href="#f-kling" title="ver a ficha de Kling nesta página">🇨🇳 Kling</a>
@@ -3913,7 +3902,6 @@ footer span:last-child{ flex-basis:100%; }
             <span class="glifo g-carimbo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="12.5" rx="2"/><path d="M12 16.5V20M8.5 20h7M7 8.5h7M7 12h4.5"/></svg></span>
             <h3>Criação de apresentações</h3>
             <p>O senhor entrega o assunto, ou o texto que já escreveu, e recebe os slides montados: divisão em telas, títulos e imagens. O ajuste fino continua sendo seu — e a conferência também.</p>
-            <p class="so-mais">O que muda nesta categoria não é o modelo, é o que ele decide. Ao quebrar o texto em telas, a máquina escolhe o que vira título, o que vira item e o que fica de fora — decisão editorial, não gráfica. Como o argumento de uma apresentação mora justamente nessa hierarquia, é a etapa que menos se deve aceitar pronta.</p>
             <div class="pastilhas">
               <a class="pastilha" href="#f-gamma" title="ver a ficha de Gamma nesta página">🇺🇸 Gamma</a>
               <a class="pastilha" href="#f-manus" title="ver a ficha de Manus nesta página">🇸🇬 Manus</a>
@@ -4209,6 +4197,8 @@ footer span:last-child{ flex-basis:100%; }
             <li>Brasil. <em>Lei nº 13.709, de 14 de agosto de 2018</em> — Lei Geral de Proteção de Dados Pessoais, arts. 7º e 23, sobre o tratamento de dados pelo poder público.</li>
             <li>Maritaca AI. Documentação oficial dos modelos Sabiá e do assistente MariTalk. Disponível em: <a href="https://docs.maritaca.ai/pt/introducao" target="_blank" rel="noopener noreferrer">docs.maritaca.ai</a></li>
             <li>Políticas de privacidade e de uso de dados de OpenAI, Google, Anthropic, DeepSeek e DeepL — a distinção entre conta pessoal e contrato corporativo, citada nas fichas, está nesses documentos e muda com frequência.</li>
+            <li>Ordem dos quatro assistentes mais procurados: participação mundial em visitas de maio de 2026, a partir de estimativas da Similarweb compiladas em relatórios de mercado — ChatGPT 53,9%, Gemini 27,9%, Claude 9,2% e DeepSeek 4,1%. A medida importa: por usuários ativos mensais dentro do pacote Microsoft 365, o Copilot ficaria à frente de dois deles. Nenhum desses números é auditado por terceiro independente.</li>
+            <li>CNBC. Aquisição da Butterfly Effect, empresa do Manus, pela Meta — dezembro de 2025.</li>
           </ol>
         </div>
 
