@@ -227,7 +227,6 @@ main{ min-width:0; }
 .capa h1 em{ font-style:italic; color:var(--carimbo); display:block; margin-top:.28em; }
 .capa .abertura{ font-size:1.18em; max-width:55ch; }
 
-.acoes{ display:flex; flex-wrap:wrap; gap:10px; margin-top:32px; }
 .botao{
   display:inline-flex; align-items:center; gap:9px; min-height:52px; padding:0 24px;
   border-radius:var(--r-2); text-decoration:none; font:inherit; font-size:.97rem; font-weight:650;
@@ -244,7 +243,7 @@ main{ min-width:0; }
 
 /* dedicatória carimbada */
 .dedicatoria{
-  position:relative; margin:48px 0 0; max-width:620px; padding:32px 130px 28px 34px;
+  position:relative; margin:40px 0 0; max-width:620px; padding:32px 130px 28px 34px;
   background:var(--folha); border:1px solid var(--fio); border-radius:var(--r-2); box-shadow:var(--sombra-1);
 }
 .dedicatoria p{ font-family:var(--display); font-size:1.1em; line-height:1.6; margin-bottom:.85em; }
@@ -669,46 +668,24 @@ body[data-nivel="mais"]     .so-simples{ display:none; }
   color:var(--tinta-3);
 }
 .video-tit::after{ content:""; height:1px; flex:1; background:var(--fio); }
-.moldura{
-  position:relative; width:100%; aspect-ratio:16/9; overflow:hidden;
-  background:var(--tinta); border:1px solid var(--fio); border-radius:var(--r-2);
+.convite{ margin:44px 0 0; max-width:720px; }
+.convite-corpo{
+  display:grid; grid-template-columns:auto 1fr; gap:22px; align-items:start;
+  padding:26px 28px; background:var(--folha); border:1px solid var(--fio);
+  border-left:3px solid var(--carimbo); border-radius:var(--r-2);
 }
-.moldura iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
-.video-capa{
-  position:absolute; inset:0; display:flex; flex-direction:column; align-items:center;
-  justify-content:center; gap:16px; width:100%; padding:24px;
-  background:var(--tinta); border:0; cursor:pointer; font:inherit; color:var(--papel);
-  text-align:center; transition:background .2s;
+.convite .play{
+  width:56px; height:56px; border-radius:50%; background:var(--carimbo); color:#fff;
+  display:grid; place-items:center; flex:none; margin-top:2px;
 }
-.video-capa:hover{ background:#1B2B24; }
-.play{
-  width:74px; height:74px; border-radius:50%; background:var(--carimbo); color:#fff;
-  display:grid; place-items:center; flex:none; box-shadow:0 8px 28px -10px rgba(0,0,0,.7);
-  transition:transform .2s cubic-bezier(.2,.7,.3,1);
+.convite .play svg{ width:22px; height:22px; margin-left:3px; }
+.convite-txt{ margin:0 0 10px; font-size:.98em; color:var(--tinta-2); max-width:56ch; }
+.convite-como{
+  margin:0 0 18px; font-family:var(--dado); font-size:.79rem; line-height:1.5;
+  color:var(--tinta-3); max-width:52ch;
 }
-.play svg{ width:28px; height:28px; margin-left:4px; }
-.video-capa:hover .play{ transform:scale(1.07); }
-.video-capa .chamar{ font-family:var(--display); font-size:1.16rem; line-height:1.3; max-width:34ch; }
-.video-capa .marca-tempo{
-  font-family:var(--dado); font-size:.75rem; letter-spacing:.05em;
-  color:color-mix(in srgb,var(--papel) 62%,transparent);
-}
-.video-falha{
-  position:absolute; inset:0; display:flex; flex-direction:column; align-items:center;
-  justify-content:center; gap:14px; padding:26px; text-align:center;
-  background:var(--tinta); color:color-mix(in srgb,var(--papel) 80%,transparent);
-}
-.video-falha p{ margin:0; font-size:.9rem; line-height:1.5; max-width:44ch; }
-.video-falha .aviso{
-  font-family:var(--dado); font-size:.68rem; letter-spacing:.11em; text-transform:uppercase;
-  color:var(--ocre);
-}
-.video-falha a{
-  display:inline-flex; align-items:center; gap:9px; min-height:48px; padding:0 22px;
-  background:var(--carimbo); color:#fff; border-radius:var(--r-2);
-  font-size:.92rem; font-weight:650; text-decoration:none;
-}
-.video-falha a svg{ width:16px; height:16px; }
+.convite .botao{ min-height:48px; font-size:.92rem; }
+.convite .direitos{ margin-top:12px; }
 
 .video-pe{ display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center; margin-top:12px; }
 .video-pe a{
@@ -911,7 +888,6 @@ footer{
   .letras button{ min-width:38px; }
 
   .capa h1{ max-width:none; }
-  .acoes .botao{ flex:1 1 100%; justify-content:center; }
   .dedicatoria{ padding:26px 22px 22px; }
   .carimbo{ position:static; margin:20px 0 0; transform:rotate(-4deg); display:inline-grid; }
   
@@ -998,10 +974,11 @@ footer{
     <p class="divisao">Parte III · Um país à parte</p>
     <ol>
       <li><a href="#china"><span class="folio">11</span> China em foco</a></li>
+      <li><a href="#livros"><span class="folio">12</span> Livros</a></li>
     </ol>
     <p class="divisao">Parte IV · Aulas</p>
     <ol>
-      <li><a href="#trilha"><span class="folio">12</span> Recomendação de trilha</a></li>
+      <li><a href="#trilha"><span class="folio">13</span> Recomendação de trilha</a></li>
     </ol>
   </nav>
 
@@ -1035,14 +1012,6 @@ footer{
         decisão precisa voltar a ser de alguém que responde por ela.
       </p>
 
-      <div class="acoes">
-        <a class="botao b-cheio" href="#etica">
-          Começar pela questão central
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <a class="botao b-vazio" href="#ferramentas">Ir direto às ferramentas</a>
-      </div>
-
       <figure class="dedicatoria">
         <p>
           Pai, o senhor escolheu um ofício que quase não aparece: ficar entre a norma e a
@@ -1061,35 +1030,36 @@ footer{
         <span class="sr">Selo vermelho com os caracteres chineses 父亲节, fùqīn jié, que significam Dia dos Pais.</span>
       </figure>
 
-      <figure class="video-bloco">
+      <figure class="convite">
         <figcaption class="video-tit">Antes de começar, quatro minutos</figcaption>
 
-        <div class="moldura" id="moldura">
-          <button class="video-capa" id="abrirVideo"
-                  data-src="https://www.youtube-nocookie.com/embed/QQ-Drt-9Ils?start=0&amp;end=247&amp;rel=0"
-                  aria-label="Reproduzir o vídeo de abertura, do início até 4 minutos e 7 segundos">
-            <span class="play" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-            </span>
-            <span class="chamar">Um trecho para assistir antes de virar a página.</span>
-            <span class="marca-tempo">do início até 4:07</span>
-          </button>
+        <div class="convite-corpo">
+          <span class="play" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+          <div>
+            <p class="convite-txt">
+              Há uma aula que começa exatamente onde este site começa. Assista aos
+              <strong>primeiros 4 minutos e 7 segundos</strong> — só esse trecho, que é a
+              abertura — e depois volte para cá. O resto da aula está na última seção,
+              quando fizer sentido.
+            </p>
+            <p class="convite-como">
+              O vídeo abre em uma aba nova. Quando o relógio do YouTube passar de
+              <strong>4:07</strong>, pode fechar e voltar.
+            </p>
+            <a class="botao b-cheio" href="https://www.youtube.com/watch?v=QQ-Drt-9Ils" target="_blank" rel="noopener noreferrer">
+              Assistir os primeiros 4:07
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg>
+            </a>
+          </div>
         </div>
-
-        <p class="video-pe">
-          <a href="https://www.youtube.com/watch?v=QQ-Drt-9Ils&amp;end=247" target="_blank" rel="noopener noreferrer">
-            assistir direto no YouTube ↗
-          </a>
-        </p>
 
         <p class="direitos">
           <b>direitos autorais</b>
-          O vídeo é hospedado no YouTube e pertence integralmente ao seu autor e ao canal que o
-          publicou. Aqui ele aparece apenas incorporado, pelo recurso de compartilhamento da
-          própria plataforma e nos termos dela: nada é copiado, hospedado ou redistribuído por
-          este site, e nenhum direito é reivindicado sobre a obra. A reprodução acontece nos
-          servidores do YouTube, e o trecho exibido serve a finalidade educativa, com crédito à
-          fonte original.
+          O vídeo pertence integralmente ao seu autor e ao canal que o publicou, e é assistido
+          no próprio YouTube. Este site apenas encaminha: nada é hospedado, copiado ou
+          reproduzido aqui, e nenhum direito é reivindicado sobre a obra.
         </p>
       </figure>
 
@@ -1673,6 +1643,62 @@ footer{
           houve máquina no meio (Diligência). Cada competência cobre um ponto cego das outras.
         </p>
 
+
+        <h3 style="margin:52px 0 10px">Do outro lado: a constituição da máquina</h3>
+        <p class="prosa" style="color:var(--tinta-2);margin-bottom:4px">
+          As quatro competências dizem respeito ao senhor. Falta dizer o que a máquina traz do
+          lado dela — e a resposta da Anthropic tem um nome que vai soar familiar a quem
+          trabalha com norma.
+        </p>
+
+        <div class="definicoes">
+          <article class="def d-ocde">
+            <p class="orgao"><strong>IA Constitucional</strong> <em>Anthropic · constitutional AI · método publicado em dezembro de 2022</em></p>
+            <blockquote>
+              Em vez de corrigir a máquina caso a caso, com milhares de exemplos julgados por
+              pessoas, escreve-se um documento com princípios em linguagem comum — uma
+              constituição — e ensina-se a máquina a julgar as próprias respostas contra ele.
+            </blockquote>
+            <p class="decide">
+              <b>como funciona, em dois tempos</b>
+              Primeiro a máquina responde, lê a própria resposta à luz de um princípio e a
+              reescreve — uma autocrítica escrita, com revisão em seguida. Depois ela passa a
+              escolher entre duas respostas suas qual respeita melhor aquele princípio, e é
+              essa escolha que orienta o treinamento. A supervisão humana não desaparece: ela
+              sobe de nível, e passa a estar inteira no texto dos princípios.
+            </p>
+          </article>
+        </div>
+
+        <div class="esqueleto-comum">
+          <h4>De onde vieram os princípios</h4>
+          <ol>
+            <li><b>Declaração Universal dos Direitos Humanos</b> — escolhida por ter sido redigida por representantes de tradições jurídicas e culturais diversas.</li>
+            <li><b>Termos de serviço de grandes plataformas</b> — para cobrir o que um documento de 1948 não poderia prever: privacidade de dados, falsificação de identidade.</li>
+            <li><b>Regras de pesquisa de outro laboratório</b> — os princípios do Sparrow, da DeepMind.</li>
+            <li><b>Perspectivas não ocidentais</b> — princípios escritos de propósito para considerar valores de fora do mundo ocidental, industrializado e rico.</li>
+            <li><b>Tentativa e erro dos próprios pesquisadores</b> — a parte que a empresa admite ter sido feita de modo improvisado.</li>
+          </ol>
+        </div>
+
+        <p class="margem-nota" style="max-width:66ch">
+          <strong>A pergunta que o senhor deve fazer:</strong> quem escreve a constituição?
+          Um documento público, escrito, revisável, que governa a conduta — isso é,
+          literalmente, a forma de uma norma administrativa. A diferença é que ninguém elegeu
+          quem a redigiu. A própria Anthropic reconhece a lacuna: diz que o texto "não está
+          finalizado nem é provavelmente o melhor possível" e afirma buscar formas de produzi-lo
+          de maneira mais democrática. Enquanto isso não acontece, os valores de uma máquina que
+          já atende cidadãos são redigidos por uma empresa — e cabe ao Estado, na contratação,
+          perguntar quais são e exigir vê-los.
+        </p>
+
+        <p class="prosa" style="color:var(--tinta-2)">
+          Repare no encaixe: a constituição da máquina é a <strong>Diligência</strong> vista do
+          outro lado. O senhor responde pelo que assina; ela responde a um texto que alguém
+          escreveu. Nos dois casos a pergunta é a mesma — quem responde por isto? — e só um
+          dos dois lados pode ser convocado a prestar contas.
+        </p>
+
         <div class="fontes">
           <h4>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
@@ -1682,6 +1708,8 @@ footer{
             <li>Anthropic. <em>AI Fluency: Frameworks &amp; Foundations</em> — curso aberto, 2025. Enquadramento das quatro competências (Delegation, Description, Discernment, Diligence).</li>
             <li>Dakan, R.; Feller, J. <em>AI Fluency</em> — material desenvolvido em parceria entre a Ringling College of Art and Design, a University College Cork e a Anthropic.</li>
             <li>Anthropic. <em>Prompt engineering overview</em> — documentação oficial, para o desdobramento técnico da competência de Descrição.</li>
+            <li>Bai, Y. <em>et al.</em> "Constitutional AI: Harmlessness from AI Feedback". Anthropic, dezembro de 2022. Disponível em: <a href="https://arxiv.org/abs/2212.08073" target="_blank" rel="noopener noreferrer">arxiv.org/abs/2212.08073</a></li>
+            <li>Anthropic. <em>Claude’s Constitution</em>, maio de 2023 — texto dos princípios e das fontes de onde foram tirados. Disponível em: <a href="https://www.anthropic.com/news/claudes-constitution" target="_blank" rel="noopener noreferrer">anthropic.com/news/claudes-constitution</a></li>
           </ol>
         </div>
 
@@ -2052,9 +2080,31 @@ se o texto não disser algo, escreva
           </article>
         </div>
 
-        <h3 style="margin:46px 0 6px">Uma estante sobre China e IA</h3>
+        <p class="escopo"><b>a seguir</b><span>Cronologia chinesa e regulação própria, com o que muda para quem contrata tecnologia no Brasil.</span></p>
+      </div>
+    </section>
+    <!-- Livros -->
+    <section class="parte" id="livros">
+      <div class="caixa">
+        <div class="cabeca">
+          <p class="etiqueta">Fólio 12 · para ler devagar</p>
+          <h2><span class="selo-secao" aria-hidden="true">人</span>Livros</h2>
+          <p class="abertura">
+            Um site se lê em uma tarde e se esquece em duas. Livro é outra coisa: obriga a
+            demorar, e o que se demora fica. Esta é a estante que acompanha a seção anterior —
+            China e inteligência artificial — e vai crescer conforme as demais forem escritas.
+          </p>
+        </div>
+
+        <p class="criterio">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg>
+          <span><strong>Regra desta estante:</strong> só entra livro com edição brasileira
+          confirmada — editora e tradutor conferidos. Indicar o que o senhor não consegue ler
+          seria recomendação vazia.</span>
+        </p>
+
+        <h3 style="margin:38px 0 6px">China e inteligência artificial</h3>
         <p class="prosa" style="font-size:.93em;color:var(--tinta-2);margin-bottom:20px">
-          Só entram aqui livros com edição brasileira confirmada — editora e tradutor conferidos.
           A regra tem um custo, e vale dizer qual: o livro mais duro sobre vigilância na China
           ainda não foi traduzido, de modo que o contraponto crítico está faltando nesta estante.
           Ela recomenda o que se pode ler, não o que bastaria ler.
@@ -2097,16 +2147,16 @@ se o texto não disser algo, escreva
               </p>
             </div>
           </article>
-        </div>
+                </div>
 
-        <p class="escopo"><b>a seguir</b><span>Cronologia chinesa e regulação própria. Na estante: preço atual, disponibilidade em bibliotecas públicas e o capítulo por onde começar em cada título.</span></p>
+        <p class="escopo"><b>a seguir</b><span>Uma prateleira por seção — ética, serviço público, história da técnica —, cada livro com preço atual, disponibilidade em bibliotecas públicas e o capítulo por onde começar.</span></p>
       </div>
     </section>
     <!-- Trilha -->
     <section class="parte" id="trilha">
       <div class="caixa">
         <div class="cabeca">
-          <p class="etiqueta">Fólio 12 · para continuar depois</p>
+          <p class="etiqueta">Fólio 13 · para continuar depois</p>
           <h2><span class="selo-secao" aria-hidden="true">人</span>Recomendação de trilha</h2>
           <p class="abertura">
             Este site dá o mapa. Quem dá a aula é outra pessoa — e com voz, quadro e tempo,
@@ -2415,51 +2465,6 @@ se o texto não disser algo, escreva
       b.setAttribute("aria-selected","true");
     });
   });
-
-  /* ── vídeo: o player só entra na página depois do clique ── */
-  var capa = document.getElementById("abrirVideo");
-  if(capa){
-    var moldura = document.getElementById("moldura");
-    var LINK = "https://www.youtube.com/watch?v=QQ-Drt-9Ils&end=247";
-
-    function falhou(){
-      moldura.innerHTML =
-        '<div class="video-falha">'
-      + '  <p class="aviso">conteúdo externo bloqueado</p>'
-      + '  <p>Este ambiente de pré-visualização não permite carregar vídeos de outros sites.'
-      + '  No site publicado o trecho toca aqui mesmo, sem sair da página.</p>'
-      + '  <a href="' + LINK + '" target="_blank" rel="noopener noreferrer">'
-      + '    Assistir no YouTube'
-      + '    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg>'
-      + '  </a>'
-      + '</div>';
-    }
-
-    capa.addEventListener("click", function(){
-      var q = document.createElement("iframe");
-      q.src = capa.dataset.src + "&autoplay=1";
-      q.title = "Vídeo de abertura";
-      q.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share";
-      q.referrerPolicy = "strict-origin-when-cross-origin";
-      q.allowFullscreen = true;
-
-      /* Um quadro do YouTube que carrega é de outra origem: tocar no
-         contentDocument dele lança exceção. Se o acesso funcionar, o que
-         está ali dentro não é o YouTube — foi bloqueado.                */
-      var resolvido = false;
-      q.addEventListener("load", function(){
-        if(resolvido) return;
-        resolvido = true;
-        var bloqueado = false;
-        try { bloqueado = !!q.contentDocument; } catch(e){ bloqueado = false; }
-        if(bloqueado) falhou();
-      });
-      setTimeout(function(){ if(!resolvido){ resolvido = true; falhou(); } }, 4000);
-
-      moldura.replaceChildren(q);
-    });
-  }
-
 
   /* ── miniaturas: se o host bloquear i.ytimg.com, desenha o lugar delas ── */
   document.querySelectorAll(".aula-thumb img").forEach(function(img){

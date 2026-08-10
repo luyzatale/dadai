@@ -35,10 +35,10 @@ Doze seções em quatro partes, ordenadas por importância para o leitor. Cada u
 `07` O método 4D · `08` Ferramentas do dia a dia · `09` Engenharia de prompt · `10` SocialTech
 
 **Parte III · Um país à parte**
-`11` China em foco
+`11` China em foco · `12` Livros
 
 **Parte IV · Aulas**
-`12` Recomendação de trilha
+`13` Recomendação de trilha
 
 ---
 
