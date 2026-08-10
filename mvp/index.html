@@ -1,0 +1,1862 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dad AI — MVP de design</title>
+<style>
+/* ═══════════════════════════════════════════════════════════
+   DAD AI  ·  direção visual "Processo"
+   Um dossiê de estudo: papel ofício, fólio na margem,
+   e o vermelhão reservado ao que foi carimbado.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── 1 · Tokens (tema claro completo no :root) ───────────── */
+:root{
+  --papel:    #EDEFE9;   /* papel ofício, cinza-celadon */
+  --papel-2:  #E4E8DE;
+  --folha:    #F7F8F3;   /* a folha sobre a mesa */
+  --folha-2:  #FBFCF8;
+
+  --tinta:    #131E19;   /* verde-preto de caneta */
+  --tinta-2:  #41534A;
+  --tinta-3:  #6D7E74;
+  --fio:      #D2D9CB;
+  --fio-2:    #B7C1B2;
+
+  --carimbo:   #B3372A;  /* vermelhão de selo — só onde se carimba */
+  --carimbo-f: #F6E9E5;
+  --jade:      #1E6153;  /* verificado, fonte, confirmação */
+  --jade-f:    #E4EDE8;
+  --ocre:      #8C6A18;  /* anotação de margem, o presente */
+  --ocre-f:    #F3EDDC;
+
+  --sombra-1: 0 1px 0 rgba(19,30,25,.05), 0 1px 3px rgba(19,30,25,.05);
+  --sombra-2: 0 1px 2px rgba(19,30,25,.06), 0 10px 26px -10px rgba(19,30,25,.18);
+  --sombra-3: 0 2px 6px rgba(19,30,25,.08), 0 24px 56px -16px rgba(19,30,25,.28);
+
+  --r-1:2px; --r-2:4px; --r-3:7px;
+
+  --display: "Palatino Linotype","Book Antiqua",Palatino,"Iowan Old Style","Hoefler Text",Georgia,serif;
+  --texto:   "Segoe UI",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  --dado:    Consolas,"SF Mono",Menlo,"DejaVu Sans Mono",monospace;
+  /* face chinesa com serifa (estilo Song/Ming) — registro de documento, não de interface */
+  --han:     "Songti SC","STSong","Noto Serif CJK SC","Source Han Serif SC","SimSun",
+             "PingFang SC","Microsoft YaHei","Hiragino Sans GB",serif;
+
+  --escala: 1;
+  --corpo: calc(1.1875rem * var(--escala));
+  --medida: 68ch;
+  --margem: 304px;
+}
+
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --papel:#111814; --papel-2:#182119; --folha:#1A231D; --folha-2:#202B24;
+    --tinta:#E6EADE; --tinta-2:#B3BFB4; --tinta-3:#7F8E84;
+    --fio:#293630; --fio-2:#3A4A41;
+    --carimbo:#E27C67; --carimbo-f:#2A1A17;
+    --jade:#6BC0A5;    --jade-f:#122520;
+    --ocre:#D3AC58;    --ocre-f:#251F12;
+    --sombra-1:0 1px 0 rgba(0,0,0,.3);
+    --sombra-2:0 1px 2px rgba(0,0,0,.35), 0 10px 26px -10px rgba(0,0,0,.6);
+    --sombra-3:0 2px 6px rgba(0,0,0,.4), 0 24px 56px -16px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --papel:#111814; --papel-2:#182119; --folha:#1A231D; --folha-2:#202B24;
+  --tinta:#E6EADE; --tinta-2:#B3BFB4; --tinta-3:#7F8E84;
+  --fio:#293630; --fio-2:#3A4A41;
+  --carimbo:#E27C67; --carimbo-f:#2A1A17;
+  --jade:#6BC0A5;    --jade-f:#122520;
+  --ocre:#D3AC58;    --ocre-f:#251F12;
+  --sombra-1:0 1px 0 rgba(0,0,0,.3);
+  --sombra-2:0 1px 2px rgba(0,0,0,.35), 0 10px 26px -10px rgba(0,0,0,.6);
+  --sombra-3:0 2px 6px rgba(0,0,0,.4), 0 24px 56px -16px rgba(0,0,0,.7);
+}
+
+/* ── 2 · Base ────────────────────────────────────────────── */
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; scroll-padding-top:96px; -webkit-text-size-adjust:100%; }
+body{
+  margin:0; background:var(--papel); color:var(--tinta);
+  font-family:var(--texto); font-size:var(--corpo); line-height:1.68;
+  text-rendering:optimizeLegibility;
+}
+h1,h2,h3{ font-family:var(--display); font-weight:600; line-height:1.14; margin:0; text-wrap:balance; }
+h1{ font-size:clamp(1.95rem,1.3rem+2.1vw,3rem); letter-spacing:-.014em; line-height:1.18; }
+h2{ font-size:clamp(1.8rem,1.25rem+2vw,2.7rem);   letter-spacing:-.014em; }
+h3{ font-size:clamp(1.2rem,1.05rem+.6vw,1.45rem); letter-spacing:-.008em; }
+h4{ font-family:var(--texto); font-size:1.03rem; font-weight:650; line-height:1.35; margin:0; letter-spacing:-.005em; }
+p{ margin:0 0 1.05em; }
+a{ color:inherit; }
+strong{ font-weight:650; }
+button,a,.aba,.tema{ touch-action:manipulation; -webkit-tap-highlight-color:transparent; }
+::selection{ background:var(--ocre-f); color:var(--tinta); }
+:focus-visible{ outline:2.5px solid var(--jade); outline-offset:3px; }
+
+.sr{ position:absolute; width:1px; height:1px; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+.pular{
+  position:fixed; top:8px; left:8px; z-index:900; transform:translateY(-200%);
+  background:var(--tinta); color:var(--papel); padding:12px 20px; border-radius:var(--r-2);
+  font-weight:600; text-decoration:none; transition:transform .18s;
+}
+.pular:focus{ transform:none; }
+
+/* ── 3 · Cabeçalho ───────────────────────────────────────── */
+#barra{ position:fixed; top:0; left:0; height:2px; width:0; background:var(--carimbo); z-index:700; }
+
+.topo{
+  position:sticky; top:0; z-index:600; display:flex; align-items:center; gap:14px;
+  padding:11px clamp(16px,3vw,30px);
+  background:color-mix(in srgb,var(--papel) 88%,transparent);
+  backdrop-filter:blur(12px) saturate(1.3);
+  border-bottom:1px solid var(--fio);
+}
+.marca{ display:flex; align-items:center; gap:11px; text-decoration:none; margin-right:auto; min-width:0; }
+/* logo: selo 白文 — caractere reservado em branco sobre campo vermelho */
+.marca-selo{
+  position:relative; width:36px; height:36px; flex:none; border-radius:var(--r-1);
+  background:var(--carimbo); color:#fff; display:grid; place-items:center;
+  font-family:var(--han); font-size:21px; font-weight:600; line-height:1;
+  padding-bottom:1px; user-select:none;
+}
+.marca-selo::after{  /* fio interno, como o rebaixo de um carimbo de pedra */
+  content:""; position:absolute; inset:3px; border:1px solid rgba(255,255,255,.42);
+  border-radius:1px; pointer-events:none;
+}
+.marca:hover .marca-selo{ background:var(--tinta); }
+.marca-txt{ display:block; min-width:0; }
+.marca-txt b{ font-family:var(--display); font-size:1.08rem; font-weight:600; display:block; line-height:1.2; letter-spacing:-.01em; }
+.marca-txt i{ font-style:normal; display:block; font-family:var(--dado); font-size:.68rem; color:var(--tinta-3); letter-spacing:.03em; }
+
+.ferramentas{ display:flex; align-items:center; gap:8px; }
+.tecla{
+  display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:0 13px;
+  background:var(--folha); border:1px solid var(--fio); border-radius:var(--r-2);
+  font:inherit; font-size:.82rem; font-weight:600; color:var(--tinta-2); cursor:pointer;
+  transition:border-color .16s, color .16s;
+}
+.tecla:hover{ border-color:var(--tinta-3); color:var(--tinta); }
+.tecla svg{ width:17px; height:17px; flex:none; }
+.letras{ display:flex; background:var(--folha); border:1px solid var(--fio); border-radius:var(--r-2); overflow:hidden; }
+.letras button{
+  min-width:42px; min-height:44px; border:0; background:none; cursor:pointer; color:var(--tinta-2);
+  font-family:var(--display); font-weight:600; transition:background .16s;
+}
+.letras button:hover{ background:var(--papel-2); }
+.letras button+button{ border-left:1px solid var(--fio); }
+.letras button[aria-pressed="true"]{ background:var(--tinta); color:var(--papel); }
+.l1{font-size:.78rem} .l2{font-size:.98rem} .l3{font-size:1.2rem}
+#abrirSumario{ display:none; }
+
+/* ── 4 · Estrutura: margem de protocolo + coluna ─────────── */
+.folha-mestra{ display:grid; grid-template-columns:var(--margem) minmax(0,1fr); align-items:start; }
+
+.sumario{
+  position:sticky; top:59px; height:calc(100dvh - 59px); overflow-y:auto;
+  padding:30px 18px 40px clamp(16px,3vw,30px); border-right:1px solid var(--fio);
+}
+.sumario-tit{
+  font-family:var(--dado); font-size:.68rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--tinta-3); margin:0 0 14px 10px;
+}
+.sumario ol{ list-style:none; margin:0; padding:0; }
+.divisao{
+  margin:22px 10px 9px; padding-top:13px; border-top:1px solid var(--fio);
+  font-family:var(--dado); font-size:.64rem; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--tinta-3);
+}
+.sumario-tit + .divisao{ margin-top:0; padding-top:0; border-top:0; }
+.sumario a{
+  display:grid; grid-template-columns:30px 1fr; align-items:baseline; gap:10px;
+  padding:8px 10px; border-radius:var(--r-2); text-decoration:none;
+  color:var(--tinta-2); font-size:.9rem; font-weight:550; line-height:1.35;
+  border-left:2px solid transparent; transition:background .16s,color .16s,border-color .16s;
+}
+.sumario a:hover{ background:var(--papel-2); color:var(--tinta); }
+.folio{ font-family:var(--dado); font-size:.72rem; color:var(--tinta-3); font-variant-numeric:tabular-nums; }
+.sumario a[aria-current="true"]{ background:var(--carimbo-f); color:var(--carimbo); font-weight:650; border-left-color:var(--carimbo); }
+.sumario a[aria-current="true"] .folio{ color:var(--carimbo); }
+/* epígrafe da capa */
+.epigrafe{
+  margin:30px 0 30px; padding:20px 0; max-width:46ch;
+  border-top:1px solid var(--fio-2); border-bottom:1px solid var(--fio-2);
+}
+.epigrafe p{
+  margin:0 0 10px; font-family:var(--display); font-style:italic;
+  font-size:1.2em; line-height:1.45; color:var(--tinta);
+}
+.epigrafe cite{
+  font-style:normal; font-family:var(--dado); font-size:.73rem;
+  letter-spacing:.07em; text-transform:uppercase; color:var(--tinta-3);
+}
+
+main{ min-width:0; }
+.parte{ padding:clamp(52px,6.5vw,96px) clamp(20px,5vw,68px); border-bottom:1px solid var(--fio); }
+.caixa{ max-width:1060px; }
+.prosa{ max-width:var(--medida); }
+
+.etiqueta{
+  display:flex; align-items:center; gap:11px; margin:0 0 18px;
+  font-family:var(--dado); font-size:.71rem; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--carimbo); font-weight:600;
+}
+.etiqueta::after{ content:""; height:1px; flex:1; max-width:120px; background:var(--fio-2); }
+.abertura{ font-size:1.12em; color:var(--tinta-2); max-width:60ch; line-height:1.6; }
+.cabeca{ margin-bottom:40px; }
+.cabeca h2{ margin-bottom:14px; }
+
+/* nota de escopo — o que ainda vem */
+.escopo{
+  display:flex; gap:12px; align-items:flex-start; margin-top:26px; padding:14px 16px;
+  border:1px dashed var(--fio-2); border-radius:var(--r-2); background:var(--papel-2);
+  font-size:.85em; color:var(--tinta-2); line-height:1.55; max-width:64ch;
+}
+.escopo b{ font-family:var(--dado); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--tinta-3); flex:none; padding-top:3px; }
+
+/* ── 5 · Capa ────────────────────────────────────────────── */
+.capa{ padding:clamp(46px,6vw,86px) clamp(20px,5vw,68px) clamp(52px,6.5vw,90px); border-bottom:1px solid var(--fio); }
+.data-capa{
+  font-family:var(--dado); font-size:.75rem; letter-spacing:.08em; color:var(--tinta-3);
+  text-transform:uppercase; margin:0 0 22px; display:flex; gap:14px; flex-wrap:wrap; align-items:center;
+}
+.data-capa .ponto{ width:3px; height:3px; border-radius:50%; background:var(--fio-2); }
+.capa h1{ max-width:30ch; margin-bottom:6px; text-wrap:pretty; }
+.capa h1 em{ font-style:italic; color:var(--carimbo); display:block; margin-top:.28em; }
+.capa .abertura{ font-size:1.18em; max-width:55ch; }
+
+.acoes{ display:flex; flex-wrap:wrap; gap:10px; margin-top:32px; }
+.botao{
+  display:inline-flex; align-items:center; gap:9px; min-height:52px; padding:0 24px;
+  border-radius:var(--r-2); text-decoration:none; font:inherit; font-size:.97rem; font-weight:650;
+  border:1.5px solid transparent; cursor:pointer; transition:transform .16s, box-shadow .16s, border-color .16s;
+}
+.botao svg{ width:18px; height:18px; }
+.b-cheio{ background:var(--tinta); color:var(--papel); box-shadow:var(--sombra-2); }
+.b-vazio{ background:var(--folha); color:var(--tinta); border-color:var(--fio-2); }
+@media (hover:hover){
+  .b-cheio:hover{ transform:translateY(-2px); box-shadow:var(--sombra-3); }
+  .b-vazio:hover{ border-color:var(--tinta); transform:translateY(-2px); }
+}
+.botao:active{ transform:scale(.985); }
+
+/* dedicatória carimbada */
+.dedicatoria{
+  position:relative; margin:48px 0 0; max-width:620px; padding:32px 130px 28px 34px;
+  background:var(--folha); border:1px solid var(--fio); border-radius:var(--r-2); box-shadow:var(--sombra-1);
+}
+.dedicatoria p{ font-family:var(--display); font-size:1.1em; line-height:1.6; margin-bottom:.85em; }
+.votos{ font-family:var(--display); font-size:1.15em; color:var(--carimbo); margin:0 0 .5em; }
+.assinatura{ display:flex; align-items:center; gap:11px; font-size:.85rem; color:var(--tinta-3); }
+.assinatura::before{ content:""; width:26px; height:1px; background:var(--fio-2); }
+
+.carimbo{
+  font-family:var(--han);
+  position:absolute; right:26px; top:50%; width:92px; height:92px; margin-top:-46px;
+  border:2.5px solid var(--carimbo); border-radius:var(--r-2); color:var(--carimbo);
+  display:grid; place-items:center; transform:rotate(-7deg); opacity:.9;
+  font-size:23px; line-height:1.06; letter-spacing:0;
+  writing-mode:vertical-rl; white-space:nowrap; padding:8px 2px; user-select:none;
+}
+.carimbo::after{ content:""; position:absolute; inset:4px; border:1px solid currentColor; border-radius:1px; opacity:.5; }
+
+
+/* ── 6 · Peças de conteúdo ───────────────────────────────── */
+.malha{ display:grid; gap:16px; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); }
+
+.ficha{
+  display:flex; flex-direction:column; background:var(--folha); border:1px solid var(--fio);
+  border-radius:var(--r-2); padding:24px; transition:transform .18s, box-shadow .18s, border-color .18s;
+}
+@media (hover:hover){ .ficha:hover{ transform:translateY(-2px); box-shadow:var(--sombra-2); border-color:var(--fio-2); } }
+.ficha:active{ border-color:var(--fio-2); }
+.ficha h3{ margin-bottom:8px; }
+.ficha > p{ font-size:.92em; color:var(--tinta-2); margin-bottom:14px; }
+.glifo{ width:42px; height:42px; border-radius:var(--r-2); display:grid; place-items:center; margin-bottom:16px; background:var(--papel-2); color:var(--tinta-2); }
+.glifo svg{ width:22px; height:22px; }
+.g-carimbo{ background:var(--carimbo-f); color:var(--carimbo); }
+.g-jade{ background:var(--jade-f); color:var(--jade); }
+.g-ocre{ background:var(--ocre-f); color:var(--ocre); }
+
+.no-servico{
+  display:flex; gap:9px; align-items:flex-start; margin-top:auto; padding:11px 13px;
+  background:var(--jade-f); border-radius:var(--r-1); font-size:.83em; color:var(--jade); line-height:1.5;
+}
+.no-servico svg{ width:15px; height:15px; flex:none; margin-top:4px; }
+
+.pastilhas{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+.pastilha{
+  display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:var(--r-1);
+  background:var(--papel-2); border:1px solid var(--fio); font-size:.76rem; font-weight:600; color:var(--tinta-2);
+}
+
+/* termo explicado */
+.termo{
+  border:0; border-bottom:1.5px dotted var(--jade); background:none; padding:0 1px;
+  font:inherit; color:inherit; cursor:help;
+}
+.termo::after{ content:"?"; font-size:.58em; vertical-align:super; color:var(--jade); font-weight:700; }
+#balao{
+  position:absolute; z-index:800; max-width:300px; padding:13px 15px;
+  background:var(--tinta); color:var(--papel); border-radius:var(--r-2);
+  font-size:.85rem; line-height:1.5; box-shadow:var(--sombra-3);
+  opacity:0; transform:translateY(5px); transition:opacity .15s, transform .15s; pointer-events:none;
+}
+#balao.visivel{ opacity:1; transform:none; }
+#balao b{ display:block; font-family:var(--dado); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ocre); margin-bottom:4px; }
+
+/* dois níveis de explicação */
+.niveis{ display:inline-flex; padding:3px; background:var(--papel-2); border:1px solid var(--fio); border-radius:var(--r-2); margin-bottom:24px; }
+.niveis button{
+  min-height:40px; padding:0 18px; border:0; border-radius:var(--r-1); background:none; cursor:pointer;
+  font:inherit; font-size:.85rem; font-weight:650; color:var(--tinta-3); transition:.18s;
+}
+.niveis button[aria-pressed="true"]{ background:var(--folha); color:var(--tinta); box-shadow:var(--sombra-1); }
+body[data-nivel="simples"]  .so-mais{ display:none; }
+body[data-nivel="mais"]     .so-simples{ display:none; }
+
+/* linha do tempo */
+.cronologia{ position:relative; padding-left:38px; }
+.cronologia::before{ content:""; position:absolute; left:9px; top:7px; bottom:7px; width:1px; background:var(--fio-2); }
+.evento{ position:relative; padding-bottom:34px; }
+.evento::before{
+  content:""; position:absolute; left:-33px; top:8px; width:9px; height:9px;
+  background:var(--carimbo); border-radius:var(--r-1); transform:rotate(45deg);
+}
+.evento .quando{ font-family:var(--dado); font-size:.8rem; font-weight:600; color:var(--carimbo); font-variant-numeric:tabular-nums; }
+.evento h3{ margin:4px 0 7px; }
+.evento p{ font-size:.93em; color:var(--tinta-2); max-width:58ch; margin-bottom:9px; }
+.onde{
+  display:inline-flex; align-items:center; gap:6px; padding:3px 10px; border-radius:var(--r-1);
+  background:var(--papel-2); border:1px solid var(--fio); font-size:.76rem; color:var(--tinta-3); font-weight:600;
+}
+.onde svg{ width:12px; height:12px; }
+
+/* abas */
+.abas{ display:flex; flex-wrap:wrap; gap:7px; margin-bottom:26px; padding-bottom:14px; border-bottom:1px solid var(--fio); }
+.aba{
+  min-height:44px; padding:0 16px; border-radius:var(--r-2); border:1px solid var(--fio);
+  background:var(--folha); font:inherit; font-size:.86rem; font-weight:600; color:var(--tinta-2);
+  cursor:pointer; display:inline-flex; align-items:center; gap:7px; transition:.18s;
+}
+.aba:hover{ border-color:var(--tinta-3); }
+.aba[aria-selected="true"]{ background:var(--tinta); border-color:var(--tinta); color:var(--papel); }
+
+/* organizações */
+.org{
+  display:flex; align-items:center; gap:16px; padding:16px 18px; margin-bottom:8px;
+  border:1px solid var(--fio); border-radius:var(--r-2); background:var(--folha);
+  transition:border-color .18s, transform .18s;
+}
+@media (hover:hover){ .org:hover{ border-color:var(--fio-2); transform:translateX(3px); } }
+.org .inicial{
+  width:44px; height:44px; flex:none; border-radius:var(--r-2); display:grid; place-items:center;
+  font-family:var(--display); font-weight:600; font-size:1.1rem; color:var(--folha-2); background:var(--tinta);
+}
+.org .corpo{ flex:1; min-width:0; }
+.org .corpo p{ margin:2px 0 0; font-size:.85em; color:var(--tinta-3); }
+.org .selo-txt{ font-family:var(--dado); font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--jade); white-space:nowrap; }
+
+/* ── parte China: mesmo papel, outro regime visual ──
+   Vermelho oficial da bandeira (#DE2910) só em campo e traço — nunca
+   como texto corrido sobre claro, onde não alcança 4,5:1.            */
+.china{
+  --china-vermelho:#DE2910;
+  --china-ouro:#FFDE00;
+  padding-top:0; position:relative;
+}
+.estandarte{
+  position:relative; overflow:hidden; margin:0 calc(-1 * clamp(20px,5vw,68px));
+  padding:clamp(38px,5vw,62px) clamp(20px,5vw,68px) clamp(34px,4.5vw,54px);
+  background:var(--china-vermelho); color:#fff;
+}
+.estandarte::after{  /* 中 em marca-d'água, dentro do campo vermelho */
+  content:"中"; font-family:var(--han); position:absolute; right:-30px; top:50%; transform:translateY(-50%);
+  font-size:clamp(220px,26vw,360px); line-height:1;
+  color:#fff; opacity:.09; pointer-events:none; user-select:none;
+}
+.estandarte > *{ position:relative; }
+.bandeira-cn{
+  width:96px; height:64px; display:block; margin-bottom:26px;
+  border:1px solid rgba(255,255,255,.35); border-radius:var(--r-1);
+  box-shadow:0 6px 20px -8px rgba(0,0,0,.55);
+}
+.estandarte .etiqueta{ color:var(--china-ouro); }
+.estandarte .etiqueta::after{ background:rgba(255,255,255,.4); }
+.estandarte h2{ color:#fff; margin-bottom:14px; }
+.estandarte .abertura{ color:rgba(255,255,255,.88); }
+.estandarte .hanzi{
+  font-family:var(--han); font-size:1.5rem; color:var(--china-ouro);
+  letter-spacing:.3em; margin:0 0 6px;
+}
+
+/* corpo da seção, de volta ao papel */
+.china-corpo{ padding-top:clamp(40px,5vw,64px); }
+.china .ficha{ border-top:2px solid var(--china-vermelho); }
+.china .glifo{ background:var(--carimbo-f); color:var(--carimbo); }
+.china .ficha h3{ font-size:1.28rem; }
+
+/* ética */
+.temas{ display:grid; gap:9px; grid-template-columns:repeat(auto-fill,minmax(238px,1fr)); }
+.tema{
+  display:grid; grid-template-columns:26px 1fr; align-items:baseline; gap:10px; width:100%;
+  padding:14px 15px; text-align:left; background:var(--folha); border:1px solid var(--fio);
+  border-radius:var(--r-2); font:inherit; font-size:.89rem; font-weight:600; color:var(--tinta);
+  line-height:1.35; cursor:pointer; transition:.18s;
+}
+@media (hover:hover){ .tema:hover{ border-color:var(--carimbo); background:var(--carimbo-f); } }
+.tema:active{ border-color:var(--carimbo); background:var(--carimbo-f); }
+.tema .folio{ color:var(--tinta-3); }
+
+.verbete{
+  margin-top:22px; padding:32px; background:var(--folha);
+  border:1px solid var(--fio); border-radius:var(--r-3); box-shadow:var(--sombra-1);
+}
+.verbete h3{ font-size:1.55rem; margin-bottom:12px; }
+.verbete .prosa{ color:var(--tinta-2); }
+.margem-nota{
+  margin:20px 0; padding:16px 20px; background:var(--ocre-f);
+  border-left:2px solid var(--ocre); border-radius:0 var(--r-1) var(--r-1) 0;
+  font-size:.94em; color:var(--tinta-2);
+}
+.margem-nota strong{ color:var(--ocre); }
+
+.fontes{ margin-top:24px; padding-top:20px; border-top:1px solid var(--fio); }
+.fontes h4{
+  font-family:var(--dado); font-size:.69rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--tinta-3); margin-bottom:12px; display:flex; align-items:center; gap:8px;
+}
+.fontes h4 svg{ width:14px; height:14px; color:var(--jade); }
+.fontes ol{ margin:0; padding-left:19px; font-size:.87em; color:var(--tinta-2); line-height:1.58; }
+.fontes li{ margin-bottom:8px; }
+
+/* caso de governo */
+.caso{
+  display:grid; grid-template-columns:1.4fr 1fr; overflow:hidden;
+  border:1px solid var(--fio); border-radius:var(--r-3); background:var(--folha); box-shadow:var(--sombra-1);
+}
+.caso .relato{ padding:30px; }
+.caso .relato h3{ margin:10px 0 11px; }
+.caso .relato p{ font-size:.93em; color:var(--tinta-2); }
+.caso .placar{
+  padding:30px; background:var(--papel-2); border-left:1px solid var(--fio);
+  display:flex; flex-direction:column; gap:20px; justify-content:center;
+}
+.placar strong{
+  display:block; font-family:var(--display); font-size:1.9rem; line-height:1.05;
+  color:var(--jade); margin-bottom:4px; font-variant-numeric:tabular-nums;
+}
+.placar span{ font-size:.82rem; color:var(--tinta-3); line-height:1.45; display:block; }
+.rodape-nota{ margin-top:14px; font-size:.82rem; color:var(--tinta-3); }
+
+/* notícias */
+
+
+/* engenharia de prompt — escada e comparação */
+.escada{ display:grid; gap:10px; counter-reset:degrau; }
+.degrau{
+  display:grid; grid-template-columns:auto 1fr; gap:18px; align-items:start;
+  padding:18px 20px; background:var(--folha); border:1px solid var(--fio); border-radius:var(--r-2);
+}
+.degrau .nivel{
+  font-family:var(--dado); font-size:.7rem; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--tinta-3); white-space:nowrap; padding-top:4px; font-variant-numeric:tabular-nums;
+}
+.degrau h4{ margin-bottom:5px; }
+.degrau p{ margin:0; font-size:.9em; color:var(--tinta-2); max-width:62ch; }
+.degrau .receita{
+  margin-top:10px; font-family:var(--dado); font-size:.83em; color:var(--jade);
+  background:var(--jade-f); border-radius:var(--r-1); padding:8px 11px; display:inline-block;
+}
+
+.confronto{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:26px 0 0; }
+.pedaco{ border:1px solid var(--fio); border-radius:var(--r-2); overflow:hidden; background:var(--folha); display:flex; flex-direction:column; }
+.pedaco .titulo{
+  display:flex; align-items:center; gap:8px; padding:11px 16px; border-bottom:1px solid var(--fio);
+  font-family:var(--dado); font-size:.72rem; letter-spacing:.09em; text-transform:uppercase; font-weight:600;
+}
+.pedaco .titulo svg{ width:14px; height:14px; }
+.p-fraco .titulo{ color:var(--carimbo); background:var(--carimbo-f); }
+.p-bom   .titulo{ color:var(--jade);    background:var(--jade-f); }
+.pedaco .fala{
+  margin:0; padding:16px; font-family:var(--dado); font-size:.85em; line-height:1.6;
+  color:var(--tinta-2); white-space:pre-wrap; overflow-x:auto;
+}
+.pedaco .porque{ margin:auto 0 0; padding:12px 16px; border-top:1px dashed var(--fio-2); font-size:.83em; color:var(--tinta-3); }
+.pedaco mark{ background:var(--ocre-f); color:var(--tinta); border-radius:2px; padding:0 2px; }
+
+/* regulamentação — três filosofias e o quadro comparativo */
+.filosofias{ display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(258px,1fr)); }
+.filosofia{
+  display:flex; flex-direction:column; padding:22px 22px 18px; background:var(--folha);
+  border:1px solid var(--fio); border-top:3px solid var(--acento); border-radius:var(--r-2);
+}
+.f-ue { --acento:var(--jade); }
+.f-eua{ --acento:var(--ocre); }
+.f-cn { --acento:var(--carimbo); }
+.filosofia .quem{
+  font-family:var(--dado); font-size:.71rem; letter-spacing:.11em; text-transform:uppercase;
+  color:var(--acento); font-weight:600; margin:0 0 8px;
+}
+.filosofia h3{ font-size:1.22rem; margin-bottom:9px; }
+.filosofia > p{ font-size:.9em; color:var(--tinta-2); margin-bottom:12px; }
+.filosofia .custo{
+  margin:auto 0 0; padding-top:12px; border-top:1px dashed var(--fio-2);
+  font-size:.83em; color:var(--tinta-3);
+}
+.filosofia .custo b{
+  display:block; font-family:var(--dado); font-size:.66rem; letter-spacing:.11em;
+  text-transform:uppercase; color:var(--tinta-3); margin-bottom:3px;
+}
+
+.legenda{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
+.estagio{
+  display:inline-block; padding:3px 10px; border-radius:var(--r-1); white-space:nowrap;
+  font-family:var(--dado); font-size:.71rem; letter-spacing:.05em; font-weight:600;
+  border:1px solid currentColor;
+}
+.e-vigor     { color:var(--jade);    background:var(--jade-f); }
+.e-tramite   { color:var(--ocre);    background:var(--ocre-f); }
+.e-setor     { color:var(--carimbo); background:var(--carimbo-f); }
+.e-voluntario{ color:var(--tinta-3); background:var(--papel-2); }
+
+.rolagem-tabela{ overflow-x:auto; border:1px solid var(--fio); border-radius:var(--r-2); background:var(--folha); }
+.quadro{ width:100%; min-width:660px; border-collapse:collapse; font-size:.89em; }
+.quadro th, .quadro td{ padding:13px 16px; text-align:left; vertical-align:top; border-bottom:1px solid var(--fio); }
+.quadro thead th{
+  font-family:var(--dado); font-size:.68rem; letter-spacing:.11em; text-transform:uppercase;
+  color:var(--tinta-3); font-weight:600; background:var(--papel-2); border-bottom:1px solid var(--fio-2);
+}
+.quadro tbody th{ font-weight:650; color:var(--tinta); white-space:nowrap; }
+.quadro tbody td{ color:var(--tinta-2); }
+.quadro tbody tr:last-child th, .quadro tbody tr:last-child td{ border-bottom:0; }
+@media (hover:hover){ .quadro tbody tr:hover th, .quadro tbody tr:hover td{ background:var(--papel-2); } }
+
+/* leitura de fonte primária */
+.leitura{
+  display:grid; grid-template-columns:auto 1fr; gap:18px; align-items:start;
+  margin:22px 0; padding:20px 22px; background:var(--jade-f);
+  border:1px solid color-mix(in srgb,var(--jade) 26%,transparent); border-radius:var(--r-2);
+}
+.leitura .icone-livro{ width:26px; height:26px; color:var(--jade); flex:none; margin-top:2px; }
+.leitura h5{
+  margin:0 0 4px; font-family:var(--display); font-size:1.1rem; font-weight:600; color:var(--tinta);
+}
+.leitura .credito{ margin:0 0 12px; font-family:var(--dado); font-size:.74rem; color:var(--tinta-3); }
+.leitura p{ font-size:.9em; color:var(--tinta-2); margin-bottom:12px; }
+.leitura a.abrir{
+  display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:0 16px;
+  background:var(--jade); color:var(--folha-2); border-radius:var(--r-2);
+  font-size:.86rem; font-weight:650; text-decoration:none; word-break:break-word;
+}
+.leitura a.abrir svg{ width:15px; height:15px; }
+@media (hover:hover){ .leitura a.abrir:hover{ background:var(--tinta); } }
+
+/* recado pessoal da filha — a voz de quem montou o site */
+.recado{
+  position:relative; margin:20px 0; padding:18px 22px 18px 24px;
+  background:var(--ocre-f); border-left:2px solid var(--ocre); border-radius:0 var(--r-2) var(--r-2) 0;
+  max-width:62ch;
+}
+.recado b{
+  display:block; margin-bottom:6px; font-family:var(--dado); font-size:.67rem;
+  letter-spacing:.12em; text-transform:uppercase; color:var(--ocre);
+}
+.recado p{
+  margin:0; font-family:var(--display); font-style:italic; font-size:1.02em;
+  line-height:1.55; color:var(--tinta);
+}
+
+/* estante — leituras recomendadas */
+.estante{ display:grid; gap:10px; }
+.livro{
+  display:grid; grid-template-columns:10px 1fr; gap:20px; align-items:stretch;
+  background:var(--folha); border:1px solid var(--fio); border-radius:var(--r-2); overflow:hidden;
+}
+.lombada{ background:var(--acento); }
+.livro .miolo{ padding:19px 20px 17px 0; }
+.livro h4{ font-family:var(--display); font-size:1.14rem; font-weight:600; margin-bottom:3px; }
+.livro .autoria{
+  font-family:var(--dado); font-size:.74rem; letter-spacing:.03em; color:var(--tinta-3);
+  margin:0 0 10px; font-variant-numeric:tabular-nums;
+}
+.livro .porque{ margin:0 0 11px; font-size:.9em; color:var(--tinta-2); max-width:64ch; }
+.livro .edicoes{ display:flex; flex-wrap:wrap; gap:6px; }
+.ed{
+  display:inline-block; padding:3px 9px; border-radius:var(--r-1);
+  font-family:var(--dado); font-size:.68rem; letter-spacing:.05em; font-weight:600;
+  border:1px solid currentColor;
+}
+.ed-br{ color:var(--jade);    background:var(--jade-f); }
+.ed-en{ color:var(--tinta-3); background:var(--papel-2); }
+.ed-ver{ color:var(--ocre);   background:var(--ocre-f); }
+
+/* metodo 4D (AI Fluency, Anthropic) */
+.quatro-d{ display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); }
+.card-d{
+  display:grid; grid-template-columns:58px 1fr; gap:20px;
+  padding:24px 24px 20px; background:var(--folha);
+  border:1px solid var(--fio); border-left:3px solid var(--acento); border-radius:var(--r-2);
+}
+.d-ini{ text-align:center; }
+.d-ini .letra{
+  display:block; font-family:var(--display); font-size:2.7rem; line-height:.9;
+  color:var(--acento); font-weight:600;
+}
+.d-ini .ordem{
+  display:block; margin-top:7px; font-family:var(--dado); font-size:.68rem;
+  letter-spacing:.09em; color:var(--tinta-3); font-variant-numeric:tabular-nums;
+}
+.card-d h3{ font-size:1.24rem; margin-bottom:3px; }
+.card-d .en{
+  font-family:var(--dado); font-size:.7rem; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--tinta-3); margin:0 0 11px;
+}
+.card-d .pergunta{
+  font-family:var(--display); font-style:italic; font-size:1.05em; color:var(--tinta);
+  margin:0 0 11px;
+}
+.card-d > div > p{ font-size:.9em; color:var(--tinta-2); margin-bottom:11px; }
+.card-d .no-servico{ margin-top:4px; }
+.d-1{ --acento:var(--carimbo); }
+.d-2{ --acento:var(--jade); }
+.d-3{ --acento:var(--ocre); }
+.d-4{ --acento:var(--tinta-2); }
+
+/* folha de aprovação */
+.aprovacao{ padding:clamp(44px,6vw,80px) clamp(20px,5vw,68px); background:var(--papel-2); border-top:1px solid var(--fio); }
+.amostra{ display:flex; align-items:center; gap:11px; font-size:.83rem; color:var(--tinta-2); margin-bottom:9px; }
+.chapa{ width:28px; height:28px; flex:none; border-radius:var(--r-1); border:1px solid rgba(19,30,25,.12); }
+.lista-ux{ margin:0; padding-left:19px; font-size:.9em; color:var(--tinta-2); line-height:1.6; }
+.lista-ux li{ margin-bottom:6px; }
+
+/* ── páginas: uma seção por vez ── */
+[hidden]{ display:none !important; }
+main section[id]:focus{ outline:none; }
+
+.nav-paginas{
+  display:grid; grid-template-columns:1fr 1fr; gap:12px;
+  padding:26px clamp(20px,5vw,68px) 34px; border-top:1px solid var(--fio);
+}
+.np{
+  display:flex; flex-direction:column; gap:3px; padding:16px 20px; min-height:76px;
+  border:1px solid var(--fio); border-radius:var(--r-2); background:var(--folha);
+  text-decoration:none; justify-content:center; transition:border-color .18s, transform .18s;
+}
+.np span{
+  font-family:var(--dado); font-size:.68rem; letter-spacing:.11em; text-transform:uppercase;
+  color:var(--tinta-3);
+}
+.np b{ font-family:var(--display); font-size:1.06rem; font-weight:600; color:var(--tinta); line-height:1.25; }
+.np-prox{ text-align:right; align-items:flex-end; }
+@media (hover:hover){
+  .np:hover{ border-color:var(--carimbo); }
+  .np-ant:hover{ transform:translateX(-3px); }
+  .np-prox:hover{ transform:translateX(3px); }
+}
+.np-vazio{ border:0; background:none; }
+
+footer{
+  padding:34px clamp(20px,5vw,68px); display:flex; flex-wrap:wrap; gap:10px 28px; align-items:center;
+  font-family:var(--dado); font-size:.75rem; color:var(--tinta-3); letter-spacing:.02em;
+  border-top:1px solid var(--fio);
+}
+
+/* ── 7 · Responsivo ──────────────────────────────────────── */
+/* — tablet e abaixo: o sumário vira gaveta — */
+@media (max-width:1000px){
+  .folha-mestra{ grid-template-columns:1fr; }
+  .sumario{
+    position:fixed; inset:0 auto 0 0; width:min(300px,86vw); height:100dvh; z-index:650;
+    background:var(--papel); box-shadow:var(--sombra-3);
+    padding:calc(20px + env(safe-area-inset-top)) 18px calc(30px + env(safe-area-inset-bottom));
+    transform:translateX(-102%); transition:transform .26s cubic-bezier(.2,.7,.3,1);
+    overscroll-behavior:contain;
+  }
+  .sumario.aberto{ transform:none; }
+  .sumario a{ padding:12px 10px; }          /* alvo de toque mais alto */
+  #abrirSumario{ display:inline-flex; }
+  .caso{ grid-template-columns:1fr; }
+  .caso .placar{ border-left:0; border-top:1px solid var(--fio); flex-direction:row; flex-wrap:wrap; gap:26px; }
+  #veu{ position:fixed; inset:0; background:rgba(10,16,13,.5); z-index:640; }
+  .confronto{ grid-template-columns:1fr; }
+  body.travado{ overflow:hidden; }
+}
+
+/* — celular — */
+@media (max-width:640px){
+  :root{ --corpo: calc(1.125rem * var(--escala)); --medida:100%; }
+  html{ scroll-padding-top:74px; }
+  .topo{
+    padding-left:max(14px,env(safe-area-inset-left));
+    padding-right:max(14px,env(safe-area-inset-right));
+    gap:10px;
+  }
+  .marca-txt i{ display:none; }
+  .marca-txt b{ font-size:.98rem; }
+  .tecla .rotulo{ display:none; }
+  .tecla{ padding:0 12px; }
+  .letras button{ min-width:38px; }
+
+  .capa h1{ max-width:none; }
+  .acoes .botao{ flex:1 1 100%; justify-content:center; }
+  .dedicatoria{ padding:26px 22px 22px; }
+  .carimbo{ position:static; margin:20px 0 0; transform:rotate(-4deg); display:inline-grid; }
+  
+  .cronologia{ padding-left:30px; }
+  .evento::before{ left:-25px; }
+  .degrau{ grid-template-columns:1fr; gap:8px; padding:16px 17px; }
+  .degrau .nivel{ padding-top:0; }
+  .verbete{ padding:24px 20px; }
+  .china::before{ font-size:230px; opacity:.1; right:-40px; }
+
+  /* organizações empilham em vez de espremer */
+  .org{ flex-wrap:wrap; row-gap:10px; padding:14px 16px; }
+  .org .corpo{ flex:1 1 calc(100% - 60px); }
+  .org .selo-txt{ flex:1 1 100%; }
+
+  footer{ padding-bottom:calc(34px + env(safe-area-inset-bottom)); }
+}
+
+/* — celular estreito (≤ 400px) — */
+@media (max-width:400px){
+  .marca-txt{ display:none; }
+  .parte, .capa, .aprovacao{ padding-left:16px; padding-right:16px; }
+  .malha{ grid-template-columns:1fr; }
+  .temas{ grid-template-columns:1fr; }
+  .caso .relato, .caso .placar{ padding:22px 18px; }
+  }
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{ animation-duration:.01ms!important; transition-duration:.01ms!important; scroll-behavior:auto!important; }
+}
+@media print{ .topo,.sumario,#barra{ display:none } .folha-mestra{ display:block } }
+</style>
+</head>
+<body data-nivel="simples">
+
+<div id="barra"></div>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="topo">
+  <button class="tecla" id="abrirSumario" aria-label="Abrir o sumário" aria-expanded="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  </button>
+
+  <a class="marca" href="#capa">
+    <span class="marca-selo" aria-hidden="true" title="人 (rén) — humano. Primeiro caractere de 人工智能, inteligência artificial">人</span>
+    <span class="marca-txt">
+      <b>Dad AI</b>
+      <i>O Homem que revisa a IA</i>
+    </span>
+  </a>
+
+  <div class="ferramentas">
+    <div class="letras" role="group" aria-label="Tamanho da letra">
+      <button class="l1" data-escala="0.92" aria-pressed="true" aria-label="Letra pequena">A</button>
+      <button class="l2" data-escala="1"    aria-pressed="false"  aria-label="Letra média">A</button>
+      <button class="l3" data-escala="1.16" aria-pressed="false" aria-label="Letra grande">A</button>
+    </div>
+    <button class="tecla" id="trocarTema" aria-label="Alternar modo claro e escuro">
+      <svg id="icoTema" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></svg>
+      <span class="rotulo" id="rotTema">Modo escuro</span>
+    </button>
+  </div>
+</header>
+
+<div class="folha-mestra">
+
+  <nav class="sumario" id="sumario" aria-label="Sumário">
+    <p class="sumario-tit">Sumário</p>
+    <p class="divisao">Parte I · A questão</p>
+    <ol>
+      <li><a href="#capa"><span class="folio">01</span> Início</a></li>
+      <li><a href="#empresas"><span class="folio">02</span> Quem constrói a IA</a></li>
+      <li><a href="#etica"><span class="folio">03</span> Ética e sociedade</a></li>
+      <li><a href="#regulacao"><span class="folio">04</span> Regulamentação da IA</a></li>
+      <li><a href="#publico"><span class="folio">05</span> IA no serviço público</a></li>
+    </ol>
+    <p class="divisao">Parte II · A prática</p>
+    <ol>
+      <li><a href="#ferramentas"><span class="folio">06</span> Ferramentas do dia a dia</a></li>
+      <li><a href="#quatrod"><span class="folio">07</span> O método 4D</a></li>
+      <li><a href="#prompt"><span class="folio">08</span> Engenharia de prompt</a></li>
+    </ol>
+    <p class="divisao">Parte III · O mundo</p>
+    <ol>
+      <li><a href="#china"><span class="folio">09</span> China em foco</a></li>
+      <li><a href="#cronologia"><span class="folio">10</span> Como a IA chegou aqui</a></li>
+    </ol>
+  </nav>
+
+  <main id="conteudo">
+
+    <!-- 01 ───────────────────────────────────────────────── -->
+    <section class="capa" id="capa">
+      <p class="data-capa">
+        <span>Dia dos Pais</span><span class="ponto"></span><span>agosto de 2026</span><span class="ponto"></span><span>edição única</span>
+      </p>
+
+      <h1>
+        A máquina atravessou uma fronteira que julgávamos exclusivamente nossa.
+        <em>O que resta do humano quando já não somos os únicos a atravessá-la?</em>
+      </h1>
+
+      <blockquote class="epigrafe">
+        <p>"A técnica é o esforço para poupar esforço."</p>
+        <cite>José Ortega y Gasset · <i>Meditação sobre a técnica</i> · 1939</cite>
+      </blockquote>
+
+      <p class="abertura">
+        Se toda técnica nasce para nos poupar esforço, cada uma devolve em seguida a mesma
+        pergunta: o que fazer com o esforço poupado — e quem decide isso. A inteligência
+        artificial apenas trouxe a pergunta para mais perto do centro, porque desta vez o que
+        ela poupa é a parte pensada do trabalho.
+      </p>
+      <p class="abertura">
+        Não há aqui nada a que se deva aderir — há um percurso: de onde essa técnica veio,
+        por quais mãos ela passa, o que já vem decidindo em nome do Estado e em que ponto a
+        decisão precisa voltar a ser de alguém que responde por ela.
+      </p>
+
+      <div class="acoes">
+        <a class="botao b-cheio" href="#etica">
+          Começar pela questão central
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="botao b-vazio" href="#ferramentas">Ir direto às ferramentas</a>
+      </div>
+
+      <figure class="dedicatoria">
+        <p>
+          Pai, o senhor escolheu um ofício que quase não aparece: ficar entre a norma e a
+          pessoa, e impedir que a primeira esmague a segunda. É trabalho de tradução — e é,
+          no fundo, trabalho filosófico, porque exige decidir todo dia o que é justo quando
+          a regra não alcança o caso.
+        </p>
+        <p>
+          A máquina que este site explica vai ocupar exatamente esse espaço nos próximos anos.
+          Achei que o senhor devia conhecê-la antes que ela chegasse — não para desconfiar nem
+          para aplaudir, mas para seguir sendo quem decide.
+        </p>
+        <p class="votos">Feliz Dia dos Pais.</p>
+        <figcaption class="assinatura">Sua filha — Luyza Alexandre</figcaption>
+        <span class="carimbo" aria-hidden="true" title="父亲节 (fùqīn jié) — Dia dos Pais">父亲节</span>
+        <span class="sr">Selo vermelho com os caracteres chineses 父亲节, fùqīn jié, que significam Dia dos Pais.</span>
+      </figure>
+
+    </section>
+    <!-- 04 ───────────────────────────────────────────────── -->
+    <section class="parte" id="empresas">
+      <div class="caixa">
+        <div class="cabeca">
+          <p class="etiqueta">Fólio 02</p>
+          <h2>Quem realmente constrói a IA</h2>
+          <p class="abertura">
+            Poucas organizações, em poucos países, decidem hoje o que a máquina pode ou não
+            responder. Saber quem são é o primeiro passo para não depender de uma só.
+          </p>
+        </div>
+
+        <div class="abas" role="tablist" aria-label="Regiões">
+          <button class="aba" role="tab" aria-selected="true">🇨🇳 China</button>
+          <button class="aba" role="tab" aria-selected="false">🇺🇸 Estados Unidos</button>
+          <button class="aba" role="tab" aria-selected="false">🇧🇷 Brasil</button>
+          <button class="aba" role="tab" aria-selected="false">🇪🇺 Europa</button>
+        </div>
+
+        <div class="org">
+          <span class="inicial" style="background:var(--carimbo)">D</span>
+          <span class="corpo"><h4>DeepSeek · 深度求索</h4><p>Hangzhou · modelos abertos que qualquer país pode baixar e rodar por conta própria</p></span>
+          <span class="selo-txt">aberto</span>
+        </div>
+        <div class="org">
+          <span class="inicial" style="background:var(--jade)">A</span>
+          <span class="corpo"><h4>Alibaba · Qwen</h4><p>Hangzhou · família de modelos adotada por empresas no mundo inteiro</p></span>
+          <span class="selo-txt">aberto</span>
+        </div>
+        <div class="org">
+          <span class="inicial" style="background:var(--ocre)">B</span>
+          <span class="corpo"><h4>Baidu · Ernie</h4><p>Pequim · busca e IA integradas a serviços urbanos e mapas</p></span>
+          <span class="selo-txt">plataforma</span>
+        </div>
+
+        <p class="escopo"><b>a seguir</b><span>As abas trocam a lista. De 6 a 8 organizações por região, com porte, o que fazem e por que importam ao Brasil.</span></p>
+      </div>
+    </section>
+    <!-- 06 ───────────────────────────────────────────────── -->
+    <section class="parte" id="etica">
+      <div class="caixa">
+        <div class="cabeca">
+          <p class="etiqueta">Fólio 03 · o coração deste guia</p>
+          <h2>Ética, sociedade e o Estado</h2>
+          <p class="abertura">
+            Dezesseis questões que a tecnologia não resolve — e que, exatamente por isso,
+            terminam na mesa de quem administra o Estado. Nenhuma delas será poupada de sua
+            dificuldade: o que está em disputa continua em disputa. Sem jargão, sem alívio,
+            e sempre com as fontes ao final, para conferir e para citar.
+          </p>
+        </div>
+
+        <div class="temas">
+          <button class="tema"><span class="folio">01</span> Design Sensível a Valores (VSD)</button>
+          <button class="tema"><span class="folio">02</span> Lei de IA da União Europeia</button>
+          <button class="tema"><span class="folio">03</span> Legislação brasileira de IA</button>
+          <button class="tema"><span class="folio">04</span> A abordagem dos BRICS</button>
+          <button class="tema"><span class="folio">05</span> Sociedade 5.0</button>
+          <button class="tema"><span class="folio">06</span> Governança de dados (DMBOK)</button>
+          <button class="tema"><span class="folio">07</span> Direitos humanos digitais</button>
+          <button class="tema"><span class="folio">08</span> Mídia sintética e a crise do real</button>
+          <button class="tema"><span class="folio">09</span> IA e democracia</button>
+          <button class="tema"><span class="folio">10</span> Economia cognitiva</button>
+          <button class="tema"><span class="folio">11</span> IA agêntica e organizações autônomas</button>
+          <button class="tema"><span class="folio">12</span> Colonialismo de dados</button>
+          <button class="tema"><span class="folio">13</span> IA e clima</button>
+          <button class="tema"><span class="folio">14</span> Identidade digital e o "eu"</button>
+          <button class="tema"><span class="folio">15</span> A morte na era digital</button>
+          <button class="tema"><span class="folio">16</span> Tecnologia e inclusão social</button>
+        </div>
+
+        <article class="verbete">
+          <p class="etiqueta">Amostra do formato · tema 02</p>
+          <h3>A Lei de IA da União Europeia</h3>
+
+          <div class="prosa">
+            <p class="so-simples">
+              A Europa escreveu a primeira lei geral do mundo sobre inteligência artificial, e
+              organizou tudo em torno de um único eixo: quanto maior o risco do uso, maior a
+              exigência. Um brinquedo com IA responde por uma regra; um sistema que decide se
+              alguém recebe um benefício responde por outra, incomparavelmente mais dura. O que
+              a lei não resolve — e assume não resolver — é quem classifica cada caso.
+            </p>
+            <p class="so-mais">
+              O regulamento europeu adota abordagem <em>baseada em risco</em>, em quatro camadas:
+              risco inaceitável (proibido), alto risco (documentação, supervisão humana e registro
+              obrigatórios), risco limitado (dever de transparência) e risco mínimo. Sistemas usados
+              por autoridades públicas em serviços essenciais caem, em regra, na faixa de alto risco.
+            </p>
+
+            <p class="margem-nota">
+              <strong>Por que isso importa para o senhor:</strong> quando o Brasil contratar um
+              sistema de IA, o edital tende a espelhar essas exigências. Entender a lógica do risco
+              é saber o que perguntar ao fornecedor antes de assinar.
+            </p>
+          </div>
+
+          <div class="fontes">
+            <h4>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+              Referências deste tema
+            </h4>
+            <ol>
+              <li>União Europeia. <em>Regulamento (UE) 2024/1689 — Regulamento da Inteligência Artificial</em>. Jornal Oficial da União Europeia, 2024.</li>
+              <li>Comissão Europeia. <em>AI Act: regulatory framework for AI</em>. Portal Shaping Europe's Digital Future, atualizado em 2025.</li>
+              <li>Veale, M.; Zuiderveen Borgesius, F. "Demystifying the Draft EU Artificial Intelligence Act". <em>Computer Law Review International</em>, v. 22, n. 4, p. 97–112, 2021.</li>
+            </ol>
+          </div>
+        </article>
+
+
+        <article class="verbete" style="margin-top:16px">
+          <p class="etiqueta">Amostra do formato · tema 05</p>
+          <h3>Sociedade 5.0</h3>
+
+          <div class="prosa">
+            <p class="so-simples">
+              O Japão deu nome a uma ideia que interessa diretamente a quem trabalha no Estado:
+              depois da sociedade da caça, da agrícola, da industrial e da informação, viria uma
+              quinta — aquela em que a tecnologia existe para resolver problemas sociais concretos,
+              e não para criar mercados novos. Envelhecimento da população, cidades esvaziadas,
+              falta de médico no interior.
+            </p>
+            <p class="so-mais">
+              Formulada no 5º Plano Básico de Ciência e Tecnologia do Japão, em 2016, a
+              Sociedade 5.0 propõe a integração entre espaço físico e espaço digital com um
+              critério explícito: o centro é a pessoa, não o sistema. É uma resposta
+              deliberada à Indústria 4.0 alemã, que organiza o mesmo aparato em torno da
+              produtividade fabril. A diferença não é de tecnologia — é de finalidade.
+            </p>
+
+            <p class="margem-nota">
+              <strong>Por que isso importa para o senhor:</strong> é o vocabulário que permite
+              defender um projeto público de tecnologia pelo problema social que ele resolve,
+              e não pela economia que promete. Muda quem precisa provar o quê.
+            </p>
+          </div>
+
+          <div class="leitura">
+            <svg class="icone-livro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+            <div>
+              <h5>Society 5.0: A People-centric Super-smart Society</h5>
+              <p class="credito">Hitachi–UTokyo Laboratory (H‑UTokyo Lab.) · Springer · livro completo, acesso aberto</p>
+              <p>
+                O livro inteiro, de graça e legalmente, no Internet Archive. É a fonte primária
+                do conceito — escrita por quem o formulou, e não por quem o comenta.
+              </p>
+              <a class="abrir" href="https://archive.org/details/oapen-20.500.12657-41719/page/n9/mode/1up" target="_blank" rel="noopener noreferrer">
+                Abrir o livro no Internet Archive
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <p class="recado">
+            <b>recado da Luyza</b>
+            Este está em inglês, pai — mas é aberto e não custa nada. Dá para traduzir para o
+            português sem dificuldade: me chame que eu traduzo os capítulos que o senhor quiser,
+            e aí a gente lê junto.
+          </p>
+
+          <div class="fontes">
+            <h4>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+              Referências deste tema
+            </h4>
+            <ol>
+              <li>Hitachi–UTokyo Laboratory (org.). <em>Society 5.0: A People-centric Super-smart Society</em>. Singapura: Springer, 2020. Acesso aberto. Disponível em: <a href="https://archive.org/details/oapen-20.500.12657-41719/page/n9/mode/1up" target="_blank" rel="noopener noreferrer">archive.org/details/oapen-20.500.12657-41719</a></li>
+              <li>Japão. Cabinet Office. <em>5th Science and Technology Basic Plan</em>, 2016 — documento que formula oficialmente a Sociedade 5.0.</li>
+              <li>Fukuyama, M. "Society 5.0: Aiming for a New Human-Centered Society". <em>Japan Spotlight</em>, jul.–ago. 2018.</li>
+            </ol>
+          </div>
+        </article>
+
+        <p class="escopo"><b>a seguir</b><span>Clicar em qualquer um dos 16 temas abre um verbete como este, no mesmo formato e sempre com as referências ao final.</span></p>
+      </div>
+    </section>
+    <!-- Regulamentacao -->
+    <section class="parte" id="regulacao">
+      <div class="caixa">
+        <div class="cabeca">
+          <p class="etiqueta">Fólio 04 · o mundo escrevendo as regras</p>
+          <h2>Quem já está regulamentando a IA</h2>
+          <p class="abertura">
+            Nenhum país chegou a um regime completo. Mas três filosofias distintas já se
+            desenharam, e a escolha entre elas não é técnica: é uma decisão sobre onde se
+            prefere errar — antes ou depois do dano.
+          </p>
+        </div>
+
+        <div class="filosofias">
+          <article class="filosofia f-ue">
+            <p class="quem">União Europeia</p>
+            <h3>Regular o risco, antes</h3>
+            <p>Classifica cada uso por gravidade e impõe deveres proporcionais. Aposta que é
+            preferível atrasar a inovação a permitir um dano irreversível.</p>
+            <p class="custo"><b>o preço</b> lentidão e custo de conformidade</p>
+          </article>
+          <article class="filosofia f-eua">
+            <p class="quem">Estados Unidos</p>
+            <h3>Deixar o mercado andar, corrigir depois</h3>
+            <p>Sem lei federal geral. Vale o direito já existente — consumidor, concorrência,
+            discriminação — mais padrões voluntários e leis estaduais avulsas.</p>
+            <p class="custo"><b>o preço</b> o dano precisa ocorrer para ser reconhecido</p>
+          </article>
+          <article class="filosofia f-cn">
+            <p class="quem">China</p>
+            <h3>Regular a aplicação, uma por vez</h3>
+            <p>Nada de lei geral: normas setoriais rápidas para cada uso concreto — recomendação
+            algorítmica, síntese de imagem, IA generativa —, com registro prévio do serviço.</p>
+            <p class="custo"><b>o preço</b> alcance amplo do Estado sobre o discurso</p>
+          </article>
+        </div>
+
+        <h3 style="margin:46px 0 8px">Onde cada país está</h3>
+        <p class="prosa" style="font-size:.93em;color:var(--tinta-2);margin-bottom:18px">
+          O recorte pedido: os BRICS, os Estados Unidos e a União Europeia.
+        </p>
+
+        <div class="legenda">
+          <span class="estagio e-vigor">em vigor</span>
+          <span class="estagio e-tramite">em tramitação</span>
+          <span class="estagio e-setor">normas setoriais</span>
+          <span class="estagio e-voluntario">diretriz voluntária</span>
+        </div>
+
+        <div class="rolagem-tabela">
+          <table class="quadro">
+            <caption class="sr">Estágio da regulamentação de inteligência artificial por país ou bloco</caption>
+            <thead>
+              <tr><th scope="col">País ou bloco</th><th scope="col">Instrumento</th><th scope="col">Estágio</th><th scope="col">Traço distintivo</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">🇪🇺 União Europeia</th>
+                <td>Regulamento (UE) 2024/1689</td>
+                <td><span class="estagio e-vigor">em vigor</span></td>
+                <td>Primeira lei geral do mundo; deveres por faixa de risco</td>
+              </tr>
+              <tr>
+                <th scope="row">🇧🇷 Brasil</th>
+                <td>PL 2.338/2023</td>
+                <td><span class="estagio e-tramite">em tramitação</span></td>
+                <td>Aprovado no Senado, segue na Câmara; inspirado no modelo europeu</td>
+              </tr>
+              <tr>
+                <th scope="row">🇨🇳 China</th>
+                <td>Medidas para IA generativa e normas de síntese profunda</td>
+                <td><span class="estagio e-setor">normas setoriais</span></td>
+                <td>Registro prévio do serviço e rotulagem obrigatória de conteúdo sintético</td>
+              </tr>
+              <tr>
+                <th scope="row">🇺🇸 Estados Unidos</th>
+                <td>Sem lei federal geral; leis estaduais e padrões do NIST</td>
+                <td><span class="estagio e-voluntario">diretriz voluntária</span></td>
+                <td>Regulação fragmentada por estado e por setor</td>
+              </tr>
+              <tr>
+                <th scope="row">🇮🇳 Índia</th>
+                <td>Lei de proteção de dados de 2023 e orientações do ministério</td>
+                <td><span class="estagio e-voluntario">diretriz voluntária</span></td>
+                <td>Prioriza adoção e inclusão digital antes de restringir</td>
+              </tr>
+              <tr>
+                <th scope="row">🇷🇺 Rússia</th>
+                <td>Código de Ética de IA e regimes experimentais</td>
+                <td><span class="estagio e-voluntario">diretriz voluntária</span></td>
+                <td>Adesão de empresas por assinatura, sem sanção</td>
+              </tr>
+              <tr>
+                <th scope="row">🇿🇦 África do Sul</th>
+                <td>Política nacional de IA em construção</td>
+                <td><span class="estagio e-tramite">em tramitação</span></td>
+                <td>Ancorada na lei de proteção de dados já existente</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="margem-nota" style="max-width:64ch">
+          <strong>O que isso significa para o Brasil:</strong> o país está decidindo, agora, de
+          qual dos três modelos vai se aproximar. Um servidor que entenda a diferença entre eles
+          consegue ler um edital de contratação e perceber qual filosofia ele já assumiu — muitas
+          vezes sem que isso esteja escrito em lugar nenhum.
+        </p>
+
+        <p class="escopo"><b>a seguir</b><span>Cada linha do quadro vira um verbete com a data exata do instrumento, o texto oficial vinculado e o que muda na prática para quem contrata. Toda informação normativa será datada e reconferida na publicação — legislação de IA muda de mês para mês.</span></p>
+      </div>
+    </section>
+    <!-- 07 ───────────────────────────────────────────────── -->
+    <section class="parte" id="publico">
+      <div class="caixa">
+        <div class="cabeca">
+          <p class="etiqueta">Fólio 05</p>
+          <h2>O que os governos já fazem — e o que deu certo</h2>
+          <p class="abertura">
+            Sem futurologia. Projetos reais, em operação, com números publicados e fonte
+            verificável. Inclusive brasileiros.
+          </p>
+        </div>
+
+        <article class="caso">
+          <div class="relato">
+            <span class="pastilha">🇧🇷 Brasil · Judiciário</span>
+            <h3>Victor — triagem de recursos no Supremo Tribunal Federal</h3>
+            <p>
+              Um sistema lê os recursos que chegam ao STF e identifica a qual tema de repercussão
+              geral cada um pertence. O que um servidor levava dezenas de minutos para fazer passou
+              a levar segundos — e a decisão final continua sendo humana.
+            </p>
+            <p class="rodape-nota">
+              Formato de todo caso: <strong>o problema → o que foi feito → resultado medido → quem
+              assina a fonte</strong>. Nenhum número entra sem fonte.
+            </p>
+          </div>
+          <div class="placar">
+            <div><strong>segundos</strong><span>tempo de classificação, antes contado em minutos</span></div>
+            <div><strong>humana</strong><span>a decisão final permanece com o servidor</span></div>
+          </div>
+        </article>
+
+        <p class="escopo"><b>a seguir</b><span>De 8 a 10 casos — Brasil, Estônia, Portugal, Singapura, China e Índia — todos com o mesmo placar comparável.</span></p>
+      </div>
+    </section>
+    <!-- 02 ───────────────────────────────────────────────── -->
+    <section class="parte" id="ferramentas">
+      <div class="caixa">
+        <div class="cabeca">
+          <p class="etiqueta">Fólio 06 · o concreto primeiro</p>
+          <h2>As ferramentas que já estão no dia a dia</h2>
+          <p class="abertura">
+            Depois das questões, os objetos. Estas são as ferramentas que milhões de pessoas
+            já abrem todo dia para escrever, resumir, pesquisar e organizar o trabalho —
+            inclusive dentro de repartições públicas.
+          </p>
+        </div>
+
+        <div class="niveis" role="group" aria-label="Nível de explicação">
+          <button data-nivel="simples" aria-pressed="true">Essencial</button>
+          <button data-nivel="mais"    aria-pressed="false">Aprofundar</button>
+        </div>
+
+        <p class="prosa so-simples">
+          São sistemas que leram uma quantidade de texto que nenhuma vida humana alcançaria e
+          que respondem por escrito. Eles não compreendem no sentido em que o senhor compreende:
+          reconhecem regularidades. A distância entre reconhecer e compreender é pequena no
+          resultado e enorme na responsabilidade.
+        </p>
+        <p class="prosa so-mais">
+          Tecnicamente são <button class="termo" data-termo="modelo">modelos de linguagem</button>:
+          preveem a palavra seguinte de um texto, e dessa única operação nascem o resumo, a tradução
+          e a redação. Note o que isso implica — eles não consultam um repositório de verdades, e sim
+          produzem o enunciado mais provável. Errar com absoluta confiança não é uma falha do sistema;
+          é o que ele faz quando o mais provável não é o verdadeiro.
+        </p>
+
+        <div class="malha" style="margin-top:30px">
+          <article class="ficha">
+            <span class="glifo g-jade"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
+            <h3>Assistentes de conversa</h3>
+            <p>O senhor escreve a pergunta em português comum e recebe a resposta por escrito. Serve para redigir, resumir e explicar.</p>
+            <div class="pastilhas">
+              <span class="pastilha">🇺🇸 ChatGPT</span>
+              <span class="pastilha">🇺🇸 Claude</span>
+              <span class="pastilha">🇨🇳 DeepSeek</span>
+            </div>
+            <p class="no-servico">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+              <span><strong>No serviço público:</strong> transformar um parecer técnico em linguagem cidadã.</span>
+            </p>
+          </article>
+
+          <article class="ficha">
+            <span class="glifo g-carimbo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 15h6M9 11h3"/></svg></span>
+            <h3>Leitores de documento</h3>
+            <p>O senhor entrega um PDF longo e ele devolve o resumo, os pontos-chave e responde perguntas sobre aquele arquivo específico.</p>
+            <div class="pastilhas">
+              <span class="pastilha">🇺🇸 NotebookLM</span>
+              <span class="pastilha">🇺🇸 Copilot</span>
+            </div>
+            <p class="no-servico">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+              <span><strong>No serviço público:</strong> ler 200 páginas de edital e apontar o que mudou.</span>
+            </p>
+          </article>
+
+          <article class="ficha">
+            <span class="glifo g-ocre"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span>
+            <h3>Criação de imagem e voz</h3>
+            <p>Descreva com palavras e a máquina desenha; entregue um texto e ela fala. Útil — e também o berço das falsificações.</p>
+            <div class="pastilhas">
+              <span class="pastilha">🇺🇸 Midjourney</span>
+              <span class="pastilha">🇨🇳 Kling</span>
+              <span class="pastilha">🇨🇳 Hailuo</span>
+            </div>
+            <p class="no-servico">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+              <span><strong>No serviço público:</strong> material de campanha — e treino do olho para reconhecer fraude.</span>
+            </p>
+          </article>
+        </div>
+
+        <p class="escopo"><b>a seguir</b><span>De 12 a 15 ferramentas, cada uma com "para que serve", "quanto custa", "dá para confiar?" e um passo a passo ilustrado.</span></p>
+      </div>
+    </section>
+    <!-- Metodo 4D -->
+    <section class="parte" id="quatrod">
+      <div class="caixa">
+        <div class="cabeca">
+          <p class="etiqueta">Fólio 07 · as quatro competências</p>
+          <h2>O método 4D</h2>
+          <p class="abertura">
+            A Anthropic — uma das empresas que constroem esses sistemas — publicou um
+            enquadramento aberto para trabalhar com IA sem se dissolver nela. São quatro
+            competências, não quatro etapas: elas se exercem ao mesmo tempo, e a ausência
+            de qualquer uma delas compromete as outras três.
+          </p>
+        </div>
+
+        <div class="quatro-d">
+          <article class="card-d d-1">
+            <p class="d-ini"><span class="letra">D</span><span class="ordem">01</span></p>
+            <div>
+              <h3>Delegação</h3>
+              <p class="en">delegation</p>
+              <p class="pergunta">O que deve continuar sendo meu?</p>
+              <p>Decidir o que entregar à máquina, o que fazer sozinho e o que fazer junto.
+              Exige conhecer o problema, conhecer a ferramenta e ter clareza sobre o que se
+              perde ao terceirizar aquela tarefa.</p>
+              <p class="no-servico">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+                <span><strong>No serviço público:</strong> há atos que a lei atribui a uma pessoa. Esses não se delegam — nem a um estagiário, nem a um sistema.</span>
+              </p>
+            </div>
+          </article>
+
+          <article class="card-d d-2">
+            <p class="d-ini"><span class="letra">D</span><span class="ordem">02</span></p>
+            <div>
+              <h3>Descrição</h3>
+              <p class="en">description</p>
+              <p class="pergunta">Eu disse mesmo o que queria?</p>
+              <p>Explicitar o produto desejado, o caminho a seguir e o padrão de qualidade
+              esperado. É aqui que mora a engenharia de prompt — mas o problema de fundo é
+              mais antigo: dizer com precisão o que se quer é difícil mesmo entre humanos.</p>
+              <p class="no-servico">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+                <span><strong>No serviço público:</strong> a mesma disciplina de um bom despacho — quem, o quê, com que fundamento, em que prazo.</span>
+              </p>
+            </div>
+          </article>
+
+          <article class="card-d d-3">
+            <p class="d-ini"><span class="letra">D</span><span class="ordem">03</span></p>
+            <div>
+              <h3>Discernimento</h3>
+              <p class="en">discernment</p>
+              <p class="pergunta">Isto que voltou presta?</p>
+              <p>Avaliar o resultado, o processo e o comportamento do sistema com ceticismo
+              treinado. A dificuldade é específica: o texto errado chega com a mesma fluidência
+              e a mesma confiança do texto certo.</p>
+              <p class="no-servico">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+                <span><strong>No serviço público:</strong> conferir a fonte antes de assinar. A responsabilidade não se transfere junto com a tarefa.</span>
+              </p>
+            </div>
+          </article>
+
+          <article class="card-d d-4">
+            <p class="d-ini"><span class="letra">D</span><span class="ordem">04</span></p>
+            <div>
+              <h3>Diligência</h3>
+              <p class="en">diligence</p>
+              <p class="pergunta">Quem responde por isto?</p>
+              <p>Usar com responsabilidade: dizer que houve IA no caminho, verificar antes de
+              publicar, assumir o resultado. É a competência que liga o uso cotidiano às
+              questões do Fólio 03.</p>
+              <p class="no-servico">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+                <span><strong>No serviço público:</strong> transparência é dever legal, não cortesia. O cidadão tem direito de saber como a decisão foi tomada.</span>
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <p class="margem-nota" style="max-width:66ch">
+          <strong>Por que quatro e não uma:</strong> é possível escrever um pedido excelente
+          (Descrição) para uma tarefa que nunca deveria ter saído das suas mãos (Delegação).
+          E é possível conferir com rigor (Discernimento) e ainda assim publicar sem dizer que
+          houve máquina no meio (Diligência). Cada competência cobre um ponto cego das outras.
+        </p>
+
+        <div class="fontes">
+          <h4>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+            Referências deste fólio
+          </h4>
+          <ol>
+            <li>Anthropic. <em>AI Fluency: Frameworks &amp; Foundations</em> — curso aberto, 2025. Enquadramento das quatro competências (Delegation, Description, Discernment, Diligence).</li>
+            <li>Dakan, R.; Feller, J. <em>AI Fluency</em> — material desenvolvido em parceria entre a Ringling College of Art and Design, a University College Cork e a Anthropic.</li>
+            <li>Anthropic. <em>Prompt engineering overview</em> — documentação oficial, para o desdobramento técnico da competência de Descrição.</li>
+          </ol>
+        </div>
+
+        <p class="escopo"><b>a seguir</b><span>Cada uma das quatro competências ganha exemplos de trabalho de repartição e um pequeno teste de autoavaliação. A nomenclatura dos subcomponentes será reconferida contra o material original da Anthropic na publicação.</span></p>
+      </div>
+    </section>
+    <!-- 09 ───────────────────────────────────────────────── -->
+    <section class="parte" id="prompt">
+      <div class="caixa">
+        <div class="cabeca">
+          <p class="etiqueta">Fólio 08 · a competência da Descrição, em detalhe</p>
+          <h2>Engenharia de prompt: como pedir bem</h2>
+          <p class="abertura">
+            "Prompt" é só o pedido que o senhor escreve. A diferença entre uma resposta inútil e
+            uma resposta pronta para usar quase nunca está na máquina — está em como o pedido foi
+            feito. E isso se aprende como se aprende a redigir um ofício.
+          </p>
+        </div>
+
+        <div class="confronto">
+          <div class="pedaco p-fraco">
+            <p class="titulo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+              pedido vago
+            </p>
+            <p class="fala">Escreva sobre a nova lei.</p>
+            <p class="porque">A máquina não sabe qual lei, para quem, em que tamanho nem em que tom. Vai inventar um meio-termo que não serve para nada.</p>
+          </div>
+
+          <div class="pedaco p-bom">
+            <p class="titulo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>
+              pedido completo
+            </p>
+            <p class="fala"><mark>Você é servidor público</mark> e escreve para
+o cidadão comum.
+
+<mark>Tarefa:</mark> explicar as mudanças da lei
+no texto que eu colei abaixo.
+
+<mark>Formato:</mark> 5 itens curtos, cada um
+começando pelo que muda na prática.
+
+<mark>Regras:</mark> nada de sigla sem explicar;
+se o texto não disser algo, escreva
+"não consta" em vez de supor.</p>
+            <p class="porque">Papel, tarefa, formato e limites. Quatro linhas a mais que resolvem 90% dos problemas.</p>
+          </div>
+        </div>
+
+        <h3 style="margin:44px 0 16px">A escada, um degrau por vez</h3>
+
+        <div class="escada">
+          <div class="degrau">
+            <span class="nivel">degrau 1</span>
+            <div>
+              <h4>Dizer quem, o quê e como</h4>
+              <p>Todo bom pedido tem quatro partes: o papel que a máquina deve assumir, a tarefa, o formato da resposta e os limites.</p>
+              <p class="receita">papel + tarefa + formato + limites</p>
+            </div>
+          </div>
+          <div class="degrau">
+            <span class="nivel">degrau 2</span>
+            <div>
+              <h4>Mostrar um exemplo pronto</h4>
+              <p>Em vez de descrever o resultado desejado, cole um exemplo do jeito que o senhor gosta. A máquina imita melhor do que interpreta.</p>
+              <p class="receita">"siga exatamente este modelo: …"</p>
+            </div>
+          </div>
+          <div class="degrau">
+            <span class="nivel">degrau 3</span>
+            <div>
+              <h4>Pedir o raciocínio antes da resposta</h4>
+              <p>Peça para listar os passos primeiro e só depois concluir. Além de reduzir erro, o senhor consegue conferir onde ela errou.</p>
+              <p class="receita">"pense passo a passo e mostre o caminho"</p>
+            </div>
+          </div>
+          <div class="degrau">
+            <span class="nivel">degrau 4</span>
+            <div>
+              <h4>Entregar a fonte e exigir citação</h4>
+              <p>Cole o documento e proíba respostas de fora dele. É o antídoto prático contra invenção — essencial em contexto de decisão pública.</p>
+              <p class="receita">"responda só com base no texto e cite o trecho"</p>
+            </div>
+          </div>
+          <div class="degrau">
+            <span class="nivel">degrau 5</span>
+            <div>
+              <h4>Instruções permanentes e agentes</h4>
+              <p>Guardar um conjunto de regras que valem para todas as conversas, e delegar tarefas de vários passos. É onde a <button class="termo" data-termo="agente">IA agêntica</button> começa — e onde a supervisão humana passa a ser obrigatória.</p>
+              <p class="receita">instruções fixas + verificação humana</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="escopo"><b>a seguir</b><span>Cada degrau ganha 2 ou 3 exemplos reais de trabalho de repartição — despacho, resumo de processo, resposta a cidadão — no formato "antes e depois" acima, mais uma folha de bolso para imprimir.</span></p>
+      </div>
+    </section>
+    <!-- 05 ───────────────────────────────────────────────── -->
+    <section class="parte china" id="china">
+      <div class="estandarte">
+        <div class="caixa">
+          <svg class="bandeira-cn" viewBox="0 0 30 20" role="img" aria-label="Bandeira da República Popular da China: campo vermelho com uma estrela dourada grande e quatro menores em arco">
+            <rect width="30" height="20" fill="#DE2910"/>
+            <g fill="#FFDE00">
+              <polygon points="5.000,2.000 5.674,4.073 7.853,4.073 6.090,5.354 6.763,7.427 5.000,6.146 3.237,7.427 3.910,5.354 2.147,4.073 4.326,4.073"/>
+              <polygon points="9.143,2.514 9.620,1.966 9.246,1.343 9.914,1.628 10.391,1.080 10.328,1.803 10.996,2.088 10.288,2.251 10.224,2.975 9.851,2.352"/>
+              <polygon points="11.010,4.141 11.662,3.821 11.560,3.102 12.065,3.624 12.718,3.304 12.378,3.946 12.884,4.467 12.168,4.343 11.829,4.985 11.726,4.266"/>
+              <polygon points="11.038,6.725 11.765,6.699 11.964,6.001 12.213,6.683 12.939,6.657 12.367,7.105 12.616,7.787 12.014,7.382 11.442,7.830 11.641,7.131"/>
+              <polygon points="9.219,8.375 9.899,8.632 10.353,8.064 10.319,8.790 10.999,9.046 10.298,9.239 10.265,9.964 9.865,9.357 9.618,8.982"/>
+            </g>
+          </svg>
+          <p class="etiqueta">Fólio 09</p>
+          <p class="hanzi">中国</p>
+          <h2>China em foco</h2>
+          <p class="abertura">
+            Uma seção só para o país que o senhor admira. Um caso concreto de Estado,
+            planejamento de longo prazo e tecnologia caminhando juntos.
+          </p>
+        </div>
+      </div>
+
+      <div class="caixa china-corpo">
+        <div class="malha">
+          <article class="ficha">
+            <span class="glifo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg></span>
+            <h3>O plano de Estado</h3>
+            <p>Desde 2017 há uma meta pública e datada para a IA, com etapas intermediárias e responsáveis definidos. Planejamento, não improviso.</p>
+          </article>
+          <article class="ficha">
+            <span class="glifo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></span>
+            <h3>Cidade e cidadão</h3>
+            <p>Transporte, saúde e atendimento ao público com IA em larga escala — com ganhos reais e perguntas duras sobre privacidade.</p>
+          </article>
+          <article class="ficha">
+            <span class="glifo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20 15 15 0 010-20z"/></svg></span>
+            <h3>Abrir o código ao mundo</h3>
+            <p>Ao liberar modelos gratuitos, a China oferece ao Sul Global uma alternativa à dependência de fornecedores americanos.</p>
+          </article>
+        </div>
+
+        <h3 style="margin:46px 0 6px">Uma estante sobre China e IA</h3>
+        <p class="prosa" style="font-size:.93em;color:var(--tinta-2);margin-bottom:20px">
+          Cinco livros que discordam entre si. Estão aqui exatamente por isso: dois deles
+          admiram o que a China construiu, um denuncia o preço disso, e dois são ficção —
+          que às vezes chega mais perto.
+        </p>
+
+        <div class="estante">
+          <article class="livro" style="--acento:var(--china-vermelho)">
+            <span class="lombada" aria-hidden="true"></span>
+            <div class="miolo">
+              <h4>Inteligência Artificial <span style="color:var(--tinta-3);font-weight:400">· AI Superpowers</span></h4>
+              <p class="autoria">Kai-Fu Lee · 2018</p>
+              <p class="porque">
+                Escrito por quem dirigiu o Google na China e depois virou investidor em Pequim.
+                Defende que a vantagem chinesa não está na descoberta científica, e sim na
+                velocidade de aplicação e na escala de dados. É a tese mais influente do debate —
+                e convém conhecê-la antes de aceitá-la.
+              </p>
+              <p class="edicoes"><span class="ed ed-br">edição brasileira</span></p>
+            </div>
+          </article>
+
+          <article class="livro" style="--acento:var(--tinta-2)">
+            <span class="lombada" aria-hidden="true"></span>
+            <div class="miolo">
+              <h4>Surveillance State</h4>
+              <p class="autoria">Josh Chin e Liza Lin · 2022</p>
+              <p class="porque">
+                O contraponto duro, apurado por dois jornalistas do <em>Wall Street Journal</em>:
+                como a mesma infraestrutura que organiza o trânsito e agiliza o atendimento
+                também vigia. Ler este junto do anterior é o que impede que a seção vire
+                propaganda — em qualquer direção.
+              </p>
+              <p class="edicoes"><span class="ed ed-en">em inglês</span></p>
+            </div>
+          </article>
+
+          <article class="livro" style="--acento:var(--ocre)">
+            <span class="lombada" aria-hidden="true"></span>
+            <div class="miolo">
+              <h4>IA 2041 · Dez Visões para o Nosso Futuro</h4>
+              <p class="autoria">Kai-Fu Lee e Chen Qiufan · 2021</p>
+              <p class="porque">
+                Dez contos ambientados em 2041 — vários deles na China e no Sul Global —, cada
+                um seguido de um comentário técnico do próprio Kai-Fu Lee explicando o que já
+                existe e o que ainda é imaginação. O formato resolve o problema de sempre:
+                separar a previsão do desejo.
+              </p>
+              <p class="edicoes"><span class="ed ed-ver">edição brasileira a confirmar</span></p>
+            </div>
+          </article>
+
+          <article class="livro" style="--acento:var(--jade)">
+            <span class="lombada" aria-hidden="true"></span>
+            <div class="miolo">
+              <h4>Maré Tóxica <span style="color:var(--tinta-3);font-weight:400">· 荒潮</span></h4>
+              <p class="autoria">Chen Qiufan · 2013</p>
+              <p class="porque">
+                Romance sobre uma ilha chinesa que recebe o lixo eletrônico do mundo. Não trata
+                de inteligência artificial diretamente, e sim de quem paga a conta do progresso
+                tecnológico. É o livro desta lista que mais se aproxima de uma pergunta moral.
+              </p>
+              <p class="edicoes"><span class="ed ed-ver">edição brasileira a confirmar</span></p>
+            </div>
+          </article>
+
+          <article class="livro" style="--acento:var(--carimbo)">
+            <span class="lombada" aria-hidden="true"></span>
+            <div class="miolo">
+              <h4>Technology and the Rise of Great Powers</h4>
+              <p class="autoria">Jeffrey Ding · 2024</p>
+              <p class="porque">
+                O mais acadêmico da estante, e o que mais muda a forma de pensar: sustenta que
+                potências não se decidem por quem inventa primeiro, e sim por quem consegue
+                espalhar a tecnologia por toda a economia. Uma tese com consequências diretas
+                para o Brasil.
+              </p>
+              <p class="edicoes"><span class="ed ed-en">em inglês</span></p>
+            </div>
+          </article>
+        </div>
+
+        <p class="escopo"><b>a seguir</b><span>Cronologia chinesa, regulação própria e pequeno glossário 中文 → português. Na estante: capa, editora, tradutor e disponibilidade em bibliotecas públicas — e a confirmação de quais títulos já saíram em português.</span></p>
+      </div>
+    </section>
+    <!-- 03 ───────────────────────────────────────────────── -->
+    <section class="parte" id="cronologia">
+      <div class="caixa">
+        <div class="cabeca">
+          <p class="etiqueta">Fólio 10 · em ordem, porque a ordem explica</p>
+          <h2>Como a IA chegou até aqui</h2>
+          <p class="abertura">
+            A IA não nasceu em 2023. Tem fases, invernos, promessas quebradas e retomadas —
+            e cada uma aconteceu em um lugar do mundo, por razões bem humanas.
+          </p>
+        </div>
+
+        <div class="cronologia">
+          <article class="evento">
+            <p class="quando">1956</p>
+            <h3>O nome nasce numa sala de aula</h3>
+            <p>Um grupo de professores reserva um verão inteiro para "fazer máquinas pensarem". Cunham o termo <em>inteligência artificial</em> e erram feio no prazo: achavam que bastariam alguns meses.</p>
+            <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Dartmouth, Estados Unidos</span>
+          </article>
+
+          <article class="evento">
+            <p class="quando">1974 – 1993</p>
+            <h3>Os dois invernos</h3>
+            <p>Duas vezes o dinheiro seca e a área quase desaparece. A lição que ficou: entusiasmo sem resultado prático custa caro — inclusive em orçamento público.</p>
+            <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Reino Unido e Estados Unidos</span>
+          </article>
+
+          <article class="evento">
+            <p class="quando">2012</p>
+            <h3>A máquina aprende a enxergar</h3>
+            <p>Um programa passa a reconhecer objetos em fotos melhor que qualquer método anterior. É o estouro do <button class="termo" data-termo="profundo">aprendizado profundo</button> e o início de tudo que veio depois.</p>
+            <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Toronto, Canadá</span>
+          </article>
+
+          <article class="evento">
+            <p class="quando">2025 – 2026</p>
+            <h3>A corrida deixa de ser de um país só</h3>
+            <p>Modelos abertos chineses passam a competir de igual para igual com os americanos, a um custo muito menor. O tabuleiro muda e o Sul Global entra na conversa.</p>
+            <span class="onde"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg> Hangzhou e Pequim, China</span>
+          </article>
+        </div>
+
+        <p class="escopo"><b>a seguir</b><span>Doze marcos, cada um com "por que isso importa para o senhor" e a fonte histórica correspondente.</span></p>
+      </div>
+    </section>
+
+
+
+
+
+
+
+
+
+    <!-- folha de aprovação ───────────────────────────────── -->
+    <section class="aprovacao" id="aprovacao">
+      <div class="caixa">
+        <p class="etiqueta">Folha de aprovação</p>
+        <h2 style="margin-bottom:12px">O que este MVP está propondo</h2>
+        <p class="abertura" style="margin-bottom:32px">
+          Este arquivo decide <strong>aparência e experiência</strong>. O conteúdo real de cada
+          seção entra na etapa seguinte — depois do seu aval.
+        </p>
+
+        <div class="malha">
+          <div class="ficha">
+            <h4 style="margin-bottom:14px">Paleta "Processo"</h4>
+            <p class="amostra"><span class="chapa" style="background:#EDEFE9"></span> Papel ofício — fundo frio, sem brilho</p>
+            <p class="amostra"><span class="chapa" style="background:#131E19"></span> Tinta — verde-preto de caneta</p>
+            <p class="amostra"><span class="chapa" style="background:#B3372A"></span> Carimbo — só onde algo foi selado</p>
+            <p class="amostra"><span class="chapa" style="background:#1E6153"></span> Jade — fontes e confirmações</p>
+            <p class="amostra" style="margin:0"><span class="chapa" style="background:#8C6A18"></span> Ocre — anotação de margem</p>
+          </div>
+
+          <div class="ficha">
+            <h4 style="margin-bottom:12px">Tipografia</h4>
+            <p style="font-family:var(--display);font-size:1.6rem;line-height:1.12;margin-bottom:8px">Palatino nos títulos</p>
+            <p style="font-size:.9em;color:var(--tinta-2);margin:0">
+              Registro de diploma, não de revista. No texto corrido, sem serifa a 19px — bem acima
+              do padrão da web, pensado para leitura longa e confortável. Números e datas em
+              monoespaçada, alinhados como em um processo.
+            </p>
+          </div>
+
+          <div class="ficha">
+            <h4 style="margin-bottom:12px">Decisões de experiência</h4>
+            <ol class="lista-ux">
+              <li>Botão <strong>A A A</strong> aumenta a letra do site inteiro</li>
+              <li>Modo escuro para leitura à noite</li>
+              <li>Dois níveis no mesmo texto — <strong>Essencial</strong> e <strong>Aprofundar</strong>, nunca "fácil" e "difícil"</li>
+              <li>Palavra difícil vira <button class="termo" data-termo="modelo">explicação em um toque</button></li>
+              <li>Sumário à margem mostra sempre onde o senhor está</li>
+              <li>Referências visíveis em todos os 16 temas de ética</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <nav class="nav-paginas" id="navPaginas" aria-label="Navegação entre seções"></nav>
+
+    <footer>
+      <span>Dad AI · O Homem que revisa a IA · MVP de design v1</span>
+      <span>feito para Julio César Alexandre</span>
+    </footer>
+
+  </main>
+</div>
+
+<div id="balao" role="tooltip" aria-hidden="true"></div>
+
+<script>
+(function(){
+  "use strict";
+  var raiz = document.documentElement, corpo = document.body;
+
+  function guardar(c,v){ try{ localStorage.setItem("iacc."+c, v); }catch(e){} }
+  function lembrar(c){ try{ return localStorage.getItem("iacc."+c); }catch(e){ return null; } }
+
+  /* ── tema ── */
+  var SOL = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>';
+  var LUA = '<path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/>';
+  function temaAtual(){
+    var m = raiz.getAttribute("data-theme");
+    if(m) return m;
+    return matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  function pintarBotaoTema(){
+    var escuro = temaAtual() === "dark";
+    document.getElementById("icoTema").innerHTML = escuro ? SOL : LUA;
+    document.getElementById("rotTema").textContent = escuro ? "Modo claro" : "Modo escuro";
+  }
+  var salvo = lembrar("tema");
+  if(salvo) raiz.setAttribute("data-theme", salvo);
+  pintarBotaoTema();
+  document.getElementById("trocarTema").addEventListener("click", function(){
+    var novo = temaAtual() === "dark" ? "light" : "dark";
+    raiz.setAttribute("data-theme", novo); guardar("tema", novo); pintarBotaoTema();
+  });
+
+  /* ── tamanho da letra ── */
+  var botoesLetra = Array.prototype.slice.call(document.querySelectorAll("[data-escala]"));
+  function aplicarEscala(v){
+    raiz.style.setProperty("--escala", v);
+    botoesLetra.forEach(function(b){ b.setAttribute("aria-pressed", String(b.dataset.escala === String(v))); });
+  }
+  aplicarEscala(lembrar("escala") || "0.92");
+  botoesLetra.forEach(function(b){
+    b.addEventListener("click", function(){ aplicarEscala(b.dataset.escala); guardar("escala", b.dataset.escala); });
+  });
+
+  /* ── nível de explicação ── */
+  var botoesNivel = Array.prototype.slice.call(document.querySelectorAll(".niveis button"));
+  function aplicarNivel(n){
+    corpo.dataset.nivel = n;
+    botoesNivel.forEach(function(b){ b.setAttribute("aria-pressed", String(b.dataset.nivel === n)); });
+  }
+  aplicarNivel(lembrar("nivel") || "simples");
+  botoesNivel.forEach(function(b){
+    b.addEventListener("click", function(){ aplicarNivel(b.dataset.nivel); guardar("nivel", b.dataset.nivel); });
+  });
+
+  /* ── sumário no celular ── */
+  var sumario = document.getElementById("sumario"), abrir = document.getElementById("abrirSumario"), veu = null;
+  function fecharSumario(){
+    sumario.classList.remove("aberto"); corpo.classList.remove("travado");
+    abrir.setAttribute("aria-expanded","false");
+    if(veu){ veu.remove(); veu = null; }
+  }
+  abrir.addEventListener("click", function(){
+    if(sumario.classList.contains("aberto")) return fecharSumario();
+    sumario.classList.add("aberto"); corpo.classList.add("travado");
+    abrir.setAttribute("aria-expanded","true");
+    veu = document.createElement("div"); veu.id = "veu";
+    veu.addEventListener("click", fecharSumario); corpo.appendChild(veu);
+    var primeiro = sumario.querySelector("a"); if(primeiro) primeiro.focus();
+  });
+  addEventListener("resize", function(){ if(innerWidth > 1000) fecharSumario(); }, {passive:true});
+  sumario.addEventListener("click", function(e){ if(e.target.closest("a")) fecharSumario(); });
+
+  /* ── páginas: uma seção por vez, com histórico e teclado ── */
+  var paginas = Array.prototype.slice.call(document.querySelectorAll("main section[id]"));
+  var ids     = paginas.map(function(s){ return s.id; });
+  var itens   = Array.prototype.slice.call(document.querySelectorAll(".sumario a"));
+  var barra   = document.getElementById("barra");
+  var navP    = document.getElementById("navPaginas");
+  var base    = document.title;
+
+  var titulos = {};
+  itens.forEach(function(a){
+    titulos[a.getAttribute("href").slice(1)] = a.textContent.replace(/^\s*\d+\s*/, "").trim();
+  });
+  titulos.aprovacao = "Folha de aprovação";
+
+  function lado(id, dir){
+    if(!id) return '<span class="np-vazio"></span>';
+    return '<a class="np np-' + dir + '" href="#' + id + '">'
+         + '<span>' + (dir === "ant" ? "seção anterior" : "próxima seção") + '</span>'
+         + '<b>' + titulos[id] + '</b></a>';
+  }
+
+  var atual = null;
+  function mostrar(id){
+    var i = ids.indexOf(id);
+    if(i < 0 || id === atual) return;
+    atual = id;
+    paginas.forEach(function(s, k){ s.hidden = (k !== i); });
+    itens.forEach(function(a){
+      a.setAttribute("aria-current", String(a.getAttribute("href") === "#" + id));
+    });
+    navP.innerHTML = lado(ids[i - 1], "ant") + lado(ids[i + 1], "prox");
+    document.title = titulos[id] + " · " + base;
+    scrollTo({ top:0, behavior:"auto" });
+    paginas[i].setAttribute("tabindex", "-1");
+    paginas[i].focus({ preventScroll:true });
+    medirBarra();
+  }
+
+  /* âncoras que não são seções (o link "pular para o conteúdo") não navegam */
+  addEventListener("hashchange", function(){
+    var h = location.hash.slice(1);
+    if(ids.indexOf(h) >= 0) mostrar(h);
+  });
+  mostrar(ids.indexOf(location.hash.slice(1)) >= 0 ? location.hash.slice(1) : ids[0]);
+
+  /* setas ← → percorrem as seções, fora de campos de texto */
+  addEventListener("keydown", function(e){
+    if(e.altKey || e.ctrlKey || e.metaKey) return;
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
+    var i = ids.indexOf(atual), destino = null;
+    if(e.key === "ArrowRight") destino = ids[i + 1];
+    if(e.key === "ArrowLeft")  destino = ids[i - 1];
+    if(destino){ e.preventDefault(); location.hash = destino; }
+  });
+
+  /* barra de progresso: leitura dentro da página aberta */
+  var agendado = false;
+  function medirBarra(){
+    agendado = false;
+    var alt = document.documentElement.scrollHeight - innerHeight;
+    barra.style.width = (alt > 8 ? Math.min(100, scrollY / alt * 100) : 0) + "%";
+  }
+  addEventListener("scroll", function(){ if(!agendado){ agendado = true; requestAnimationFrame(medirBarra); } }, {passive:true});
+  addEventListener("resize", medirBarra, {passive:true});
+
+  /* ── abas de amostra ── */
+  document.querySelectorAll(".abas").forEach(function(grupo){
+    grupo.addEventListener("click", function(e){
+      var b = e.target.closest(".aba"); if(!b) return;
+      grupo.querySelectorAll(".aba").forEach(function(x){ x.setAttribute("aria-selected","false"); });
+      b.setAttribute("aria-selected","true");
+    });
+  });
+
+  /* ── balão de glossário ── */
+  var glossario = {
+    modelo: ["Modelo de linguagem",
+      "Um programa treinado com uma quantidade enorme de texto para prever qual palavra vem a seguir. É assim que ele escreve, resume e traduz — sem entender como uma pessoa entende."],
+    profundo: ["Aprendizado profundo",
+      "Técnica em que o computador descobre sozinho os padrões de milhões de exemplos, em camadas, em vez de seguir regras escritas à mão por um programador."],
+    agente: ["IA agêntica",
+      "Quando a máquina não apenas responde, mas executa uma sequência de tarefas sozinha — abrir um arquivo, consultar um sistema, redigir e enviar. Ganha-se tempo e perde-se visibilidade: por isso a conferência humana vira regra, não gentileza."]
+  };
+  var balao = document.getElementById("balao"), aberto = null;
+  function fecharBalao(){ balao.classList.remove("visivel"); balao.setAttribute("aria-hidden","true"); aberto = null; }
+  function abrirBalao(el){
+    var d = glossario[el.dataset.termo]; if(!d) return;
+    balao.innerHTML = "<b>" + d[0] + "</b>" + d[1];
+    balao.setAttribute("aria-hidden","false"); balao.classList.add("visivel");
+    var r = el.getBoundingClientRect(), larg = Math.min(300, innerWidth - 32);
+    balao.style.width = larg + "px";
+    balao.style.left  = Math.max(16, Math.min(r.left + scrollX, scrollX + innerWidth - larg - 16)) + "px";
+    balao.style.top   = (r.bottom + scrollY + 9) + "px";
+    aberto = el;
+  }
+  document.addEventListener("click", function(e){
+    var t = e.target.closest(".termo");
+    if(t){ e.preventDefault(); (aberto === t) ? fecharBalao() : abrirBalao(t); }
+    else if(!e.target.closest("#balao")) fecharBalao();
+  });
+  addEventListener("scroll", function(){ if(aberto) fecharBalao(); }, {passive:true});
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape"){ fecharBalao(); fecharSumario(); } });
+})();
+</script>
+</body>
+</html>
